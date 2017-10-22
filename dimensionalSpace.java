@@ -5,9 +5,9 @@ public class dimensionalSpace {
   HashMap<String, Integer> stddev;
   HashMap<String, Integer> sum;
   HashMap<String, Integer> n;
-  HashMap<String, Point> Points;
+  ArrayList<Point> Points;
 
-  public class dimensionalSpace (){
+  public dimensionalSpace(){
     mean = new HashMap<String, Integer>();
     stddev = new HashMap<String, Integer>();
     sum = new HashMap<String, Integer>();
@@ -15,17 +15,13 @@ public class dimensionalSpace {
     pts = new HashMap<String, Integer>();
   }
   
-  public class addPts(Point pts[]){
+  public void addPts(Point pts[]){
     for(int i = 0; i < pts.length; i++){
       addPt(pts[i]);
     }
   }
   
-  /*
-  * This class 
-  *
-  */
-  public class addPt(Point pt){
+  public void addPt(Point pt){
     Points.add(pt);
     
   }
@@ -43,7 +39,7 @@ public class dimensionalSpace {
     mean = newMean;
   }
 
-  public  getMean(){
+  public HashMap<String, Integer> getMean(){
     return mean;
   }
 
@@ -61,5 +57,13 @@ public class dimensionalSpace {
 
   public HashMap<String, Integer> getSum(){
     return sum;
+  }
+
+  public void setPoints(ArrayList<Point> pts){
+    Points = pts;
+  }
+
+  public ArrayList<Points> getPoints(){
+    return Points;
   }
 }
