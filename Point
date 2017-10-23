@@ -1,0 +1,37 @@
+import java.util.HashMap;
+
+public class Point 
+{
+	private HashMap<String, String> rawValues;
+	private int cost;
+	
+	public Point(int cost)
+	{
+		this.cost = cost;
+	}
+	public Point()
+	{
+		cost = 0;
+	}
+	
+	public void addAttribute(String att, String value)
+	{
+		rawValues.put(att, value);
+	}
+	
+	public String gettAttribute(String att)
+	{
+		return rawValues.get(att);
+	}
+	
+	public void setCost(int cost)
+	{
+		this.cost = cost;
+	}
+	
+	public int getCost()
+	{
+		return this.cost;
+	}
+
+}
