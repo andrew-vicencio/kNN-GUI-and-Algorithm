@@ -2,54 +2,61 @@ import java.util.HashMap;
 import java.util.ArrayList;
 import java.util.concurrent.ConcurrentHashMap;
 import java.lang.Math;
+import java.util.Iterator;
+import java.util.Map.Entry;
+import java.util.Map;
 
 public class dimensionalSpace {
   private ConcurrentHashMap<String, Integer> mean;
   private ConcurrentHashMap<String, Integer> stddev;
   private ConcurrentHashMap<String, Integer> sum;
-  private ConcurrentHashMap<String, Integer> n;
+  private int n;
   private ArrayList<Point> Points;
 
   public dimensionalSpace(){
     mean = new ConcurrentHashMap();
     stddev = new ConcurrentHashMap();
     sum = new ConcurrentHashMap();
-    n = new ConcurrentHashMap();
     Points = new ArrayList();
   }
   
   public void addPts(ArrayList<Point> pts){
-    for(int i = 0; i < pts.length; i++){
-      addPt(pts[i]);
+    Iterator<Point> pair = pts.iterator();
+    while(pair.hasNext()){
+      addPt(pair.next());
     }
     findMean();
-    findStdDev();
   }
   
   public void addPt(Point pt){
     String attribute;
     Integer val;
     ArrayList<String> attr = pt.getAttributes();
-    Points.add(pt);
-    for (String item : attr){
-      attribute = attr.get(i);
-      val = pt.getValue(attribute);
-      if(!mean.containsKey(attribute)){
-        sum.put(attribute, val);
-        n.put(attribute, 1);
+    if(Points != null){
+      Points.add(pt);
+    } else {
+      System.out.println("Points not initialized");
+    }
+    for (String key : attr){
+      val = pt.getValue(key);
+      if(!mean.containsKey(key)){
+        sum.put(key, val);
       } else {
-        sum.replace(attrbute, sum.get(attribute) + val);
-        n.replace(attribute, n.get(attribute) + 1);
+        sum.replace(key, sum.get(key) + val);
       }
+    }
+    n++;
   }
 
-  private float findMean(){
-   String key;
+  private void findMean(){
+    String key;
     Integer val;
-    for (Map.Entry<String, Integer> entry : sum.entrySet()){
-      key = entry.getKey();
-      val = entry.getValue();
-      mean.replace(key, val / n.get(key));
+    Iterator<Map.Entry<String, Integer>> entry = mean.entrySet().iterator();
+    while (entry.hasNext()){
+      Map.Entry<String, Integer> Pair = entry.next();
+      key = Pair.getKey();
+      val = Pair.getValue();
+      mean.replace(key, val / n);
     }
   }
 
@@ -57,27 +64,27 @@ public class dimensionalSpace {
     return 0;
   }
   
-  public void setMean(HashMap<String, Integer> newMean){
+  public void setMean(ConcurrentHashMap<String, Integer> newMean){
     mean = newMean;
   }
 
-  public HashMap<String, Integer> getMean(){
+  public ConcurrentHashMap<String, Integer> getMean(){
     return mean;
   }
 
-  public void setStdDev(HashMap<String, Integer> newDev){
+  public void setStdDev(ConcurrentHashMap<String, Integer> newDev){
     stddev = newDev;
   }
 
-  public HashMap<String, Integer> getStdDev(){
+  public ConcurrentHashMap<String, Integer> getStdDev(){
     return stddev;
   }
 
-  public void setSum(HashMap<String, Integer> newSum){
+  public void setSum(ConcurrentHashMap<String, Integer> newSum){
     sum = newSum;
   }
 
-  public HashMap<String, Integer> getSum(){
+  public ConcurrentHashMap<String, Integer> getSum(){
     return sum;
   }
 
@@ -87,5 +94,36 @@ public class dimensionalSpace {
 
   public ArrayList<Point> getPoints(){
     return Points;
+  }
+
+  public static void main(String[] args){
+    Point h1 = new Point(500000);
+    h1.addAttribute("coordinate x", 12);
+    h1.addAttribute("coordinate y", 25);
+    h1.addAttribute("sq. ft.", 1200);
+    h1.addAttribute("age", 0);
+    Point h2 = new Point(300000);
+    h2.addAttribute("coordinate x", 10);
+    h2.addAttribute("coordinate y", 50);
+    h2.addAttribute("sq. ft.", 1000);
+    h2.addAttribute("age", 1);
+    Point h3 = new Point(400000);
+    h3.addAttribute("coordinate x", 30);
+    h3.addAttribute("coordinate y", 1000);
+    h3.addAttribute("sq. ft.", 800);
+    h3.addAttribute("age", 0);
+    dimensionalSpace DS = new dimensionalSpace();
+    ArrayList<Point> Pts = new ArrayList();
+    if(Pts.add(h1)){
+      System.out.println("h1 added");
+    }
+    if(Pts.add(h2)){
+      System.out.println("h2 added");
+    }
+    if(Pts.add(h3)){
+      System.out.println("h3 added");
+    }
+    DS.addPt(h1);
+    DS.addPts(Pts);
   }
 }
