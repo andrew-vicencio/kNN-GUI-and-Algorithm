@@ -20,14 +20,24 @@ public class dimensionalSpace {
     Points = new ArrayList<Point>();
   }
   
+  /* 
+  * addPts takes an array of Points and sends them to addPt which
+  * which adds a singular Point in at a time
+  * 
+  * return void
+  */
   public void addPts(ArrayList<Point> pts){
     Iterator<Point> pair = pts.iterator();
     while(pair.hasNext()){
       addPt(pair.next());
     }
-    findMean();
   }
   
+  /*
+  * addPt adds a singular Point to the Points array as well as
+  * adding all of the Point's attribute to the sum array
+  * TODO: This can be broken up into two method addPt then add sum
+  */
   public void addPt(Point pt){
     String attribute;
     Integer val;
@@ -46,7 +56,12 @@ public class dimensionalSpace {
       }
     }
   }
-
+  
+  /*
+  * findMean goes through the sum hashmap and copies every key into
+  * the mean hashmap and dividng the value of the key by the
+  * numberOfPoints
+  */
   private void findMean(){
     String key;
     Integer val;
@@ -55,17 +70,24 @@ public class dimensionalSpace {
       Map.Entry<String, Integer> Pair = entry.next();
       key = Pair.getKey();
       val = Pair.getValue();
-      mean.replace(key, val / numberOfPoints);
+      if(mean.containsKey(key)){
+        mean.put(key, val / numberOfPoints);
+      } else {
+        mean.replace(key, val / numberOfPoints);
+      }
     }
   }
 
   public int FindkNN(){
     return 0;
   }
-
+  
+  /*
+  * generateStats generates the number of points and the mean
+  */
   public void generateStats(){
-    findMean();
     numberOfPoints = Points.size();
+    findMean();
   }
   
   public void setMean(ConcurrentHashMap<String, Integer> newMean){
