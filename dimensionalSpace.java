@@ -10,14 +10,14 @@ public class dimensionalSpace {
   private ConcurrentHashMap<String, Integer> mean;
   private ConcurrentHashMap<String, Integer> stddev;
   private ConcurrentHashMap<String, Integer> sum;
-  private int n;
+  private int numberOfPoints;
   private ArrayList<Point> Points;
 
   public dimensionalSpace(){
-    mean = new ConcurrentHashMap();
-    stddev = new ConcurrentHashMap();
-    sum = new ConcurrentHashMap();
-    Points = new ArrayList();
+    mean = new ConcurrentHashMap<String, Integer>();
+    stddev = new ConcurrentHashMap<String, Integer>();
+    sum = new ConcurrentHashMap<String, Integer>();
+    Points = new ArrayList<Point>();
   }
   
   public void addPts(ArrayList<Point> pts){
@@ -45,7 +45,6 @@ public class dimensionalSpace {
         sum.replace(key, sum.get(key) + val);
       }
     }
-    n++;
   }
 
   private void findMean(){
@@ -56,12 +55,17 @@ public class dimensionalSpace {
       Map.Entry<String, Integer> Pair = entry.next();
       key = Pair.getKey();
       val = Pair.getValue();
-      mean.replace(key, val / n);
+      mean.replace(key, val / numberOfPoints);
     }
   }
 
   public int FindkNN(){
     return 0;
+  }
+
+  public void generateStats(){
+    findMean();
+    numberOfPoints = Points.size();
   }
   
   public void setMean(ConcurrentHashMap<String, Integer> newMean){

@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.AbstractMap;
 import java.util.ArrayList;
@@ -7,7 +8,7 @@ public class Point
 	private HashMap<String, Integer> rawValues;
   private HashMap<String, Integer> stdValues;
 	private int cost;
-  private ArrayList<String> attributes;
+    private ArrayList<String> attributes;
 	
 	public Point(int cost)
 	{
@@ -38,11 +39,15 @@ public class Point
 		return rawValues.get(att);
 	}
 	
-  public void standardise(AbstractMap<String, Integer> mean, AbstractMap<String, Integer> n){
+  public void standardise(AbstractMap<String, Integer> mean, int n){
     for (String attr : attributes){
       Integer X = rawValues.get(attr);
-      stdValues.put(attr, (X - ((X - mean.get(attr))/n.get(attr)))/mean.get(attr));
+      stdValues.put(attr, (X - findStdDev(X, mean.get(attr), n))/mean.get(attr));
     }
+  }
+
+  private int findStdDev(Integer X, Integer mean, int n){
+    return ((X - mean)/n);
   }
 
 	public void setCost(int cost)
