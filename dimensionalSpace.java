@@ -1,38 +1,68 @@
 import java.util.*;
 
-public class dimensionalSpace {
+public class DimensionalSpace {
   HashMap<String, Integer> mean;
   HashMap<String, Integer> stddev;
   HashMap<String, Integer> sum;
-  HashMap<String, Integer> n;
-  ArrayList<Point> Points;
+  int numberOfPoints;
+  ArrayList<Point> points;
 
-  public dimensionalSpace(){
+  public DimensionalSpace(){
     mean = new HashMap<String, Integer>();
     stddev = new HashMap<String, Integer>();
     sum = new HashMap<String, Integer>();
-    n = new HashMap<String, Integer>();
-    pts = new HashMap<String, Integer>();
+    numberOfPoints = 0;
+    points = new ArrayList<Point>();
   }
   
   public void addPts(Point pts[]){
     for(int i = 0; i < pts.length; i++){
       addPt(pts[i]);
     }
+    numberOfPoints = pts.length;
+    generateStats();
   }
   
   public void addPt(Point pt){
-    Points.add(pt);
-    
+    points.add(pt);
   }
 
-  private float findMean(){
+  private void generateStats() {	  
+	  for (String key: points.get(0).getAttributes()) {
+		  generateSum(key);
+		  findMean(key);
+		  findStdDev(key);
+	  }
+  }
+  
+  private void generateSum(String key) {
+	  ArrayList<String> keys = points.get(0).getAttributes();
+	  int total = 0;
+	  
+	  for (Point pt: points) {
+		  total += pt.getValue(key);
+	  }
+		  
+	  sum.put(key, total);
+  }
+  
+  private void findMean(String key){
+	  mean.put(key, sum.get(key) / numberOfPoints);
   }
 
-  private float findStdDev(){
+  private void findStdDev(String key){
+	  int summation = 0;
+	  
+	  for (Point pt: points) {
+		  summation += (pt.getValue(key) - mean.get(key)) ^ 2;
+	  }
+	  
+	  stddev.put(key, (int)Math.sqrt(summation / numberOfPoints));
   }
 
   public int FindkNN(){
+	  
+	  return 0;
   }
   
   public void setMean(HashMap<String, Integer> newMean){
@@ -60,10 +90,10 @@ public class dimensionalSpace {
   }
 
   public void setPoints(ArrayList<Point> pts){
-    Points = pts;
+    points = pts;
   }
 
-  public ArrayList<Points> getPoints(){
-    return Points;
+  public ArrayList<Point> getPoints(){
+    return points;
   }
 }

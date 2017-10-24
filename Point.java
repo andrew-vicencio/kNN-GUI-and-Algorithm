@@ -1,10 +1,11 @@
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Point 
 {
-	private HashMap<String, String> rawValues;
+	private HashMap<String, Integer> rawValues;
 	private int cost;
-  private ArrayList<String> attributes;
+    private ArrayList<String> attributes;
 	
 	public Point(int cost)
 	{
@@ -15,7 +16,7 @@ public class Point
 		cost = 0;
 	}
 	
-	public void addAttribute(String att, String value)
+	public void addAttribute(String att, int value)
 	{
 		rawValues.put(att, value);
     attributes.add(att);
@@ -27,7 +28,7 @@ public class Point
 
 	// Formerly .getAttribute, changed because it returns
   // the Value and not the attribute
-	public String getValue(String att)
+	public int getValue(String att)
 	{
 		return rawValues.get(att);
 	}
