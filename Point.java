@@ -7,31 +7,32 @@ import java.lang.Math;
 public class Point 
 {
 	private HashMap<String, Integer> rawValues;
-  private HashMap<String, Integer> stdValues;
+    private HashMap<String, Integer> stdValues;
 	private int cost;
     private ArrayList<String> attributes;
 	
 	public Point(int cost)
 	{
 		this.cost = cost;
-    rawValues = new HashMap();
-    stdValues = new HashMap();
-    attributes = new ArrayList();
+		rawValues = new HashMap<String, Integer>();
+    	stdValues = new HashMap<String, Integer>();
+    	attributes = new ArrayList<String>();
 	}
+	
 	public Point()
 	{
-    this(0);
+		this(0);
 	}
 	
 	public void addAttribute(String att, Integer value)
 	{
 		rawValues.put(att, value);
-    attributes.add(att);
+		attributes.add(att);
 	}
 
-  public ArrayList<String> getAttributes(){
-    return attributes;
-  }
+    public ArrayList<String> getAttributes(){
+    	return attributes;
+    }
 
 	// Formerly .getAttribute, changed because it returns
   // the Value and not the attribute
@@ -65,17 +66,24 @@ public class Point
   * sample stdDev in dimensionalSpace
   */
   private int findStdDev(Integer X, Integer mean, int n){
-    return (Math.pow((X - mean),2)/n);
+    return (int) (Math.pow((X - mean),2)/n);
   }
 
-	public void setCost(int cost)
-	{
-		this.cost = cost;
-	}
-	
-	public int getCost()
-	{
-		return this.cost;
-	}
+  public void setCost(int cost)
+  {
+	this.cost = cost;
+  }
 
+  public int getCost()
+  {
+	return this.cost;
+  }
+
+  public HashMap<String, Integer> getStdValues() {
+	return stdValues;
+  }
+
+  public void setStdValues(HashMap<String, Integer> stdValues) {
+	this.stdValues = stdValues;
+  }
 }
