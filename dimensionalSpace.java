@@ -4,18 +4,18 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.lang.Math;
 import java.util.Iterator;
 
-public class dimensionalSpace {
+public class DimensionalSpace {
   private ConcurrentHashMap<String, Integer> mean;
   private ConcurrentHashMap<String, Integer> stddev;
   private ConcurrentHashMap<String, Integer> sum;
   private int numberOfPoints;
-  private ArrayList<Point> Points;
+  private ArrayList<Point> points;
 
-  public dimensionalSpace(){
+  public DimensionalSpace(){
     mean = new ConcurrentHashMap<String, Integer>();
     stddev = new ConcurrentHashMap<String, Integer>();
     sum = new ConcurrentHashMap<String, Integer>();
-    Points = new ArrayList<Point>();
+    points = new ArrayList<Point>();
     numberOfPoints = 0;
   }
   
@@ -40,8 +40,8 @@ public class dimensionalSpace {
   public void addPt(Point pt){
     Integer val;
     ArrayList<String> attr = pt.getAttributes();
-    if(Points != null){
-      Points.add(pt);
+    if(points != null){
+      points.add(pt);
     } else {
       System.out.println("Points not initialized");
     }
@@ -76,10 +76,10 @@ public class dimensionalSpace {
    * 
    * @return				The value of the given point
    */
-  public int FindkNN(Point targetPoint, int k){
+  public int findkNN(Point targetPoint, int k){
 	  	
 	    assert(k > 0);
-	    if (k > Points.size()) k = Points.size();
+	    if (k > points.size()) k = points.size();
 	    
 	    targetPoint.standardise(mean, numberOfPoints);
 		
@@ -97,7 +97,7 @@ public class dimensionalSpace {
 		}
 		
 		// For each of the given points in the dataset, calculate the distance from the target point
-		for (Point pt: Points) {
+		for (Point pt: points) {
 			
 			// Reset the instance variables for each point
 			distValueDisplacement = false;
@@ -174,7 +174,7 @@ public class dimensionalSpace {
   * generateStats generates the number of points and the mean
   */
   public void generateStats(){
-    numberOfPoints = Points.size();
+    numberOfPoints = points.size();
     findMean();
   }
   
@@ -203,11 +203,12 @@ public class dimensionalSpace {
   }
 
   public void setPoints(ArrayList<Point> pts){
-    Points = pts;
+    points = pts;
+    numberOfPoints = pts.size();
   }
 
   public ArrayList<Point> getPoints(){
-    return Points;
+    return points;
   }
   
   public int getNumberOfPoints() {
@@ -244,7 +245,7 @@ public class dimensionalSpace {
 	}
   }
 
-  public static void main(String[] args){
+  public static void main(String[] args) {
     Point h1 = new Point(500000);
     h1.addAttribute("coordinate x", 12);
     h1.addAttribute("coordinate y", 25);
@@ -260,7 +261,7 @@ public class dimensionalSpace {
     h3.addAttribute("coordinate y", 100);
     h3.addAttribute("sq. ft.", 800);
     h3.addAttribute("age", 2);
-    dimensionalSpace DS = new dimensionalSpace();
+    DimensionalSpace DS = new DimensionalSpace();
     ArrayList<Point> Pts = new ArrayList<Point>();
     if(Pts.add(h1)){
       System.out.println("h1 added");
@@ -285,7 +286,7 @@ public class dimensionalSpace {
     t1.addAttribute("coordinate y", 20);
     t1.addAttribute("sq. ft.", 1500);
     t1.addAttribute("age", 1);
-    System.out.println(DS.FindkNN(t1, 3));
+    System.out.println(DS.findkNN(t1, 3));
   }
   
 }
