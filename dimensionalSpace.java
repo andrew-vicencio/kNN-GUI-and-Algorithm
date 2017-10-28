@@ -245,48 +245,6 @@ public class DimensionalSpace {
 	}
   }
 
-  public static void main(String[] args) {
-    Point h1 = new Point(500000);
-    h1.addAttribute("coordinate x", 12);
-    h1.addAttribute("coordinate y", 25);
-    h1.addAttribute("sq. ft.", 1200);
-    h1.addAttribute("age", 2);
-    Point h2 = new Point(300000);
-    h2.addAttribute("coordinate x", 10);
-    h2.addAttribute("coordinate y", 50);
-    h2.addAttribute("sq. ft.", 1000);
-    h2.addAttribute("age", 1);
-    Point h3 = new Point(400000);
-    h3.addAttribute("coordinate x", 30);
-    h3.addAttribute("coordinate y", 100);
-    h3.addAttribute("sq. ft.", 800);
-    h3.addAttribute("age", 2);
-    DimensionalSpace DS = new DimensionalSpace();
-    ArrayList<Point> Pts = new ArrayList<Point>();
-    if(Pts.add(h1)){
-      System.out.println("h1 added");
-    }
-    if(Pts.add(h2)){
-      System.out.println("h2 added");
-    }
-    if(Pts.add(h3)){
-      System.out.println("h3 added");
-    }
-    // DS.addPt(h1);
-    DS.addPts(Pts);
-    
-    DS.findMean();
-    
-    for (Point pt: DS.getPoints()) {
-    	pt.standardise(DS.getMean(), DS.getNumberOfPoints());
-    }
-    
-    Point t1 = new Point();
-    t1.addAttribute("coordinate x", 15);
-    t1.addAttribute("coordinate y", 20);
-    t1.addAttribute("sq. ft.", 1500);
-    t1.addAttribute("age", 1);
-    System.out.println(DS.findkNN(t1, 3));
-  }
+  
   
 }
