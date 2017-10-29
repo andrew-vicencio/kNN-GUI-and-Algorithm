@@ -39,10 +39,10 @@
 * Implement save/load functionality
 
 ## To Do List
-[ ] Update UML
-[ ] Create user manual
-[ ] javadoc
-[ ] jar completed java files (with source code & executable)
+-[ ] Update UML
+-[ ] Create user manual
+-[ ] javadoc
+-[ ] jar completed java files (with source code & executable)
 
 
 
