@@ -2,7 +2,7 @@
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
- *
+ */
 
 import java.util.ArrayList;
 
@@ -85,7 +85,7 @@ public class TestEnviroment {
             }
         }
         //Report the out put
-        System.out.println("The most useful K value is " + kValue + ".\nThe accruacy of this K value for a new point is " + accuracy + ".\n The acctual value was 400000. The generated value was " + value + ".");
+        System.out.println("The most useful K value is " + kValue + ".\nThe accuracy of this K value for a new point is " + accuracy + ".\n The actual value was 400000. The generated value was " + value + ".");
 
     }
 

@@ -4,6 +4,12 @@ import java.util.AbstractMap;
 import java.util.ArrayList;
 import java.lang.Math;
 
+/**
+ * 
+ * @author Gabrielle & Andrew
+ *
+ */
+
 public class Point 
 {
 	private HashMap<String, Integer> rawValues;

@@ -4,6 +4,12 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.lang.Math;
 import java.util.Iterator;
 
+/**
+ * 
+ * @author Darren & Andrew
+ *
+ */
+
 public class DimensionalSpace {
   private ConcurrentHashMap<String, Integer> mean;
   private ConcurrentHashMap<String, Integer> stddev;
