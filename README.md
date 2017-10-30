@@ -29,9 +29,19 @@
 * Created TestEnvironment class to create test scenarios by which the kNN algorithm is evaluated
 
 ## Known Issues
-
+* The standard deviation should be calculated in DimensionalSpace, not Point
+* The kNN algorithm should have its own class
+	* This will lend itself to the Strategy Design Pattern
+	* Will also allow for more flexibility
+* Program is not very user-friendly at the moment
+	* Due to hard-coding
+* Coordinate values for points are not very flexible at the moment
+	* Due to only accepting Integers for the values in the key-value pairs
+		* Perhaps a type parameter could be used for more flexibility
 
 ## Future Steps
+* Redesign some aspects to improve cohesion and create looser coupling
+* Make the program more user-friendly
 * Create GUI
 * Implement unit test
 * Retrieving user input as data
@@ -40,9 +50,8 @@
 
 ## To Do List
 * Update UML
-* Create user manual
-* javadoc
 * jar completed java files (with source code & executable)
+* Add second dataset
 
 
 
