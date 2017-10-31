@@ -49,10 +49,6 @@
 * Implement save/load functionality
 
 ## To Do List
-* Update UML
-* jar completed java files (with source code & executable)
-* Add second dataset
-
 
 
 
