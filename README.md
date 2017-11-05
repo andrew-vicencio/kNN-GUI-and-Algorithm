@@ -48,8 +48,6 @@
 * Increase flexibility (to be clarified at a later date)
 * Implement save/load functionality
 
-## To Do List
-
 
 
 
