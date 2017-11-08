@@ -1,6 +1,7 @@
-package CodersIncMilestone1;
+
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * Class to test the kNN algorithm using a dataset and a test point.
@@ -218,7 +219,17 @@ public class TestEnviroment {
      * @param args
      */
     public static void main(String[] args) {
-
+    	View view = new View();
+    	view.addFeaturePanel();
+    	HashMap<String, String> s = new HashMap<String, String>();
+    	s.put("key1", "value1");
+    	s.put("key2", "value2");
+    	s.put("key3", "value3");
+    	s.put("example", "");
+    	view.setFeatures(s);
+    	view.addFeatureType("TEST");
+    	//view.setUpFeatures();
+    	//view.addFeaturePanel();
         // Test the first case.
         TestEnviroment working = new TestEnviroment(true);
         int kValue = 0;
