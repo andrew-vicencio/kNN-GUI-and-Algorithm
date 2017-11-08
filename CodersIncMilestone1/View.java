@@ -12,12 +12,14 @@ import javax.swing.*;
 
 
 public class View {
-	private JFrame mainFrame;
-	private JFrame errorFrame;
+	private JFrame mainFrame, errorFrame;
+	private JPanel mainPanel, contentPanel, footerPanel;
 	private JMenuBar menuBar;
 	private JMenu create, edit, display, help;
 	private JMenuItem newDataSet, newTestCase, addValue, helpDoc;
-	private HashMap<String, String> dataType;
+	private JButton done;
+	private HashMap<String, String> features;
+	//private FeaturePanel test;
 	
 	 /**
      * Initializes and displays the initial view
@@ -27,6 +29,9 @@ public class View {
 	{
 		mainFrame = new JFrame("CODERS INC");
 		errorFrame = new JFrame("Error");
+		mainPanel = new JPanel();
+		contentPanel = new JPanel();
+		footerPanel = new  JPanel();
 		menuBar = new JMenuBar();
 		create = new JMenu("Create");
 		edit = new JMenu("Edit");
@@ -36,9 +41,13 @@ public class View {
 		newTestCase = new JMenuItem("New Test Case");
 		addValue = new JMenuItem("Add Value");
 		helpDoc = new JMenuItem("View Help Documents");
-		
-		
+		done = new JButton("Done");
 		mainFrame.setJMenuBar(menuBar);
+		mainFrame.add(mainPanel);
+		mainPanel.setLayout(new BorderLayout());
+		mainPanel.add(contentPanel, BorderLayout.CENTER);
+		mainPanel.add(footerPanel, BorderLayout.SOUTH);
+		footerPanel.add(done);
 		menuBar.add(create);
 		menuBar.add(edit);
 		menuBar.add(display);
@@ -48,75 +57,58 @@ public class View {
 		edit.add(addValue);
 		help.add(helpDoc);
 		
-		mainFrame.setSize(500, 500);
+		
+		mainFrame.setSize(700, 500);
+
 		newTestCase.setEnabled(false);
 		edit.setEnabled(false);
 		display.setEnabled(false);
 		mainFrame.setVisible(true);
 		
-		dataType = new HashMap<String, String>();
-		
+		features = new HashMap<String, String>();
 	}
-	 /**
-     * Allows user to initialize a data set. 
-     * First, the user is prompted for the number of features required.
-     * Next, the user provides the name and class for each feature.
-     * A hashmap containing the name of the feature (String) as keys, and the class of the feature (String) as value
-     *
-     */
-	public HashMap<String, String> createDataSet()
-		{
-			int numData = 0;
-			try{
-				JFrame numDataFrame = new JFrame("Enter a number of attributes");
-				SpinnerNumberModel snModel = new SpinnerNumberModel(0, 0, 30, 1);
-				JSpinner spinner = new JSpinner(snModel);
-				JOptionPane.showOptionDialog(null, spinner, 
-						"Enter valid number", JOptionPane.OK_CANCEL_OPTION, 
-						JOptionPane.QUESTION_MESSAGE, null, null, null);
-				
-				 numData = (int) snModel.getNumber();
-			}
-			catch(Exception e)
-			{
-				JFrame errorFrame = new JFrame();
-				JOptionPane.showMessageDialog(errorFrame,
-					    "Please input a valid number.",
-					    "Error",
-					    JOptionPane.ERROR_MESSAGE);
-			}
-			if (numData == 0)
-			{
-				
-				JOptionPane.showMessageDialog(errorFrame,
-					    "Please input a valid number.",
-					    "Error",
-					    JOptionPane.ERROR_MESSAGE);
-			}
-			//TO DO: Show this in mainPanel rather than in individual alert boxes
-			for(int i = 0; i < numData; i++)
-			{
-				JFrame featureFrame= new JFrame();
-				
-				String key = (String)JOptionPane.showInputDialog(
-		                featureFrame,
-		                "#" + (i+1) + " Enter your feature name: " ,
-		                " ", JOptionPane.PLAIN_MESSAGE,
-		                null,
-		                null,
-		                null);
-				//TO DO: Give user drop-down list of classes
-				String value = (String)JOptionPane.showInputDialog(
-		                featureFrame,
-		                "#" + (i+1) + " Enter your feature class: ",
-		                " ", JOptionPane.PLAIN_MESSAGE,
-		                null,
-		                null,
-		                null);
-				dataType.put(key, value);    
-			};
-			return dataType;
-			
-		}
-
+	/**
+	 * A FeaturePanel is added to the content panel, allowing the user to add a new feature
+	 */
+	public void addFeaturePanel()
+	{
+		FeaturePanel fp = new FeaturePanel(this);
+		contentPanel.add(fp);
+		contentPanel.revalidate();
+		contentPanel.repaint();
+	}
+	/**
+	 * The features from a featurePanel is added to the features list
+	 * @param fp : the featurePanel
+	 */
+	public void addNewFeature(FeaturePanel fp)
+	{
+		String key = fp.getKey();
+		String value = fp.getValue();
+		features.put(key, value);
+	}
+	
+	/**
+	 * To get the hashmap containing all features added thus far.
+	 * @return  HashMap of String key/value pairs
+	 */
+	public HashMap<String, String> getFeatureMap()
+	{
+		return features;
+	}
+	
+	/**
+	 * Sends an error message to the user
+	 * @param message to be displayed in the error frame
+	 */
+	public void sendErrorFrame(String message)
+	{
+		errorFrame = new JFrame();
+		JOptionPane.showMessageDialog(errorFrame,
+			    message,
+			    "Error",
+			    JOptionPane.ERROR_MESSAGE);
+	}
 }
+
+
