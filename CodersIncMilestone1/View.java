@@ -13,10 +13,10 @@ import javax.swing.*;
 
 public class View {
 	private JFrame mainFrame;
+	private JFrame errorFrame;
 	private JMenuBar menuBar;
 	private JMenu create, edit, display, help;
 	private JMenuItem newDataSet, newTestCase, addValue, helpDoc;
-	private JPanel mainPanel;
 	private HashMap<String, String> dataType;
 	
 	 /**
@@ -26,12 +26,12 @@ public class View {
 	public View()
 	{
 		mainFrame = new JFrame("CODERS INC");
+		errorFrame = new JFrame("Error");
 		menuBar = new JMenuBar();
 		create = new JMenu("Create");
 		edit = new JMenu("Edit");
 		display = new JMenu("Display");
 		help = new JMenu("Help");
-		mainPanel = new JPanel();
 		newDataSet = new JMenuItem("New Data Set");
 		newTestCase = new JMenuItem("New Test Case");
 		addValue = new JMenuItem("Add Value");
@@ -45,11 +45,10 @@ public class View {
 		menuBar.add(help);
 		create.add(newDataSet);
 		create.add(newTestCase);
-		edit.add("Add Values");
-		help.add("View User Guide");
+		edit.add(addValue);
+		help.add(helpDoc);
 		
 		mainFrame.setSize(500, 500);
-		mainPanel.setLayout(new BoxLayout(mainPanel, 0));
 		newTestCase.setEnabled(false);
 		edit.setEnabled(false);
 		display.setEnabled(false);
@@ -62,27 +61,46 @@ public class View {
      * Allows user to initialize a data set. 
      * First, the user is prompted for the number of features required.
      * Next, the user provides the name and class for each feature.
+     * A hashmap containing the name of the feature (String) as keys, and the class of the feature (String) as value
      *
      */
-	public HashMap<JTextField, JTextField> createDataSet()
+	public HashMap<String, String> createDataSet()
 		{
-			JFrame numDataFrame = new JFrame();
-			// TO DO: error handling for non-int types OR restrict user from entering non-numerical data
-			int numData = Integer.parseInt((String)JOptionPane.showInputDialog(
-	                numDataFrame,
-	                "Enter the number of data features required: ",
-	                " ", JOptionPane.QUESTION_MESSAGE,
-	                null,
-	                null,
-	                null));
-			
+			int numData = 0;
+			try{
+				JFrame numDataFrame = new JFrame("Enter a number of attributes");
+				SpinnerNumberModel snModel = new SpinnerNumberModel(0, 0, 30, 1);
+				JSpinner spinner = new JSpinner(snModel);
+				JOptionPane.showOptionDialog(null, spinner, 
+						"Enter valid number", JOptionPane.OK_CANCEL_OPTION, 
+						JOptionPane.QUESTION_MESSAGE, null, null, null);
+				
+				 numData = (int) snModel.getNumber();
+			}
+			catch(Exception e)
+			{
+				JFrame errorFrame = new JFrame();
+				JOptionPane.showMessageDialog(errorFrame,
+					    "Please input a valid number.",
+					    "Error",
+					    JOptionPane.ERROR_MESSAGE);
+			}
+			if (numData == 0)
+			{
+				
+				JOptionPane.showMessageDialog(errorFrame,
+					    "Please input a valid number.",
+					    "Error",
+					    JOptionPane.ERROR_MESSAGE);
+			}
 			//TO DO: Show this in mainPanel rather than in individual alert boxes
 			for(int i = 0; i < numData; i++)
 			{
 				JFrame featureFrame= new JFrame();
+				
 				String key = (String)JOptionPane.showInputDialog(
 		                featureFrame,
-		                "Enter your feature name: ",
+		                "#" + (i+1) + " Enter your feature name: " ,
 		                " ", JOptionPane.PLAIN_MESSAGE,
 		                null,
 		                null,
@@ -90,15 +108,14 @@ public class View {
 				//TO DO: Give user drop-down list of classes
 				String value = (String)JOptionPane.showInputDialog(
 		                featureFrame,
-		                "Enter your feature class: ",
+		                "#" + (i+1) + " Enter your feature class: ",
 		                " ", JOptionPane.PLAIN_MESSAGE,
 		                null,
 		                null,
 		                null);
-				dataType.put(key, value);
-		        
+				dataType.put(key, value);    
 			};
-			return null;
+			return dataType;
 			
 		}
 
