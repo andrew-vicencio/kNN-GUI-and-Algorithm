@@ -37,7 +37,10 @@ public class FeaturePanel extends JPanel {
 		//To do: event listeners for add button
 			
 	}
-	
+	/**
+	 * Returns the key/feature name inputed by the user in the JTextField featureName
+	 * @return String
+	 */
 	public String getKey()
 	{
 		String s="";
@@ -51,6 +54,11 @@ public class FeaturePanel extends JPanel {
 		}
 		return s;
 	}
+	
+	/**
+	 * Returns the value/feature class denoted by the user's choice the JComboBox featureClass
+	 * @return String
+	 */
 	public String getValue()
 	{
 		String s="";

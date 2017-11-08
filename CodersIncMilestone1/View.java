@@ -1,8 +1,10 @@
 import java.awt.BorderLayout;
-import java.util.ArrayList;
+import java.awt.GridLayout;
 import java.util.HashMap;
-
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
+import javax.swing.border.EtchedBorder;
+
 /**
  * View class for the GUI. This class is responsible for initiating the UI frame, and updating it as required
  *
@@ -13,7 +15,7 @@ import javax.swing.*;
 
 public class View {
 	private JFrame mainFrame, errorFrame;
-	private JPanel mainPanel, contentPanel, footerPanel;
+	private JPanel mainPanel, headerPanel, contentPanel, footerPanel;
 	private JMenuBar menuBar;
 	private JMenu create, edit, display, help;
 	private JMenuItem newDataSet, newTestCase, addValue, helpDoc;
@@ -30,6 +32,7 @@ public class View {
 		mainFrame = new JFrame("CODERS INC");
 		errorFrame = new JFrame("Error");
 		mainPanel = new JPanel();
+		headerPanel = new JPanel();
 		contentPanel = new JPanel();
 		footerPanel = new  JPanel();
 		menuBar = new JMenuBar();
@@ -45,6 +48,7 @@ public class View {
 		mainFrame.setJMenuBar(menuBar);
 		mainFrame.add(mainPanel);
 		mainPanel.setLayout(new BorderLayout());
+		mainPanel.add(headerPanel, BorderLayout.NORTH);
 		mainPanel.add(contentPanel, BorderLayout.CENTER);
 		mainPanel.add(footerPanel, BorderLayout.SOUTH);
 		footerPanel.add(done);
@@ -58,7 +62,7 @@ public class View {
 		help.add(helpDoc);
 		
 		
-		mainFrame.setSize(700, 500);
+		mainFrame.setSize(1000, 700);
 
 		newTestCase.setEnabled(false);
 		edit.setEnabled(false);
@@ -108,6 +112,32 @@ public class View {
 			    message,
 			    "Error",
 			    JOptionPane.ERROR_MESSAGE);
+	}
+	/**
+	 * Sets up the main panel with the keys user has provided as JLabels in the 
+	 * headerPanel
+	 */
+	public void setUpFeatures()
+	{
+		contentPanel.removeAll();
+		headerPanel.setLayout(new GridLayout(1, features.size()));
+		for (String key : features.keySet()){
+			JLabel jl = new JLabel("    " + key);
+			jl.setBorder(BorderFactory.createCompoundBorder(new EtchedBorder(), new EmptyBorder(6, 6, 6, 6)));
+			
+			headerPanel.add(jl);
+	    }
+		headerPanel.revalidate();
+		headerPanel.repaint();
+		
+	}
+	/**
+	 * Method used for testing purposes only
+	 * @param HashMap<String, String> for features
+	 */
+	public void setFeatures(HashMap<String, String> s)
+	{
+		features = s;
 	}
 }
 
