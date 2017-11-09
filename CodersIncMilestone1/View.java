@@ -1,6 +1,8 @@
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.EtchedBorder;
@@ -20,8 +22,10 @@ public class View {
 	private JMenu create, edit, display, help;
 	private JMenuItem newDataSet, newTestCase, addValue, helpDoc;
 	private JButton done;
-	private HashMap<String, String> features;
-	//private FeaturePanel test;
+	private LinkedHashMap<String, String> features;
+	private ArrayList<String> featureTypes;
+	private boolean fpexists = false;
+
 	
 	 /**
      * Initializes and displays the initial view
@@ -51,7 +55,7 @@ public class View {
 		mainPanel.add(headerPanel, BorderLayout.NORTH);
 		mainPanel.add(contentPanel, BorderLayout.CENTER);
 		mainPanel.add(footerPanel, BorderLayout.SOUTH);
-		footerPanel.add(done);
+		contentPanel.setLayout(new BoxLayout(contentPanel, BoxLayout.PAGE_AXIS));
 		menuBar.add(create);
 		menuBar.add(edit);
 		menuBar.add(display);
@@ -68,27 +72,37 @@ public class View {
 		edit.setEnabled(false);
 		display.setEnabled(false);
 		mainFrame.setVisible(true);
+		done.setVisible(false);
 		
-		features = new HashMap<String, String>();
+		done.addActionListener(new DoneButtonController(this));
+		
+		features = new LinkedHashMap<String, String>();
+		featureTypes = new ArrayList<String>();
+		featureTypes.add("Integer");
+		featureTypes.add("Float");
+		featureTypes.add("Coordinates");
+		featureTypes.add("String");
+		featureTypes.add("Add new feature type");
 	}
 	/**
 	 * A FeaturePanel is added to the content panel, allowing the user to add a new feature
+	 * @param i: integer denoting the level of subfeatures deep this feature is. Will start with 0.
 	 */
 	public void addFeaturePanel()
 	{
-		FeaturePanel fp = new FeaturePanel(this);
+		FeaturePanel fp = new FeaturePanel(this, featureTypes);
 		contentPanel.add(fp);
 		contentPanel.revalidate();
 		contentPanel.repaint();
+		footerPanel.add(done);
+		done.setVisible(true);
 	}
 	/**
 	 * The features from a featurePanel is added to the features list
 	 * @param fp : the featurePanel
 	 */
-	public void addNewFeature(FeaturePanel fp)
+	public void addNewFeature(String key, String value)
 	{
-		String key = fp.getKey();
-		String value = fp.getValue();
 		features.put(key, value);
 	}
 	
@@ -120,25 +134,54 @@ public class View {
 	public void setUpFeatures()
 	{
 		contentPanel.removeAll();
+		footerPanel.removeAll();
 		headerPanel.setLayout(new GridLayout(1, features.size()));
+	
 		for (String key : features.keySet()){
 			JLabel jl = new JLabel("    " + key);
 			jl.setBorder(BorderFactory.createCompoundBorder(new EtchedBorder(), new EmptyBorder(6, 6, 6, 6)));
-			
 			headerPanel.add(jl);
 	    }
 		headerPanel.revalidate();
 		headerPanel.repaint();
+
 		
 	}
+
+	
 	/**
-	 * Method used for testing purposes only
-	 * @param HashMap<String, String> for features
+	 * Method to add a new feature type when the "Add a new Feature Type" is chosen in the combo box
+	 * The JTextfield value becomes the name of the feature type
+	 * @param String: name of new feature type
 	 */
-	public void setFeatures(HashMap<String, String> s)
+	public void addFeatureType(String s)
 	{
-		features = s;
+		featureTypes.add(featureTypes.size()-1, s);
 	}
+	/**
+	 * Get the Done JButton in the footer panel
+	 * @return
+	 */
+	public JButton getDoneButton()
+	{
+		return done;
+	}
+	
+	public HashMap<String, String> getList()
+	{
+		return features;
+	}
+	public boolean fpExists() {
+
+		return fpexists;
+	}
+	public void setfpExists(boolean b) {
+		fpexists = true;
+		
+	}
+	
 }
+
+
 
 
