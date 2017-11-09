@@ -40,9 +40,16 @@ public class FeaturePanelController implements ActionListener {
 			else
 			{
 				fp.getView().addNewFeature(key, value);
-				System.out.println(fp.getView().getList().toString());
 				fp.disable();	
-				fp.getView().addFeaturePanel();
+				if(!fp.getView().fpExists())
+				{
+					fp.getView().addFeaturePanel();
+					fp.getView().setfpExists(true);
+				}
+				else
+				{
+					fp.getView().setfpExists(false);
+				}
 			}
 			
 			}
