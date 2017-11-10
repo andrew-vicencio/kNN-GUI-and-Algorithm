@@ -1,5 +1,10 @@
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
+import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -16,6 +21,7 @@ import javax.swing.border.EtchedBorder;
 
 
 public class View {
+    //TODO: GH Is this our main controler class if we were doing MVC?
 	private JFrame mainFrame, errorFrame;
 	private JPanel mainPanel, headerPanel, contentPanel, footerPanel;
 	private JMenuBar menuBar;
@@ -25,6 +31,7 @@ public class View {
 	private LinkedHashMap<String, String> features;
 	private ArrayList<String> featureTypes;
 	private boolean fpexists = false;
+	private DataSet model;
 
 	
 	 /**
@@ -60,6 +67,8 @@ public class View {
 		menuBar.add(edit);
 		menuBar.add(display);
 		menuBar.add(help);
+
+        createListeners();
 		create.add(newDataSet);
 		create.add(newTestCase);
 		edit.add(addValue);
@@ -83,10 +92,13 @@ public class View {
 		featureTypes.add("Coordinates");
 		featureTypes.add("String");
 		featureTypes.add("Add new feature type");
+
+		//Added close application operation when window closes
+		mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        model = new DataSet();
 	}
 	/**
 	 * A FeaturePanel is added to the content panel, allowing the user to add a new feature
-	 * @param i: integer denoting the level of subfeatures deep this feature is. Will start with 0.
 	 */
 	public void addFeaturePanel()
 	{
@@ -97,15 +109,60 @@ public class View {
 		footerPanel.add(done);
 		done.setVisible(true);
 	}
+
+/**
+ * A JOptionPane to prompt the user which feature they would like to test
+ * @return String of the name of the feature they would like to test
+ */
+	public String promptTestCase()
+	{
+		JFrame testCase = new JFrame("New Test Case");
+		String[] featureArray = features.keySet().toArray(new String[features.size()]);
+
+	    String typeToTest = (String) JOptionPane.showInputDialog(testCase, 
+	        "Choose which value you would like to test for.",
+	        "New Test Case",
+	        JOptionPane.QUESTION_MESSAGE, 
+	        null, 
+	        featureArray, 
+	        featureArray[0]);
+	    
+	    return typeToTest;
+
+	}
 	/**
 	 * The features from a featurePanel is added to the features list
-	 * @param fp : the featurePanel
 	 */
 	public void addNewFeature(String key, String value)
 	{
 		features.put(key, value);
 	}
-	
+
+
+
+	public void createListeners(){
+	    //newDataSet, newTestCase, addValue, helpDoc;
+
+        //If it only dose one thnig why not use this the controler classes are good for like complicated things
+        newDataSet.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+             addFeaturePanel();
+            }
+        });
+
+        newTestCase.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+
+            }
+        });
+
+
+
+
+    }
+
 	/**
 	 * To get the hashmap containing all features added thus far.
 	 * @return  HashMap of String key/value pairs
@@ -137,7 +194,7 @@ public class View {
 		footerPanel.removeAll();
 		headerPanel.setLayout(new GridLayout(1, features.size()));
 	
-		for (String key : features.keySet()){
+		for (String key : model.getFeilds().keySet()){
 			JLabel jl = new JLabel("    " + key);
 			jl.setBorder(BorderFactory.createCompoundBorder(new EtchedBorder(), new EmptyBorder(6, 6, 6, 6)));
 			headerPanel.add(jl);
@@ -148,16 +205,11 @@ public class View {
 		
 	}
 
-	
-	/**
+    /**
 	 * Method to add a new feature type when the "Add a new Feature Type" is chosen in the combo box
 	 * The JTextfield value becomes the name of the feature type
-	 * @param String: name of new feature type
 	 */
-	public void addFeatureType(String s)
-	{
-		featureTypes.add(featureTypes.size()-1, s);
-	}
+
 	/**
 	 * Get the Done JButton in the footer panel
 	 * @return
@@ -179,7 +231,14 @@ public class View {
 		fpexists = true;
 		
 	}
-	
+
+    public DataSet getModel() {
+        return model;
+    }
+
+    public void setModel(DataSet model) {
+        this.model = model;
+    }
 }
 
 

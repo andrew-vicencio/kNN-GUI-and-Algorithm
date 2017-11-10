@@ -221,13 +221,7 @@ public class TestEnviroment {
     public static void main(String[] args) {
     	View view = new View();
     	view.addFeaturePanel();
-    	HashMap<String, String> s = new HashMap<String, String>();
-    	s.put("key1", "value1");
-    	s.put("key2", "value2");
-    	s.put("key3", "value3");
-    	s.put("example", "");
-    	view.setFeatures(s);
-    	view.addFeatureType("TEST");
+
     	//view.setUpFeatures();
     	//view.addFeaturePanel();
         // Test the first case.

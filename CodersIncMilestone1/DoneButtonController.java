@@ -12,12 +12,13 @@ public class DoneButtonController implements ActionListener {
 
 	public void actionPerformed(ActionEvent e) {
 	
-		if(view.getFeatureMap().isEmpty() || view.getFeatureMap().size() == 1)
+		if(view.getModel().isFeildsLessThan2())
 		{
 			view.sendErrorFrame("Please enter at least two features");
 		}
 		else
 		{
+
 			view.setUpFeatures();
 		}
 		

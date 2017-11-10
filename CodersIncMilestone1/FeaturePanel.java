@@ -18,7 +18,7 @@ import javax.swing.border.EtchedBorder;
 
 
 public class FeaturePanel extends JPanel {
-	
+	//TODO: Need to specify which are public and private
 	JPanel innerPanel;
 	View view;
 	JLabel key;
