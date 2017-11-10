@@ -187,22 +187,13 @@ public class TestEnviroment {
     public static void main(String[] args) {
     	View view = new View();
     	view.addFeaturePanel();
-<<<<<<< HEAD
 
-    	//view.setUpFeatures();
-    	//view.addFeaturePanel();
-        // Test the first case.
-        TestEnviroment working = new TestEnviroment(true);
-        int kValue = 0;
-        double accuracy = 0;
-        int value = 0;
-=======
     	HashMap<String, String> s = new HashMap<String, String>();
     	s.put("key1", "value1");
     	s.put("key2", "value2");
     	s.put("key3", "value3");
     	s.put("example", "");
->>>>>>> a05919257ec096a91b5795e014854144cfe93af4
+
 
 
 
