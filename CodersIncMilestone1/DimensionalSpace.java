@@ -1,4 +1,4 @@
-package CodersIncMilestone1;
+package CodersInc;
 import java.util.HashMap;
 import java.util.ArrayList;
 import java.util.concurrent.ConcurrentHashMap;

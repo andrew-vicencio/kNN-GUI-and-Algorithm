@@ -27,8 +27,8 @@ public class Point
 	 */
 	public Point(int ptVal) {
 		this.pointValue = ptVal;
-		rawValues = new HashMap<String, Integer>();
-    	stdValues = new HashMap<String, Integer>();
+		rawValues = new ArrayList<Feature>();
+    	stdValues = new ArrayList<Feature>();
 	}
 	
 	/**
