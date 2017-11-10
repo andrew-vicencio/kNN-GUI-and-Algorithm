@@ -158,41 +158,7 @@ public class TestEnviroment {
      * @param k	The number of neighbours to use.
      * @return	The calculated point value.
      */
-    public int testCostFeature1(int k) {
-        Point t1 = new Point();
-        t1.addAttribute("coordinate x", 15);
-        t1.addAttribute("coordinate y", 20);
-        t1.addAttribute("sq. ft.", 1500);
-        t1.addAttribute("age", 1);
-        return dataSet.findkNN(t1, k);
-    }
 
-    /**
-     * KNN test for the second dataset.
-     *
-     * @param k	The number of neighbours to use.
-     * @return	The calculated point value.
-     */
-    public int testCostFeature2(int k) {
-
-        Point h7 = new Point();
-        h7.addAttribute("1", 2);
-        h7.addAttribute("2", 2);
-        h7.addAttribute("3", 2);
-        h7.addAttribute("4", 2);
-        h7.addAttribute("5", 2);
-        h7.addAttribute("6", 3);
-        h7.addAttribute("7", 2);
-        h7.addAttribute("8", 2);
-        h7.addAttribute("9", 2);
-        h7.addAttribute("10", 2);
-        h7.addAttribute("11", 2);
-        h7.addAttribute("coordinate x", 7);
-        h7.addAttribute("coordinate y", 7);
-        h7.addAttribute("Elavation", 585);
-        return dataSet.findkNN(h7, k);
-
-    }
 
     /**
      * Determines how accurate the kNN function if a known value for the point
@@ -221,6 +187,7 @@ public class TestEnviroment {
     public static void main(String[] args) {
     	View view = new View();
     	view.addFeaturePanel();
+<<<<<<< HEAD
 
     	//view.setUpFeatures();
     	//view.addFeaturePanel();
@@ -229,48 +196,22 @@ public class TestEnviroment {
         int kValue = 0;
         double accuracy = 0;
         int value = 0;
+=======
+    	HashMap<String, String> s = new HashMap<String, String>();
+    	s.put("key1", "value1");
+    	s.put("key2", "value2");
+    	s.put("key3", "value3");
+    	s.put("example", "");
+>>>>>>> a05919257ec096a91b5795e014854144cfe93af4
 
-        //Determine which K Value will give you the most accurate value in our test case
-        for (int i = 1; i <= working.getSize(); i++) {
 
-            value = working.testCostFeature1(i);
-            double tempAccuracy = working.accuracy(400000, value);
-            //Set value for original value
-            if (accuracy == 0) {
-                accuracy = tempAccuracy;
-                kValue = i;
-            } else if (tempAccuracy > accuracy) {
-                // If the K value generates a more accurate value
-                accuracy = tempAccuracy;
-                kValue = i;
-            }
-        }
-        //Report the out put
-        System.out.println("The most useful K value is " + kValue + ".\nThe accuracy of this K value for a new point is " + accuracy + ".\n The actual value was 400000. The generated value was " + value + ".");
 
-        // Test the second case.
-        working = new TestEnviroment(false);
-        kValue = 0;
-        accuracy = 0;
-        value = 0;
+    	//view.setFeatures(s);
+    	//view.addFeatureType("TEST");
+    	//view.setUpFeatures();
+    	//view.addFeaturePanel();
+        // Test the first case.
 
-        //Determine which K Value will give you the most accurate value in our test case
-        for (int i = 1; i <= working.getSize(); i++) {
-
-            value = working.testCostFeature2(i);
-            double tempAccuracy = working.accuracy(2, value);
-            //Set value for original value
-            if (accuracy == 0) {
-                accuracy = tempAccuracy;
-                kValue = i;
-            } else if (tempAccuracy > accuracy) {
-                // If the K value generates a more accurate value
-                accuracy = tempAccuracy;
-                kValue = i;
-            }
-        }
-        //Report the out put
-        System.out.println("The most useful K value is " + kValue + ".\nThe accuracy of this K value for a new point is " + accuracy + ".\n The actual value was 2. The generated value was " + value + ".");
 
     }
 
