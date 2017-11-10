@@ -186,12 +186,7 @@ public class TestEnviroment {
      */
     public static void main(String[] args) {
     	View view = new View();
-    	view.addFeaturePanel();
-    	HashMap<String, String> s = new HashMap<String, String>();
-    	s.put("key1", "value1");
-    	s.put("key2", "value2");
-    	s.put("key3", "value3");
-    	s.put("example", "");
+
 
 
 

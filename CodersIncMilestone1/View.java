@@ -90,9 +90,14 @@ public class View {
 		featureTypes = new ArrayList<String>();
 		featureTypes.add("Integer");
 		featureTypes.add("Float");
-		featureTypes.add("Coordinates");
 		featureTypes.add("String");
 		featureTypes.add("Add new feature type");
+		
+		newDataSet.addActionListener(new MenuController(this));
+		newTestCase.addActionListener(new MenuController(this));
+		addValue.addActionListener(new MenuController(this));
+		helpDoc.addActionListener(new MenuController(this));
+		
 
 		//Added close application operation when window closes
 		mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -202,14 +207,12 @@ public class View {
 	{
 		return features;
 	}
-	public boolean fpExists() {
-
-		return fpexists;
-	}
-	public void setfpExists(boolean b) {
-		fpexists = true;
+	
+	public void disableNewDataSet() {
+		newDataSet.setEnabled(false);
 		
 	}
+
 
 
 }

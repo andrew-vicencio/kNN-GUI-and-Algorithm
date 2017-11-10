@@ -16,6 +16,7 @@ public class FeaturePanelController extends MainController{
         //TODO Just make done deal with empty feature aka dont count the one empty feature one that would be easy for User experience
 		String key = fp.getKey();
 		String value = fp.getValue();
+		
 		if(key.isEmpty())
 		{
 			fp.getView().sendErrorFrame("Please enter a valid name");
@@ -31,15 +32,13 @@ public class FeaturePanelController extends MainController{
                 this.getDataModel().addField(key, value);
 				fp.refreshComboBox(key);
 				fp.disable();
-				fp.addFeaturePanel(key);
-
+				//fp.getView().addSubFeaturePanel();
 			}
 			else
 			{
-
-
                 this.getDataModel().addField(key, value);
 				fp.disable();	
+				fp.getView().addFeaturePanel();
 
 			}
 			

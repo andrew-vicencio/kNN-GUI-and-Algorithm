@@ -12,7 +12,7 @@ public class DoneButtonController extends MainController {
 
 	public void actionPerformed(ActionEvent e) {
 	
-		if(this.getDataModel().isFeildsLessThan2())
+		if(view.getFeatureMap().size() <= 2)
 		{
 			view.sendErrorFrame("Please enter at least two features");
 		}

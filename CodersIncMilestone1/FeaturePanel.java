@@ -16,24 +16,23 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.EtchedBorder;
 
-
 public class FeaturePanel extends JPanel {
 	//TODO: Need to specify which are public and private
-	JPanel innerPanel;
-	View view;
-	JLabel key;
-	JLabel value;
-	JComboBox<String> featureClass;
-	JTextField  featureName;
-	ArrayList<String> types;
-	JButton addFeature;
-	FeaturePanelController fpController;
+	private JPanel innerPanel;
+	private View view;
+	private JLabel key;
+	private JLabel value;
+	private JComboBox<String> featureClass;
+	private JTextField  featureName;
+	private ArrayList<String> types;
+	private JButton addFeature;
+	private FeaturePanelController fpController;
 
 	
 	public FeaturePanel(View view, ArrayList<String> types)
 	{
 		super();
-		setLayout(new GridLayout(1, 0));
+		setLayout(new GridLayout(0, 1));
 		this.types = types;
 		String[] typesArray = types.toArray(new String[0]);
 		featureClass = new JComboBox<String>(typesArray);
@@ -45,7 +44,7 @@ public class FeaturePanel extends JPanel {
 		this.view = view;
 		
 		add(innerPanel);
-		innerPanel.setLayout(new FlowLayout());
+		innerPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
 		innerPanel.add(key);
 		innerPanel.add(featureName);
 		innerPanel.add(value);
@@ -54,8 +53,7 @@ public class FeaturePanel extends JPanel {
 		
 		fpController = new FeaturePanelController(this);
 		addFeature.addActionListener(fpController);
-		
-		setMaximumSize(new Dimension(1000, 70));
+		setMaximumSize(new Dimension(1000, 60));
 		setBorder(BorderFactory.createCompoundBorder(new EtchedBorder(), new EmptyBorder(6, 6, 6, 6)));
 			
 	}
@@ -67,7 +65,7 @@ public class FeaturePanel extends JPanel {
 	public void addFeaturePanel(String key)
 	{
 		
-		setMaximumSize(new Dimension(getWidth() - 100, getHeight() + 70));
+		setMaximumSize(new Dimension(getWidth(), getHeight() + 100));
 		FeaturePanel newFP = new FeaturePanel(view, types);
 		add(newFP);
 		revalidate();
@@ -136,6 +134,7 @@ public class FeaturePanel extends JPanel {
 		featureClass.setSelectedItem(key);	
 	}
 	
+
 	
 
 }
