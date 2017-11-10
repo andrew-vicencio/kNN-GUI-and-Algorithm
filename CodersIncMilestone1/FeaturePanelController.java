@@ -32,14 +32,7 @@ public class FeaturePanelController implements ActionListener {
 				fp.refreshComboBox(key);
 				fp.disable();
 				fp.addFeaturePanel(key);
-<<<<<<< HEAD
-				if(!fp.getView().fpExists())
-				{
-					fp.getView().addFeaturePanel();
-					fp.getView().setfpExists(true);
-				}
-=======
->>>>>>> a05919257ec096a91b5795e014854144cfe93af4
+
 
 			}
 			else
@@ -48,12 +41,7 @@ public class FeaturePanelController implements ActionListener {
 
                 fp.getView().getModel().addField(key, value);
 				fp.disable();	
-<<<<<<< HEAD
-				fp.getView().addFeaturePanel();
-				
-=======
 
->>>>>>> a05919257ec096a91b5795e014854144cfe93af4
 			}
 			
 			}
