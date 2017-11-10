@@ -1,8 +1,3 @@
-<<<<<<< HEAD
-
-=======
-package CodersInc;
->>>>>>> Refactoring
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Set;
@@ -31,8 +26,8 @@ public class Point
 	 */
 	public Point(int ptVal) {
 		this.pointValue = ptVal;
-		rawValues = new HashMap<String, Integer>();
-    	stdValues = new HashMap<String, Integer>();
+		rawValues = new ArrayList<Feature>();
+    	stdValues = new ArrayList<Feature>();
 	}
 	
 	/**
@@ -49,8 +44,9 @@ public class Point
 	 * @param att		The key for the value
 	 * @param value		The value of the key
 	 */
-	public void addAttribute(String att, int value) {
-		rawValues.put(att, value);
+	public void addAttribute(Feature f) {
+		
+		rawValues.add(f);
 	}
 
     /**
@@ -58,8 +54,8 @@ public class Point
      * 
      * @return		A Set of keys in string format.
      */
-    public Set<String> getAttributes() {
-    	return rawValues.keySet();
+    public ArrayList<Feature> getAttributes() {
+    	return rawValues;
     }
 
 	
@@ -70,7 +66,7 @@ public class Point
 	 * @return			The value of the key
 	 */
 	public int getValue(String att) {
-		return rawValues.get(att);
+		return 0;
 	}
 	
 	/**
@@ -83,10 +79,10 @@ public class Point
 	 * @param n		Number of points in the sample.
 	 */
 	public void standardise(AbstractMap<String, Integer> mean, int n){
-		 for (String attr : rawValues.keySet()){
-			 int X = rawValues.get(attr);
-			 stdValues.put(attr, (X - findStdDev(X, mean.get(attr), n))/mean.get(attr));
-		 }
+		 //for (String attr : rawValues.keySet()){
+		//	 int X = rawValues.get(attr);
+		//	 stdValues.put(attr, (X - findStdDev(X, mean.get(attr), n))/mean.get(attr));
+		// }
 	}
 	
 	/**
@@ -123,7 +119,7 @@ public class Point
 	/**
 	 * @return			The calculated standard deviation values.
 	 */
-	public HashMap<String, Integer> getStdValues() {
+	public ArrayList<Feature> getStdValues() {
 		 return stdValues;
 	}
 
@@ -133,6 +129,6 @@ public class Point
 	 * @param stdValues		The HashMap containing the new standard deviations.
 	 */
 	public void setStdValues(HashMap<String, Integer> stdValues) {
-		 this.stdValues = stdValues;
+		 //this.stdValues = stdValues;
 	}
 }
