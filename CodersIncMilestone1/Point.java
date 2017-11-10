@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 
+=======
+package CodersInc;
+>>>>>>> Refactoring
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Set;
@@ -16,8 +20,8 @@ import java.lang.Math;
 
 public class Point 
 {
-	private HashMap<String, Integer> rawValues;
-    private HashMap<String, Integer> stdValues;
+	private ArrayList<Feature> rawValues;
+    private ArrayList<Feature> stdValues;
 	private int pointValue;
 	
 	/**
