@@ -11,15 +11,15 @@ public class CompositeCell extends Cell {
 		features = new ArrayList<Cell>();
 	}
 	
-	public ArrayList<Cell> getSubFeatures() {
+	public ArrayList<Cell> getSubCells() {
 		return features;
 	}
 	
-	public void setSubFeatures(ArrayList<Cell> features) {
+	public void setSubCells(ArrayList<Cell> features) {
 		this.features = features;
 	}
 	
-	public void addFeature(Cell f) {
+	public void addCell(Cell f) {
 		features.add(f);
 	}
 }
