@@ -1,7 +1,4 @@
-<<<<<<< HEAD
-=======
 
->>>>>>> a05919257ec096a91b5795e014854144cfe93af4
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Set;
