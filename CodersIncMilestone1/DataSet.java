@@ -6,6 +6,7 @@ public class DataSet {
     private HashMap<String, String> feilds;
     private DimensionalSpace grid;
 
+    //TODO: BB actualy an interperter class so use the DimensionalSpace as the data model not this class change to interperter
 
 
     public DataSet(){

@@ -8,6 +8,7 @@ import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
+import java.util.*;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.EtchedBorder;
@@ -21,7 +22,7 @@ import javax.swing.border.EtchedBorder;
 
 
 public class View {
-    //TODO: GH Is this our main controler class if we were doing MVC?
+
 	private JFrame mainFrame, errorFrame;
 	private JPanel mainPanel, headerPanel, contentPanel, footerPanel;
 	private JMenuBar menuBar;
@@ -31,7 +32,7 @@ public class View {
 	private LinkedHashMap<String, String> features;
 	private ArrayList<String> featureTypes;
 	private boolean fpexists = false;
-	private DataSet model;
+
 
 	
 	 /**
@@ -95,7 +96,6 @@ public class View {
 
 		//Added close application operation when window closes
 		mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        model = new DataSet();
 	}
 	/**
 	 * A FeaturePanel is added to the content panel, allowing the user to add a new feature
@@ -108,27 +108,6 @@ public class View {
 		contentPanel.repaint();
 		footerPanel.add(done);
 		done.setVisible(true);
-	}
-
-/**
- * A JOptionPane to prompt the user which feature they would like to test
- * @return String of the name of the feature they would like to test
- */
-	public String promptTestCase()
-	{
-		JFrame testCase = new JFrame("New Test Case");
-		String[] featureArray = features.keySet().toArray(new String[features.size()]);
-
-	    String typeToTest = (String) JOptionPane.showInputDialog(testCase, 
-	        "Choose which value you would like to test for.",
-	        "New Test Case",
-	        JOptionPane.QUESTION_MESSAGE, 
-	        null, 
-	        featureArray, 
-	        featureArray[0]);
-	    
-	    return typeToTest;
-
 	}
 	/**
 	 * The features from a featurePanel is added to the features list
@@ -188,13 +167,13 @@ public class View {
 	 * Sets up the main panel with the keys user has provided as JLabels in the 
 	 * headerPanel
 	 */
-	public void setUpFeatures()
+	public void setUpFeatures(Set<String> keys)
 	{
 		contentPanel.removeAll();
 		footerPanel.removeAll();
 		headerPanel.setLayout(new GridLayout(1, features.size()));
 	
-		for (String key : model.getFeilds().keySet()){
+		for (String key : keys){
 			JLabel jl = new JLabel("    " + key);
 			jl.setBorder(BorderFactory.createCompoundBorder(new EtchedBorder(), new EmptyBorder(6, 6, 6, 6)));
 			headerPanel.add(jl);
@@ -232,13 +211,7 @@ public class View {
 		
 	}
 
-    public DataSet getModel() {
-        return model;
-    }
 
-    public void setModel(DataSet model) {
-        this.model = model;
-    }
 }
 
 

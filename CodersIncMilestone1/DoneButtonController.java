@@ -1,7 +1,7 @@
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class DoneButtonController implements ActionListener {
+public class DoneButtonController extends MainController {
 
 	private View view;
 	
@@ -12,14 +12,14 @@ public class DoneButtonController implements ActionListener {
 
 	public void actionPerformed(ActionEvent e) {
 	
-		if(view.getModel().isFeildsLessThan2())
+		if(this.getDataModel().isFeildsLessThan2())
 		{
 			view.sendErrorFrame("Please enter at least two features");
 		}
 		else
 		{
 
-			view.setUpFeatures();
+			view.setUpFeatures(this.getDataModel().getFeilds().keySet());
 		}
 		
 	}

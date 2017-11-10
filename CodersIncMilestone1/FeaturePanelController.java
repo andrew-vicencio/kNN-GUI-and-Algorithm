@@ -2,7 +2,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 
-public class FeaturePanelController implements ActionListener {
+public class FeaturePanelController extends MainController{
 	
 	FeaturePanel fp;
 	
@@ -20,7 +20,7 @@ public class FeaturePanelController implements ActionListener {
 		{
 			fp.getView().sendErrorFrame("Please enter a valid name");
 		}
-		else if(fp.getView().getModel().getFeilds().containsKey(key))
+		else if(this.getDataModel().getFeilds().containsKey(key))
 		{
 			fp.getView().sendErrorFrame("There is already a feature with that particular name");
 		}
@@ -28,18 +28,17 @@ public class FeaturePanelController implements ActionListener {
 		{
 			if(value.equals("Add new feature type"))
 			{
-                fp.getView().getModel().addField(key, value);
+                this.getDataModel().addField(key, value);
 				fp.refreshComboBox(key);
 				fp.disable();
 				fp.addFeaturePanel(key);
-
 
 			}
 			else
 			{
 
 
-                fp.getView().getModel().addField(key, value);
+                this.getDataModel().addField(key, value);
 				fp.disable();	
 
 			}
