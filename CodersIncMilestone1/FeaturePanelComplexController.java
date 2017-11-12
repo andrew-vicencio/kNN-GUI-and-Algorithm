@@ -1,9 +1,11 @@
+import sun.applet.Main;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 
-public class FeaturePanelComplexController implements ActionListener {
+public class FeaturePanelComplexController extends MainController {
 
 	/**
 	 * Constructor to pass the FeaturePanelComplex using this controller

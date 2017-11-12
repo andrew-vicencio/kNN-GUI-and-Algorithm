@@ -293,6 +293,13 @@ public class View {
 		contentPanel.repaint();
 		
 	}
+	public void promptValue() {
+		JFrame promptFrame = new JFrame("Enter your data values");
+		JPanel mainPanel = new JPanel();
+		
+		
+		
+	}
 	
 
 

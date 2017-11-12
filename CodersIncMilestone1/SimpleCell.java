@@ -1,4 +1,4 @@
-package CodersInc;
+
 
 public class SimpleCell<E> extends Cell {
 	

@@ -3,7 +3,7 @@ import java.awt.event.ActionListener;
 
 
 public class FeaturePanelSimpleController extends MainController{
-	
+	//TODO: BB Change to utilize the data model
 	FeaturePanelSimple fp;
 	
 	/**
@@ -23,7 +23,7 @@ public class FeaturePanelSimpleController extends MainController{
 
 		String key = fp.getKey();
 		String value = fp.getValue();
-		
+		//Make sure there is a valid key
 		if(key.isEmpty())
 		{
 			fp.getView().sendErrorFrame("Please enter a valid name");
@@ -34,7 +34,9 @@ public class FeaturePanelSimpleController extends MainController{
 		}
 		else
 		{
-			fp.disable();
+		    //Disable so that the name can not be changed
+		    fp.disable();
+			//Check if the simple feature has a parent complex feature if not just add as its own type
 			if(fp.getParentComplex() != null)
 			{
 				fp.getParentComplex().addSubFeaturePanel(key, value);

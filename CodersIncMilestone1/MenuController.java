@@ -1,10 +1,9 @@
 import java.awt.Container;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import javax.swing.JLabel;
 
-public class MenuController implements ActionListener {
+public class MenuController extends MainController {
 
 	private View view;
 	/**
