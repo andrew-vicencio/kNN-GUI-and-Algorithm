@@ -43,7 +43,7 @@ public class Point
     * Returns the set of keys that are currently being used by the point.
     * 
     * @return		A Set of keys in string format.
-    */
+    **/
     public Set<String> getAttributes() {
     	return rawValues.keySet();
     }
@@ -66,42 +66,7 @@ public class Point
     * 
     * @param mean		Map of the mean values.
     * @param n		Number of points in the sample.
-    */
-    /**public void standardise(AbstractMap<String, Integer> mean, int n){
-        for (String attr : rawValues.keySet()){
-	    int X = rawValues.get(attr);
-	    stdValues.put(attr, (X - findStdDev(X, mean.get(attr), n))/mean.get(attr));
-	}
-    }**/
-    
-    /**
-    * Finds the standard deviation for the value based on the sample mean and number
-    * of points.
-    * 
-    * TODO: this should be done in DimensionalSpace using the entire sample.
-    * 
-    * @param X			The value to be used.
-    * @param mean		The sample mean for that value
-    * @param n			The number of points in the sample
-    * @return			The stdDev value
-    */
-    /**private int findStdDev(int X, int mean, int n) {
-        return (int) (Math.pow((X - mean),2)/n);
-    }**/
-
-    /**
-    * @return			The calculated standard deviation values.
-    */
-    // public HashMap<String, Integer> getStdValues() {
-    //    return stdValues;
-    //}
-
-    /**
-    * Sets the standard deviation values.
-    * 
-    * @param stdValues		The HashMap containing the new standard deviations.
-    */
-    //public void setStdValues(HashMap<String, Integer> stdValues) {
-    //    this.stdValues = stdValues;
-    //}
+    **/
+    public void standardise(AbstractMap<String, Integer> mean, int n){
+    }
 }
