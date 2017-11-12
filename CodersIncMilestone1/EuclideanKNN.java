@@ -1,16 +1,16 @@
+package CodersInc;
+
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
-public class EuclideanKNN implements kNN {
-	
-	DimensionalSpace ds;
+public class EuclideanKNN extends kNN {
 	
 	public EuclideanKNN(DimensionalSpace ds) {
-		this.ds = ds;
+		super(ds);
 	}
 
 	/**
-	   * FindkNN finds the "cost" value for the given point using a KNN algorithm
+	   * findKNN finds the "cost" value for the given point using a euclidean KNN algorithm
 	   * with the k nearest points
 	   * 
 	   * @param targetKey		The key to be found
@@ -19,103 +19,81 @@ public class EuclideanKNN implements kNN {
 	   * 
 	   * @return				The unknown value of the given point
 	   */
-	@Override
-	public float findKNN(String targetKey, Point targetPoint, int neighbours) {
+	public Cell findKNN(String targetKey, Point targetPoint, int neighbours) {
 	  	
+		NumericalDistance nDist = new NumericalDistance();
+		StringDistance sDist = new StringDistance();
+		
 		ArrayList<Point> points = ds.getPoints();
-		int numberOfPoints = ds.getNumberOfPoints();
-		ConcurrentHashMap<String, Integer> mean = ds.getMean();
 		
-	    assert(neighbours > 0);
+		if (neighbours <= 0) neighbours = 1;
 	    if (neighbours > points.size()) neighbours = points.size();
-	    
-	    targetPoint.standardise(mean, numberOfPoints);
 		
-	    // Initialize required instance variables
-		HashMap<String, Integer> targetValues = targetPoint.getStdValues();
-		HashMap<String, Integer> currentPtValues;
-		HashMap<Integer, Tuple<Integer, Integer>> closestKNeighbours = new HashMap<Integer, Tuple<Integer, Integer>>();
-		int distance, targetCost;
-		boolean distValueDisplacement;
-		Tuple<Integer, Integer> displacedPoint, placeHolder;
+	    ArrayList<Tuple<Float, Cell>> closestKNeighbours = new ArrayList<Tuple<Float, Cell>>(neighbours);
+		Tuple<Float, Cell> displacedPoint, placeHolder;
+		float distance;
+		boolean displacement;
+		HashMap<String, Cell> currentPtValues;
+		HashMap<String, Cell> targetPtValues = targetPoint.getStdValues();
 		
-		// Initialize an empty hashmap to hold the closest neighbours
-		for (int i = 1; i <= neighbours; i++) {
-			closestKNeighbours.put(i, new Tuple<Integer, Integer>(-1, -1));
+		for (int i = 0; i < neighbours; i++) {
+			closestKNeighbours = null;
 		}
 		
-		// For each of the given points in the dataset, calculate the distance from the target point
 		for (Point pt: points) {
-			
-			// Reset the instance variables for each point
-			distValueDisplacement = false;
-			displacedPoint = null;
-			distance = 0;
-			currentPtValues = pt.getStdValues();
-		    
-			// Factor in every value to the distance
-			for(String key: currentPtValues.keySet()) {
-				distance += (int) Math.pow((currentPtValues.get(key) - targetValues.get(key)), 2);
-			}
-			
-			// Complete the Euclidean distance calculation
-			distance = (int) Math.sqrt(distance);
-			
-			// Add the point to the nearest neighbours list in the corresponding location if applicable
-			for (int i = 1; i <= neighbours; i++) {
+			if (!(pt.equals(targetPoint))) {
+				displacement = false;
+				displacedPoint = null;
+				distance = 0;
+				currentPtValues = pt.getStdValues();
 				
-				// If entries are not being displaced, use the current point's distance and cost
-				if (!distValueDisplacement) {
-					
-					// If the current spot has not been used yet
-					if (closestKNeighbours.get(i).getValue2() == -1) {
-						closestKNeighbours.replace(i, new Tuple<Integer, Integer>(pt.getPointValue(), distance));
-						break;
-						
-					// If the current point is displacing other point(s)
-					} else if (distance < closestKNeighbours.get(i).getValue2()) {
-						displacedPoint = closestKNeighbours.get(i);
-						closestKNeighbours.replace(i, new Tuple<Integer, Integer>(pt.getPointValue(), distance));
-						distValueDisplacement = true;
-						
-					// If there's a tie and the last list spot has been reached
-					} else if (distance == closestKNeighbours.get(i).getValue2() && i == neighbours) {
-						closestKNeighbours.replace(i, new Tuple<Integer, Integer>((pt.getPointValue() + closestKNeighbours.get(i).getValue1()) / 2, distance));
+				for (String key: currentPtValues.keySet()) {
+					if (!(key.equals(targetKey))) {
+						if (currentPtValues.get(key) instanceof SimpleCell) {
+							if (((SimpleCell)currentPtValues.get(key)).getValue() instanceof String) {
+								distance += sDist.calcDistance((SimpleCell)targetPtValues.get(key), (SimpleCell)currentPtValues.get(key));
+							} else {
+								distance += nDist.calcDistance((SimpleCell)targetPtValues.get(key), (SimpleCell)currentPtValues.get(key));
+							}
+						} else {
+							// Composite
+						}
 					}
-					
-				// If entries are being displaced
-				} else {
-					
-					// If the current spot has not yet been used
-					if (closestKNeighbours.get(i).getValue2() == -1) {
-						closestKNeighbours.replace(i, displacedPoint);
-						break;
-						
-					// If the current displaced point is displacing other point(s)
-					} else if (distance < closestKNeighbours.get(i).getValue2()) {
-						placeHolder = closestKNeighbours.get(i);
-						closestKNeighbours.replace(i, displacedPoint);
-						displacedPoint = placeHolder;
-						distValueDisplacement = true;
-					
-					// If there's a tie and the last list spot has been reached
-					} else if (distance == closestKNeighbours.get(i).getValue2() && i == neighbours) {
-						closestKNeighbours.replace(i, new Tuple<Integer, Integer>((displacedPoint.getValue1() + closestKNeighbours.get(i).getValue1()) / 2, distance));
+				}
+				
+				distance = (float)Math.sqrt(distance);
+				
+				for (int i = 0; i < neighbours; i ++) {
+					if (!displacement) {
+						// If the current spot has not been used yet
+						if (closestKNeighbours.get(i).getValue2() == null) {
+							closestKNeighbours.set(i, new Tuple<Float, Cell>(distance, pt.getCell(targetKey)));
+							break;
+							
+						// If the current point is displacing other point(s)
+						} else if (distance < closestKNeighbours.get(i).getValue1()) {
+							displacedPoint = closestKNeighbours.get(i);
+							closestKNeighbours.set(i, new Tuple<Float, Cell>(distance, pt.getCell(targetKey)));
+							displacement = true;
+						}
+					} else {
+						// If the current spot has not been used yet
+						if (closestKNeighbours.get(i).getValue2() == null) {
+							closestKNeighbours.set(i, new Tuple<Float, Cell>(distance, pt.getCell(targetKey)));
+							break;
+							
+						// If the current point is displacing other point(s)
+						} else if (distance < closestKNeighbours.get(i).getValue1()) {
+							placeHolder = closestKNeighbours.get(i);
+							closestKNeighbours.set(i, displacedPoint);
+							displacedPoint = placeHolder;
+						}
 					}
 				}
 			}
 		}
 		
-		// Initialize the target cost
-		targetCost = 0;
-		
-		// Return the average cost of the nearest neighbour(s) as the target point's cost
-		for (int i = 1; i <= neighbours; i++) {
-			targetCost += closestKNeighbours.get(i).getValue1();
-		}
-		
-		targetPoint.setPointValue(targetCost / neighbours);
-	    return targetPoint.getPointValue();
+		return findValue(closestKNeighbours, targetKey);
 	}
 
 }
