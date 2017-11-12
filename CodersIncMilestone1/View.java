@@ -27,11 +27,11 @@ public class View {
 	private JPanel mainPanel, headerPanel, contentPanel, footerPanel;
 	private JMenuBar menuBar;
 	private JMenu create, edit, display, help;
-	private JMenuItem newDataSet, newTestCase, addValue, helpDoc;
+	private JMenuItem newDataSet, newTestCase, simpleFeature, complexFeature, addValue, helpDoc;
 	private JButton done;
 	private LinkedHashMap<String, String> features;
 	private ArrayList<String> featureTypes;
-	private boolean fpexists = false;
+	private MenuController menuController;
 
 
 	
@@ -41,6 +41,7 @@ public class View {
      */
 	public View()
 	{
+		//Instantiation of View elements
 		mainFrame = new JFrame("CODERS INC");
 		errorFrame = new JFrame("Error");
 		mainPanel = new JPanel();
@@ -56,7 +57,12 @@ public class View {
 		newTestCase = new JMenuItem("New Test Case");
 		addValue = new JMenuItem("Add Value");
 		helpDoc = new JMenuItem("View Help Documents");
+		simpleFeature = new JMenuItem("Add a Simple Feature");
+		complexFeature = new JMenuItem("Add a Complex Feature");
 		done = new JButton("Done");
+		menuController = new MenuController(this);
+		
+		//Placement and sizing of View elements
 		mainFrame.setJMenuBar(menuBar);
 		mainFrame.add(mainPanel);
 		mainPanel.setLayout(new BorderLayout());
@@ -68,35 +74,41 @@ public class View {
 		menuBar.add(edit);
 		menuBar.add(display);
 		menuBar.add(help);
-
-        createListeners();
 		create.add(newDataSet);
 		create.add(newTestCase);
+		edit.add(complexFeature);
+		edit.add(simpleFeature);
 		edit.add(addValue);
 		help.add(helpDoc);
-		
-		
 		mainFrame.setSize(1000, 700);
 
+		//Initial disabling of menu items
 		newTestCase.setEnabled(false);
 		edit.setEnabled(false);
 		display.setEnabled(false);
 		mainFrame.setVisible(true);
 		done.setVisible(false);
+		complexFeature.setEnabled(false);
+		simpleFeature.setEnabled(false);
 		
+		//Action Listeners
+		createListeners();
 		done.addActionListener(new DoneButtonController(this));
+		create.addActionListener(menuController);
+		simpleFeature.addActionListener(menuController);
+		complexFeature.addActionListener(menuController);
 		
 		features = new LinkedHashMap<String, String>();
 		featureTypes = new ArrayList<String>();
 		featureTypes.add("Integer");
 		featureTypes.add("Float");
 		featureTypes.add("String");
-		featureTypes.add("Add new feature type");
 		
 		newDataSet.addActionListener(new MenuController(this));
 		newTestCase.addActionListener(new MenuController(this));
 		addValue.addActionListener(new MenuController(this));
 		helpDoc.addActionListener(new MenuController(this));
+		
 		
 
 		//Added close application operation when window closes
@@ -105,14 +117,24 @@ public class View {
 	/**
 	 * A FeaturePanel is added to the content panel, allowing the user to add a new feature
 	 */
-	public void addFeaturePanel()
+	public void addFeaturePanelSimple()
 	{
-		FeaturePanel fp = new FeaturePanel(this, featureTypes);
+		FeaturePanelSimple fp = new FeaturePanelSimple(this, featureTypes);
 		contentPanel.add(fp);
 		contentPanel.revalidate();
 		contentPanel.repaint();
 		footerPanel.add(done);
 		done.setVisible(true);
+	}
+	
+	public void addFeaturePanelComplex() {
+		FeaturePanelSimple fp = new FeaturePanelSimple(this, featureTypes);
+		contentPanel.add(fp);
+		contentPanel.revalidate();
+		contentPanel.repaint();
+		footerPanel.add(done);
+		done.setVisible(true);
+		
 	}
 	/**
 	 * The features from a featurePanel is added to the features list
@@ -127,22 +149,20 @@ public class View {
 	public void createListeners(){
 	    //newDataSet, newTestCase, addValue, helpDoc;
 
-        //If it only dose one thnig why not use this the controler classes are good for like complicated things
         newDataSet.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-             addFeaturePanel();
+             //TO DO: JOption pane that alerts user data set is created, and how to add new features
             }
         });
-
+        
+        
         newTestCase.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
 
             }
         });
-
-
 
 
     }
@@ -208,10 +228,18 @@ public class View {
 		return features;
 	}
 	
-	public void disableNewDataSet() {
-		newDataSet.setEnabled(false);
+	public void enableNewDataSet(boolean b) {
+		newDataSet.setEnabled(b);
 		
 	}
+	public void enableFeatureCreation(boolean b) {
+		edit.setEnabled(b);
+		simpleFeature.setEnabled(b);
+		complexFeature.setEnabled(b);
+		addValue.setEnabled(!b);
+		
+	}
+	
 
 
 

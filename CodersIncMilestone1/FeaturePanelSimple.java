@@ -16,8 +16,7 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.EtchedBorder;
 
-public class FeaturePanel extends JPanel {
-	//TODO: Need to specify which are public and private
+public class FeaturePanelSimple extends JPanel{
 	private JPanel innerPanel;
 	private View view;
 	private JLabel key;
@@ -26,10 +25,10 @@ public class FeaturePanel extends JPanel {
 	private JTextField  featureName;
 	private ArrayList<String> types;
 	private JButton addFeature;
-	private FeaturePanelController fpController;
+	private FeaturePanelSimpleController fpController;
 
 	
-	public FeaturePanel(View view, ArrayList<String> types)
+	public FeaturePanelSimple(View view, ArrayList<String> types)
 	{
 		super();
 		setLayout(new GridLayout(0, 1));
@@ -51,7 +50,7 @@ public class FeaturePanel extends JPanel {
 		innerPanel.add(featureClass);
 		innerPanel.add(addFeature);
 		
-		fpController = new FeaturePanelController(this);
+		fpController = new FeaturePanelSimpleController(this);
 		addFeature.addActionListener(fpController);
 		setMaximumSize(new Dimension(1000, 60));
 		setBorder(BorderFactory.createCompoundBorder(new EtchedBorder(), new EmptyBorder(6, 6, 6, 6)));
@@ -66,7 +65,7 @@ public class FeaturePanel extends JPanel {
 	{
 		
 		setMaximumSize(new Dimension(getWidth(), getHeight() + 100));
-		FeaturePanel newFP = new FeaturePanel(view, types);
+		FeaturePanelSimple newFP = new FeaturePanelSimple(view, types);
 		add(newFP);
 		revalidate();
 		repaint();

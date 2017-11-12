@@ -2,11 +2,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 
-public class FeaturePanelController extends MainController{
+public class FeaturePanelSimpleController extends MainController{
 	
-	FeaturePanel fp;
+	FeaturePanelSimple fp;
 	
-	public FeaturePanelController(FeaturePanel fp)
+	public FeaturePanelSimpleController(FeaturePanelSimple fp)
 	{
 		this.fp = fp;
 	}
@@ -27,24 +27,8 @@ public class FeaturePanelController extends MainController{
 		}
 		else
 		{
-			if(value.equals("Add new feature type"))
-			{
-                this.getDataModel().addField(key, value);
-				fp.refreshComboBox(key);
-				fp.disable();
-				//fp.getView().addSubFeaturePanel();
-			}
-			else
-			{
-                this.getDataModel().addField(key, value);
-				fp.disable();	
-				fp.getView().addFeaturePanel();
-
-			}
-			
-			}
+			//TODO: BB - Use the key and value variables and pass them on to Dimensional Space
 		}
 
-		
-
+	}
 }

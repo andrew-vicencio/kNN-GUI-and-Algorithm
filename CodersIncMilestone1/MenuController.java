@@ -12,10 +12,18 @@ public class MenuController implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		String s = e.getActionCommand();
 		
-		if(s.equals("Create New Data Set"))
+		if(s.equals("New Data Set"))
 		{
-			view.addFeaturePanel();
-			view.disableNewDataSet();
+			view.enableNewDataSet(false);
+			view.enableFeatureCreation(true);
+		}
+		if(s.equals("Add a Simple Feature"))
+		{
+			view.addFeaturePanelSimple();
+		}
+		if(s.equals("Add a Complex Feature"))
+		{
+			view.addFeaturePanelComplex();
 		}
 
 	}
