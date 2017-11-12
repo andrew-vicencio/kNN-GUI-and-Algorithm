@@ -32,7 +32,7 @@ public class View {
 	private LinkedHashMap<String, Object> features;
 	private ArrayList<String> featureTypes;
 	private MenuController menuController;
-
+    private DimensionalSpace dataModel;
 
 	
 	 /**
@@ -41,7 +41,7 @@ public class View {
      */
 	public View()
 	{
-		//Instantiation of View elements
+		//Instantiation of View elements / Data Model
 		mainFrame = new JFrame("CODERS INC");
 		errorFrame = new JFrame("Error");
 		mainPanel = new JPanel();
@@ -61,8 +61,9 @@ public class View {
 		complexFeature = new JMenuItem("Add a Complex Feature");
 		done = new JButton("Done");
 		menuController = new MenuController(this);
-		
-		//Placement and sizing of View elements
+        dataModel = menuController.getDataModel();
+
+        //Placement and sizing of View elements
 		mainFrame.setJMenuBar(menuBar);
 		mainFrame.add(mainPanel);
 		mainPanel.setLayout(new BorderLayout());
@@ -188,8 +189,10 @@ public class View {
 	public void createListeners(){
 	    //newDataSet, newTestCase, addValue, helpDoc;
 
-
     }
+
+
+
 
 	/**
 	 * Sends an error message to the user
