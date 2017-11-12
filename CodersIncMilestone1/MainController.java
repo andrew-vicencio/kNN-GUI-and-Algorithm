@@ -10,4 +10,5 @@ public abstract class MainController implements ActionListener{
     public DimensionalSpace getDataModel() {
         return dataModel;
     }
+
 }
