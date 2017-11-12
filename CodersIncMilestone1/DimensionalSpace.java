@@ -33,8 +33,8 @@ public class DimensionalSpace {
         stddev = new HashMap<String, Cell>();
         sum = new HashMap<String, Cell>();
         points = new ArrayList<Point>();
+        cellTypes = new HashMap<String, String>();
     }
-  
   
     /**
     * Adds the given ArrayList of points to the DimensionalSpace's list of points. Calls the addPt funtion
@@ -49,9 +49,8 @@ public class DimensionalSpace {
     //TODO: DOCUMENT
     //TODO: Finish 1
     public void findSum(Point pt){
-
     }
-
+    
     /**
     * Finds the average value for each of the values wich define the points.
     */
@@ -84,14 +83,14 @@ public class DimensionalSpace {
     * 
     * @param newMean			HashMap containing the mean for each key.
     */
-    public void setMean(HashMap<String, Integer> newMean){
+    public void setMean(HashMap<String, Cell> newMean){
         mean = newMean;
     }
 
     /**
     * @return				HashMap containing the the mean values for the dataset.
     */
-    public HashMap<String, Integer> getMean(){
+    public HashMap<String, Cell> getMean(){
         return mean;
     }
   
@@ -100,14 +99,14 @@ public class DimensionalSpace {
     * 
     * @param newDev		HashMap containing the standard deviation for each key.
     **/
-    public void setStdDev(HashMap<String, Integer> newDev){
+    public void setStdDev(HashMap<String, Cell> newDev){
         stddev = newDev;
     }
   
     /**
     * @return				HashMap containing the the standard deviation values for the dataset.
     **/
-    public HashMap<String, Integer> getStdDev(){
+    public HashMap<String, Cell> getStdDev(){
         return stddev;
     }
 
@@ -116,14 +115,14 @@ public class DimensionalSpace {
     * 
     * @param newSum		HashMap containing the sum for each key.
     */
-    public void setSum(Map<String, Integer> newSum){
+    public void setSum(HashMap<String, Cell> newSum){
         sum = newSum;
     }
 
     /**
     * @return				HashMap containing the the summed values for the dataset.
     */
-    public HashMap<String, Integer> getSum(){
+    public HashMap<String, Cell> getSum(){
         return sum;
     }
     
@@ -143,8 +142,7 @@ public class DimensionalSpace {
     public ArrayList<Point> getPoints(){
         return points;
     }
-  
-  
+    
     /**
     * @return			The current number of points in the space.
     */
