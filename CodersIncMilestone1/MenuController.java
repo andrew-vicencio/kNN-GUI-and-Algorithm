@@ -1,7 +1,7 @@
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class MenuController implements ActionListener {
+public class MenuController extends MainController {
 
 	private View view;
 	/**

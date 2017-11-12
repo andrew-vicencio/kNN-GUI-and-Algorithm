@@ -1,4 +1,4 @@
-package CodersInc;
+
 
 public class SimpleFeature<E> extends Feature {
 	
