@@ -54,8 +54,8 @@ public class Point
     * @param att		The key of the value to be retrieved
     * @return			The value of the key
     */
-    public int getValue(String att) {
-	return rawValues.get(att);
+    public Cell getCell(String att) {
+    	return rawValues.get(att);
     }
 
     /**
