@@ -1,5 +1,8 @@
+import java.awt.Container;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
+import javax.swing.JLabel;
 
 public class MenuController implements ActionListener {
 
@@ -21,8 +24,10 @@ public class MenuController implements ActionListener {
 		
 		if(s.equals("New Data Set"))
 		{
+			view.showNewDataInfo();
 			view.enableNewDataSet(false);
 			view.enableFeatureCreation(true);
+			view.clearContentPanel();
 		}
 		if(s.equals("Add a Simple Feature"))
 		{
@@ -31,6 +36,10 @@ public class MenuController implements ActionListener {
 		if(s.equals("Add a Complex Feature"))
 		{
 			view.addFeaturePanelComplex("", 0);
+		}
+		if(s.equals("Add Value"))
+		{
+			
 		}
 
 	}

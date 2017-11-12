@@ -26,7 +26,7 @@ public class DoneButtonController extends MainController {
 		}
 		else
 		{
-
+			System.out.println(view.getList().toString());
 			view.setUpFeatures();
 		}
 		

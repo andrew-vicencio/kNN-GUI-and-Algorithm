@@ -272,6 +272,25 @@ public class View {
 	 */
 	public void displayInfo()
 	{
+		JLabel info = new JLabel("CODERS INC by Benjamin Bichel, Darren Holden, Gabrielle Hubert, Andrew Vicencio");
+		contentPanel.add(info);
+		info.setVisible(true);
+		contentPanel.revalidate();
+		contentPanel.repaint();
+	}
+	public void clearContentPanel() {
+		contentPanel.removeAll();
+
+		
+	}
+	public void showNewDataInfo() {
+		JLabel info = new JLabel("To add a simple feature, click Edit -> Add Simple Feature. To add a "
+				+ "composite/complex feature, click Edit -> Add Complex Feature."
+				+ " Always click 'ADD' when you are finished inputting a feature ");
+		contentPanel.add(info);
+		info.setVisible(true);
+		contentPanel.revalidate();
+		contentPanel.repaint();
 		
 	}
 	

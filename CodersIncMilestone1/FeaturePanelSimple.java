@@ -170,10 +170,4 @@ public class FeaturePanelSimple extends JPanel{
 		this.parent = parentComplex;
 	}
 
-	
-
-	
-
-	
-
 }
