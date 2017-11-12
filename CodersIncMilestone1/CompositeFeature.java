@@ -1,5 +1,3 @@
-package CodersInc;
-
 import java.util.ArrayList;
 
 public class CompositeFeature extends Feature {

@@ -1,5 +1,3 @@
-package CodersInc;
-
 public class SimpleFeature<E> extends Feature {
 	
 	private E value;

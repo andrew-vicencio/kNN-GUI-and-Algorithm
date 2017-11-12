@@ -1,4 +1,3 @@
-package CodersInc;
 import java.util.HashMap;
 import java.util.ArrayList;
 import java.lang.Math;

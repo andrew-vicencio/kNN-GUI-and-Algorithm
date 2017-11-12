@@ -1,5 +1,3 @@
-package CodersInc;
-
 public abstract class Feature {
 	private String key;
 	
