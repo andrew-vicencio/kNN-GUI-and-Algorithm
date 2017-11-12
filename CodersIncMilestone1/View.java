@@ -29,7 +29,7 @@ public class View {
 	private JMenu create, edit, display, help;
 	private JMenuItem newDataSet, newTestCase, simpleFeature, complexFeature, addValue, helpDoc;
 	private JButton done;
-	private LinkedHashMap<String, String> features;
+	private LinkedHashMap<String, Object> features;
 	private ArrayList<String> featureTypes;
 	private MenuController menuController;
 
@@ -69,7 +69,8 @@ public class View {
 		mainPanel.add(headerPanel, BorderLayout.NORTH);
 		mainPanel.add(contentPanel, BorderLayout.CENTER);
 		mainPanel.add(footerPanel, BorderLayout.SOUTH);
-		contentPanel.setLayout(new BoxLayout(contentPanel, BoxLayout.PAGE_AXIS));
+
+		contentPanel.setLayout(new BoxLayout(contentPanel, BoxLayout.Y_AXIS));
 		menuBar.add(create);
 		menuBar.add(edit);
 		menuBar.add(display);
@@ -97,29 +98,33 @@ public class View {
 		create.addActionListener(menuController);
 		simpleFeature.addActionListener(menuController);
 		complexFeature.addActionListener(menuController);
+		newDataSet.addActionListener(menuController);
+		newTestCase.addActionListener(menuController);
+		addValue.addActionListener(menuController);
+		helpDoc.addActionListener(menuController);
 		
-		features = new LinkedHashMap<String, String>();
+		//Set up list of primitive types the user can choose from
+		features = new LinkedHashMap<String, Object>();
 		featureTypes = new ArrayList<String>();
 		featureTypes.add("Integer");
 		featureTypes.add("Float");
 		featureTypes.add("String");
 		
-		newDataSet.addActionListener(new MenuController(this));
-		newTestCase.addActionListener(new MenuController(this));
-		addValue.addActionListener(new MenuController(this));
-		helpDoc.addActionListener(new MenuController(this));
-		
-		
-
 		//Added close application operation when window closes
 		mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+		//Initialize main panel
+		displayInfo();
+		
 	}
 	/**
-	 * A FeaturePanel is added to the content panel, allowing the user to add a new feature
+	 * Creates a panel for the user to add a Simple Feature, then adds it to the contentPanel
+	 * @param superFeatureName: String. If this is a subFeature, its parent's feature will be included as a label. If not, leave an empty string
+	 * @param tab: If this is a subFeature, the panel will be tabbed over for readability, so increment from parent's tab value. Otherwise, leave 0
 	 */
-	public void addFeaturePanelSimple()
+	public void addFeaturePanelSimple(String superFeatureName, int tab)
 	{
-		FeaturePanelSimple fp = new FeaturePanelSimple(this, featureTypes);
+		FeaturePanelSimple fp = new FeaturePanelSimple(this, featureTypes, superFeatureName, tab);
 		contentPanel.add(fp);
 		contentPanel.revalidate();
 		contentPanel.repaint();
@@ -127,8 +132,14 @@ public class View {
 		done.setVisible(true);
 	}
 	
-	public void addFeaturePanelComplex() {
-		FeaturePanelSimple fp = new FeaturePanelSimple(this, featureTypes);
+	/**
+	 * Creates a panel for the user to add a Complex Feature, then adds it to the contentPanel
+	 * @param superFeatureName: String. If this is a subFeature, its parent's feature will be included as a label. If not, leave an empty string
+	 * @param tab: If this is a subFeature, the panel will be tabbed over for readability, so increment from parent's tab value. Otherwise, leave 0
+	 */
+	public void addFeaturePanelComplex(String superFeatureName, int tab) 
+	{
+		FeaturePanelComplex fp = new FeaturePanelComplex(this, featureTypes, superFeatureName, tab);
 		contentPanel.add(fp);
 		contentPanel.revalidate();
 		contentPanel.repaint();
@@ -136,46 +147,50 @@ public class View {
 		done.setVisible(true);
 		
 	}
+	
+	/**
+	 * Adds an already created panel for a simple feature to the contentPanel
+	 * @param fp: the FeaturePanelSimple object
+	 */
+	public void addFeaturePanelSimple(FeaturePanelSimple fp)
+	{
+		contentPanel.add(fp);
+		contentPanel.revalidate();
+		contentPanel.repaint();
+		footerPanel.add(done);
+		done.setVisible(true);
+	}
+	
+	/**
+	 * Adds an already created panel for a complex feature to the contentPanel
+	 * @param fp: the FeaturePanelSimple object
+	 */
+	public void addFeaturePanelComplex(FeaturePanelComplex fp)
+	{
+		contentPanel.add(fp);
+		contentPanel.revalidate();
+		contentPanel.repaint();
+		footerPanel.add(done);
+		done.setVisible(true);
+	}
 	/**
 	 * The features from a featurePanel is added to the features list
 	 */
-	public void addNewFeature(String key, String value)
+	public void addNewFeature(String key, Object value)
 	{
 		features.put(key, value);
 	}
 
 
-
+	/**
+	 * Create actionListeners for elements that do not require a full controller class
+	 */
 	public void createListeners(){
 	    //newDataSet, newTestCase, addValue, helpDoc;
-
-        newDataSet.addActionListener(new ActionListener(){
-            @Override
-            public void actionPerformed(ActionEvent actionEvent) {
-             //TO DO: JOption pane that alerts user data set is created, and how to add new features
-            }
-        });
-        
-        
-        newTestCase.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent actionEvent) {
-
-            }
-        });
 
 
     }
 
-	/**
-	 * To get the hashmap containing all features added thus far.
-	 * @return  HashMap of String key/value pairs
-	 */
-	public HashMap<String, String> getFeatureMap()
-	{
-		return features;
-	}
-	
 	/**
 	 * Sends an error message to the user
 	 * @param message to be displayed in the error frame
@@ -188,31 +203,27 @@ public class View {
 			    "Error",
 			    JOptionPane.ERROR_MESSAGE);
 	}
+	
 	/**
 	 * Sets up the main panel with the keys user has provided as JLabels in the 
 	 * headerPanel
 	 */
-	public void setUpFeatures(Set<String> keys)
+	public void setUpFeatures()
 	{
-		contentPanel.removeAll();
-		footerPanel.removeAll();
-		headerPanel.setLayout(new GridLayout(1, features.size()));
+		//contentPanel.removeAll();
+		//footerPanel.removeAll();
+		//headerPanel.setLayout(new GridLayout(1, features.size()));
 	
-		for (String key : keys){
-			JLabel jl = new JLabel("    " + key);
-			jl.setBorder(BorderFactory.createCompoundBorder(new EtchedBorder(), new EmptyBorder(6, 6, 6, 6)));
-			headerPanel.add(jl);
-	    }
-		headerPanel.revalidate();
-		headerPanel.repaint();
+		//for (String key : keys){
+		//	JLabel jl = new JLabel("    " + key);
+		//	jl.setBorder(BorderFactory.createCompoundBorder(new EtchedBorder(), new EmptyBorder(6, 6, 6, 6)));
+		//	headerPanel.add(jl);
+	    //}
+		//headerPanel.revalidate();
+		//headerPanel.repaint();
 
 		
 	}
-
-    /**
-	 * Method to add a new feature type when the "Add a new Feature Type" is chosen in the combo box
-	 * The JTextfield value becomes the name of the feature type
-	 */
 
 	/**
 	 * Get the Done JButton in the footer panel
@@ -223,15 +234,30 @@ public class View {
 		return done;
 	}
 	
-	public HashMap<String, String> getList()
+	/**
+	 * Get the list of feature names that have been added. The key will refer to the name of the feature, and the value will be the type
+	 * In the case of a simple feature, the type will simply be a string
+	 * In the case of a complex feature, the type will be another HashMap of features
+	 * @return
+	 */
+	public HashMap<String, Object> getList()
 	{
 		return features;
 	}
 	
+	/**
+	 * Enables the newDataSet menu item
+	 * @param b : boolean
+	 */
 	public void enableNewDataSet(boolean b) {
 		newDataSet.setEnabled(b);
 		
 	}
+	
+	/**
+	 * Enables the menu items allowing users to add features
+	 * @param b : boolean
+	 */
 	public void enableFeatureCreation(boolean b) {
 		edit.setEnabled(b);
 		simpleFeature.setEnabled(b);
@@ -240,7 +266,15 @@ public class View {
 		
 	}
 	
-
+	/**
+	 * Displays program information to the contentPanel
+	 * 
+	 */
+	public void displayInfo()
+	{
+		
+	}
+	
 
 
 }

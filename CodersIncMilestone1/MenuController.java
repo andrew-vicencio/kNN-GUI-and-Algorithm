@@ -4,10 +4,17 @@ import java.awt.event.ActionListener;
 public class MenuController implements ActionListener {
 
 	private View view;
+	/**
+	 * Constructor to pass along the View containing the MenuController
+	 * @param view
+	 */
 		public MenuController(View view)
 		{
 			this.view = view;
 		}
+	/**
+	 * Executes action depending on which menu item was chosen
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		String s = e.getActionCommand();
@@ -19,11 +26,11 @@ public class MenuController implements ActionListener {
 		}
 		if(s.equals("Add a Simple Feature"))
 		{
-			view.addFeaturePanelSimple();
+			view.addFeaturePanelSimple("", 0);
 		}
 		if(s.equals("Add a Complex Feature"))
 		{
-			view.addFeaturePanelComplex();
+			view.addFeaturePanelComplex("", 0);
 		}
 
 	}
