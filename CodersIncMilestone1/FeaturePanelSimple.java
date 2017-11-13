@@ -1,4 +1,3 @@
-
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
@@ -12,6 +11,12 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.EtchedBorder;
 
+
+/**
+ * A JPanel allowing a user to create a simple feature
+ * @author Gabrielle
+ *
+ */
 public class FeaturePanelSimple extends JPanel{
 	private JPanel innerPanel;
 	private View view;

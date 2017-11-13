@@ -8,7 +8,11 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-
+/**
+ * A JFrame that prompts the user for values for each feature, using JTextfields
+ * @author Gabrielle
+ *
+ */
 public class PromptValueFrame extends JFrame {
 	
 	JPanel mainPanel, footerPanel, promptPanel;
@@ -19,6 +23,10 @@ public class PromptValueFrame extends JFrame {
 	View view;
 	PromptValueFrameController controller;
 	
+	/**
+	 * Constructor, which initializes the frame and its layout
+	 * @param view
+	 */
 	public PromptValueFrame(View view)
 	{
 		super("Enter your data values");
@@ -55,7 +63,11 @@ public class PromptValueFrame extends JFrame {
 		add(footerPanel, BorderLayout.SOUTH);
 		setVisible(true);
 	}
-	
+	/**
+	 * Provides a HashMap with the name of the feature (String) as a key, and a 
+	 * JTextField as a value.
+	 * @return HashMap<String, JTextField>
+	 */
 	public HashMap<String, JTextField> getFieldMap()
 	{
 		return fieldMap;

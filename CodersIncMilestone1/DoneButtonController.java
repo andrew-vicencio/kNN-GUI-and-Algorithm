@@ -1,5 +1,10 @@
 import java.awt.event.ActionEvent;
-
+/**
+ * Controller for the JButton (Done), when a user is inputting feature types.
+ * The number of features is checked first.
+ * @author Gabrielle
+ *
+ */
 public class DoneButtonController extends MainController {
 
 	private View view;

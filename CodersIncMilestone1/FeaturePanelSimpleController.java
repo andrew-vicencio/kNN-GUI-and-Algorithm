@@ -1,7 +1,11 @@
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-
+/**
+ * Controller for a FeaturePanelSimple JPanel. It creates a simple feature and passes it to the data model (Dimensional Space)
+ * @author Gabrielle and Ben
+ *
+ */
 public class FeaturePanelSimpleController extends MainController{
 	//TODO: BB Change to utilize the data model
 	FeaturePanelSimple fp;

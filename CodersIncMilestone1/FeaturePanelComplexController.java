@@ -1,15 +1,11 @@
-import sun.applet.Main;
-
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
-import javax.swing.JButton;
+/**
+ * A controller class for a FeaturePanelComplex JPanel. It adds a complex feature to the data model (DimensionalSpace)
+ * @author Gabrielle and Ben
+ *
+ */
 
 public class FeaturePanelComplexController extends MainController {
-
-
-    //TODO: BB adding Complex after adding 2
-
 
 	/**
 	 * Constructor to pass the FeaturePanelComplex using this controller
@@ -48,7 +44,7 @@ public class FeaturePanelComplexController extends MainController {
 		}
 		else if(s.equals("Add a complex subfeature"))
 		{
-            fp.getView().sendErrorFrame("Sorry Complex values are not allowed in other complex values");
+            fp.getView().sendErrorFrame("Complex subfeatures are not supported at the moment.");
 		    /* CODE FOR A LATER IMPLEMENTATION
 			if(key.isEmpty())
 			{

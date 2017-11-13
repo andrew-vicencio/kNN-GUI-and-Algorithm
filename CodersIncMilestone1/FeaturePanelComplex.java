@@ -1,6 +1,6 @@
+import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
-import java.awt.GridLayout;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import javax.swing.BorderFactory;
@@ -10,14 +10,18 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.EtchedBorder;
-
+/**
+ * A JPanel allowing a user to create a complex feature
+ * @author Gabrielle
+ *
+ */
 public class FeaturePanelComplex extends JPanel
 {
 	private JPanel innerPanel;
 	private View view;
 	private JLabel name, superName;
 	private JTextField  featureName;
-	private JButton addSimple, addComplex, add;
+	private JButton addSimple, add;
 	private FeaturePanelComplexController fpController;
 	private LinkedHashMap<String, Object> subFeaturePanels;
 	private ArrayList<String> types;
@@ -35,12 +39,11 @@ public class FeaturePanelComplex extends JPanel
 	 */
 	public FeaturePanelComplex(View view, ArrayList<String> types, String superFeatureName, int tab) {
 		super();
-		setLayout(new GridLayout(0, 1));
+		setLayout(new BorderLayout());
 		name = new JLabel("Feature name: ");
 		superName = new JLabel(superFeatureName);
 		featureName = new JTextField(15);
 		addSimple = new JButton("Add a simple subfeature");
-		//addComplex = new JButton("Add a complex subfeature");
 		add = new JButton("Add this feature");
 		innerPanel = new JPanel();
 		subFeaturePanels = new LinkedHashMap<String, Object>();
@@ -48,17 +51,16 @@ public class FeaturePanelComplex extends JPanel
 		this.tab = tab;
 		this.types = types;
 		
-		add(innerPanel);
+		add(innerPanel, BorderLayout.CENTER);
+		add(superName, BorderLayout.NORTH);
 		innerPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
 		innerPanel.add(name);
 		innerPanel.add(featureName);
 		innerPanel.add(addSimple);
-		//innerPanel.add(addComplex);
 		innerPanel.add(add);
 		
 		fpController = new FeaturePanelComplexController(this);
 		addSimple.addActionListener(fpController);
-		//addComplex.addActionListener(fpController);
 		add.addActionListener(fpController);
 		setMaximumSize(new Dimension(800, 80));
 		setBorder(BorderFactory.createCompoundBorder(new EtchedBorder(), new EmptyBorder(6, 6, 6, 6)));

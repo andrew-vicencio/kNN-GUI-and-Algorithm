@@ -1,5 +1,9 @@
 import java.awt.event.ActionEvent;
-
+/**
+ * Controller for JMenuItems. It checks what was clicked, and executes the appropriate method in the view
+ * @author Gabrielle
+ *
+ */
 public class MenuController extends MainController {
 
 	private View view;
