@@ -13,9 +13,10 @@ public class PromptValueFrame extends JFrame {
 	JPanel mainPanel, footerPanel, promptPanel;
 	JLabel jl;
 	JTextField jt;
-	JButton done, addMore;
+	JButton done;
 	HashMap<String, JTextField> fieldMap;
 	View view;
+	PromptValueFrameController controller;
 	
 	public PromptValueFrame(View view)
 	{
@@ -23,9 +24,9 @@ public class PromptValueFrame extends JFrame {
 		mainPanel = new JPanel();
 		footerPanel = new JPanel();
 		done = new JButton("Done");
-		addMore = new JButton("Add another value");
 		fieldMap = new HashMap<String, JTextField>();
 		this.view = view;
+		controller = new PromptValueFrameController(view, this);
 		
 		setSize(500, 600);
 		mainPanel.setLayout(new GridLayout(0, 1));
@@ -43,11 +44,16 @@ public class PromptValueFrame extends JFrame {
 	
 		}
 		
+		done.addActionListener(controller);
 		footerPanel.add(done);
-		footerPanel.add(addMore);
 		add(mainPanel, BorderLayout.CENTER);
 		add(footerPanel, BorderLayout.SOUTH);
 		setVisible(true);
+	}
+	
+	public HashMap<String, JTextField> getFieldMap()
+	{
+		return fieldMap;
 	}
 
 }
