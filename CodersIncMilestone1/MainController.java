@@ -1,9 +1,13 @@
 
 import java.awt.event.ActionListener;
-
+/**
+ * MainController abstract class to provide static shared information of the model
+ * to all controllers
+ * @author Ben
+ *
+ */
 public abstract class MainController implements ActionListener{
 
-    //Main controller used to make sure that all other controllers can access the data set
 
     protected static DimensionalSpace dataModel = new DimensionalSpace();
 

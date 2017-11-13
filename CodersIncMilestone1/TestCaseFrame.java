@@ -7,7 +7,12 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-
+/**
+ * A JFrame that lists all features (other than the feature being tested)
+ * in a JLabel, with an associated JTextField
+ * @author Gabrielle
+ *
+ */
 public class TestCaseFrame extends JFrame {
 	
 	private View view;
@@ -19,6 +24,12 @@ public class TestCaseFrame extends JFrame {
 	private TestCaseFrameController controller;
 	private HashMap<String, JTextField> fieldMap;
 	
+	
+	/**
+	 * Displays the TestCaseFrame with required JTextFields
+	 * @param view: View object this JFrame was spawned from 
+	 * @param testValue: String
+	 */
 	public TestCaseFrame(View view, String testValue)
 	{
 		super("Enter your test case values");
@@ -27,6 +38,7 @@ public class TestCaseFrame extends JFrame {
 		done = new JButton("Done");
 		fieldMap = new HashMap<String, JTextField>();
 		this.view = view;
+		this.testValue = testValue;
 		controller = new TestCaseFrameController(view, this);
 		
 		setSize(500, 600);
@@ -60,6 +72,12 @@ public class TestCaseFrame extends JFrame {
 		add(footerPanel, BorderLayout.SOUTH);
 		setVisible(true);
 	}
+	
+	/**
+	 * Provides a HashMap with the name of the feature (String) as a key, and a 
+	 * JTextField as a value
+	 * @return HashMap<String, JTextField>
+	 */
 	
 	public HashMap<String, JTextField> getFieldMap()
 	{

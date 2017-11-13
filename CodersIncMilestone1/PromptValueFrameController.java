@@ -1,5 +1,13 @@
 import java.awt.event.ActionEvent;
 import java.util.HashMap;
+/**
+ * A Controller class for a PromptValueFrame.
+ * Takes data inputed in the PromptValueFrame, and creates Cell objects and a Point object, and adds
+ * it to the model (DimensionalSpace)
+ * @author Gabrielle and Ben
+ *
+ */
+
 public class PromptValueFrameController extends MainController {
 
 	private PromptValueFrame pvf;
