@@ -331,21 +331,14 @@ public class View {
 	 */
 	public void promptTestCase()
 	{
-		HashSet<String> featureNames = new HashSet<String>();
-		for(String str: dataModel.getCellTypes().keySet())
-		{
-			if(!str.contains("."))
-			{
-				String[] parts = str.split(".");
-				featureNames.add(parts[0]);
-			}
-		}
 		
-		 String[] optionsArray = new String[featureNames.size()];
-		 featureNames.toArray(optionsArray);
-		 JComboBox<String> optionList = new JComboBox<String>(optionsArray);
-		 JOptionPane.showMessageDialog(null, optionList, "Choose a value to test",
-		 JOptionPane.QUESTION_MESSAGE);;
+		 String[] optionsArray = new String[dataModel.getCellTypes().keySet().size()];
+		 dataModel.getCellTypes().keySet().toArray(optionsArray);
+		 JFrame chooseValueFrame = new JFrame("New Test Case");
+		 String testValue = (String) JOptionPane.showInputDialog(chooseValueFrame, "Choose a value to test",
+		 "Feature", JOptionPane.QUESTION_MESSAGE, null, optionsArray, optionsArray[0]);
+		 System.out.println(testValue);
+		 TestCaseFrame testFrame = new TestCaseFrame(this, testValue);
 	}
 
 }
