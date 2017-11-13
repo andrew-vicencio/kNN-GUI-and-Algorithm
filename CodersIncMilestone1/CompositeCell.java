@@ -52,6 +52,11 @@ public class CompositeCell extends Cell {
 		for (Cell c: value) {
 			if(c.getKey().equals(key)) {
 				return c;
+			} else if (c instanceof CompositeCell){
+				Cell d = ((CompositeCell)c).getSubCell(key);
+				if (d != null) {
+					return d;
+				}
 			}
 		}
 		return null;
