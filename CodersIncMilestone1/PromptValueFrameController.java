@@ -1,5 +1,14 @@
 import java.awt.event.ActionEvent;
 import java.util.HashMap;
+/**
+ * A controller class for a JFrame which prompts the user for a set of values corresponding to
+ * predetermined features. This class is responsible for checking the user input to see if it 
+ * is valid, and creating a Cell object for each. Those Cell objects make up a Point, which
+ * will be add to DimensionalSpace
+ * 
+ * @author Gabrielle and Ben
+ *
+ */
 public class PromptValueFrameController extends MainController {
 
 	private PromptValueFrame pvf;
@@ -17,16 +26,12 @@ public class PromptValueFrameController extends MainController {
 	}
 	
 	/**
-	 * Adds the data that was inputted in the PromptValueFrame to a Point, which is added to Dimensional Frame
+	 * Adds the data that was inputed in the PromptValueFrame to a Point, which is added to Dimensional Frame
 	 */
 	public void actionPerformed(ActionEvent e) {
 		
             Point newPoint = new Point();
             HashMap<String, Cell> newConfiguredData = new HashMap<String, Cell>();
-			//TODO BB : pvf.getFieldMap() is a Hash Map of the feature name and their corresponding JTextField.
-			// You need iterate through it, get the text from the JTextField, and add to a point 
-			// in Dimensional space
-			pvf.dispose();
 
             for(String key : dataModel.getCellTypes().keySet()){
                 if(dataModel.getCellTypes().get(key).equals("comp")){
@@ -51,7 +56,12 @@ public class PromptValueFrameController extends MainController {
 			}
 
 	}
-
+	/**
+	 * TODO: BB - documentation
+	 * @param key
+	 * @param value
+	 * @return
+	 */
 	private Cell createStanderedFeature(String key, String value){
         String type = dataModel.getCellTypes().get(key);
         System.out.println(key + "," + value);
@@ -59,35 +69,46 @@ public class PromptValueFrameController extends MainController {
             try{
                 int valueInt = Integer.parseInt(value.replaceAll(" ", ""));
                 SimpleCell<Integer> newCell = new SimpleCell<Integer>(key, valueInt);
+                pvf.dispose();
                 return newCell;
             }catch (NumberFormatException ex){
-                //TODO: BB
-                //TODO: GH Create error back out
+                view.sendErrorFrame("One or more integers have incorrect formatting.");
             }
 
         }else if(type.equals("float")){
            try{
                float valueInt = Float.parseFloat(value);
                SimpleCell<Float> newCell = new SimpleCell<Float>(key, valueInt);
+               pvf.dispose();
                return newCell;
            }catch (NumberFormatException ex){
-               //TODO: BB
-               //TODO: GH Create error back out
+               view.sendErrorFrame("One or more floats have incorrect formatting");
            }
         }else{
             SimpleCell<String> newCell = new SimpleCell<String>(key, value);
+            pvf.dispose();
             return newCell;
         }
 
         return null;
     }
-
+	/**
+	 * TODO: BB - Documentation
+	 * @param key
+	 * @param value
+	 * @param complexCell
+	 */
     private void createSubFeature(String key, String value, CompositeCell complexCell){
         Cell newSimpleCell = createStanderedFeature(key, value);
         complexCell.addCell(newSimpleCell);
 
     }
-
+    
+    /**
+     * TODO: BB - Documentation
+     * @param key
+     * @param newConfiguredData
+     */
     private void createCompFeature(String key,  HashMap<String, Cell> newConfiguredData ) {
         if(!newConfiguredData.keySet().contains(key)){
             CompositeCell newComplexCell = new CompositeCell(key);
