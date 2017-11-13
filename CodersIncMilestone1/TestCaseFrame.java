@@ -50,9 +50,9 @@ public class TestCaseFrame extends JFrame {
 		
 		for(String str: view.getDataModel().getCellTypes().keySet())
 		{
-			System.out.println(str + " is being iterated");
-		    if(!str.equals(testValue)){
-		    	System.out.println(str + " is being added");
+
+		    if(!str.equals(testValue))
+		    {
 		    	name = new JLabel(str);
 		    	type = new JLabel(view.getDataModel().getCellTypes().get(str));
 		    	jt = new JTextField(15);

@@ -25,7 +25,7 @@ public class PromptValueFrameController extends MainController {
 	}
 	
 	/**
-	 * Adds the data that was inputted in the PromptValueFrame to a Point, which is added to Dimensional Frame
+	 * Adds the data that was inputed in the PromptValueFrame to a Point, which is added to Dimensional Frame
 	 */
 	public void actionPerformed(ActionEvent e) {
 		
@@ -66,8 +66,7 @@ public class PromptValueFrameController extends MainController {
                 SimpleCell<Integer> newCell = new SimpleCell<Integer>(key, valueInt);
                 return newCell;
             }catch (NumberFormatException ex){
-                //TODO: BB
-                //TODO: GH Create error back out
+                view.sendErrorFrame("Invalid int value was provided");
             }
 
         }else if(type.equals("float")){
@@ -76,8 +75,7 @@ public class PromptValueFrameController extends MainController {
                SimpleCell<Float> newCell = new SimpleCell<Float>(key, valueInt);
                return newCell;
            }catch (NumberFormatException ex){
-               //TODO: BB
-               //TODO: GH Create error back out
+               view.sendErrorFrame("Invalid float value was provided");
            }
         }else{
             SimpleCell<String> newCell = new SimpleCell<String>(key, value);

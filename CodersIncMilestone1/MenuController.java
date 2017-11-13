@@ -25,7 +25,6 @@ public class MenuController extends MainController {
 		
 		if(s.equals("New Data Set"))
 		{
-			view.showNewDataInfo();
 			view.enableNewDataSet(false);
 			view.enableFeatureCreation(true);
 			view.clearContentPanel();

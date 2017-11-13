@@ -303,25 +303,12 @@ public class View {
 		contentPanel.removeAll();
 	}
 	
-	/**
-	 * Shows instructions for the user once they've created a new data set 
-	 * (CURRENTLY NOT IN USE)
-	 */
-	public void showNewDataInfo() {
-		JLabel info = new JLabel("To add a simple feature, click Edit -> Add Simple Feature. To add a "
-				+ "composite/complex feature, click Edit -> Add Complex Feature."
-				+ " Always click 'ADD' when you are finished inputting a feature ");
-		contentPanel.add(info);
-		info.setVisible(true);
-		contentPanel.revalidate();
-		contentPanel.repaint();
-		
-	}
 	
 	/**
 	 * Creates a new PromptValueFrame to gather data from user
 	 */
-	public void promptValue() {
+	public void promptValue() 
+	{
 		new PromptValueFrame(this);
 	}
 	
@@ -340,8 +327,8 @@ public class View {
 		 System.out.println(testValue);
 		 TestCaseFrame testFrame = new TestCaseFrame(this, testValue);
 	}
-
 }
+
 
 
 
