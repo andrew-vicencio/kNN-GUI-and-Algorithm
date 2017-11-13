@@ -1,4 +1,4 @@
-package CodersIncMilestone1;
+package CodersInc;
 import java.util.HashMap;
 import java.util.ArrayList;
 import java.util.concurrent.ConcurrentHashMap;
@@ -17,11 +17,12 @@ import java.util.Set;
  */
 
 public class DimensionalSpace {
-  private ConcurrentHashMap<String, Integer> mean;
-  private ConcurrentHashMap<String, Integer> stddev;
-  private ConcurrentHashMap<String, Integer> sum;
+  private ConcurrentHashMap<String, Float> mean;
+  private ConcurrentHashMap<String, Float> stddev;
+  private ConcurrentHashMap<String, Float> sum;
   private int numberOfPoints;
   private ArrayList<Point> points;
+  private HashMap<String, String> keyTypes;
 
   
   /**
@@ -29,9 +30,9 @@ public class DimensionalSpace {
    * current number of points to 0.
    */
   public DimensionalSpace(){
-    mean = new ConcurrentHashMap<String, Integer>();
-    stddev = new ConcurrentHashMap<String, Integer>();
-    sum = new ConcurrentHashMap<String, Integer>();
+    mean = new ConcurrentHashMap<String, Float>();
+    stddev = new ConcurrentHashMap<String, Float>();
+    sum = new ConcurrentHashMap<String, Float>();
     points = new ArrayList<Point>();
     numberOfPoints = 0;
   }
@@ -58,7 +59,7 @@ public class DimensionalSpace {
    * @param pt 			The Point to be added to the space.
    */
   public void addPt(Point pt){
-    Integer val;
+    float val;
     Set<String> attr = pt.getAttributes();
     if(points != null){
       points.add(pt);
@@ -66,13 +67,19 @@ public class DimensionalSpace {
       System.out.println("Points not initialized");
     }
     for (String key : attr){
-      val = pt.getValue(key);
-      if(!sum.containsKey(key)){
-        sum.put(key, val);
-      } else {
-        sum.replace(key, sum.get(key) + val);
+      if (pt.getCell(key) instanceof SimpleCell) {
+    	  if (!(((SimpleCell)pt.getCell(key)).getValue() instanceof String)) {
+    		  val = (float)((SimpleCell)pt.getCell(key)).getValue();
+    	      
+    	      if(!sum.containsKey(key)){
+    	    	  sum.put(key, val);
+    	      } else {
+    	    	  sum.replace(key, sum.get(key) + val);
+    	      }
+    	    }
+    		  
+    	  }
       }
-    }
     numberOfPoints++;
   }
   
@@ -95,98 +102,8 @@ public class DimensionalSpace {
    * 
    * @return				The unknown value of the given point
    */
-  public int findkNN(Point targetPoint, int k){
-	  	
-	    assert(k > 0);
-	    if (k > points.size()) k = points.size();
-	    
-	    targetPoint.standardise(mean, numberOfPoints);
-		
-	    // Initialize required instance variables
-		HashMap<String, Integer> targetValues = targetPoint.getStdValues();
-		HashMap<String, Integer> currentPtValues;
-		HashMap<Integer, Tuple<Integer, Integer>> closestKNeighbours = new HashMap<Integer, Tuple<Integer, Integer>>();
-		int distance, targetCost;
-		boolean distValueDisplacement;
-		Tuple<Integer, Integer> displacedPoint, placeHolder;
-		
-		// Initialize an empty hashmap to hold the closest neighbours
-		for (int i = 1; i <= k; i++) {
-			closestKNeighbours.put(i, new Tuple<Integer, Integer>(-1, -1));
-		}
-		
-		// For each of the given points in the dataset, calculate the distance from the target point
-		for (Point pt: points) {
-			
-			// Reset the instance variables for each point
-			distValueDisplacement = false;
-			displacedPoint = null;
-			distance = 0;
-			currentPtValues = pt.getStdValues();
-		    
-			// Factor in every value to the distance
-			for(String key: currentPtValues.keySet()) {
-				distance += (int) Math.pow((currentPtValues.get(key) - targetValues.get(key)), 2);
-			}
-			
-			// Complete the Euclidean distance calculation
-			distance = (int) Math.sqrt(distance);
-			
-			// Add the point to the nearest neighbours list in the corresponding location if applicable
-			for (int i = 1; i <= k; i++) {
-				
-				// If entries are not being displaced, use the current point's distance and cost
-				if (!distValueDisplacement) {
-					
-					// If the current spot has not been used yet
-					if (closestKNeighbours.get(i).getValue2() == -1) {
-						closestKNeighbours.replace(i, new Tuple<Integer, Integer>(pt.getPointValue(), distance));
-						break;
-						
-					// If the current point is displacing other point(s)
-					} else if (distance < closestKNeighbours.get(i).getValue2()) {
-						displacedPoint = closestKNeighbours.get(i);
-						closestKNeighbours.replace(i, new Tuple<Integer, Integer>(pt.getPointValue(), distance));
-						distValueDisplacement = true;
-						
-					// If there's a tie and the last list spot has been reached
-					} else if (distance == closestKNeighbours.get(i).getValue2() && i == k) {
-						closestKNeighbours.replace(i, new Tuple<Integer, Integer>((pt.getPointValue() + closestKNeighbours.get(i).getValue1()) / 2, distance));
-					}
-					
-				// If entries are being displaced
-				} else {
-					
-					// If the current spot has not yet been used
-					if (closestKNeighbours.get(i).getValue2() == -1) {
-						closestKNeighbours.replace(i, displacedPoint);
-						break;
-						
-					// If the current displaced point is displacing other point(s)
-					} else if (distance < closestKNeighbours.get(i).getValue2()) {
-						placeHolder = closestKNeighbours.get(i);
-						closestKNeighbours.replace(i, displacedPoint);
-						displacedPoint = placeHolder;
-						distValueDisplacement = true;
-					
-					// If there's a tie and the last list spot has been reached
-					} else if (distance == closestKNeighbours.get(i).getValue2() && i == k) {
-						closestKNeighbours.replace(i, new Tuple<Integer, Integer>((displacedPoint.getValue1() + closestKNeighbours.get(i).getValue1()) / 2, distance));
-					}
-				}
-			}
-		}
-		
-		// Initialize the target cost
-		targetCost = 0;
-		
-		// Return the average cost of the nearest neighbour(s) as the target point's cost
-		for (int i = 1; i <= k; i++) {
-			targetCost += closestKNeighbours.get(i).getValue1();
-		}
-		
-		targetPoint.setPointValue(targetCost / k);
-	    return targetPoint.getPointValue();
+  public float findkNN(Point targetPoint, int k){
+	  	return 0;	    
   }
   
   /**
@@ -194,14 +111,14 @@ public class DimensionalSpace {
    * 
    * @param newMean			HashMap containing the mean for each key.
    */
-  public void setMean(ConcurrentHashMap<String, Integer> newMean){
+  public void setMean(ConcurrentHashMap<String, Float> newMean){
     mean = newMean;
   }
 
   /**
    * @return				HashMap containing the the mean values for the dataset.
    */
-  public ConcurrentHashMap<String, Integer> getMean(){
+  public ConcurrentHashMap<String, Float> getMean(){
     return mean;
   }
   
@@ -210,14 +127,14 @@ public class DimensionalSpace {
    * 
    * @param newDev		HashMap containing the standard deviation for each key.
    */
-  public void setStdDev(ConcurrentHashMap<String, Integer> newDev){
+  public void setStdDev(ConcurrentHashMap<String, Float> newDev){
     stddev = newDev;
   }
   
   /**
    * @return				HashMap containing the the standard deviation values for the dataset.
    */
-  public ConcurrentHashMap<String, Integer> getStdDev(){
+  public ConcurrentHashMap<String, Float> getStdDev(){
     return stddev;
   }
 
@@ -226,14 +143,14 @@ public class DimensionalSpace {
    * 
    * @param newSum		HashMap containing the sum for each key.
    */
-  public void setSum(ConcurrentHashMap<String, Integer> newSum){
+  public void setSum(ConcurrentHashMap<String, Float> newSum){
     sum = newSum;
   }
 
   /**
    * @return				HashMap containing the the summed values for the dataset.
    */
-  public ConcurrentHashMap<String, Integer> getSum(){
+  public ConcurrentHashMap<String, Float> getSum(){
     return sum;
   }
 
@@ -263,55 +180,15 @@ public class DimensionalSpace {
 	  return numberOfPoints;
   }
   
-  /**
-   * Simple Tuple class to hold 2 ordered values for use in the findKNN function.
-   * 
-   * @author Darren
-   *
-   * @param <E>	Type of the first value.
-   * @param <K>	Type of the second value
-   */
-  private class Tuple<E, K> {
-	private E value1;
-	private K value2;
-	
-	/**
-	 * Tuple constructor.
-	 * 
-	 * @param val1		The first value of type E.
-	 * @param val2		The second value of type K.
-	 */
-	public Tuple(E val1, K val2) {
-		this.value1 = val1;
-		this.value2 = val2;
-	}
-
-	/**
-	 * @return		The first value.
-	 */
-	public E getValue1() {
-		return value1;
-	}
-
-	/**
-	 * @param x	The new value for the first value (of type E).
-	 */
-	public void setValue1(E x) {
-		this.value1 = x;
-	}
-	
-	/**
-	 * @return		The second value.
-	 */
-	public K getValue2() {
-		return value2;
-	}
-	
-	/**
-	 * @param x	The new value for the second value (of type K).
-	 */
-	public void setValue2(K x) {
-		this.value2 = x;
-	}
+  public HashMap<String, String> getKeyTypes() {
+	  return keyTypes;
+  }
+  
+  public void setKeyTypes(HashMap<String, String> keyTypes) {
+	  this.keyTypes = keyTypes;
+  }
+  
+  public void addKeyType(String key, String type) {
+	  keyTypes.put(key, type);
   }
 }
