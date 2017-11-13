@@ -1,34 +1,25 @@
-package CodersInc;
+
 
 import java.util.ArrayList;
 
 public class CompositeCell extends Cell {
 
-	private ArrayList<Cell> value;
+	private ArrayList<Cell> features;
 	
 	public CompositeCell(String key) {
 		super(key);
-		value = new ArrayList<Cell>();
+		features = new ArrayList<Cell>();
 	}
 	
 	public ArrayList<Cell> getSubCells() {
-		return value;
+		return features;
 	}
 	
 	public void setSubCells(ArrayList<Cell> features) {
-		this.value = features;
-	}
-	
-	public Cell getSubCell(String key) {
-		for (Cell c: value) {
-			if(c.getKey().equals(key)) {
-				return c;
-			}
-		}
-		return null;
+		this.features = features;
 	}
 	
 	public void addCell(Cell f) {
-		value.add(f);
+		features.add(f);
 	}
 }

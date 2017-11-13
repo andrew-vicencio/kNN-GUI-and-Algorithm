@@ -1,232 +1,204 @@
-package CodersInc;
+
+
+import java.lang.reflect.Array;
+
 import java.util.HashMap;
 import java.util.ArrayList;
-import java.util.concurrent.ConcurrentHashMap;
 import java.lang.Math;
 import java.util.Iterator;
 import java.util.Set;
 
 /**
- * Class to hold the points from the dataset. This class calculates the sum, mean, and standard 
- * deviation of all the known points which are used to standardize the points to give more accurate
- * calculations. This class also contains the K-nearest neighbour function which calculates the value
- * of a new point.
- * 
- * @author Darren and Andrew
- * @version Milestone 1
- */
+* Class to hold the points from the dataset. This class calculates the sum, mean, and standard 
+* deviation of all the known points which are used to standardize the points to give more accurate
+* calculations. This class also contains the K-nearest neighbour function which calculates the value
+* of a new point.
+* 
+* @author Darren and Andrew
+* @version Milestone 1
+**/
 
 public class DimensionalSpace {
-  private ConcurrentHashMap<String, Float> mean;
-  private ConcurrentHashMap<String, Float> stddev;
-  private ConcurrentHashMap<String, Float> sum;
-  private int numberOfPoints;
-  private ArrayList<Point> points;
+    private HashMap<String, Cell> mean;
+    private HashMap<String, Cell> stddev;
+    private HashMap<String, Cell> sum;
+    private HashMap<String, String> cellTypes;
+    private int numberOfPoints;
+    private int numberOfFields;
+    private ArrayList<Point> points;
 
   
-  /**
-   * Constructor for instances of the DimensionalSpace class. Initializes the class variables and sets the
-   * current number of points to 0.
-   */
-  public DimensionalSpace(){
-    mean = new ConcurrentHashMap<String, Float>();
-    stddev = new ConcurrentHashMap<String, Float>();
-    sum = new ConcurrentHashMap<String, Float>();
-    points = new ArrayList<Point>();
-    numberOfPoints = 0;
-  }
+    /**
+    * Constructor for instances of the DimensionalSpace class. Initializes the class variables and sets the
+    * current number of points to 0.
+    */
+    public DimensionalSpace(){
+        mean = new HashMap<String, Cell>();
+        stddev = new HashMap<String, Cell>();
+        sum = new HashMap<String, Cell>();
+        points = new ArrayList<Point>();
+        cellTypes = new HashMap<String, String>();
+    }
   
-  
-  /**
-   * Adds the given ArrayList of points to the DimensionalSpace's list of points. Calls the addPt funtion
-   * on each point in the ArrayList.
-   * 
-   * @param pts 		An ArrayList of Point objects to be added to the space.
-   */
-  public void addPts(ArrayList<Point> pts){
-	  if (pts.size() == 0) return;
-	  
-	  for (Point pt: pts) {
-		  addPt(pt);
-	  }
-  }
-  
-  
-  /**
-   * Adds the given Point to the DimensionalSpace's list of points. Also adds the values from each of the
-   * point's "coordinates" to the corresponding sum value.
-   * 
-   * @param pt 			The Point to be added to the space.
-   */
-  public void addPt(Point pt){
-    points.add(pt);
-    numberOfPoints++;
-  }
-  
-  public void findStatistics() {
-	  findSum();
-	  findMean();
-	  findStdDev();
-  }
-  
-  public void findSum() {
-	  HashMap<String, Cell> cellList;
-	  for (Point pt: points) {
-		  cellList = pt.getRawValues();
-		  for (String k: cellList.keySet()) {
-			  Cell c = cellList.get(k);
-			  
-			  if (c instanceof SimpleCell) {
-				  if (!(((SimpleCell)c).getValue() instanceof String)) {
-					  calcSimpleSum((SimpleCell)c);
-				  }
-			  } else {
-				  calcComplexSum((CompositeCell)c);
-			  }
-		  }
-	  }
-  }
-  
-  private void calcComplexSum(CompositeCell c) {
-	  ArrayList<Cell> subCells = c.getSubCells();
-	  
-	  for (Cell subC: subCells) {
-		  if (subC instanceof SimpleCell) {
-			  if (!(((SimpleCell)subC).getValue() instanceof String)) {
-				  calcSimpleSum((SimpleCell)subC);
-			  }
-		  } else {
-			  calcComplexSum((CompositeCell)subC);
-		  }
-	  }
-  }
+    /**
+    * Adds the given ArrayList of points to the DimensionalSpace's list of points. Calls the addPt funtion
+    * on each point in the ArrayList.
+    * 
+    * @param pts 		An ArrayList of Point objects to be added to the space.
+    **/
+    public void addPts(ArrayList<Point> pts){
+        points.addAll(pts);
+    }
+    
+    //TODO: DOCUMENT
+    //TODO: Finish 1
+    public void findSum(Point pt){
+    }
+    
+    /**
+    * Finds the average value for each of the values wich define the points.
+    */
+    //TODO: DOCUMENT
+    //TODO: Finish 2
+    public void findMean(){
 
+    }
+    
+    //TODO: DOCUMENT
+    //TODO: FINISH 4
+    public void findStdDev(Point pt){
+    
+    }
+    
+    //TODO: DOCUMENT
+    //TODO: FINISH 3
+    //TODO: TEST 1
+    public void findStatistics(){
+        numberOfPoints = points.size();
+        for (Point pt : points){
+            this.findSum(pt);
+        }
 
-  private void calcSimpleSum(SimpleCell c) {
-	  float val;
-	  if (c.getValue() instanceof Integer) {
-		  val = (float)(int)c.getValue();
-	  } else {
-		  val = (float)c.getValue();
-	  }
-	  
-	  if (sum.containsKey(c.getKey())) {
-		  sum.put(c.getKey(), val + sum.get(c.getKey()));
-	  } else {
-		  sum.put(c.getKey(), val);
-	  }
-  }
+        this.findMean();
+    }
 
+    /**
+    * Sets the mean values to the given HashMap.
+    * 
+    * @param newMean			HashMap containing the mean for each key.
+    */
+    public void setMean(HashMap<String, Cell> newMean){
+        mean = newMean;
+    }
 
-  /**
-   * Finds the average value for each of the values wich define the points.
-   */
-  public void findMean(){
-      for (String key: sum.keySet()) {
-    	  mean.put(key, sum.get(key) / numberOfPoints);
-      }
-  }
+    /**
+    * @return				HashMap containing the the mean values for the dataset.
+    */
+    public HashMap<String, Cell> getMean(){
+        return mean;
+    }
   
-  public void findStdDev(){
-	  
-  }
+    /**
+    * Sets the standard deviation values to the given HashMap.
+    * 
+    * @param newDev		HashMap containing the standard deviation for each key.
+    **/
+    public void setStdDev(HashMap<String, Cell> newDev){
+        stddev = newDev;
+    }
   
-  /**
-   * FindkNN finds the "cost" value for the given point using a KNN algorithm
-   * with the k nearest points
-   * 
-   * @param targetPoint		The point whose value is to be found
-   * @param k				The number of nearest neighbours to query
-   * 
-   * @return				The unknown value of the given point
-   */
-  public float findkNN(Point targetPoint, int k){
-	  	return 0;	    
-  }
-  
-  /**
-   * Sets the mean values to the given HashMap.
-   * 
-   * @param newMean			HashMap containing the mean for each key.
-   */
-  public void setMean(ConcurrentHashMap<String, Float> newMean){
-    mean = newMean;
-  }
+    /**
+    * @return				HashMap containing the the standard deviation values for the dataset.
+    **/
+    public HashMap<String, Cell> getStdDev(){
+        return stddev;
+    }
 
-  /**
-   * @return				HashMap containing the the mean values for the dataset.
-   */
-  public ConcurrentHashMap<String, Float> getMean(){
-    return mean;
-  }
-  
-  /**
-   * Sets the standard deviation values to the given HashMap.
-   * 
-   * @param newDev		HashMap containing the standard deviation for each key.
-   */
-  public void setStdDev(ConcurrentHashMap<String, Float> newDev){
-    stddev = newDev;
-  }
-  
-  /**
-   * @return				HashMap containing the the standard deviation values for the dataset.
-   */
-  public ConcurrentHashMap<String, Float> getStdDev(){
-    return stddev;
-  }
+    /**
+    * Sets the summed values to the given HashMap.
+    * 
+    * @param newSum		HashMap containing the sum for each key.
+    */
+    public void setSum(HashMap<String, Cell> newSum){
+        sum = newSum;
+    }
 
-  /**
-   * Sets the summed values to the given HashMap.
-   * 
-   * @param newSum		HashMap containing the sum for each key.
-   */
-  public void setSum(ConcurrentHashMap<String, Float> newSum){
-    sum = newSum;
-  }
+    /**
+    * @return				HashMap containing the the summed values for the dataset.
+    */
+    public HashMap<String, Cell> getSum(){
+        return sum;
+    }
+    
+    /**
+    * Sets the space's points to the given ArrayList
+    * 
+    * @param pts				ArrayList of the points to be used for the space.
+    */
+    public void setPoints(ArrayList<Point> pts){
+        points = pts;
+        numberOfPoints = pts.size();
+    }
+  
+    /**
+    * @return				The ArrayList of Points in the space.
+    */
+    public ArrayList<Point> getPoints(){
+        return points;
+    }
+    
+    /**
+    * @return			The current number of points in the space.
+    */
+    public int getNumberOfPoints() {
+         return numberOfPoints;
+    }
 
-  /**
-   * @return				HashMap containing the the summed values for the dataset.
-   */
-  public ConcurrentHashMap<String, Float> getSum(){
-    return sum;
-  }
+    public void setSingleCellType(String key, String type){
+        System.out.println(key );
+        if(!key.contains(".")){
+            System.out.println("inside" );
+            numberOfFields++;
+        }
+        System.out.println(numberOfFields );
+        cellTypes.put(key, type);
+    }
 
-  
-  /**
-   * Sets the space's points to the given ArrayList
-   * 
-   * @param pts				ArrayList of the points to be used for the space.
-   */
-  public void setPoints(ArrayList<Point> pts){
-    points = pts;
-    numberOfPoints = pts.size();
-  }
-  
-  /**
-   * @return				The ArrayList of Points in the space.
-   */
-  public ArrayList<Point> getPoints(){
-    return points;
-  }
-  
-  
-  /**
-   * @return				The current number of points in the space.
-   */
-  public int getNumberOfPoints() {
-	  return numberOfPoints;
-  }
-  
-//  public HashMap<String, String> getKeyTypes() {
-//	  return keyTypes;
-//  }
-//  
-//  public void setKeyTypes(HashMap<String, String> keyTypes) {
-//	  this.keyTypes = keyTypes;
-//  }
-//  
-//  public void addKeyType(String key, String type) {
-//	  keyTypes.put(key, type);
-//  }
+    //TODO: DOCUMENT
+    public void setCellTypes(HashMap<String, String> types){
+        cellTypes = types;
+    }
+
+    //TODO: DOCUMENT
+    public HashMap<String, String> getCellTypes(){
+        return cellTypes;
+    }
+
+    //TODO: AV Should this be here
+    //TODO: DH Should this be here
+    public boolean cellTypesLessThanTwo(){
+        if(numberOfFields <2){
+            return true;
+        }
+        return false;
+    }
+
+    public int cellTypeComp(String key){
+        int x = 0;
+        String[] keys = cellTypes.keySet().toArray(new String[0]);
+
+        for (String i:keys) {
+            if(i.contains(key)){
+                x++;
+            }
+
+        }
+        return x;
+    }
+
+    public void addPoint(Point x){
+        points.add(x);
+        numberOfPoints = points.size();
+    }
+
 }

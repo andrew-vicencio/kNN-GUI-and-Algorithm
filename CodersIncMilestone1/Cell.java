@@ -1,4 +1,3 @@
-package CodersInc;
 
 public abstract class Cell {
 	private String key;
