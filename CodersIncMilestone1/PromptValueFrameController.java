@@ -1,4 +1,5 @@
 import java.awt.event.ActionEvent;
+import java.util.HashMap;
 public class PromptValueFrameController extends MainController {
 
 	private PromptValueFrame pvf;
