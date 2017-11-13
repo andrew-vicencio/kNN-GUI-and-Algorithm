@@ -55,7 +55,21 @@ public class Point
     * @return			The value of the key
     */
     public Cell getCell(String att) {
-    	return rawValues.get(att);
+    	Cell targ = rawValues.get(att);
+    	
+    	if (targ == null) {
+    		for (String k: rawValues.keySet()) {
+    			targ = rawValues.get(k);
+    			if (targ instanceof CompositeCell) {
+    				targ = ((CompositeCell)targ).getSubCell(att);
+    				if (targ != null) {
+    					break;
+    				}
+    			}
+    		}
+    	}
+    	
+    	return targ;
     }
 
     /**
@@ -101,7 +115,7 @@ public class Point
     * 
     * @param stdValues		The HashMap containing the new standard deviations.
     */
-    //public void setStdValues(HashMap<String, Integer> stdValues) {
-    //    this.stdValues = stdValues;
-    //}
+    public void setStdValues(HashMap<String, Cell> stdValues) {
+        this.stdValues = stdValues;
+    }
 }

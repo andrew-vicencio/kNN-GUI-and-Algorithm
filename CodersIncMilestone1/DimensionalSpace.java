@@ -22,7 +22,6 @@ public class DimensionalSpace {
   private ConcurrentHashMap<String, Float> sum;
   private int numberOfPoints;
   private ArrayList<Point> points;
-  private HashMap<String, String> keyTypes;
 
   
   /**
