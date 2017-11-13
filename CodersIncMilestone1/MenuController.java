@@ -1,7 +1,4 @@
-import java.awt.Container;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import javax.swing.JLabel;
 
 public class MenuController extends MainController {
 
@@ -14,6 +11,7 @@ public class MenuController extends MainController {
 		{
 			this.view = view;
 		}
+		
 	/**
 	 * Executes action depending on which menu item was chosen
 	 */
@@ -40,9 +38,10 @@ public class MenuController extends MainController {
 		{
 			view.promptValue();
 		}
-
-
-
+		if(s.equals("New Test Case"))
+		{
+			view.promptTestCase();
+		}
 
 	}
 

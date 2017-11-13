@@ -1,10 +1,5 @@
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
-import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -70,7 +65,6 @@ public class View {
 		mainPanel.add(headerPanel, BorderLayout.NORTH);
 		mainPanel.add(contentPanel, BorderLayout.CENTER);
 		mainPanel.add(footerPanel, BorderLayout.SOUTH);
-
 		contentPanel.setLayout(new BoxLayout(contentPanel, BoxLayout.Y_AXIS));
 		menuBar.add(create);
 		menuBar.add(edit);
@@ -188,9 +182,6 @@ public class View {
 
     }
 
-
-
-
 	/**
 	 * Sends an error message to the user
 	 * @param message to be displayed in the error frame
@@ -221,8 +212,7 @@ public class View {
 	    }
 		headerPanel.revalidate();
 		headerPanel.repaint();
-
-		
+	
 	}
 
 	/**
@@ -234,6 +224,10 @@ public class View {
 		return done;
 	}
 	
+	/**
+	 * Returns the data model (DimensionalSpace) the view is using
+	 * @return DimensionalSpace
+	 */
 	public DimensionalSpace getDataModel()
 	{
 		return dataModel;
@@ -283,7 +277,7 @@ public class View {
 	
 	/**
 	 * Enables the user to choose to input a test case
-	 * @param b
+	 * @param b boolean
 	 */
 	public void enableTesting(boolean b) {
 		newTestCase.setEnabled(b);
@@ -292,7 +286,6 @@ public class View {
 	
 	/**
 	 * Displays program information to the contentPanel
-	 * 
 	 */
 	public void displayInfo()
 	{
@@ -302,11 +295,18 @@ public class View {
 		contentPanel.revalidate();
 		contentPanel.repaint();
 	}
+	
+	/**
+	 * Clears all contents of the contentPanel
+	 */
 	public void clearContentPanel() {
 		contentPanel.removeAll();
-
-		
 	}
+	
+	/**
+	 * Shows instructions for the user once they've created a new data set 
+	 * (CURRENTLY NOT IN USE)
+	 */
 	public void showNewDataInfo() {
 		JLabel info = new JLabel("To add a simple feature, click Edit -> Add Simple Feature. To add a "
 				+ "composite/complex feature, click Edit -> Add Complex Feature."
@@ -317,13 +317,36 @@ public class View {
 		contentPanel.repaint();
 		
 	}
+	
+	/**
+	 * Creates a new PromptValueFrame to gather data from user
+	 */
 	public void promptValue() {
 		new PromptValueFrame(this);
 	}
-
 	
-	
-
+	/**
+	 * Prompts the user for a test case, by asking for which value they want to test for, and 
+	 * then providing the rest of the values
+	 */
+	public void promptTestCase()
+	{
+		HashSet<String> featureNames = new HashSet<String>();
+		for(String str: dataModel.getCellTypes().keySet())
+		{
+			if(!str.contains("."))
+			{
+				String[] parts = str.split(".");
+				featureNames.add(parts[0]);
+			}
+		}
+		
+		 String[] optionsArray = new String[featureNames.size()];
+		 featureNames.toArray(optionsArray);
+		 JComboBox<String> optionList = new JComboBox<String>(optionsArray);
+		 JOptionPane.showMessageDialog(null, optionList, "Choose a value to test",
+		 JOptionPane.QUESTION_MESSAGE);;
+	}
 
 }
 

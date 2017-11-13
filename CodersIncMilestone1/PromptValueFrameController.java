@@ -1,6 +1,4 @@
 import java.awt.event.ActionEvent;
-import java.util.HashMap;
-import javax.swing.JTextField;
 public class PromptValueFrameController extends MainController {
 
 	private PromptValueFrame pvf;
@@ -18,7 +16,7 @@ public class PromptValueFrameController extends MainController {
 	}
 	
 	/**
-	 * Adds the data that was inputed in the PromptValueFrame to a Point, which is added to Dimensional Frame
+	 * Adds the data that was inputted in the PromptValueFrame to a Point, which is added to Dimensional Frame
 	 */
 	public void actionPerformed(ActionEvent e) {
 		
