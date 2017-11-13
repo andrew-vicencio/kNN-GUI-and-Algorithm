@@ -183,5 +183,16 @@ public class DimensionalSpace {
         return false;
     }
 
+    public int cellTypeComp(String key){
+        int x = 0;
+        String[] keys = cellTypes.keySet().toArray(new String[0]);
 
+        for (String i:keys) {
+            if(i.contains(key)){
+                x++;
+            }
+
+        }
+        return x;
+    }
 }

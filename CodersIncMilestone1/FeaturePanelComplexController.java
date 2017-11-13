@@ -7,6 +7,9 @@ import javax.swing.JButton;
 
 public class FeaturePanelComplexController extends MainController {
 
+
+    //TODO: BB adding Complex after adding 2
+    //TODO: BB Disable add
 	/**
 	 * Constructor to pass the FeaturePanelComplex using this controller
 	 * @param fp
@@ -37,7 +40,8 @@ public class FeaturePanelComplexController extends MainController {
 				FeaturePanelSimple newSimple = new FeaturePanelSimple(fp.getView(), fp.getTypes(), fp.getKey(), fp.getTab() + 1, fp);
 				newSimple.setParentComplexKey(key);
 				fp.getView().addFeaturePanelSimple(newSimple);
-				fp.disable();
+				fp.disableFeatureName();
+
 
 			}
 		}
@@ -64,6 +68,8 @@ public class FeaturePanelComplexController extends MainController {
 		}
 		else if(s.equals("Add this feature"))
 		{
+		    //Disables add Simple button
+
 			if(key.isEmpty())
 			{
 				fp.getView().sendErrorFrame("Please enter a valid name");
@@ -71,7 +77,12 @@ public class FeaturePanelComplexController extends MainController {
 			}
 			else
 			{
-				fp.disable();
+			    if(dataModel.cellTypeComp(key) < 2){
+                    fp.getView().sendErrorFrame("Please add at least 2 subfeatures");
+                }
+                else
+                {
+                fp.disableAddSimpleButton();
                 if(fp.getParentComplex() == null)
                 {
                     dataModel.setSingleCellType(key, "Comp");
@@ -85,11 +96,13 @@ public class FeaturePanelComplexController extends MainController {
                     dataModel.setSingleCellType(key, "Comp");
 
                 }
+			    }
 
 
 			}
 		}
 
 	}
+
 
 }

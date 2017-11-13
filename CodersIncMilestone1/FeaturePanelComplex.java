@@ -40,7 +40,7 @@ public class FeaturePanelComplex extends JPanel
 		superName = new JLabel(superFeatureName);
 		featureName = new JTextField(15);
 		addSimple = new JButton("Add a simple subfeature");
-		addComplex = new JButton("Add a complex subfeature");
+		//addComplex = new JButton("Add a complex subfeature");
 		add = new JButton("Add this feature");
 		innerPanel = new JPanel();
 		subFeaturePanels = new LinkedHashMap<String, Object>();
@@ -53,12 +53,12 @@ public class FeaturePanelComplex extends JPanel
 		innerPanel.add(name);
 		innerPanel.add(featureName);
 		innerPanel.add(addSimple);
-		innerPanel.add(addComplex);
+		//innerPanel.add(addComplex);
 		innerPanel.add(add);
 		
 		fpController = new FeaturePanelComplexController(this);
 		addSimple.addActionListener(fpController);
-		addComplex.addActionListener(fpController);
+		//addComplex.addActionListener(fpController);
 		add.addActionListener(fpController);
 		setMaximumSize(new Dimension(800, 80));
 		setBorder(BorderFactory.createCompoundBorder(new EtchedBorder(), new EmptyBorder(6, 6, 6, 6)));
@@ -146,7 +146,14 @@ public class FeaturePanelComplex extends JPanel
 		//addComplex.setEnabled(false);
 		//addSimple.setEnabled(false);
 	}
-	
+
+	public void disableFeatureName(){
+	    featureName.setEnabled(false);
+    }
+
+    public void disableAddSimpleButton(){
+	    addSimple.setEnabled(false);
+    }
 	/**
 	 * Returns the list of panels which the panel is the parent of
 	 * @return LinkedHashMap<String, Object>
