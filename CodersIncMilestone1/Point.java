@@ -1,3 +1,4 @@
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Set;
@@ -15,120 +16,61 @@ import java.lang.Math;
 
 public class Point 
 {
-	private ArrayList<Feature> rawValues;
-    private ArrayList<Feature> stdValues;
-	private int pointValue;
+    private HashMap<String, Cell> rawValues;
+    private HashMap<String, Cell> stdValues;
 	
-	/**
-	 * Point constructor for a point with a given value.
-	 * 
-	 * @param ptVal		The value of the point
-	 */
-	public Point(int ptVal) {
-		this.pointValue = ptVal;
-		rawValues = new ArrayList<Feature>();
-    	stdValues = new ArrayList<Feature>();
-	}
-	
-	/**
-	 * Point constructor for a point with an undefined value. Calls the
-	 * Point(int ptVal) constructor, assigning the point a value of 0.
-	 */
-	public Point() {
-		this(0);
-	}
-	
-	/**
-	 * Adds a coordinate pair value to the Point
-	 * 
-	 * @param att		The key for the value
-	 * @param value		The value of the key
-	 */
-	public void addAttribute(Feature f) {
-		
-		rawValues.add(f);
-	}
-
     /**
-     * Returns the set of keys that are currently being used by the point.
-     * 
-     * @return		A Set of keys in string format.
-     */
-    public ArrayList<Feature> getAttributes() {
-    	return rawValues;
+    * Point constructor for a point with a given value.
+    * 
+    * @param ptVal		The value of the point
+    */
+    public Point() {
+        rawValues = new HashMap<String,Cell>();
+        stdValues = new HashMap<String,Cell>();
+    }
+	
+    /**
+    * Adds a coordinate pair value to the Point
+    * 
+    * @param att		The key for the value
+    * @param value		The value of the key
+    */
+    public void addAttribute(Cell f) {
+        rawValues.put(f.getKey(), f);
     }
 
-	
-	/**
-	 * Returns the value of the given key in the point.
-	 * 
-	 * @param att		The key of the value to be retrieved
-	 * @return			The value of the key
-	 */
-	public int getValue(String att) {
-		return 0;
-	}
-	
-	/**
-	 * Standardizes the raw values of the point, given the mean values and the number
-	 * of points in the sample. Uses the formula (x - s)/u, where x is the raw value,
-	 * s is the value's standard deviation across the sample, and u is the value's average
-	 * Across the sample.
-	 * 
-	 * @param mean		Map of the mean values.
-	 * @param n		Number of points in the sample.
-	 */
-	public void standardise(AbstractMap<String, Integer> mean, int n){
-		 //for (String attr : rawValues.keySet()){
-		//	 int X = rawValues.get(attr);
-		//	 stdValues.put(attr, (X - findStdDev(X, mean.get(attr), n))/mean.get(attr));
-		// }
-	}
-	
-	/**
-	 * Finds the standard deviation for the value based on the sample mean and number
-	 * of points.
-	 * 
-	 * TODO: this should be done in DimensionalSpace using the entire sample.
-	 * 
-	 * @param X			The value to be used.
-	 * @param mean		The sample mean for that value
-	 * @param n			The number of points in the sample
-	 * @return			The stdDev value
-	 */
-	private int findStdDev(int X, int mean, int n) {
-		 return (int) (Math.pow((X - mean),2)/n);
-	}
+    public void setHashMaprawValues( HashMap<String,Cell> f){
+        rawValues = f;
+    }
 
-	/**
-	 * Sets the value for this point.
-	 * 
-	 * @param ptVal		The new value for the point.
-	 */
-	public void setPointValue(int ptVal) {
-		 this.pointValue = ptVal;
-	}
+    /**
+    * Returns the set of keys that are currently being used by the point.
+    * 
+    * @return		A Set of keys in string format.
+    **/
+    public Set<String> getAttributes() {
+    	return rawValues.keySet();
+    }
 
-	/**
-	 * @return			The point's value.
-	 */
-	public int getPointValue() {
-		 return this.pointValue;
-	}
+    /**
+    * Returns the value of the given key in the point.
+    * 
+    * @param att		The key of the value to be retrieved
+    * @return			The value of the key
+    */
+    public Cell getCell(String att) {
+    	return rawValues.get(att);
+    }
 
-	/**
-	 * @return			The calculated standard deviation values.
-	 */
-	public ArrayList<Feature> getStdValues() {
-		 return stdValues;
-	}
-
-	/**
-	 * Sets the standard deviation values.
-	 * 
-	 * @param stdValues		The HashMap containing the new standard deviations.
-	 */
-	public void setStdValues(HashMap<String, Integer> stdValues) {
-		 //this.stdValues = stdValues;
-	}
+    /**
+    * Standardizes the raw values of the point, given the mean values and the number
+    * of points in the sample. Uses the formula (x - s)/u, where x is the raw value,
+    * s is the value's standard deviation across the sample, and u is the value's average
+    * Across the sample.
+    * 
+    * @param mean		Map of the mean values.
+    * @param n		Number of points in the sample.
+    **/
+    public void standardise(AbstractMap<String, Integer> mean, int n){
+    }
 }

@@ -9,7 +9,8 @@ public class FeaturePanelComplexController extends MainController {
 
 
     //TODO: BB adding Complex after adding 2
-    //TODO: BB Disable add
+
+
 	/**
 	 * Constructor to pass the FeaturePanelComplex using this controller
 	 * @param fp
@@ -77,32 +78,27 @@ public class FeaturePanelComplexController extends MainController {
 			}
 			else
 			{
-			    if(dataModel.cellTypeComp(key) < 2){
-                    fp.getView().sendErrorFrame("Please add at least 2 subfeatures");
-                }
-                else
-                {
-                fp.disableAddSimpleButton();
-                if(fp.getParentComplex() == null)
-                {
-                    dataModel.setSingleCellType(key, "Comp");
-
-                }
-                else
-                {
-                    //CODE FOR A LATER IMPLEMENTATION
-                    key = fp.getParentComplex().getParentComplexKey() + "." + key ;
-
-                    dataModel.setSingleCellType(key, "Comp");
-
-                }
-			    }
-
-
+			    addValueToDataModel(key);
 			}
 		}
 
 	}
 
+	public void addValueToDataModel(String key){
+        if(dataModel.cellTypeComp(key) < 2){
+            fp.getView().sendErrorFrame("Please add at least 2 subfeatures");
+        }
+        else
+        {
+            fp.disableAddSimpleButton();
+            fp.disable();
+            if(fp.getParentComplex() == null)
+            {
+                if(!dataModel.getCellTypes().keySet().contains(key)){
+                    dataModel.setSingleCellType(key, "comp");
+                }
+            }
+        }
+    }
 
 }

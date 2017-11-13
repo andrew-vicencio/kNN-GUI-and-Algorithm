@@ -142,7 +142,7 @@ public class FeaturePanelComplex extends JPanel
 	 */
 	public void disable()
 	{
-		featureName.setEnabled(false);
+        add.setEnabled(false);
 		//addComplex.setEnabled(false);
 		//addSimple.setEnabled(false);
 	}

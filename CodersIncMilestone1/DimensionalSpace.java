@@ -195,4 +195,10 @@ public class DimensionalSpace {
         }
         return x;
     }
+
+    public void addPoint(Point x){
+        points.add(x);
+        numberOfPoints = points.size();
+    }
+
 }

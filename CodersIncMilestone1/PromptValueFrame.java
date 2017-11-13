@@ -1,6 +1,7 @@
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.util.HashMap;
+import java.util.Map;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -31,9 +32,15 @@ public class PromptValueFrame extends JFrame {
 		setSize(500, 600);
 		mainPanel.setLayout(new GridLayout(0, 1));
 		setLayout(new BorderLayout());
-		
+
+
+        //TODO: GH Can u tell the user what to input
+
+
+
 		for(String str: view.getDataModel().getCellTypes().keySet())
 		{
+		    if(!view.getDataModel().getCellTypes().get(str).equals("comp")){
 			jl = new JLabel(str);
 			jt = new JTextField(15);
 			promptPanel = new JPanel();
@@ -41,6 +48,7 @@ public class PromptValueFrame extends JFrame {
 			promptPanel.add(jt);
 			mainPanel.add(promptPanel);
 			fieldMap.put(str, jt);
+		    }
 	
 		}
 		

@@ -107,8 +107,8 @@ public class View {
 		//Set up list of primitive types the user can choose from
 		features = new LinkedHashMap<String, Object>();
 		featureTypes = new ArrayList<String>();
-		featureTypes.add("Integer");
-		featureTypes.add("Float");
+		featureTypes.add("int");
+		featureTypes.add("float");
 		featureTypes.add("String");
 		
 		//Added close application operation when window closes
