@@ -40,6 +40,18 @@ public class CompositeCell extends Cell {
 	 */
 	public void setSubCells(ArrayList<Cell> features) {
 		this.value = features;
+<<<<<<< HEAD
+=======
+	}
+	
+	public Cell getSubCell(String key) {
+		for (Cell c: value) {
+			if(c.getKey().equals(key)) {
+				return c;
+			}
+		}
+		return null;
+>>>>>>> Refactoring
 	}
 	
 	/**
