@@ -213,6 +213,8 @@ public class View {
 	 */
 	public void setUpFeatures()
 	{
+	    //TODO: GH So who will do this
+        //TODO: BB WILL I
 		//contentPanel.removeAll();
 		//footerPanel.removeAll();
 		//headerPanel.setLayout(new GridLayout(1, features.size()));

@@ -23,6 +23,7 @@ public class FeaturePanelComplex extends JPanel
 	private ArrayList<String> types;
 	private int tab;
 	private FeaturePanelComplex parent;
+	private String keyParentName;
 	
 
 	/**
@@ -142,6 +143,8 @@ public class FeaturePanelComplex extends JPanel
 	public void disable()
 	{
 		featureName.setEnabled(false);
+		addComplex.setEnabled(false);
+		addSimple.setEnabled(false);
 	}
 	
 	/**
@@ -195,4 +198,11 @@ public class FeaturePanelComplex extends JPanel
 		this.parent = parentComplex;
 	}
 
+    public void setParentComplexKey(String key){
+        keyParentName = key;
+    }
+
+    public String getParentComplexKey(){
+        return keyParentName;
+    }
 }

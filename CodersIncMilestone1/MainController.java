@@ -5,7 +5,7 @@ public abstract class MainController implements ActionListener{
 
     //Main controller used to make sure that all other controllers can access the data set
 
-    private static DimensionalSpace dataModel = new DimensionalSpace();
+    protected static DimensionalSpace dataModel = new DimensionalSpace();
 
     public DimensionalSpace getDataModel() {
         return dataModel;

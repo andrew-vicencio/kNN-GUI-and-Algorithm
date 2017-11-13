@@ -33,7 +33,9 @@ public class FeaturePanelComplexController extends MainController {
 			}
 			else
 			{
+
 				FeaturePanelSimple newSimple = new FeaturePanelSimple(fp.getView(), fp.getTypes(), fp.getKey(), fp.getTab() + 1, fp);
+				newSimple.setParentComplexKey(key);
 				fp.getView().addFeaturePanelSimple(newSimple);
 				fp.disable();
 
@@ -41,6 +43,8 @@ public class FeaturePanelComplexController extends MainController {
 		}
 		else if(s.equals("Add a complex subfeature"))
 		{
+            fp.getView().sendErrorFrame("Sorry Complex values are not allowed in other complex values");
+		    /* CODE FOR A LATER IMPLEMENTATION
 			if(key.isEmpty())
 			{
 				fp.getView().sendErrorFrame("Please enter a valid name");
@@ -48,25 +52,37 @@ public class FeaturePanelComplexController extends MainController {
 			else
 			{
 				FeaturePanelComplex newComplex = new FeaturePanelComplex(fp.getView(), fp.getTypes(), fp.getKey(), fp.getTab() + 1, fp);
+				newComplex.setParentComplexKey(key);
 				fp.getView().addFeaturePanelComplex(newComplex);
 				fp.disable();		
 
-			}
+			}*/
 		}
 		else if(s.equals("Add this feature"))
 		{
 			if(key.isEmpty())
 			{
 				fp.getView().sendErrorFrame("Please enter a valid name");
-			}
-			else if(fp.getSubFeaturePanels().size() < 2)
-			{
-				fp.getView().sendErrorFrame("Please enter at least two sub-features");
+
 			}
 			else
 			{
 				fp.disable();
-				fp.getView().addNewFeature(key, fp.getSubFeaturePanels());
+                if(fp.getParentComplex() == null)
+                {
+                    dataModel.setSingleCellType(key, "Comp");
+
+                }
+                else
+                {
+                    //CODE FOR A LATER IMPLEMENTATION
+                    key = fp.getParentComplex().getParentComplexKey() + "." + key ;
+
+                    dataModel.setSingleCellType(key, "Comp");
+
+                }
+
+
 			}
 		}
 

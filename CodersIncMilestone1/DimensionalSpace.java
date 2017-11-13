@@ -1,4 +1,5 @@
 
+import java.lang.reflect.Array;
 import java.util.HashMap;
 import java.util.ArrayList;
 import java.lang.Math;
@@ -21,6 +22,7 @@ public class DimensionalSpace {
     private HashMap<String, Cell> sum;
     private HashMap<String, String> cellTypes;
     private int numberOfPoints;
+    private int numberOfFields;
     private ArrayList<Point> points;
 
   
@@ -150,6 +152,16 @@ public class DimensionalSpace {
          return numberOfPoints;
     }
 
+    public void setSingleCellType(String key, String type){
+        System.out.println(key );
+        if(!key.contains(".")){
+            System.out.println("inside" );
+            numberOfFields++;
+        }
+        System.out.println(numberOfFields );
+        cellTypes.put(key, type);
+    }
+
     //TODO: DOCUMENT
     public void setCellTypes(HashMap<String, String> types){
         cellTypes = types;
@@ -159,4 +171,15 @@ public class DimensionalSpace {
     public HashMap<String, String> getCellTypes(){
         return cellTypes;
     }
+
+    //TODO: AV Should this be here
+    //TODO: DH Should this be here
+    public boolean cellTypesLessThanTwo(){
+        if(numberOfFields >=2){
+            return true;
+        }
+        return false;
+    }
+
+
 }

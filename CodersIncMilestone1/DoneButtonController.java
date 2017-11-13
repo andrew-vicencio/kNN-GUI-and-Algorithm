@@ -18,15 +18,14 @@ public class DoneButtonController extends MainController {
 	 */
 	public void actionPerformed(ActionEvent e) {
 		
-		System.out.println(view.getList().toString());
+		System.out.println(dataModel.getCellTypes().toString());
 	
-		if(view.getList().size() < 2)
+		if(dataModel.cellTypesLessThanTwo())
 		{
 			view.sendErrorFrame("Please enter at least two features");
 		}
 		else
 		{
-
 			view.setUpFeatures();
 		}
 		

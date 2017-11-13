@@ -23,6 +23,7 @@ public class FeaturePanelSimple extends JPanel{
 	private FeaturePanelSimpleController fpController;
 	private FeaturePanelComplex parent;
 	int tab;
+    private String keyParentName;
 
 	/**
 	 * Default constructor for a FeaturePanelSimple with no parent
@@ -171,9 +172,13 @@ public class FeaturePanelSimple extends JPanel{
 	}
 
 	
-
+    public void setParentComplexKey(String key){
+        keyParentName = key;
+    }
 	
-
+public String getKeyParentName(){
+        return keyParentName;
+}
 	
 
 }

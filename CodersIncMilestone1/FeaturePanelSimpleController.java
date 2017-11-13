@@ -28,7 +28,7 @@ public class FeaturePanelSimpleController extends MainController{
 		{
 			fp.getView().sendErrorFrame("Please enter a valid name");
 		}
-		else if(fp.getView().getList().containsKey(key))
+		else if(dataModel.getCellTypes().containsKey(key))
 		{
 			fp.getView().sendErrorFrame("There is already a feature with that particular name");
 		}
@@ -39,11 +39,11 @@ public class FeaturePanelSimpleController extends MainController{
 			//Check if the simple feature has a parent complex feature if not just add as its own type
 			if(fp.getParentComplex() != null)
 			{
-				fp.getParentComplex().addSubFeaturePanel(key, value);
+				dataModel.setSingleCellType(fp.getKeyParentName() + "." + key, value);
 			}
 			else
 			{
-				fp.getView().addNewFeature(key, value);
+				dataModel.setSingleCellType(key, value);
 			}
 		}
 
