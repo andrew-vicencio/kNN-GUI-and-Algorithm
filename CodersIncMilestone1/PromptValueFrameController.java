@@ -23,13 +23,7 @@ public class PromptValueFrameController extends MainController {
 		
             Point newPoint = new Point();
             HashMap<String, Cell> newConfiguredData = new HashMap<String, Cell>();
-<<<<<<< HEAD
 
-=======
-			//TODO BB : pvf.getFieldMap() is a Hash Map of the feature name and their corresponding JTextField.
-			// You need iterate through it, get the text from the JTextField, and add to a point 
-			// in Dimensional space
->>>>>>> 7a4b4b9d80ab6ba5c0de8735a6ccad343b23f43b
 			pvf.dispose();
 
             for(String key : dataModel.getCellTypes().keySet()){
@@ -53,10 +47,6 @@ public class PromptValueFrameController extends MainController {
 			{
 				view.enableTesting(true);
 			}
-<<<<<<< HEAD
-=======
-
->>>>>>> 7a4b4b9d80ab6ba5c0de8735a6ccad343b23f43b
 	}
 
 	private Cell createStanderedFeature(String key, String value){
@@ -85,10 +75,6 @@ public class PromptValueFrameController extends MainController {
             SimpleCell<String> newCell = new SimpleCell<String>(key, value);
             return newCell;
         }
-<<<<<<< HEAD
-=======
-
->>>>>>> 7a4b4b9d80ab6ba5c0de8735a6ccad343b23f43b
         return null;
     }
 
