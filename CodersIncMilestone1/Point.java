@@ -24,7 +24,11 @@ public class Point
     * 
     * @param ptVal		The value of the point
     */
+<<<<<<< HEAD
     public Point() {
+=======
+    public Point(int ptVal) {
+>>>>>>> Refactoring
         rawValues = new HashMap<String,Cell>();
         stdValues = new HashMap<String,Cell>();
     }
@@ -43,7 +47,11 @@ public class Point
     * Returns the set of keys that are currently being used by the point.
     * 
     * @return		A Set of keys in string format.
+<<<<<<< HEAD
     */
+=======
+    **/
+>>>>>>> Refactoring
     public Set<String> getAttributes() {
     	return rawValues.keySet();
     }
@@ -55,6 +63,7 @@ public class Point
     * @return			The value of the key
     */
     public Cell getCell(String att) {
+<<<<<<< HEAD
     	Cell targ = rawValues.get(att);
     	
     	if (targ == null) {
@@ -117,5 +126,20 @@ public class Point
     */
     public void setStdValues(HashMap<String, Cell> stdValues) {
         this.stdValues = stdValues;
+=======
+    	return rawValues.get(att);
+    }
+
+    /**
+    * Standardizes the raw values of the point, given the mean values and the number
+    * of points in the sample. Uses the formula (x - s)/u, where x is the raw value,
+    * s is the value's standard deviation across the sample, and u is the value's average
+    * Across the sample.
+    * 
+    * @param mean		Map of the mean values.
+    * @param n		Number of points in the sample.
+    **/
+    public void standardise(AbstractMap<String, Integer> mean, int n){
+>>>>>>> Refactoring
     }
 }

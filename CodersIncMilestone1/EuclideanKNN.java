@@ -3,6 +3,7 @@ package CodersInc;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
+<<<<<<< HEAD
 /**
  * EuclideanKNN extends the kNN abstract method and uses an euclidean distance metric for the calculations.
  * The formula is [distance] = sqrt(sum((endPoint - origin) ^ 2)) where the sum adds the values for every dimension.
@@ -18,14 +19,23 @@ public class EuclideanKNN extends kNN {
 	 * 
 	 * @param ds	The DimensionalSpace the the funciton will work in.
 	 */
+=======
+public class EuclideanKNN extends kNN {
+	
+>>>>>>> Refactoring
 	public EuclideanKNN(DimensionalSpace ds) {
 		super(ds);
 	}
 
 	/**
+<<<<<<< HEAD
 	   * findKNN finds the target value for the given point using an euclidean KNN algorithm
 	   * with the k nearest points. Calls the super class's findValue funtion once the nearest neighbours
 	   * are found.
+=======
+	   * findKNN finds the "cost" value for the given point using a euclidean KNN algorithm
+	   * with the k nearest points
+>>>>>>> Refactoring
 	   * 
 	   * @param targetKey		The key to be found
 	   * @param targetPoint		The point whose value is to be found
@@ -65,17 +75,30 @@ public class EuclideanKNN extends kNN {
 					if (!(key.equals(targetKey))) {
 						if (currentPtValues.get(key) instanceof SimpleCell) {
 							if (((SimpleCell)currentPtValues.get(key)).getValue() instanceof String) {
+<<<<<<< HEAD
 								distance += Math.pow(sDist.calcDistance((SimpleCell)targetPtValues.get(key), (SimpleCell)currentPtValues.get(key)), 2);
 							} else {
 								distance += Math.pow(nDist.calcDistance((SimpleCell)targetPtValues.get(key), (SimpleCell)currentPtValues.get(key)), 2);
 							}
 						} else {
 							distance += Math.pow(EuclideanComposite((CompositeCell) currentPtValues.get(key), (CompositeCell) targetPtValues.get(key)), 2);
+=======
+								distance += sDist.calcDistance((SimpleCell)targetPtValues.get(key), (SimpleCell)currentPtValues.get(key));
+							} else {
+								distance += nDist.calcDistance((SimpleCell)targetPtValues.get(key), (SimpleCell)currentPtValues.get(key));
+							}
+						} else {
+							// Composite
+>>>>>>> Refactoring
 						}
 					}
 				}
 				
+<<<<<<< HEAD
 				distance = (float) Math.sqrt(distance);
+=======
+				distance = (float)Math.sqrt(distance);
+>>>>>>> Refactoring
 				
 				for (int i = 0; i < neighbours; i ++) {
 					if (!displacement) {
@@ -107,6 +130,7 @@ public class EuclideanKNN extends kNN {
 			}
 		}
 		
+<<<<<<< HEAD
 		Cell c = findValue(closestKNeighbours, targetKey);
 		targetPoint.addAttribute(c);
 		
@@ -141,6 +165,9 @@ public class EuclideanKNN extends kNN {
 		}
 		
 		return (float) Math.sqrt(distance);
+=======
+		return findValue(closestKNeighbours, targetKey);
+>>>>>>> Refactoring
 	}
 
 }

@@ -1,5 +1,6 @@
 package CodersInc;
 
+<<<<<<< HEAD
 /**
  * Abstract class providing abstract method declarations for various distance algorithms
  * 
@@ -16,5 +17,9 @@ public abstract class DistanceAlg {
 	 * @param current	The SimpleCell to which the distance is to be measured.
 	 * @return			The distance as a float value.
 	 */
+=======
+public abstract class DistanceAlg {
+	
+>>>>>>> Refactoring
 	public abstract float calcDistance(SimpleCell target, SimpleCell current);
 }

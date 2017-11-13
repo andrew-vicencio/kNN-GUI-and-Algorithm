@@ -1,5 +1,6 @@
 package CodersInc;
 
+<<<<<<< HEAD
 /**
  * Calculates a distance between two String values. This algorithm uses the Hamming Distance calculation. This
  * returns a distance by calculating the number of switches it would take to transform one String to another.
@@ -10,6 +11,8 @@ package CodersInc;
  * @version Milestone 2
  *
  */
+=======
+>>>>>>> Refactoring
 public class StringDistance extends DistanceAlg {
 
 	@Override
