@@ -57,6 +57,7 @@ public class View {
 		done = new JButton("Done");
 		menuController = new MenuController(this);
         dataModel = menuController.getDataModel();
+        dataModel.setView(this);
 
         //Placement and sizing of View elements
 		mainFrame.setJMenuBar(menuBar);
@@ -327,6 +328,16 @@ public class View {
 		 System.out.println(testValue);
 		 TestCaseFrame testFrame = new TestCaseFrame(this, testValue);
 	}
+	
+	public void updateDisplay(Point x) {
+					
+		JLabel jl = new JLabel(x.toString());
+		contentPanel.add(jl);
+		contentPanel.revalidate();
+		contentPanel.repaint();
+		
+	}
+	
 }
 
 

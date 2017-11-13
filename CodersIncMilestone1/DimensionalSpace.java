@@ -26,6 +26,7 @@ public class DimensionalSpace {
     private int numberOfPoints;
     private int numberOfFields;
     private ArrayList<Point> points;
+	private View view;
 
   
     /**
@@ -199,6 +200,12 @@ public class DimensionalSpace {
     public void addPoint(Point x){
         points.add(x);
         numberOfPoints = points.size();
+        view.updateDisplay(x);
+    }
+    
+    public void setView(View view)
+    {
+    	this.view = view;
     }
 
 }

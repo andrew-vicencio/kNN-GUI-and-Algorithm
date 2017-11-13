@@ -73,4 +73,11 @@ public class Point
     **/
     public void standardise(AbstractMap<String, Integer> mean, int n){
     }
+    
+    
+    public String toString()
+    {
+		return null;
+    	//TO DO. Preferred format is a series of "keyName: value"
+    }
 }
