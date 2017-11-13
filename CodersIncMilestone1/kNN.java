@@ -7,6 +7,7 @@ import java.util.HashMap;
  * kNN is an abstarct class providing methods and variables for various kNN algorithms.
  * 
  * @author Darren
+ * @version Milestone 2
  *
  */
 public abstract class kNN {
@@ -92,7 +93,10 @@ public abstract class kNN {
 
 	/**
 	 * calculateSimpleCell calculates the kNN value if the target key corresponds to a SimpleCell. This is called by
-	 * calculateCompositeCell when it needs to calculate SimpleCell values.
+	 * calculateCompositeCell when it needs to calculate SimpleCell values. For numeric values, this funcitons returns
+	 * the average as the value. For String values, this function returnseither the most common String among the nearest 
+	 * neighbours, or in the case of a tie, the closest String of the nighbours involved. For example, if every String 
+	 * appears once, this function will return the String of the nearest neighbour.
 	 * 
 	 * @param closestKNeighbours	An ArrayList of Tuples containing the distance and corresponding Cell of 
 	 * 									each of the k nearest neighbours.

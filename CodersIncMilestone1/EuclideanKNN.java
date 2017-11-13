@@ -8,6 +8,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * The formula is [distance] = sqrt(sum((endPoint - origin) ^ 2)) where the sum adds the values for every dimension.
  * 
  * @author Darren
+ * @version Milestone 2
  *
  */
 public class EuclideanKNN extends kNN {

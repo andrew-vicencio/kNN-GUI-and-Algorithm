@@ -6,6 +6,7 @@ import java.util.ArrayList;
  * CompositeCell provides functionality for a grouped set of attributes within a Point.
  * 
  * @author Darren
+ * @version Milestone 2
  *
  */
 public class CompositeCell extends Cell {

@@ -1,5 +1,12 @@
 package CodersInc;
 
+/**
+ * Calculates the distance between two numerical SimpleCells. Simply returns the difference between the given values.
+ * 
+ * @author Darren
+ * @version Milestone 2
+ *
+ */
 public class NumericalDistance extends DistanceAlg {
 
 	@Override
