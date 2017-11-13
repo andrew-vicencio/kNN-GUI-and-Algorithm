@@ -1,4 +1,4 @@
-package CodersInc;
+
 
 public class NumericalDistance extends DistanceAlg {
 

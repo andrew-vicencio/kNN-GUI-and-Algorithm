@@ -1,4 +1,4 @@
-package CodersInc;
+
 
 public class StringDistance extends DistanceAlg {
 

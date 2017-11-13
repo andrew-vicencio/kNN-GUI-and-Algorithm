@@ -1,4 +1,4 @@
-package CodersInc;
+
 
 public abstract class DistanceAlg {
 	
