@@ -171,6 +171,7 @@ public class FeaturePanelSimple extends JPanel{
 		this.parent = parentComplex;
 	}
 
+
 	
     public void setParentComplexKey(String key){
         keyParentName = key;
@@ -180,5 +181,6 @@ public String getKeyParentName(){
         return keyParentName;
 }
 	
+
 
 }

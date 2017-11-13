@@ -18,7 +18,7 @@ public class DoneButtonController extends MainController {
 	 */
 	public void actionPerformed(ActionEvent e) {
 		
-		System.out.println(dataModel.getCellTypes().toString());
+
 	
 		if(dataModel.cellTypesLessThanTwo())
 		{
@@ -26,6 +26,7 @@ public class DoneButtonController extends MainController {
 		}
 		else
 		{
+
 			view.setUpFeatures();
 		}
 		

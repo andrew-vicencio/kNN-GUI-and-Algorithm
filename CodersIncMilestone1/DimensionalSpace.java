@@ -1,5 +1,7 @@
 
+
 import java.lang.reflect.Array;
+
 import java.util.HashMap;
 import java.util.ArrayList;
 import java.lang.Math;
@@ -175,7 +177,7 @@ public class DimensionalSpace {
     //TODO: AV Should this be here
     //TODO: DH Should this be here
     public boolean cellTypesLessThanTwo(){
-        if(numberOfFields >=2){
+        if(numberOfFields <2){
             return true;
         }
         return false;

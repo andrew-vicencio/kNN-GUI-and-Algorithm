@@ -49,6 +49,10 @@ public class FeaturePanelComplexController extends MainController {
 			{
 				fp.getView().sendErrorFrame("Please enter a valid name");
 			}
+			else if(fp.getTab() > 0)
+			{
+				fp.getView().sendErrorFrame("We currently do not support a second layer of subfeatures");
+			}
 			else
 			{
 				FeaturePanelComplex newComplex = new FeaturePanelComplex(fp.getView(), fp.getTypes(), fp.getKey(), fp.getTab() + 1, fp);
