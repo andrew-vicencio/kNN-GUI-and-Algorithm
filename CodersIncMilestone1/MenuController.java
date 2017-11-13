@@ -38,7 +38,7 @@ public class MenuController extends MainController {
 		}
 		if(s.equals("Add Value"))
 		{
-			
+			view.promptValue();
 		}
 
 

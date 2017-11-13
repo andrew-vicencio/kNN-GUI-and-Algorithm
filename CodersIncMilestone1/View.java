@@ -129,8 +129,7 @@ public class View {
 		contentPanel.add(fp);
 		contentPanel.revalidate();
 		contentPanel.repaint();
-		footerPanel.add(done);
-		done.setVisible(true);
+
 	}
 	
 	/**
@@ -158,8 +157,7 @@ public class View {
 		contentPanel.add(fp);
 		contentPanel.revalidate();
 		contentPanel.repaint();
-		footerPanel.add(done);
-		done.setVisible(true);
+
 	}
 	
 	/**
@@ -171,8 +169,7 @@ public class View {
 		contentPanel.add(fp);
 		contentPanel.revalidate();
 		contentPanel.repaint();
-		footerPanel.add(done);
-		done.setVisible(true);
+
 	}
 	/**
 	 * The features from a featurePanel is added to the features list
@@ -213,19 +210,17 @@ public class View {
 	 */
 	public void setUpFeatures()
 	{
-	    //TODO: GH So who will do this
-        //TODO: BB WILL I
-		//contentPanel.removeAll();
-		//footerPanel.removeAll();
-		//headerPanel.setLayout(new GridLayout(1, features.size()));
+		contentPanel.removeAll();
+		footerPanel.removeAll();
+		headerPanel.setLayout(new GridLayout(1, features.size()));
 	
-		//for (String key : keys){
-		//	JLabel jl = new JLabel("    " + key);
-		//	jl.setBorder(BorderFactory.createCompoundBorder(new EtchedBorder(), new EmptyBorder(6, 6, 6, 6)));
-		//	headerPanel.add(jl);
-	    //}
-		//headerPanel.revalidate();
-		//headerPanel.repaint();
+		for (String key : dataModel.getCellTypes().keySet()){
+			JLabel jl = new JLabel("    " + key);
+			jl.setBorder(BorderFactory.createCompoundBorder(new EtchedBorder(), new EmptyBorder(6, 6, 6, 6)));
+			headerPanel.add(jl);
+	    }
+		headerPanel.revalidate();
+		headerPanel.repaint();
 
 		
 	}
@@ -239,12 +234,18 @@ public class View {
 		return done;
 	}
 	
+	public DimensionalSpace getDataModel()
+	{
+		return dataModel;
+	}
+	
 	/**
 	 * Get the list of feature names that have been added. The key will refer to the name of the feature, and the value will be the type
 	 * In the case of a simple feature, the type will simply be a string
 	 * In the case of a complex feature, the type will be another HashMap of features
 	 * @return
 	 */
+
 	public HashMap<String, Object> getList()
 	{
 		return features;
@@ -255,8 +256,7 @@ public class View {
 	 * @param b : boolean
 	 */
 	public void enableNewDataSet(boolean b) {
-		newDataSet.setEnabled(b);
-		
+		newDataSet.setEnabled(b);	
 	}
 	
 	/**
@@ -267,8 +267,27 @@ public class View {
 		edit.setEnabled(b);
 		simpleFeature.setEnabled(b);
 		complexFeature.setEnabled(b);
-		addValue.setEnabled(!b);
-		
+		addValue.setEnabled(!b);	
+		footerPanel.add(done);
+		done.setVisible(true);
+	}
+	/**
+	 * Enables the ability to input data with the addValue menu item
+	 * @param b : boolean
+	 */
+	public void enableDataInput(boolean b) {
+		addValue.setEnabled(b);
+		simpleFeature.setEnabled(!b);
+		complexFeature.setEnabled(!b);		
+	}
+	
+	/**
+	 * Enables the user to choose to input a test case
+	 * @param b
+	 */
+	public void enableTesting(boolean b) {
+		newTestCase.setEnabled(b);
+
 	}
 	
 	/**
@@ -299,12 +318,10 @@ public class View {
 		
 	}
 	public void promptValue() {
-		JFrame promptFrame = new JFrame("Enter your data values");
-		JPanel mainPanel = new JPanel();
-		
-		
-		
+		new PromptValueFrame(this);
 	}
+
+	
 	
 
 
