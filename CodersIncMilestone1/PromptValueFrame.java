@@ -12,7 +12,7 @@ import javax.swing.JTextField;
 public class PromptValueFrame extends JFrame {
 	
 	JPanel mainPanel, footerPanel, promptPanel;
-	JLabel jl;
+	JLabel name, type;
 	JTextField jt;
 	JButton done;
 	HashMap<String, JTextField> fieldMap;
@@ -33,21 +33,18 @@ public class PromptValueFrame extends JFrame {
 		mainPanel.setLayout(new GridLayout(0, 1));
 		setLayout(new BorderLayout());
 
-
-        //TODO: GH Can u tell the user what to input
-
-
-
 		for(String str: view.getDataModel().getCellTypes().keySet())
 		{
 		    if(!view.getDataModel().getCellTypes().get(str).equals("comp")){
-			jl = new JLabel(str);
-			jt = new JTextField(15);
-			promptPanel = new JPanel();
-			promptPanel.add(jl);
-			promptPanel.add(jt);
-			mainPanel.add(promptPanel);
-			fieldMap.put(str, jt);
+		    	name = new JLabel(str);
+		    	type = new JLabel(view.getDataModel().getCellTypes().get(str));
+		    	jt = new JTextField(15);
+		    	promptPanel = new JPanel();
+		    	promptPanel.add(name);
+		    	promptPanel.add(type);
+		    	promptPanel.add(jt);
+		    	mainPanel.add(promptPanel);
+		    	fieldMap.put(str, jt);
 		    }
 	
 		}
