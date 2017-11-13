@@ -14,20 +14,20 @@ public class DoneButtonController extends MainController {
 	}
 
 	/**
-	 * Executes action depending on if data inputted is valid or not
+	 * Executes action depending on if data inputed is valid or not
 	 */
 	public void actionPerformed(ActionEvent e) {
 		
 
-	
 		if(dataModel.cellTypesLessThanTwo())
 		{
 			view.sendErrorFrame("Please enter at least two features");
 		}
 		else
 		{
-
+			view.clearContentPanel();
 			view.setUpFeatures();
+			view.enableDataInput(true);
 		}
 		
 	}
