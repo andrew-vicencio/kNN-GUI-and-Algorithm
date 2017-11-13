@@ -278,9 +278,16 @@ public class View {
 	public void enableDataInput(boolean b) {
 		addValue.setEnabled(b);
 		simpleFeature.setEnabled(!b);
-		complexFeature.setEnabled(!b);
-		
-		
+		complexFeature.setEnabled(!b);		
+	}
+	
+	/**
+	 * Enables the user to choose to input a test case
+	 * @param b
+	 */
+	public void enableTesting(boolean b) {
+		newTestCase.setEnabled(b);
+
 	}
 	
 	/**
@@ -313,6 +320,7 @@ public class View {
 	public void promptValue() {
 		new PromptValueFrame(this);
 	}
+
 	
 	
 
