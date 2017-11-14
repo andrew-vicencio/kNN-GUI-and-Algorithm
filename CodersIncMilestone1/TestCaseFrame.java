@@ -53,7 +53,7 @@ public class TestCaseFrame extends JFrame {
 		for(String str: view.getDataModel().getCellTypes().keySet())
 		{
 
-		    if(!str.equals(testValue))
+		    if(!str.equals(testValue) && !view.getDataModel().getCellTypes().get(str).equals("comp"))
 		    {
 		    	name = new JLabel(str);
 		    	type = new JLabel(view.getDataModel().getCellTypes().get(str));
@@ -96,5 +96,12 @@ public class TestCaseFrame extends JFrame {
 	{
 		return kTextField;
 	}
-			
+
+    public String getTestValue() {
+        return testValue;
+    }
+
+    public void setTestValue(String testValue) {
+        this.testValue = testValue;
+    }
 }
