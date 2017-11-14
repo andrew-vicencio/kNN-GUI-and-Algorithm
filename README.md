@@ -7,49 +7,54 @@
 * Andrew Vicencio
 
 ## Deliverables
+* Cell.java
+* CompositeCell.java
 * DimensionalSpace.java
+* DistanceAlg.java
+* DoneButtonController.java
+* EuclideanKNN.java
+* FeaturePanelComplex.java
+* FeaturePanelComplexController.java
+* FeaturePanelSimple.java
+* FeaturePanelSimpleController.java
+* KNN.java
+* MainController.java
+* MenuController.java
+* NumericalDistance.java
 * Point.java
+* PromptValueFrame.java
+* PromptValueFrameController.java
+* SimpleCell.java
+* StringDistance.java
+* TestCaseFrame.java
+* TestCaseFrameController.java
 * TestEnvironment.java
+* View.java
 * UML file
 * javadoc
 * User Manual
 
 
 ## Changes Since Last Milestone
-* Created Point class to hold data from a dataset entry
-	* Holds raw and standardized point
-	* Provides getters and setters for all included info
-	* Provides a standardization method to standardize the point
-	* Holds the "goal" value for the point
-* Created DimensionalSpace class to hold the points and perform the kNN algorithm
-	* Holds a set of points that describe the dataset
-	* Calculates the mean value of each coordinate that make up the points
-	* Performs the kNN algorithm using a given point and a number of nearest neighbours
-		* Finds the nearest k neighbours and sets the goal value to the average of the neighbours' goal values
-* Created TestEnvironment class to create test scenarios by which the kNN algorithm is evaluated
+* Created a GUI
+* Features can now have one of three primitive types: int, float and String
+* Allowed test cases to be used to predict any features
+* Increased cohesion with new classes for distance algorithms
+* Support for composite/complex features
+
 
 ## Known Issues
-* The standard deviation should be calculated in DimensionalSpace, not Point
-* The kNN algorithm should have its own class
-	* This will lend itself to the Strategy Design Pattern
-	* Will also allow for more flexibility
-* Program is not very user-friendly at the moment
-	* Due to hard-coding
-* Coordinate values for points are not very flexible at the moment
-	* Due to only accepting Integers for the values in the key-value pairs
-		* Perhaps a type parameter could be used for more flexibility
+* There is a lot of code duplication between these pairs of classes:
+** FeaturePanelComplex and FeaturePanelSimple
+** FeaturePanelComplexController and FeaturePanelSimpleController
+** PromptValueFrame and TestCaseFrame
+* Some aspects of the UI do not have ease of use, such as repeatedly clicking "Add Value" and "Add Simple Feature" and "Add Complex Feature" in the menu bar
+* No frames scroll to accomadate for extra panels
+* Points/values are not editable or removable once added
+* Points/values are not very readable when displayed
 
 ## Future Steps
 * Redesign some aspects to improve cohesion and create looser coupling
 * Make the program more user-friendly
-* Create GUI
-* Implement unit test
-* Retrieving user input as data
 * Increase flexibility (to be clarified at a later date)
 * Implement save/load functionality
-
-
-
-
-
-
