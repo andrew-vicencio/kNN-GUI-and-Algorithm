@@ -21,7 +21,7 @@ public class View {
 	private JFrame mainFrame, errorFrame;
 	private JPanel mainPanel, headerPanel, contentPanel, footerPanel;
 	private JMenuBar menuBar;
-	private JMenu create, edit, display, help;
+	private JMenu create, edit, help;
 	private JMenuItem newDataSet, newTestCase, simpleFeature, complexFeature, addValue, helpDoc;
 	private JButton done;
 	private LinkedHashMap<String, Object> features;
@@ -46,7 +46,6 @@ public class View {
 		menuBar = new JMenuBar();
 		create = new JMenu("Create");
 		edit = new JMenu("Edit");
-		display = new JMenu("Display");
 		help = new JMenu("Help");
 		newDataSet = new JMenuItem("New Data Set");
 		newTestCase = new JMenuItem("New Test Case");
@@ -69,7 +68,6 @@ public class View {
 		contentPanel.setLayout(new BoxLayout(contentPanel, BoxLayout.Y_AXIS));
 		menuBar.add(create);
 		menuBar.add(edit);
-		menuBar.add(display);
 		menuBar.add(help);
 		create.add(newDataSet);
 		create.add(newTestCase);
@@ -82,7 +80,6 @@ public class View {
 		//Initial disabling of menu items
 		newTestCase.setEnabled(false);
 		edit.setEnabled(false);
-		display.setEnabled(false);
 		mainFrame.setVisible(true);
 		done.setVisible(false);
 		complexFeature.setEnabled(false);
@@ -204,15 +201,10 @@ public class View {
 	{
 		contentPanel.removeAll();
 		footerPanel.removeAll();
-		headerPanel.setLayout(new GridLayout(1, features.size()));
-	
-		for (String key : dataModel.getCellTypes().keySet()){
-			JLabel jl = new JLabel("    " + key);
-			jl.setBorder(BorderFactory.createCompoundBorder(new EtchedBorder(), new EmptyBorder(6, 6, 6, 6)));
-			headerPanel.add(jl);
-	    }
 		headerPanel.revalidate();
 		headerPanel.repaint();
+		contentPanel.revalidate();
+		contentPanel.repaint();
 	
 	}
 
@@ -328,7 +320,10 @@ public class View {
 		 System.out.println(testValue);
 		 TestCaseFrame testFrame = new TestCaseFrame(this, testValue);
 	}
-	
+	/**
+	 * Updates the display by adding the String representation of a Point
+	 * @param x : Point
+	 */
 	public void updateDisplay(Point x) {
 					
 		JLabel jl = new JLabel(x.toString());
@@ -338,9 +333,16 @@ public class View {
 		
 	}
 	
+	/**
+	 * Displays test case result in the footer panel
+	 * @param s : String of result
+	 */
+	public void addTestCaseResult(String s)
+	{
+		JLabel jl = new JLabel(s);
+		footerPanel.add(jl);		
+		
+	}
+	
 }
-
-
-
-
 
