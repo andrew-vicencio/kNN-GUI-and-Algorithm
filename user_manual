@@ -1,6 +1,6 @@
 ********************************************
-User manual for Coder's Inc Milestone 1
-October 30th 2017
+User manual for Coder's Inc Milestone 2
+November 13th 2017
 Group members:
 - Benjamin Bichel
 - Darren Holden
@@ -8,20 +8,30 @@ Group members:
 - Andrew Vicencio
 ********************************************
 
-Currently, to use this software, the test data must be hardcoded direcely in the TestEnvironment.java file.
+1. Start application and click Create -> New Data Set in the top Menu Bar to start with an 
+   empty set of data
+2. Click Edit and choose which type of feature you require
+    a) Simple Feature: A feature with a name and a primitive type.
+    b) Complex Feature: A feature containing two or more simple features.3.
+3. Enter a feature name, and for
+    a) Simple Features: choose the type and click "Add"
+    b) Complex Features: add two or more subfeatures with the "Add a simple subfeature"
+       button. Click the "Add" button for each simple feature after initializing the 
+       name, and finalize the complex feature by clicking the top "Add this feature"
+       button
+4. Repeat steps 2 - 3 for at least one more feature.
+5. Press "Done" at the bottom to finalize your features.
+   NOTE: You cannot add more features after doing this!
+6. Click Edit -> Add Value in the top menu bar to add a value
+7. Fill in each text field and press done. You will encounter an error message if
+   a entered value is incompatible or blank.
+   NOTE: You cannot edit a value after clicking done!
+8. Continue steps 6 - 7 until all your data is inputted.
+9. Create a test case by clicking Create -> New Test Case in the top menu bar
+10. Choose a value to test from the drop-down list and click OK
+11. Fill out the text fields provided to provide the remaining information
+12. Fill the field at the bottom for the K value and click Done.
+13. Your test case result will be displayed on the bottom of the page.
+14. You can execute any number of test cases, and add any number of values
+    after you execute a test case
 
-The following steps demonstrate how to do this:
-
-1. In the constructor of the TestEnvironment.java file, locate where the points were inputted (h1, h2, etc.). Remove those points if necessary. 
-
-3. Create new point(s) with the Point(value) method. The value parameter is the value which you are testing the algorithm for.
-
-4. For each new point created, add attribute(s) with the add.attribute(key, value) method. NOTE: make sure that the same number and type of attributes exist for each point, and that the keys across a set of points are consistent
-
-5. Add each point to the Pts ArrayList areated at the top of the constructor, with the Pts.add(point) method.
-
-6. Modify the testCostFeature1(int k) method in the TestEnvironment.java class to test for data that matches the same key & value types from the prior step.
-
-7. In the main method of the TestEnvrionment.java class, make sure to change the actual value you are expecting in the final print statement, to compare against what the algorithm provides.
-
-8. The code used for these steps can be duplicated in order to test multiple kinds of data.
