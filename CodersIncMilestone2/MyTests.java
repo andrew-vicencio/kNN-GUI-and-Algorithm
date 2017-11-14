@@ -226,4 +226,637 @@ public class MyTests extends TestCase {
 		result = testKNN.findKNN("a1", targetPoint, 3);
 		assertEquals((int)((SimpleCell<Integer>)result).getValue(), 26);
 	}
+	
+	public void testSumSqFt(){
+		Point p1;
+    	Point p2;
+    	Point p3;
+    	Point p4;
+    	p1 = new Point();
+    	p1.addAttribute(new SimpleCell<String>("Name", "h1"));
+    	p1.addAttribute(new SimpleCell<Integer>("sq. ft", 1200));
+    	CompositeCell cell = new CompositeCell("Coordinates");
+    	cell.addCell(new SimpleCell<Integer>("x", 12));
+    	cell.addCell(new SimpleCell<Integer>("y", 25));
+    	p1.addAttribute(cell);
+    	p1.addAttribute(new SimpleCell<Integer>("Price", 500000));
+    	ds.addPt(p1);
+    	
+    	p2 = new Point();
+    	p2.addAttribute(new SimpleCell<String>("Name", "h2"));
+    	p2.addAttribute(new SimpleCell<Integer>("sq. ft", 1000));
+    	CompositeCell cell1 = new CompositeCell("Coordinates");
+    	cell1.addCell(new SimpleCell<Integer>("x", 10));
+    	cell1.addCell(new SimpleCell<Integer>("y", 50));
+    	p2.addAttribute(cell1);
+    	p2.addAttribute(new SimpleCell<Integer>("Price", 300000));
+    	ds.addPt(p2);
+    	
+    	p3 = new Point();
+    	p3.addAttribute(new SimpleCell<String>("Name", "h3"));
+    	p3.addAttribute(new SimpleCell<Integer>("sq. ft", 800));
+    	CompositeCell cell2 = new CompositeCell("Coordinates");
+    	cell2.addCell(new SimpleCell<Integer>("x", 30));
+    	cell2.addCell(new SimpleCell<Integer>("y", 100));
+    	p3.addAttribute(cell2);
+    	p3.addAttribute(new SimpleCell<Integer>("Price", 400000));
+    	ds.addPt(p3);
+    	
+    	p4 = new Point();
+    	p4.addAttribute(new SimpleCell<String>("Name", "h4"));
+    	p4.addAttribute(new SimpleCell<Integer>("sq. ft", 1500));
+    	CompositeCell cell3 = new CompositeCell("Coordinates");
+    	cell3.addCell(new SimpleCell<Integer>("x", 15));
+    	cell3.addCell(new SimpleCell<Integer>("y", 25));
+    	p4.addAttribute(cell3);
+    	p4.addAttribute(new SimpleCell<Integer>("Price", 850000));
+    	ds.addPt(p4);
+    	
+		float sumSqFt = 1200 + 1000 + 800 + 1500;
+		ds.findStatistics();
+		assertEquals(sumSqFt, ((SimpleCell)ds.getSum().get("sq. ft")).getValue());
+	}
+	
+	public void testSumPrice(){
+		Point p1;
+    	Point p2;
+    	Point p3;
+    	Point p4;
+    	p1 = new Point();
+    	p1.addAttribute(new SimpleCell<String>("Name", "h1"));
+    	p1.addAttribute(new SimpleCell<Integer>("sq. ft", 1200));
+    	CompositeCell cell = new CompositeCell("Coordinates");
+    	cell.addCell(new SimpleCell<Integer>("x", 12));
+    	cell.addCell(new SimpleCell<Integer>("y", 25));
+    	p1.addAttribute(cell);
+    	p1.addAttribute(new SimpleCell<Integer>("Price", 500000));
+    	ds.addPt(p1);
+    	
+    	p2 = new Point();
+    	p2.addAttribute(new SimpleCell<String>("Name", "h2"));
+    	p2.addAttribute(new SimpleCell<Integer>("sq. ft", 1000));
+    	CompositeCell cell1 = new CompositeCell("Coordinates");
+    	cell1.addCell(new SimpleCell<Integer>("x", 10));
+    	cell1.addCell(new SimpleCell<Integer>("y", 50));
+    	p2.addAttribute(cell1);
+    	p2.addAttribute(new SimpleCell<Integer>("Price", 300000));
+    	ds.addPt(p2);
+    	
+    	p3 = new Point();
+    	p3.addAttribute(new SimpleCell<String>("Name", "h3"));
+    	p3.addAttribute(new SimpleCell<Integer>("sq. ft", 800));
+    	CompositeCell cell2 = new CompositeCell("Coordinates");
+    	cell2.addCell(new SimpleCell<Integer>("x", 30));
+    	cell2.addCell(new SimpleCell<Integer>("y", 100));
+    	p3.addAttribute(cell2);
+    	p3.addAttribute(new SimpleCell<Integer>("Price", 400000));
+    	ds.addPt(p3);
+    	
+    	p4 = new Point();
+    	p4.addAttribute(new SimpleCell<String>("Name", "h4"));
+    	p4.addAttribute(new SimpleCell<Integer>("sq. ft", 1500));
+    	CompositeCell cell3 = new CompositeCell("Coordinates");
+    	cell3.addCell(new SimpleCell<Integer>("x", 15));
+    	cell3.addCell(new SimpleCell<Integer>("y", 25));
+    	p4.addAttribute(cell3);
+    	p4.addAttribute(new SimpleCell<Integer>("Price", 850000));
+    	ds.addPt(p4);
+		
+		float sumPrice = 500000 + 300000 + 400000 + 850000;
+		ds.findStatistics();
+		assertEquals(sumPrice, ((SimpleCell)ds.getSum().get("Price")).getValue());
+	}
+	
+	public void testSumX(){
+		Point p1;
+    	Point p2;
+    	Point p3;
+    	Point p4;
+    	p1 = new Point();
+    	p1.addAttribute(new SimpleCell<String>("Name", "h1"));
+    	p1.addAttribute(new SimpleCell<Integer>("sq. ft", 1200));
+    	CompositeCell cell = new CompositeCell("Coordinates");
+    	cell.addCell(new SimpleCell<Integer>("x", 12));
+    	cell.addCell(new SimpleCell<Integer>("y", 25));
+    	p1.addAttribute(cell);
+    	p1.addAttribute(new SimpleCell<Integer>("Price", 500000));
+    	ds.addPt(p1);
+    	
+    	p2 = new Point();
+    	p2.addAttribute(new SimpleCell<String>("Name", "h2"));
+    	p2.addAttribute(new SimpleCell<Integer>("sq. ft", 1000));
+    	CompositeCell cell1 = new CompositeCell("Coordinates");
+    	cell1.addCell(new SimpleCell<Integer>("x", 10));
+    	cell1.addCell(new SimpleCell<Integer>("y", 50));
+    	p2.addAttribute(cell1);
+    	p2.addAttribute(new SimpleCell<Integer>("Price", 300000));
+    	ds.addPt(p2);
+    	
+    	p3 = new Point();
+    	p3.addAttribute(new SimpleCell<String>("Name", "h3"));
+    	p3.addAttribute(new SimpleCell<Integer>("sq. ft", 800));
+    	CompositeCell cell2 = new CompositeCell("Coordinates");
+    	cell2.addCell(new SimpleCell<Integer>("x", 30));
+    	cell2.addCell(new SimpleCell<Integer>("y", 100));
+    	p3.addAttribute(cell2);
+    	p3.addAttribute(new SimpleCell<Integer>("Price", 400000));
+    	ds.addPt(p3);
+    	
+    	p4 = new Point();
+    	p4.addAttribute(new SimpleCell<String>("Name", "h4"));
+    	p4.addAttribute(new SimpleCell<Integer>("sq. ft", 1500));
+    	CompositeCell cell3 = new CompositeCell("Coordinates");
+    	cell3.addCell(new SimpleCell<Integer>("x", 15));
+    	cell3.addCell(new SimpleCell<Integer>("y", 25));
+    	p4.addAttribute(cell3);
+    	p4.addAttribute(new SimpleCell<Integer>("Price", 850000));
+    	ds.addPt(p4);
+		
+		float sumX = 12 + 10 + 30 + 15;
+		ds.findStatistics();
+		SimpleCell sum = (SimpleCell)ds.getSum().get("x");
+		assertEquals(sumX, sum.getValue());
+	}
+	
+	public void testSumY(){
+		Point p1;
+    	Point p2;
+    	Point p3;
+    	Point p4;
+    	p1 = new Point();
+    	p1.addAttribute(new SimpleCell<String>("Name", "h1"));
+    	p1.addAttribute(new SimpleCell<Integer>("sq. ft", 1200));
+    	CompositeCell cell = new CompositeCell("Coordinates");
+    	cell.addCell(new SimpleCell<Integer>("x", 12));
+    	cell.addCell(new SimpleCell<Integer>("y", 25));
+    	p1.addAttribute(cell);
+    	p1.addAttribute(new SimpleCell<Integer>("Price", 500000));
+    	ds.addPt(p1);
+    	
+    	p2 = new Point();
+    	p2.addAttribute(new SimpleCell<String>("Name", "h2"));
+    	p2.addAttribute(new SimpleCell<Integer>("sq. ft", 1000));
+    	CompositeCell cell1 = new CompositeCell("Coordinates");
+    	cell1.addCell(new SimpleCell<Integer>("x", 10));
+    	cell1.addCell(new SimpleCell<Integer>("y", 50));
+    	p2.addAttribute(cell1);
+    	p2.addAttribute(new SimpleCell<Integer>("Price", 300000));
+    	ds.addPt(p2);
+    	
+    	p3 = new Point();
+    	p3.addAttribute(new SimpleCell<String>("Name", "h3"));
+    	p3.addAttribute(new SimpleCell<Integer>("sq. ft", 800));
+    	CompositeCell cell2 = new CompositeCell("Coordinates");
+    	cell2.addCell(new SimpleCell<Integer>("x", 30));
+    	cell2.addCell(new SimpleCell<Integer>("y", 100));
+    	p3.addAttribute(cell2);
+    	p3.addAttribute(new SimpleCell<Integer>("Price", 400000));
+    	ds.addPt(p3);
+    	
+    	p4 = new Point();
+    	p4.addAttribute(new SimpleCell<String>("Name", "h4"));
+    	p4.addAttribute(new SimpleCell<Integer>("sq. ft", 1500));
+    	CompositeCell cell3 = new CompositeCell("Coordinates");
+    	cell3.addCell(new SimpleCell<Integer>("x", 15));
+    	cell3.addCell(new SimpleCell<Integer>("y", 25));
+    	p4.addAttribute(cell3);
+    	p4.addAttribute(new SimpleCell<Integer>("Price", 850000));
+    	ds.addPt(p4);
+		
+		float sumY = 25 + 50 + 100 + 25;
+		ds.findStatistics();
+		SimpleCell sum = (SimpleCell)ds.getSum().get("y");
+		assertEquals(sumY, sum.getValue());
+	}
+	
+	public void testMeanSqFt(){
+		Point p1;
+    	Point p2;
+    	Point p3;
+    	Point p4;
+    	p1 = new Point();
+    	p1.addAttribute(new SimpleCell<String>("Name", "h1"));
+    	p1.addAttribute(new SimpleCell<Integer>("sq. ft", 1200));
+    	CompositeCell cell = new CompositeCell("Coordinates");
+    	cell.addCell(new SimpleCell<Integer>("x", 12));
+    	cell.addCell(new SimpleCell<Integer>("y", 25));
+    	p1.addAttribute(cell);
+    	p1.addAttribute(new SimpleCell<Integer>("Price", 500000));
+    	ds.addPt(p1);
+    	
+    	p2 = new Point();
+    	p2.addAttribute(new SimpleCell<String>("Name", "h2"));
+    	p2.addAttribute(new SimpleCell<Integer>("sq. ft", 1000));
+    	CompositeCell cell1 = new CompositeCell("Coordinates");
+    	cell1.addCell(new SimpleCell<Integer>("x", 10));
+    	cell1.addCell(new SimpleCell<Integer>("y", 50));
+    	p2.addAttribute(cell1);
+    	p2.addAttribute(new SimpleCell<Integer>("Price", 300000));
+    	ds.addPt(p2);
+    	
+    	p3 = new Point();
+    	p3.addAttribute(new SimpleCell<String>("Name", "h3"));
+    	p3.addAttribute(new SimpleCell<Integer>("sq. ft", 800));
+    	CompositeCell cell2 = new CompositeCell("Coordinates");
+    	cell2.addCell(new SimpleCell<Integer>("x", 30));
+    	cell2.addCell(new SimpleCell<Integer>("y", 100));
+    	p3.addAttribute(cell2);
+    	p3.addAttribute(new SimpleCell<Integer>("Price", 400000));
+    	ds.addPt(p3);
+    	
+    	p4 = new Point();
+    	p4.addAttribute(new SimpleCell<String>("Name", "h4"));
+    	p4.addAttribute(new SimpleCell<Integer>("sq. ft", 1500));
+    	CompositeCell cell3 = new CompositeCell("Coordinates");
+    	cell3.addCell(new SimpleCell<Integer>("x", 15));
+    	cell3.addCell(new SimpleCell<Integer>("y", 25));
+    	p4.addAttribute(cell3);
+    	p4.addAttribute(new SimpleCell<Integer>("Price", 850000));
+    	ds.addPt(p4);
+		
+		float sumSqFt = 1200 + 1000 + 800 + 1500;
+		float meanSqFt = sumSqFt / 4;
+		ds.findStatistics();
+		assertEquals(meanSqFt, (float)((SimpleCell)ds.getMean().get("sq. ft")).getValue());
+	}
+	
+	public void testMeanPrice(){
+		Point p1;
+    	Point p2;
+    	Point p3;
+    	Point p4;
+    	p1 = new Point();
+    	p1.addAttribute(new SimpleCell<String>("Name", "h1"));
+    	p1.addAttribute(new SimpleCell<Integer>("sq. ft", 1200));
+    	CompositeCell cell = new CompositeCell("Coordinates");
+    	cell.addCell(new SimpleCell<Integer>("x", 12));
+    	cell.addCell(new SimpleCell<Integer>("y", 25));
+    	p1.addAttribute(cell);
+    	p1.addAttribute(new SimpleCell<Integer>("Price", 500000));
+    	ds.addPt(p1);
+    	
+    	p2 = new Point();
+    	p2.addAttribute(new SimpleCell<String>("Name", "h2"));
+    	p2.addAttribute(new SimpleCell<Integer>("sq. ft", 1000));
+    	CompositeCell cell1 = new CompositeCell("Coordinates");
+    	cell1.addCell(new SimpleCell<Integer>("x", 10));
+    	cell1.addCell(new SimpleCell<Integer>("y", 50));
+    	p2.addAttribute(cell1);
+    	p2.addAttribute(new SimpleCell<Integer>("Price", 300000));
+    	ds.addPt(p2);
+    	
+    	p3 = new Point();
+    	p3.addAttribute(new SimpleCell<String>("Name", "h3"));
+    	p3.addAttribute(new SimpleCell<Integer>("sq. ft", 800));
+    	CompositeCell cell2 = new CompositeCell("Coordinates");
+    	cell2.addCell(new SimpleCell<Integer>("x", 30));
+    	cell2.addCell(new SimpleCell<Integer>("y", 100));
+    	p3.addAttribute(cell2);
+    	p3.addAttribute(new SimpleCell<Integer>("Price", 400000));
+    	ds.addPt(p3);
+    	
+    	p4 = new Point();
+    	p4.addAttribute(new SimpleCell<String>("Name", "h4"));
+    	p4.addAttribute(new SimpleCell<Integer>("sq. ft", 1500));
+    	CompositeCell cell3 = new CompositeCell("Coordinates");
+    	cell3.addCell(new SimpleCell<Integer>("x", 15));
+    	cell3.addCell(new SimpleCell<Integer>("y", 25));
+    	p4.addAttribute(cell3);
+    	p4.addAttribute(new SimpleCell<Integer>("Price", 850000));
+    	ds.addPt(p4);
+		
+		float sumPrice = 500000 + 300000 + 400000 + 850000;
+		float meanPrice = sumPrice / 4;
+		ds.findStatistics();
+		assertEquals(meanPrice, (float)((SimpleCell)ds.getMean().get("sq. ft")).getValue());
+	}
+	
+	public void testMeanX(){
+		Point p1;
+    	Point p2;
+    	Point p3;
+    	Point p4;
+    	p1 = new Point();
+    	p1.addAttribute(new SimpleCell<String>("Name", "h1"));
+    	p1.addAttribute(new SimpleCell<Integer>("sq. ft", 1200));
+    	CompositeCell cell = new CompositeCell("Coordinates");
+    	cell.addCell(new SimpleCell<Integer>("x", 12));
+    	cell.addCell(new SimpleCell<Integer>("y", 25));
+    	p1.addAttribute(cell);
+    	p1.addAttribute(new SimpleCell<Integer>("Price", 500000));
+    	ds.addPt(p1);
+    	
+    	p2 = new Point();
+    	p2.addAttribute(new SimpleCell<String>("Name", "h2"));
+    	p2.addAttribute(new SimpleCell<Integer>("sq. ft", 1000));
+    	CompositeCell cell1 = new CompositeCell("Coordinates");
+    	cell1.addCell(new SimpleCell<Integer>("x", 10));
+    	cell1.addCell(new SimpleCell<Integer>("y", 50));
+    	p2.addAttribute(cell1);
+    	p2.addAttribute(new SimpleCell<Integer>("Price", 300000));
+    	ds.addPt(p2);
+    	
+    	p3 = new Point();
+    	p3.addAttribute(new SimpleCell<String>("Name", "h3"));
+    	p3.addAttribute(new SimpleCell<Integer>("sq. ft", 800));
+    	CompositeCell cell2 = new CompositeCell("Coordinates");
+    	cell2.addCell(new SimpleCell<Integer>("x", 30));
+    	cell2.addCell(new SimpleCell<Integer>("y", 100));
+    	p3.addAttribute(cell2);
+    	p3.addAttribute(new SimpleCell<Integer>("Price", 400000));
+    	ds.addPt(p3);
+    	
+    	p4 = new Point();
+    	p4.addAttribute(new SimpleCell<String>("Name", "h4"));
+    	p4.addAttribute(new SimpleCell<Integer>("sq. ft", 1500));
+    	CompositeCell cell3 = new CompositeCell("Coordinates");
+    	cell3.addCell(new SimpleCell<Integer>("x", 15));
+    	cell3.addCell(new SimpleCell<Integer>("y", 25));
+    	p4.addAttribute(cell3);
+    	p4.addAttribute(new SimpleCell<Integer>("Price", 850000));
+    	ds.addPt(p4);
+		
+		float sumX = 12 + 10 + 30 + 15;
+		float meanX = sumX / 4;
+		ds.findStatistics();
+		SimpleCell mean = (SimpleCell)ds.getMean().get("x");
+		assertEquals(meanY, mean.getValue());
+	}
+	
+	public void testMeanY(){
+		Point p1;
+    	Point p2;
+    	Point p3;
+    	Point p4;
+    	p1 = new Point();
+    	p1.addAttribute(new SimpleCell<String>("Name", "h1"));
+    	p1.addAttribute(new SimpleCell<Integer>("sq. ft", 1200));
+    	CompositeCell cell = new CompositeCell("Coordinates");
+    	cell.addCell(new SimpleCell<Integer>("x", 12));
+    	cell.addCell(new SimpleCell<Integer>("y", 25));
+    	p1.addAttribute(cell);
+    	p1.addAttribute(new SimpleCell<Integer>("Price", 500000));
+    	ds.addPt(p1);
+    	
+    	p2 = new Point();
+    	p2.addAttribute(new SimpleCell<String>("Name", "h2"));
+    	p2.addAttribute(new SimpleCell<Integer>("sq. ft", 1000));
+    	CompositeCell cell1 = new CompositeCell("Coordinates");
+    	cell1.addCell(new SimpleCell<Integer>("x", 10));
+    	cell1.addCell(new SimpleCell<Integer>("y", 50));
+    	p2.addAttribute(cell1);
+    	p2.addAttribute(new SimpleCell<Integer>("Price", 300000));
+    	ds.addPt(p2);
+    	
+    	p3 = new Point();
+    	p3.addAttribute(new SimpleCell<String>("Name", "h3"));
+    	p3.addAttribute(new SimpleCell<Integer>("sq. ft", 800));
+    	CompositeCell cell2 = new CompositeCell("Coordinates");
+    	cell2.addCell(new SimpleCell<Integer>("x", 30));
+    	cell2.addCell(new SimpleCell<Integer>("y", 100));
+    	p3.addAttribute(cell2);
+    	p3.addAttribute(new SimpleCell<Integer>("Price", 400000));
+    	ds.addPt(p3);
+    	
+    	p4 = new Point();
+    	p4.addAttribute(new SimpleCell<String>("Name", "h4"));
+    	p4.addAttribute(new SimpleCell<Integer>("sq. ft", 1500));
+    	CompositeCell cell3 = new CompositeCell("Coordinates");
+    	cell3.addCell(new SimpleCell<Integer>("x", 15));
+    	cell3.addCell(new SimpleCell<Integer>("y", 25));
+    	p4.addAttribute(cell3);
+    	p4.addAttribute(new SimpleCell<Integer>("Price", 850000));
+    	ds.addPt(p4);
+		
+		float sumY = 25 + 50 + 100 + 25;
+		float meanY = sumY / 4;
+		ds.findStatistics();
+		SimpleCell mean = (SimpleCell)ds.getMean().get("y");
+		assertEquals(meanY, mean.getValue());
+	}
+	
+	public void testStdDevSqFt(){
+		Point p1;
+    	Point p2;
+    	Point p3;
+    	Point p4;
+    	p1 = new Point();
+    	p1.addAttribute(new SimpleCell<String>("Name", "h1"));
+    	p1.addAttribute(new SimpleCell<Integer>("sq. ft", 1200));
+    	CompositeCell cell = new CompositeCell("Coordinates");
+    	cell.addCell(new SimpleCell<Integer>("x", 12));
+    	cell.addCell(new SimpleCell<Integer>("y", 25));
+    	p1.addAttribute(cell);
+    	p1.addAttribute(new SimpleCell<Integer>("Price", 500000));
+    	ds.addPt(p1);
+    	
+    	p2 = new Point();
+    	p2.addAttribute(new SimpleCell<String>("Name", "h2"));
+    	p2.addAttribute(new SimpleCell<Integer>("sq. ft", 1000));
+    	CompositeCell cell1 = new CompositeCell("Coordinates");
+    	cell1.addCell(new SimpleCell<Integer>("x", 10));
+    	cell1.addCell(new SimpleCell<Integer>("y", 50));
+    	p2.addAttribute(cell1);
+    	p2.addAttribute(new SimpleCell<Integer>("Price", 300000));
+    	ds.addPt(p2);
+    	
+    	p3 = new Point();
+    	p3.addAttribute(new SimpleCell<String>("Name", "h3"));
+    	p3.addAttribute(new SimpleCell<Integer>("sq. ft", 800));
+    	CompositeCell cell2 = new CompositeCell("Coordinates");
+    	cell2.addCell(new SimpleCell<Integer>("x", 30));
+    	cell2.addCell(new SimpleCell<Integer>("y", 100));
+    	p3.addAttribute(cell2);
+    	p3.addAttribute(new SimpleCell<Integer>("Price", 400000));
+    	ds.addPt(p3);
+    	
+    	p4 = new Point();
+    	p4.addAttribute(new SimpleCell<String>("Name", "h4"));
+    	p4.addAttribute(new SimpleCell<Integer>("sq. ft", 1500));
+    	CompositeCell cell3 = new CompositeCell("Coordinates");
+    	cell3.addCell(new SimpleCell<Integer>("x", 15));
+    	cell3.addCell(new SimpleCell<Integer>("y", 25));
+    	p4.addAttribute(cell3);
+    	p4.addAttribute(new SimpleCell<Integer>("Price", 850000));
+    	ds.addPt(p4);
+		
+		float sumSqFt = 1200 + 1000 + 800 + 1500;
+		float meanSqFt = sumSqFt / 4;
+    	float stdDevSqFt = (float)Math.pow((1200 - meanSqFt), 2)
+    			+ (float)Math.pow((1000 - meanSqFt), 2)
+    			+ (float)Math.pow((800 - meanSqFt), 2)
+    			+ (float)Math.pow((1500 - meanSqFt), 2);
+		ds.findStatistics();
+		HashMap<String, Cell> stdDev = ds.getStdDev();
+		assertEquals(stdDevSqFt, ((SimpleCell)stdDev.get("sq. ft")).getValue());
+	}
+	
+	public void testStdDevPrice(){
+		Point p1;
+    	Point p2;
+    	Point p3;
+    	Point p4;
+    	p1 = new Point();
+    	p1.addAttribute(new SimpleCell<String>("Name", "h1"));
+    	p1.addAttribute(new SimpleCell<Integer>("sq. ft", 1200));
+    	CompositeCell cell = new CompositeCell("Coordinates");
+    	cell.addCell(new SimpleCell<Integer>("x", 12));
+    	cell.addCell(new SimpleCell<Integer>("y", 25));
+    	p1.addAttribute(cell);
+    	p1.addAttribute(new SimpleCell<Integer>("Price", 500000));
+    	ds.addPt(p1);
+    	
+    	p2 = new Point();
+    	p2.addAttribute(new SimpleCell<String>("Name", "h2"));
+    	p2.addAttribute(new SimpleCell<Integer>("sq. ft", 1000));
+    	CompositeCell cell1 = new CompositeCell("Coordinates");
+    	cell1.addCell(new SimpleCell<Integer>("x", 10));
+    	cell1.addCell(new SimpleCell<Integer>("y", 50));
+    	p2.addAttribute(cell1);
+    	p2.addAttribute(new SimpleCell<Integer>("Price", 300000));
+    	ds.addPt(p2);
+    	
+    	p3 = new Point();
+    	p3.addAttribute(new SimpleCell<String>("Name", "h3"));
+    	p3.addAttribute(new SimpleCell<Integer>("sq. ft", 800));
+    	CompositeCell cell2 = new CompositeCell("Coordinates");
+    	cell2.addCell(new SimpleCell<Integer>("x", 30));
+    	cell2.addCell(new SimpleCell<Integer>("y", 100));
+    	p3.addAttribute(cell2);
+    	p3.addAttribute(new SimpleCell<Integer>("Price", 400000));
+    	ds.addPt(p3);
+    	
+    	p4 = new Point();
+    	p4.addAttribute(new SimpleCell<String>("Name", "h4"));
+    	p4.addAttribute(new SimpleCell<Integer>("sq. ft", 1500));
+    	CompositeCell cell3 = new CompositeCell("Coordinates");
+    	cell3.addCell(new SimpleCell<Integer>("x", 15));
+    	cell3.addCell(new SimpleCell<Integer>("y", 25));
+    	p4.addAttribute(cell3);
+    	p4.addAttribute(new SimpleCell<Integer>("Price", 850000));
+    	ds.addPt(p4);
+		
+		float sumPrice = 500000 + 300000 + 400000 + 850000;
+		float meanPrice = sumPrice / 4;
+		ds.findStatistics();
+    	float stdDevPrice = (float)Math.pow((500000 - meanPrice), 2)
+    			+ (float)Math.pow((300000 - meanPrice), 2)
+    			+ (float)Math.pow((400000 - meanPrice), 2)
+    			+ (float)Math.pow((850000 - meanPrice), 2);
+		HashMap<String, Cell> stdDev = ds.getStdDev();
+		assertEquals(stdDevPrice, ((SimpleCell)stdDev.get("Price")).getValue());
+	}
+	
+	public void testStdDevX(){
+		Point p1;
+    	Point p2;
+    	Point p3;
+    	Point p4;
+    	p1 = new Point();
+    	p1.addAttribute(new SimpleCell<String>("Name", "h1"));
+    	p1.addAttribute(new SimpleCell<Integer>("sq. ft", 1200));
+    	CompositeCell cell = new CompositeCell("Coordinates");
+    	cell.addCell(new SimpleCell<Integer>("x", 12));
+    	cell.addCell(new SimpleCell<Integer>("y", 25));
+    	p1.addAttribute(cell);
+    	p1.addAttribute(new SimpleCell<Integer>("Price", 500000));
+    	ds.addPt(p1);
+    	
+    	p2 = new Point();
+    	p2.addAttribute(new SimpleCell<String>("Name", "h2"));
+    	p2.addAttribute(new SimpleCell<Integer>("sq. ft", 1000));
+    	CompositeCell cell1 = new CompositeCell("Coordinates");
+    	cell1.addCell(new SimpleCell<Integer>("x", 10));
+    	cell1.addCell(new SimpleCell<Integer>("y", 50));
+    	p2.addAttribute(cell1);
+    	p2.addAttribute(new SimpleCell<Integer>("Price", 300000));
+    	ds.addPt(p2);
+    	
+    	p3 = new Point();
+    	p3.addAttribute(new SimpleCell<String>("Name", "h3"));
+    	p3.addAttribute(new SimpleCell<Integer>("sq. ft", 800));
+    	CompositeCell cell2 = new CompositeCell("Coordinates");
+    	cell2.addCell(new SimpleCell<Integer>("x", 30));
+    	cell2.addCell(new SimpleCell<Integer>("y", 100));
+    	p3.addAttribute(cell2);
+    	p3.addAttribute(new SimpleCell<Integer>("Price", 400000));
+    	ds.addPt(p3);
+    	
+    	p4 = new Point();
+    	p4.addAttribute(new SimpleCell<String>("Name", "h4"));
+    	p4.addAttribute(new SimpleCell<Integer>("sq. ft", 1500));
+    	CompositeCell cell3 = new CompositeCell("Coordinates");
+    	cell3.addCell(new SimpleCell<Integer>("x", 15));
+    	cell3.addCell(new SimpleCell<Integer>("y", 25));
+    	p4.addAttribute(cell3);
+    	p4.addAttribute(new SimpleCell<Integer>("Price", 850000));
+    	ds.addPt(p4);
+		
+		float sumX = 12 + 10 + 30 + 15;
+		float meanX = sumX / 4;
+    	float stdDevX = (float)Math.pow((12 - meanX), 2)
+    			+ (float)Math.pow((10 - meanX), 2)
+    			+ (float)Math.pow((30 - meanX), 2)
+    			+ (float)Math.pow((15 - meanX), 2);
+		ds.findStatistics();
+		SimpleCell stdDev = (SimpleCell)ds.getStdDev().get("x");
+		assertEquals(stdDevX, stdDev.getValue());
+	}
+	
+	
+	public void testStdDevY(){
+		Point p1;
+    	Point p2;
+    	Point p3;
+    	Point p4;
+    	p1 = new Point();
+    	p1.addAttribute(new SimpleCell<String>("Name", "h1"));
+    	p1.addAttribute(new SimpleCell<Integer>("sq. ft", 1200));
+    	CompositeCell cell = new CompositeCell("Coordinates");
+    	cell.addCell(new SimpleCell<Integer>("x", 12));
+    	cell.addCell(new SimpleCell<Integer>("y", 25));
+    	p1.addAttribute(cell);
+    	p1.addAttribute(new SimpleCell<Integer>("Price", 500000));
+    	ds.addPt(p1);
+    	
+    	p2 = new Point();
+    	p2.addAttribute(new SimpleCell<String>("Name", "h2"));
+    	p2.addAttribute(new SimpleCell<Integer>("sq. ft", 1000));
+    	CompositeCell cell1 = new CompositeCell("Coordinates");
+    	cell1.addCell(new SimpleCell<Integer>("x", 10));
+    	cell1.addCell(new SimpleCell<Integer>("y", 50));
+    	p2.addAttribute(cell1);
+    	p2.addAttribute(new SimpleCell<Integer>("Price", 300000));
+    	ds.addPt(p2);
+    	
+    	p3 = new Point();
+    	p3.addAttribute(new SimpleCell<String>("Name", "h3"));
+    	p3.addAttribute(new SimpleCell<Integer>("sq. ft", 800));
+    	CompositeCell cell2 = new CompositeCell("Coordinates");
+    	cell2.addCell(new SimpleCell<Integer>("x", 30));
+    	cell2.addCell(new SimpleCell<Integer>("y", 100));
+    	p3.addAttribute(cell2);
+    	p3.addAttribute(new SimpleCell<Integer>("Price", 400000));
+    	ds.addPt(p3);
+    	
+    	p4 = new Point();
+    	p4.addAttribute(new SimpleCell<String>("Name", "h4"));
+    	p4.addAttribute(new SimpleCell<Integer>("sq. ft", 1500));
+    	CompositeCell cell3 = new CompositeCell("Coordinates");
+    	cell3.addCell(new SimpleCell<Integer>("x", 15));
+    	cell3.addCell(new SimpleCell<Integer>("y", 25));
+    	p4.addAttribute(cell3);
+    	p4.addAttribute(new SimpleCell<Integer>("Price", 850000));
+    	ds.addPt(p4);
+		
+		float sumY = 25 + 50 + 100 + 25;
+		float meanY = sumY / 4;
+    	float stdDevY = (float)Math.pow((25 - meanY), 2)
+    			+ (float)Math.pow((50 - meanY), 2)
+    			+ (float)Math.pow((100 - meanY), 2)
+    			+ (float)Math.pow((25 - meanY), 2);
+		ds.findStatistics();
+		SimpleCell stdDev = (SimpleCell)ds.getStdDev().get("y");
+		assertEquals(stdDevY, stdDev.getValue());
+	}
 }
