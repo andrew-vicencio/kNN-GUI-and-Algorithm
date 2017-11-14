@@ -15,13 +15,13 @@ import javax.swing.JTextField;
  */
 public class PromptValueFrame extends JFrame {
 	
-	JPanel mainPanel, footerPanel, promptPanel;
-	JLabel name, type;
-	JTextField jt;
-	JButton done;
-	HashMap<String, JTextField> fieldMap;
-	View view;
-	PromptValueFrameController controller;
+	private JPanel mainPanel, footerPanel, promptPanel;
+	private JLabel name, type;
+	private JTextField jt;
+	private JButton done;
+	private HashMap<String, JTextField> fieldMap;
+	private View view;
+	private PromptValueFrameController controller;
 	
 	/**
 	 * Constructor, which initializes the frame and its layout

@@ -86,7 +86,6 @@ public class View {
 		simpleFeature.setEnabled(false);
 		
 		//Action Listeners
-		createListeners();
 		done.addActionListener(new DoneButtonController(this));
 		create.addActionListener(menuController);
 		simpleFeature.addActionListener(menuController);
@@ -170,15 +169,6 @@ public class View {
 	{
 		features.put(key, value);
 	}
-
-
-	/**
-	 * Create actionListeners for elements that do not require a full controller class
-	 */
-	public void createListeners(){
-	    //newDataSet, newTestCase, addValue, helpDoc;
-
-    }
 
 	/**
 	 * Sends an error message to the user
