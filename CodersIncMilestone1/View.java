@@ -204,8 +204,15 @@ public class View {
 	{
 		contentPanel.removeAll();
 		footerPanel.removeAll();
-		contentPanel.revalidate();
-		contentPanel.repaint();
+		headerPanel.setLayout(new GridLayout(1, features.size()));
+	
+		for (String key : dataModel.getCellTypes().keySet()){
+			JLabel jl = new JLabel("    " + key);
+			jl.setBorder(BorderFactory.createCompoundBorder(new EtchedBorder(), new EmptyBorder(6, 6, 6, 6)));
+			headerPanel.add(jl);
+	    }
+		headerPanel.revalidate();
+		headerPanel.repaint();
 	
 	}
 
