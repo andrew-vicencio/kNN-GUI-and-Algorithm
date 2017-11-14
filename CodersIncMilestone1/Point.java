@@ -77,7 +77,31 @@ public class Point
     
     public String toString()
     {
-		return null;
-    	//TO DO. Preferred format is a series of "keyName: value"
+        System.out.println("Size of Point" + rawValues.values().size());
+        String finalString = "";
+        for (Cell x: rawValues.values()) {
+            System.out.println(x.getKey());
+            if(x instanceof CompositeCell){
+                if(finalString == ""){
+                    finalString =    ((CompositeCell)(x)).toString();
+                }else{
+                    finalString = finalString +", " +  ((CompositeCell)(x)).toString();
+                }
+
+            }else{
+                if(finalString == ""){
+                    finalString =  ((SimpleCell)(x)).toString();
+                }else{
+                    finalString = finalString + ", " + ((SimpleCell)(x)).toString();
+                }
+
+            }
+
+        }
+
+		return finalString;
+    	//TODO. Preferred format is a series of "keyName: value"
+
+
     }
 }

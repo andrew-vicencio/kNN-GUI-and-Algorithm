@@ -17,4 +17,8 @@ public class SimpleCell<E> extends Cell {
 		this.value = value;		
 	}
 
+	public String toString(){
+	    return getKey() + ": " + value;
+    }
+
 }

@@ -22,4 +22,25 @@ public class CompositeCell extends Cell {
 	public void addCell(Cell f) {
 		features.add(f);
 	}
+
+
+	public String toString(){
+        String finalString = "";
+        System.out.println(features.size());
+        for (Cell x: features) {
+            System.out.println(finalString);
+            SimpleCell i = (SimpleCell)x;
+            if(finalString == ""){
+                finalString = i.toString();
+            }else{
+                finalString = finalString + ", " + i.toString();
+            }
+
+
+        }
+
+        return finalString;
+    }
+
+
 }

@@ -48,6 +48,7 @@ public class PromptValueFrameController extends MainController {
                 }
             }
             newPoint.setHashMaprawValues(newConfiguredData);
+            System.out.println(newPoint.toString());
             dataModel.addPoint(newPoint);
 
 
@@ -59,7 +60,7 @@ public class PromptValueFrameController extends MainController {
 
 	private Cell createStanderedFeature(String key, String value){
         String type = dataModel.getCellTypes().get(key);
-        System.out.println(key + "," + value);
+
         if(type.equals("int")){
             try{
                 int valueInt = Integer.parseInt(value.replaceAll(" ", ""));

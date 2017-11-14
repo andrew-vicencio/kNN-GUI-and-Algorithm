@@ -156,12 +156,12 @@ public class DimensionalSpace {
     }
 
     public void setSingleCellType(String key, String type){
-        System.out.println(key );
+
         if(!key.contains(".")){
-            System.out.println("inside" );
+
             numberOfFields++;
         }
-        System.out.println(numberOfFields );
+
         cellTypes.put(key, type);
     }
 
@@ -183,6 +183,7 @@ public class DimensionalSpace {
         }
         return false;
     }
+
 
     public int cellTypeComp(String key){
         int x = 0;
