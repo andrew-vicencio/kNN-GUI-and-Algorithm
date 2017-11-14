@@ -7,46 +7,69 @@
 * Andrew Vicencio
 
 ## Deliverables
+* Cell.java
+* CompositeCell.java
 * DimensionalSpace.java
+* DistanceAlg.java
+* DoneButtonController.java
+* EuclideanKNN.java
+* FeaturePanelComplex.java
+* FeaturePanelComplexController.java
+* FeaturePanelSimple.java
+* FeaturePanelSimpleController.java
+* KNN.java
+* MainController.java
+* MenuController.java
+* NumericalDistance.java
 * Point.java
+* PromptValueFrame.java
+* PromptValueFrameController.java
+* SimpleCell.java
+* StringDistance.java
+* TestCaseFrame.java
+* TestCaseFrameController.java
 * TestEnvironment.java
+* View.java
 * UML file
 * javadoc
 * User Manual
 
 
 ## Changes Since Last Milestone
-* Created Point class to hold data from a dataset entry
-	* Holds raw and standardized point
+* Created Cell objects
+	* Holds both the raw and standardised user inputted data
+	* There are two different types of Cells:
+		* Simple Cells
+			- Holds a simple data type
+		* Composite Cells
+			- Holds a reference to more data and cells
+			- Can hold more complex user-defined data types
 	* Provides getters and setters for all included info
-	* Provides a standardization method to standardize the point
-	* Holds the "goal" value for the point
-* Created DimensionalSpace class to hold the points and perform the kNN algorithm
-	* Holds a set of points that describe the dataset
-	* Calculates the mean value of each coordinate that make up the points
-	* Performs the kNN algorithm using a given point and a number of nearest neighbours
-		* Finds the nearest k neighbours and sets the goal value to the average of the neighbours' goal values
-* Created TestEnvironment class to create test scenarios by which the kNN algorithm is evaluated
+* Refactored DimensionalSpace and kNN functions to use the Cell objects
+* Added other algorithms to help calculate other data types, such as Strings, and Floats
+* Created a GUI
+* Create a Unit Test - MyTests
+	* Tested the following:
+		- EuclideanKNN with different data types
+		- finding the sum, mean, and standard deviation of each attribute
+* Allowed test cases to be used to predict any features
+* Increased cohesion with new classes for distance algorithms
 
 ## Known Issues
-* The standard deviation should be calculated in DimensionalSpace, not Point
-* The kNN algorithm should have its own class
-	* This will lend itself to the Strategy Design Pattern
-	* Will also allow for more flexibility
-* Program is not very user-friendly at the moment
-	* Due to hard-coding
-* Coordinate values for points are not very flexible at the moment
-	* Due to only accepting Integers for the values in the key-value pairs
-		* Perhaps a type parameter could be used for more flexibility
+* Testing cases are currently not working through GUI
+* Code duplication between **FeaturePanelComplex and FeaturePanelSimple**, **FeaturePanelComplexController and FeaturePanelSimpleController**, and **PromptValueFrame and TestCaseFrame**
+* Some aspects of the UI do not have ease of use, such as repeatedly clicking "Add Value", "Add Simple Feature", and "Add Complex Feature" in the menu bar
+* No frames scroll to accomodate for extra panels
+* Points/values are not editable or removable once added
+* Points/values are not very readable when displayed
+
 
 ## Future Steps
 * Redesign some aspects to improve cohesion and create looser coupling
 * Make the program more user-friendly
-* Create GUI
-* Implement unit test
-* Retrieving user input as data
-* Increase flexibility (to be clarified at a later date)
+* Increase flexibility
 * Implement save/load functionality
+
 
 
 
