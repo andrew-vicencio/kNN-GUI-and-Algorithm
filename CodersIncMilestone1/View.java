@@ -328,6 +328,14 @@ public class View {
 		
 	}
 	
+	public void addTestCaseResult(String s)
+	{
+		JLabel label = new JLabel(s);
+		footerPanel.add(label);
+		footerPanel.revalidate();
+		footerPanel.repaint();
+	}
+	
 }
 
 
