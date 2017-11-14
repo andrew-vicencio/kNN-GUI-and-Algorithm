@@ -1,16 +1,16 @@
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Set;
 import java.util.AbstractMap;
 import java.util.ArrayList;
+import java.util.concurrent.ConcurrentHashMap;
 import java.lang.Math;
 
 /**
  * Class to hold a point from the dataset.
  * 
  * @author Gabrielle and Andrew
- * @version Milestone 1
+ * @version Milestone 2
  *
  */
 
@@ -25,8 +25,8 @@ public class Point
     * @param ptVal		The value of the point
     */
     public Point() {
-        rawValues = new HashMap<String,Cell>();
-        stdValues = new HashMap<String,Cell>();
+        rawValues = new HashMap<String, Cell>();
+        stdValues = new HashMap<String, Cell>();
     }
 	
     /**
@@ -39,15 +39,16 @@ public class Point
         rawValues.put(f.getKey(), f);
     }
 
-    public void setHashMaprawValues( HashMap<String,Cell> f){
+      public void setHashMaprawValues( HashMap<String,Cell> f){
         rawValues = f;
     }
+
 
     /**
     * Returns the set of keys that are currently being used by the point.
     * 
     * @return		A Set of keys in string format.
-    **/
+    */
     public Set<String> getAttributes() {
     	return rawValues.keySet();
     }
@@ -59,23 +60,65 @@ public class Point
     * @return			The value of the key
     */
     public Cell getCell(String att) {
-    	return rawValues.get(att);
+    	Cell targ = rawValues.get(att);
+    	
+    	if (targ == null) {
+    		for (String k: rawValues.keySet()) {
+    			targ = rawValues.get(k);
+    			if (targ instanceof CompositeCell) {
+    				targ = ((CompositeCell)targ).getSubCell(att);
+    				if (targ != null) {
+    					break;
+    				}
+    			}
+    		}
+    	}
+    	
+    	return targ;
+    }
+    
+    /**
+     * Calculates the normalized values for this point.
+     * 
+     * @param mean
+     * @param stddev
+     */
+    public void normalize(ConcurrentHashMap<String, Float> mean, ConcurrentHashMap<String, Float> stddev) {
+    	float val;
+    	for (String k: mean.keySet()) {
+    		if (((SimpleCell)getCell(k)).getValue() instanceof Integer) {
+    			val = (float)(int)((SimpleCell)getCell(k)).getValue();
+    		} else {
+    			val = (float)((SimpleCell)getCell(k)).getValue();
+    		}
+    		stdValues.put(k, new SimpleCell<Float>(k, (val - mean.get(k) / stddev.get(k))));
+    	}
     }
 
     /**
-    * Standardizes the raw values of the point, given the mean values and the number
-    * of points in the sample. Uses the formula (x - s)/u, where x is the raw value,
-    * s is the value's standard deviation across the sample, and u is the value's average
-    * Across the sample.
-    * 
-    * @param mean		Map of the mean values.
-    * @param n		Number of points in the sample.
-    **/
-    public void standardise(AbstractMap<String, Integer> mean, int n){
+    * @return			The calculated standard deviation values.
+    */
+     public HashMap<String, Cell> getStdValues() {
+        return stdValues;
     }
-    
-    
-    public String toString()
+
+     /**
+      * @return			The point's raw values.
+      */
+       public HashMap<String, Cell> getRawValues() {
+          return rawValues;
+      }
+     
+    /**
+    * Sets the standard deviation values.
+    * 
+    * @param stdValues		The HashMap containing the new standard deviations.
+    */
+    public void setStdValues(HashMap<String, Cell> stdValues) {
+        this.stdValues = stdValues;
+    }
+
+	 public String toString()
     {
         System.out.println("Size of Point" + rawValues.values().size());
         String finalString = "";
