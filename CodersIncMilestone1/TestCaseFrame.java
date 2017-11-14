@@ -18,8 +18,8 @@ public class TestCaseFrame extends JFrame {
 	private View view;
 	private String testValue;
 	private JPanel mainPanel, footerPanel, promptPanel;
-	private JLabel name, type;
-	private JTextField jt;
+	private JLabel name, type, kLabel;
+	private JTextField jt, kTextField;
 	private JButton done;
 	private TestCaseFrameController controller;
 	private HashMap<String, JTextField> fieldMap;
@@ -37,6 +37,8 @@ public class TestCaseFrame extends JFrame {
 		footerPanel = new JPanel();
 		done = new JButton("Done");
 		fieldMap = new HashMap<String, JTextField>();
+		kLabel = new JLabel("K value to test");
+		kTextField = new JTextField(15);
 		this.view = view;
 		this.testValue = testValue;
 		controller = new TestCaseFrameController(view, this);
@@ -67,6 +69,8 @@ public class TestCaseFrame extends JFrame {
 		}
 		
 		done.addActionListener(controller);
+		footerPanel.add(kLabel);
+		footerPanel.add(kTextField);
 		footerPanel.add(done);
 		add(mainPanel, BorderLayout.CENTER);
 		add(footerPanel, BorderLayout.SOUTH);
@@ -82,6 +86,15 @@ public class TestCaseFrame extends JFrame {
 	public HashMap<String, JTextField> getFieldMap()
 	{
 		return fieldMap;
+	}
+	
+	/**
+	 * Provides the JTextField where the user inputed the K value they require
+	 * @return
+	 */
+	public JTextField getKTextField()
+	{
+		return kTextField;
 	}
 			
 }
