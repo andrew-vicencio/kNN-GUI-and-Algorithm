@@ -16,14 +16,3 @@ CodersIncMilestone1/.metadata/.lock
 *.history
 *.index
 CodersIncMilestone1/.metadata/.plugins/org.eclipse.ui.intro/introstate
-/DataControler.class
-/DataSet.class
-/DistanceAlg.class
-/NumericalDistance.class
-/StringDistance.class
-/PromptValueFrameController.class
-/FeaturePanelComplexController.class
-/PromptValueFrame.class
-/TestCaseFrame.class
-/TestCaseFrameController.class
-/CodersIncMilestone2/
