@@ -1,25 +1,20 @@
-package CodersInc;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
-/**
-<<<<<<< HEAD
+/*
  * kNN is an abstarct class providing methods and variables for various kNN algorithms.
  * 
  * @author Darren
  * @version Milestone 2
-=======
  * 
  * @author Darren
->>>>>>> Refactoring
  *
  */
 public abstract class kNN {
 	
 	protected DimensionalSpace ds;
 	
-<<<<<<< HEAD
 	/**
 	 * Constructs a new kNN object
 	 * 
@@ -47,14 +42,6 @@ public abstract class kNN {
 	 * @param targetKey				The key of the value to be found
 	 * @return						A cell containing the calculated value(s)
 	 */
-=======
-	public kNN (DimensionalSpace ds) {
-		this.ds = ds;
-	}
-
-	public abstract Cell findKNN(String targetKey, Point targetPoint, int neighbours);
-	
->>>>>>> Refactoring
 	public Cell findValue(ArrayList<Tuple<Float, Cell>> closestKNeighbours, String targetKey) {
 		if (closestKNeighbours.get(0).getValue2() instanceof SimpleCell) {
 			if (((SimpleCell)closestKNeighbours.get(0).getValue2()).getValue() instanceof String) {
@@ -69,7 +56,6 @@ public abstract class kNN {
 		}
 		return null;
 	}
-<<<<<<< HEAD
 	
 	/**
 	 * calculateCompositeCell calculates the kNN value if the target key corresponds to a CompositeCell
@@ -79,25 +65,16 @@ public abstract class kNN {
 	 * @param targetKey				The key of the value to be found
 	 * @return						A CompositeCell containing the calculated value(s)
 	 */
-=======
 
->>>>>>> Refactoring
 	public CompositeCell calculateCompositeCell(ArrayList<Tuple<Float, Cell>> closestKNeighbours, String targetKey) {
 		
 		ArrayList<Cell> cellsToCalc = ((CompositeCell)closestKNeighbours.get(0).getValue2()).getSubCells();
 		CompositeCell target = new CompositeCell(targetKey);
 		
 		for (Cell c: cellsToCalc) {
-<<<<<<< HEAD
 			ArrayList<Tuple<Float, Cell>> subList = new ArrayList<Tuple<Float, Cell>>(closestKNeighbours.size());
 			for(int i = 0; i < closestKNeighbours.size(); i++) {
-				subList.add(i, new Tuple<Float, Cell>(closestKNeighbours.get(i).getValue1(), ((CompositeCell)closestKNeighbours.get(i).getValue2()).getSubCell(c.getKey())));
-=======
-			String currentKey = c.getKey();
-			ArrayList<Tuple<Float, Cell>> subList = new ArrayList<Tuple<Float, Cell>>(closestKNeighbours.size());
-			for(int i = 0; i < closestKNeighbours.size(); i++) {
-				subList.set(i, new Tuple<Float, Cell>(closestKNeighbours.get(i).getValue1(), ((CompositeCell)closestKNeighbours.get(i).getValue2()).getSubCell(c.getKey())));
->>>>>>> Refactoring
+				subList.add(i, new Tuple<Float, Cell>(closestKNeighbours.get(i).getValue1(), ((CompositeCell)closestKNeighbours.get(i).getValue2()).getSubCell(c.getKey()))); 
 			}
 			
 			if (c instanceof SimpleCell) {
@@ -116,7 +93,6 @@ public abstract class kNN {
 		return target;
 	}
 
-<<<<<<< HEAD
 	/**
 	 * calculateSimpleCell calculates the kNN value if the target key corresponds to a SimpleCell. This is called by
 	 * calculateCompositeCell when it needs to calculate SimpleCell values. For numeric values, this funcitons returns
@@ -129,8 +105,7 @@ public abstract class kNN {
 	 * @param targetKey				The key of the value to be found
 	 * @return						A SimpleCell containing the calculated value(s)
 	 */
-=======
->>>>>>> Refactoring
+
 	public Cell calculateSimpleCell(ArrayList<Tuple<Float, Cell>> closestKNeighbours, String type, String targetKey) {
 		
 		switch (type){
@@ -156,13 +131,11 @@ public abstract class kNN {
 						count = stringCount.get(key);
 					} else if (stringCount.get(key) == count) {
 						for (Tuple<Float, Cell> t: closestKNeighbours) {
-<<<<<<< HEAD
+
 							if (((String)((SimpleCell)t.getValue2()).getValue()).equals(s)) {
 								break;
 							} else if (((String)((SimpleCell)t.getValue2()).getValue()).equals(key)) {
-=======
-							if (((String)((SimpleCell)t.getValue2()).getValue()).equals(key)) {
->>>>>>> Refactoring
+
 								s = key;
 								break;
 							}
@@ -199,11 +172,8 @@ public abstract class kNN {
 	   * @param <E>	Type of the first value.
 	   * @param <K>	Type of the second value
 	   */
-<<<<<<< HEAD
+
 	public static class Tuple<E, K> {
-=======
-	protected class Tuple<E, K> {
->>>>>>> Refactoring
 		private E value1;
 		private K value2;
 		

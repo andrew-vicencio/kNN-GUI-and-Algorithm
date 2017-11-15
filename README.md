@@ -36,6 +36,7 @@
 
 
 ## Changes Since Last Milestone
+<<<<<<< HEAD
 * Created Cell objects
 	* Holds both the raw and standardised user inputted data
 	* There are two different types of Cells:
@@ -63,10 +64,29 @@
 * Points/values are not editable or removable once added
 * Points/values are not very readable when displayed
 
+=======
+* Created a GUI
+* Features can now have one of three primitive types: int, float and String
+* Allowed test cases to be used to predict any features
+* Increased cohesion with new classes for distance algorithms
+* Support for composite/complex features
+
+
+## Known Issues
+* There is a lot of code duplication between these pairs of classes:
+** FeaturePanelComplex and FeaturePanelSimple
+** FeaturePanelComplexController and FeaturePanelSimpleController
+** PromptValueFrame and TestCaseFrame
+* Some aspects of the UI do not have ease of use, such as repeatedly clicking "Add Value" and "Add Simple Feature" and "Add Complex Feature" in the menu bar
+* No frames scroll to accomadate for extra panels
+* Points/values are not editable or removable once added
+* Points/values are not very readable when displayed
+>>>>>>> refs/heads/GUI
 
 ## Future Steps
 * Redesign some aspects to improve cohesion and create looser coupling
 * Make the program more user-friendly
+<<<<<<< HEAD
 * Increase flexibility
 * Implement save/load functionality
 
@@ -76,3 +96,7 @@
 
 
 
+=======
+* Increase flexibility (to be clarified at a later date)
+* Implement save/load functionality
+>>>>>>> refs/heads/GUI

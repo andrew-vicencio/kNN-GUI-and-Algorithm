@@ -1,4 +1,3 @@
-package CodersInc;
 
 import java.util.ArrayList;
 
@@ -40,20 +39,7 @@ public class CompositeCell extends Cell {
 	 */
 	public void setSubCells(ArrayList<Cell> features) {
 		this.value = features;
-<<<<<<< HEAD
-=======
-	}
-	
-	public Cell getSubCell(String key) {
-		for (Cell c: value) {
-			if(c.getKey().equals(key)) {
-				return c;
-			}
-		}
-		return null;
->>>>>>> Refactoring
-	}
-	
+
 	/**
 	 * getSubCell returns a single cell that has the given key. Returns null if no such cell exists.
 	 * 
@@ -82,4 +68,23 @@ public class CompositeCell extends Cell {
 	public void addCell(Cell f) {
 		value.add(f);
 	}
+	
+	//TODO: BB Documentation
+	public String toString(){
+        String finalString = "";
+        System.out.println(value.size());
+        for (Cell x: value) {
+            System.out.println(finalString);
+            SimpleCell i = (SimpleCell)x;
+            if(finalString == ""){
+                finalString = i.toString();
+            }else{
+                finalString = finalString + ", " + i.toString();
+            }
+
+
+        }
+
+        return finalString;
+    }
 }

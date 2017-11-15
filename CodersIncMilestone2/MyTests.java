@@ -226,6 +226,7 @@ public class MyTests extends TestCase {
 		result = testKNN.findKNN("a1", targetPoint, 3);
 		assertEquals((int)((SimpleCell<Integer>)result).getValue(), 26);
 	}
+<<<<<<< HEAD
 	
 	public void testSumSqFt(){
 		Point p1;
@@ -859,4 +860,6 @@ public class MyTests extends TestCase {
 		SimpleCell stdDev = (SimpleCell)ds.getStdDev().get("y");
 		assertEquals(stdDevY, stdDev.getValue());
 	}
+=======
+>>>>>>> refs/heads/GUI
 }
