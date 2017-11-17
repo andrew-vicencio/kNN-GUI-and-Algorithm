@@ -38,8 +38,8 @@ public class CompositeCell extends Cell {
 	 * @param features	The new list of subCells
 	 */
 	public void setSubCells(ArrayList<Cell> features) {
-		this.value = features;
-
+        this.value = features;
+    }
 	/**
 	 * getSubCell returns a single cell that has the given key. Returns null if no such cell exists.
 	 * 

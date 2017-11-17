@@ -1,8 +1,8 @@
-package CodersInc;
+
 
 import java.util.ArrayList;
-import CodersInc.kNN.Tuple;
 import junit.framework.*;
+
 
 @SuppressWarnings("unchecked")
 public class MyTests extends TestCase {
@@ -12,7 +12,6 @@ public class MyTests extends TestCase {
 	public void setUp() {
 		ds = new DimensionalSpace();
 	}
-	
 	public void testNumericalDistanceWithInteger() {
 		SimpleCell<Integer> c1 = new SimpleCell<Integer>("test1", 10);
 		SimpleCell<Integer> c2 = new SimpleCell<Integer>("test1", 7);
@@ -57,12 +56,12 @@ public class MyTests extends TestCase {
 	}
 	
 	public void testKNNCalculateSimpleCellInteger() {
-		Tuple<Float, Cell> t1 = new Tuple<Float, Cell>((float) 1, new SimpleCell<Integer>("1", 3));
-		Tuple<Float, Cell> t2 = new Tuple<Float, Cell>((float) 2, new SimpleCell<Integer>("1", 4));
-		Tuple<Float, Cell> t3 = new Tuple<Float, Cell>((float) 3, new SimpleCell<Integer>("1", 5));
+		kNN.Tuple<Float, Cell> t1 = new kNN.Tuple<Float, Cell>((float) 1, new SimpleCell<Integer>("1", 3));
+		kNN.Tuple<Float, Cell> t2 = new kNN.Tuple<Float, Cell>((float) 2, new SimpleCell<Integer>("1", 4));
+		kNN.Tuple<Float, Cell> t3 = new kNN.Tuple<Float, Cell>((float) 3, new SimpleCell<Integer>("1", 5));
 		
 		kNN testKNN = new EuclideanKNN(ds);
-		ArrayList<Tuple<Float, Cell>> list = new ArrayList<Tuple<Float, Cell>>(3);
+		ArrayList<kNN.Tuple<Float, Cell>> list = new ArrayList<kNN.Tuple<Float, Cell>>(3);
 		list.add(0, t1);
 		list.add(1, t2);
 		list.add(2, t3);
@@ -75,12 +74,12 @@ public class MyTests extends TestCase {
 	}
 	
 	public void testKNNCalculateSimpleCellFloat() {
-		Tuple<Float, Cell> t1 = new Tuple<Float, Cell>((float) 1, new SimpleCell<Float>("1", (float) 3.545));
-		Tuple<Float, Cell> t2 = new Tuple<Float, Cell>((float) 2, new SimpleCell<Float>("1", (float) 4.567));
-		Tuple<Float, Cell> t3 = new Tuple<Float, Cell>((float) 3, new SimpleCell<Float>("1", (float) 5.532));
+		kNN.Tuple<Float, Cell> t1 = new kNN.Tuple<Float, Cell>((float) 1, new SimpleCell<Float>("1", (float) 3.545));
+		kNN.Tuple<Float, Cell> t2 = new kNN.Tuple<Float, Cell>((float) 2, new SimpleCell<Float>("1", (float) 4.567));
+		kNN.Tuple<Float, Cell> t3 = new kNN.Tuple<Float, Cell>((float) 3, new SimpleCell<Float>("1", (float) 5.532));
 		
 		kNN testKNN = new EuclideanKNN(ds);
-		ArrayList<Tuple<Float, Cell>> list = new ArrayList<Tuple<Float, Cell>>(3);
+		ArrayList<kNN.Tuple<Float, Cell>> list = new ArrayList<kNN.Tuple<Float, Cell>>(3);
 		list.add(0, t1);
 		list.add(1, t2);
 		list.add(2, t3);
@@ -93,12 +92,12 @@ public class MyTests extends TestCase {
 	}
 	
 	public void testKNNCalculateSimpleCellString() {
-		Tuple<Float, Cell> t1 = new Tuple<Float, Cell>((float) 1, new SimpleCell<String>("1", "Cat"));
-		Tuple<Float, Cell> t2 = new Tuple<Float, Cell>((float) 2, new SimpleCell<String>("1", "Coder"));
-		Tuple<Float, Cell> t3 = new Tuple<Float, Cell>((float) 3, new SimpleCell<String>("1", "Dog"));
+		kNN.Tuple<Float, Cell> t1 = new kNN.Tuple<Float, Cell>((float) 1, new SimpleCell<String>("1", "Cat"));
+		kNN.Tuple<Float, Cell> t2 = new kNN.Tuple<Float, Cell>((float) 2, new SimpleCell<String>("1", "Coder"));
+		kNN.Tuple<Float, Cell> t3 = new kNN.Tuple<Float, Cell>((float) 3, new SimpleCell<String>("1", "Dog"));
 		
 		kNN testKNN = new EuclideanKNN(ds);
-		ArrayList<Tuple<Float, Cell>> list = new ArrayList<Tuple<Float, Cell>>(3);
+		ArrayList<kNN.Tuple<Float, Cell>> list = new ArrayList<kNN.Tuple<Float, Cell>>(3);
 		list.add(0, t1);
 		list.add(1, t2);
 		list.add(2, t3);
@@ -138,9 +137,9 @@ public class MyTests extends TestCase {
 		cc1.addCell(c1S);
 		cc2.addCell(c2S);
 		
-		ArrayList<Tuple<Float, Cell>> list = new ArrayList<Tuple<Float, Cell>>(2);
-		list.add(0, new Tuple<Float, Cell>((float) 1, cc1));
-		list.add(1, new Tuple<Float, Cell>((float) 2, cc2));
+		ArrayList<kNN.Tuple<Float, Cell>> list = new ArrayList<kNN.Tuple<Float, Cell>>(2);
+		list.add(0, new kNN.Tuple<Float, Cell>((float) 1, cc1));
+		list.add(1, new kNN.Tuple<Float, Cell>((float) 2, cc2));
 		
 		kNN testKNN = new EuclideanKNN(ds);
 		
