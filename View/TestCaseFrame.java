@@ -57,7 +57,7 @@ public class TestCaseFrame extends JFrame {
 		for(String str: view.getDataModel().getCellTypes().keySet())
 		{
 
-		    if(!str.equals(testValue) && !view.getDataModel().getCellTypes().get(str).equals("comp"))
+		    if(!str.contains(testValue) && !view.getDataModel().getCellTypes().get(str).equals("comp"))
 		    {
 		    	name = new JLabel(str);
 		    	type = new JLabel(view.getDataModel().getCellTypes().get(str));

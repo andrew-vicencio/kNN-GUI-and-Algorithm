@@ -2,9 +2,6 @@ package View;
 
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.*;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -315,8 +312,17 @@ public class View {
 	public void promptTestCase()
 	{
 		
-		 String[] optionsArray = new String[dataModel.getCellTypes().keySet().size()];
-		 dataModel.getCellTypes().keySet().toArray(optionsArray);
+		 Set<String> optionsSet = dataModel.getCellTypes().keySet();
+		 ArrayList<String> optionsArrayList = new ArrayList<String>();
+		 for(String s: optionsSet)
+		 {
+			 if(!s.contains("."))
+			 {
+				 optionsArrayList.add(s);
+			 }
+		 }
+		 String[] optionsArray = new String[optionsArrayList.size()];
+		 optionsArrayList.toArray(optionsArray);
 		 JFrame chooseValueFrame = new JFrame("New Test Case");
 		 String testValue = (String) JOptionPane.showInputDialog(chooseValueFrame, "Choose a value to test",
 		 "Feature", JOptionPane.QUESTION_MESSAGE, null, optionsArray, optionsArray[0]);
