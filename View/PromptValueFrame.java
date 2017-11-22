@@ -2,13 +2,7 @@ package View;
 
 import Controlers.PromptValueFrameController;
 import View.View;
-
 import java.awt.BorderLayout;
-import java.awt.GridLayout;
-import java.util.HashMap;
-
-import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
@@ -18,14 +12,9 @@ import Controlers.*;
  * @author Gabrielle
  *
  */
-public class PromptValueFrame extends JFrame {
+public class PromptValueFrame extends PromptFrame {
 	
-	private JPanel mainPanel, footerPanel, promptPanel;
-	private JLabel name, type;
-	private JTextField jt;
-	private JButton done;
-	private HashMap<String, JTextField> fieldMap;
-	private View view;
+	
 	private PromptValueFrameController controller;
 	
 	/**
@@ -34,18 +23,16 @@ public class PromptValueFrame extends JFrame {
 	 */
 	public PromptValueFrame(View view)
 	{
-		super("Enter your data values");
-		mainPanel = new JPanel();
-		footerPanel = new JPanel();
-		done = new JButton("Done");
-		fieldMap = new HashMap<String, JTextField>();
-		this.view = view;
+		super(view, "Enter your data values");
 		controller = new PromptValueFrameController(view, this);
-		
-		setSize(500, 600);
-		mainPanel.setLayout(new GridLayout(0, 1));
-		setLayout(new BorderLayout());
-
+		fillPrompts();		
+	}
+	
+	/**
+	 * Fills the frame with the number and types of prompts provided in the fieldMap
+	 */
+	public void fillPrompts()
+	{
 		for(String str: view.getDataModel().getCellTypes().keySet())
 		{
 		    if(!view.getDataModel().getCellTypes().get(str).equals("comp")){
@@ -68,14 +55,5 @@ public class PromptValueFrame extends JFrame {
 		add(footerPanel, BorderLayout.SOUTH);
 		setVisible(true);
 	}
-	/**
-	 * Provides a HashMap with the name of the feature (String) as a key, and a 
-	 * JTextField as a value.
-	 * @return HashMap<String, JTextField>
-	 */
-	public HashMap<String, JTextField> getFieldMap()
-	{
-		return fieldMap;
-	}
-
+	
 }
