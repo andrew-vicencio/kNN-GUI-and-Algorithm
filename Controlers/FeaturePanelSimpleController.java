@@ -9,7 +9,7 @@ import View.*;
  * @author Gabrielle and Ben
  *
  */
-public class FeaturePanelSimpleController extends MainController {
+public class FeaturePanelSimpleController extends FeaturePanelController {
 	//TODO: BB Change to utilize the data model
 	FeaturePanelSimple fp;
 	

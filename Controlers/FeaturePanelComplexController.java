@@ -8,7 +8,7 @@ import View.*;
  *
  */
 
-public class FeaturePanelComplexController extends MainController {
+public class FeaturePanelComplexController extends FeaturePanelController{
 
 	/**
 	 * Constructor to pass the View.FeaturePanelComplex using this controller
