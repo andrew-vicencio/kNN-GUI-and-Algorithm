@@ -1,22 +1,23 @@
-package Controlers;
+package Controllers;
 
-import Controlers.MainController;
 import View.View;
 
 import java.awt.event.ActionEvent;
+
+import Controllers.MainController;
 /**
  * Controller for JMenuItems. It checks what was clicked, and executes the appropriate method in the view
  * @author Gabrielle
  *
  */
-public class MenuController extends MainController {
+public class ButtonMenuController extends MainController {
 
 	private View view;
 	/**
-	 * Constructor to pass along the View.View containing the Controlers.MenuController
+	 * Constructor to pass along the View.View containing the Controlers.ButtonMeanuController
 	 * @param view
 	 */
-		public MenuController(View view)
+		public ButtonMenuController(View view)
 		{
 			this.view = view;
 		}
