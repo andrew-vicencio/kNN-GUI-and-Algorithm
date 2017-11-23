@@ -263,7 +263,6 @@ public class View {
 	 * @param b : boolean
 	 */
 	public void enableDataInput(boolean b) {
-		edit.setEnabled(b);
 		addValue.setEnabled(b);
 		simpleFeature.setEnabled(!b);
 		complexFeature.setEnabled(!b);		

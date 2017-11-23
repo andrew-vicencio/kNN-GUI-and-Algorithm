@@ -55,7 +55,7 @@ public class TestCaseFrameController extends MainController {
         }
 
         view.addTestCaseResult(MainController.dataModel.findkNN(testKey, newPoint, k));
-        frame.dispose();
+
 	}
 
 
