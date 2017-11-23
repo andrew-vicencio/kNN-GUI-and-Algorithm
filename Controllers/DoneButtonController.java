@@ -1,9 +1,10 @@
-package Controlers;
+package Controllers;
 
-import Controlers.MainController;
 import View.View;
 
 import java.awt.event.ActionEvent;
+
+import Controllers.MainController;
 /**
  * Controller for the JButton (Done), when a user is inputting feature types.
  * The number of features is checked first.

@@ -1,6 +1,5 @@
 package View;
 
-import Controlers.FeaturePanelSimpleController;
 import View.View;
 
 import java.awt.BorderLayout;
@@ -15,25 +14,19 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.EtchedBorder;
-import Controlers.*;
+
+import Controllers.*;
 
 /**
  * A JPanel allowing a user to create a simple feature
  * @author Gabrielle
  *
  */
-public class FeaturePanelSimple extends JPanel{
-	private JPanel innerPanel;
-	private View view;
-	private JLabel key, value, superName;
+public class FeaturePanelSimple extends FeaturePanel{
+
+	//Things specialized for this particular input
+	private JLabel  value;
 	private JComboBox<String> featureClass;
-	private JTextField  featureName;
-	private ArrayList<String> types;
-	private JButton addFeature;
-	private FeaturePanelSimpleController fpController;
-	private FeaturePanelComplex parent;
-	int tab;
-    private String keyParentName;
 
 	/**
 	 * Default constructor for a View.FeaturePanelSimple with no parent
@@ -44,36 +37,16 @@ public class FeaturePanelSimple extends JPanel{
 	 */
 	public FeaturePanelSimple(View view, ArrayList<String> types, String superFeatureName, int tab)
 	{
-		super();
-		setLayout(new BorderLayout());
-		this.setTypes(types);
+		super(view, types, superFeatureName, tab);
 		String[] typesArray = types.toArray(new String[0]);
 		featureClass = new JComboBox<String>(typesArray);
 		value = new JLabel("Feature type: ");
-		key = new JLabel("Feature name: ");
-		superName = new JLabel(superFeatureName);
-		featureName = new JTextField(15);
-		addFeature = new JButton("Add");
-		innerPanel = new JPanel();
-		this.view = view;
-		
-		add(innerPanel, BorderLayout.CENTER);
-		add(superName, BorderLayout.NORTH);
-		innerPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
-		innerPanel.add(key);
-		innerPanel.add(featureName);
+
 		innerPanel.add(value);
 		innerPanel.add(featureClass);
-		innerPanel.add(addFeature);
-		
-		fpController = new FeaturePanelSimpleController(this);
-		addFeature.addActionListener(fpController);
-		setMaximumSize(new Dimension(800, 80));
-		setBorder(BorderFactory.createCompoundBorder(new EtchedBorder(), new EmptyBorder(6, 6, 6, 6)));
-		
-		this.tab = tab;
-		
-		setAlignmentX((float) (1 - (0.1 * tab)));	
+        innerPanel.add(add);
+		controller = new FeaturePanelSimpleController(this);
+		add.addActionListener(controller);
 	}
 	
 	/**
@@ -94,23 +67,6 @@ public class FeaturePanelSimple extends JPanel{
 		}
 	}
 	
-	/**
-	 * Returns the key/feature name inputed by the user in the JTextField featureName
-	 * @return String
-	 */
-	public String getKey()
-	{
-		String s="";
-		try
-		{
-			s = featureName.getText();
-		}
-		catch(Exception e)
-		{
-			view.sendErrorFrame("Not a valid feature name");
-		}
-		return s;
-	}
 	
 	/**
 	 * Returns the value/feature class denoted by the user's choice the JComboBox featureClass
@@ -129,68 +85,24 @@ public class FeaturePanelSimple extends JPanel{
 		}
 		return s;
 	}
+
+
 	
 	/**
 	 * Disables the JTextField and JComBobox
 	 */
 	public void disable()
-	{
+    {
 		featureName.setEnabled(false);
 		featureClass.setEnabled(false);
-		addFeature.setEnabled(false);
-	}
-	
-	/**
-	 * Returns the View.View object containing the FeaturePanel
-	 * @return View.View
-	 */
-	public View getView()
-	{
-		return view;
+		add.setEnabled(false);
 	}
 
-	/**
-	 * Returns the list of primitive types the user can choose from 
-	 * @return ArrayList <String>
-	 */
-	public ArrayList<String> getTypes() {
-		return types;
+	public String getKeyParentName() {
+		// TODO Auto-generated method stub
+		return null;
 	}
-
-	/**
-	 * Sets the primitive types the user can choose from
-	 * @param types ArrayList <String>
-	 */
-	public void setTypes(ArrayList<String> types) {
-		this.types = types;
-	}
-	
-	/**
-	 * Get the View.FeaturePanelComplex object which is the parent of this panel
-	 * @return View.FeaturePanelComplex
-	 */
-	public FeaturePanelComplex getParentComplex() {
-		return parent;
-	}
-
-	/**
-	 * Set the View.FeaturePanelComplex object which is the parent of this panel
-	 * @param FeaturePanelComplex
-	 */
-	public void setParentComplex(FeaturePanelComplex parentComplex) {
-		this.parent = parentComplex;
-	}
-
-
-	
-    public void setParentComplexKey(String key){
-        keyParentName = key;
-    }
-	
-public String getKeyParentName(){
-        return keyParentName;
 }
 	
 
 
-}

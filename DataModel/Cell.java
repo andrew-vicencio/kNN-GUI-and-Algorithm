@@ -1,7 +1,7 @@
 package DataModel;
 
 /**
- * DataModel.Cell is an abstract class providing functions and a key variable for the DataModel.SimpleCell and DataModel.CompositeCell subclasses.
+ * DataModel.Cell is an abstract class providing functions and a key variable for the DataModel.CellSimple and DataModel.CellComposite subclasses.
  * 
  * @author Darren
  * @version Milestone 2

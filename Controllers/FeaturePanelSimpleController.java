@@ -1,4 +1,4 @@
-package Controlers;
+package Controllers;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -9,17 +9,17 @@ import View.*;
  * @author Gabrielle and Ben
  *
  */
-public class FeaturePanelSimpleController extends MainController {
+public class FeaturePanelSimpleController extends FeaturePanelController {
 	//TODO: BB Change to utilize the data model
-	FeaturePanelSimple fp;
+
 	
 	/**
 	 * Constructor to pass the View.FeaturePanelComplex using this controller
 	 * @param fp
 	 */
-	public FeaturePanelSimpleController(FeaturePanelSimple fp)
+	public FeaturePanelSimpleController(FeaturePanel fp)
 	{
-		this.fp = fp;
+		super(fp);
 	}
 
 	/**
@@ -28,31 +28,35 @@ public class FeaturePanelSimpleController extends MainController {
 	 */
 	public void actionPerformed(ActionEvent e) {
 
-		String key = fp.getKey();
-		String value = fp.getValue();
+		String key = currentPanel.getKey();
+		String value = ((FeaturePanelSimple)currentPanel).getValue();
+
 		//Make sure there is a valid key
 		if(key.isEmpty())
 		{
-			fp.getView().sendErrorFrame("Please enter a valid name");
+            currentPanel.getView().sendErrorFrame("Please enter a valid name");
 		}
 		else if(MainController.dataModel.getCellTypes().containsKey(key))
 		{
-			fp.getView().sendErrorFrame("There is already a feature with that particular name");
+            currentPanel.getView().sendErrorFrame("There is already a feature with that particular name");
 		}
 		else
 		{
 		    //Disable so that the name can not be changed
-		    fp.disable();
+            currentPanel.disable();
 			//Check if the simple feature has a parent complex feature if not just add as its own type
-			if(fp.getParentComplex() != null)
+			if(currentPanel.getParentComplex() != null)
 			{
-				MainController.dataModel.setSingleCellType(fp.getKeyParentName() + "." + key, value);
+				MainController.dataModel.setSingleCellType(currentPanel.getParentComplexKey() + "." + key, value);
 			}
 			else
 			{
 				MainController.dataModel.setSingleCellType(key, value);
 			}
 		}
+		for(String type: dataModel.getCellTypes().keySet()){
+		    System.out.println(type);
+        }
 
 	}
 }
