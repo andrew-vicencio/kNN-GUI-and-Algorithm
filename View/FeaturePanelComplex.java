@@ -1,7 +1,5 @@
 package View;
 
-import Controlers.FeaturePanelComplexController;
-
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
@@ -14,7 +12,8 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.EtchedBorder;
-import Controlers.*;
+
+import Controllers.*;
 /**
  * A JPanel allowing a user to create a complex feature
  * @author Gabrielle

@@ -1,6 +1,5 @@
 package View;
 
-import Controlers.FeaturePanelSimpleController;
 import View.View;
 
 import java.awt.BorderLayout;
@@ -15,7 +14,8 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.EtchedBorder;
-import Controlers.*;
+
+import Controllers.*;
 
 /**
  * A JPanel allowing a user to create a simple feature

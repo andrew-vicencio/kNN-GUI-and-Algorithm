@@ -1,4 +1,4 @@
-package Controlers;
+package Controllers;
 
 import java.awt.event.ActionEvent;
 import View.*;

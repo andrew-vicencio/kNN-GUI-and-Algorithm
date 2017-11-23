@@ -1,4 +1,4 @@
-package Controlers;
+package Controllers;
 
 import DataModel.*;
 
@@ -15,11 +15,11 @@ import View.*;
  * @author Gabrielle
  *
  */
-public class ValueTestFrameControler extends ValueInputControler {
+public class ValueTestFrameController extends ValueInputController {
 
 
 	
-	public ValueTestFrameControler(View view, TestCaseFrame testCaseFrame) {
+	public ValueTestFrameController(View view, TestCaseFrame testCaseFrame) {
 		super(view, testCaseFrame);
 	}
     //Fix the TestCaseFrame Key

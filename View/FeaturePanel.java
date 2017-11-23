@@ -12,8 +12,8 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.EtchedBorder;
 
-import Controlers.FeaturePanelComplexController;
-import Controlers.FeaturePanelController;
+import Controllers.FeaturePanelComplexController;
+import Controllers.FeaturePanelController;
 
 public abstract class FeaturePanel extends JPanel {
 	

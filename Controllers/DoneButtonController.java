@@ -1,23 +1,24 @@
-package Controlers;
+package Controllers;
 
-import Controlers.MainController;
 import View.View;
 
 import java.awt.event.ActionEvent;
+
+import Controllers.MainController;
 /**
  * Controller for the JButton (Done), when a user is inputting feature types.
  * The number of features is checked first.
  * @author Gabrielle
  *
  */
-public class ButtonAddFeaturesController extends MainController {
+public class DoneButtonController extends MainController {
 
 	private View view;
 	/**
-	 * Constructor to pass along the View.View containing the Controlers.ButtonMeanuController
+	 * Constructor to pass along the View.View containing the Controlers.MenuController
 	 * @param view
 	 */
-	public ButtonAddFeaturesController(View view)
+	public DoneButtonController(View view) 
 	{
 		this.view = view;
 	}

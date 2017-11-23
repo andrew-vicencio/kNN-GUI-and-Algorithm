@@ -1,4 +1,4 @@
-package Controlers;
+package Controllers;
 
 import DataModel.*;
 
@@ -15,7 +15,7 @@ import View.*;
  *
  */
 
-public class ValuePromtFrameControler extends ValueInputControler {
+public class ValuePromptFrameController extends ValueInputController {
 
 
 
@@ -24,7 +24,7 @@ public class ValuePromtFrameControler extends ValueInputControler {
 	 * @param view: View.View
 	 * @param pvf: View.PromptValueFrame
 	 */
-	public ValuePromtFrameControler(View view, PromptValueFrame pvf)
+	public ValuePromptFrameController(View view, PromptValueFrame pvf)
 	{
 		super(view, pvf);
 	}

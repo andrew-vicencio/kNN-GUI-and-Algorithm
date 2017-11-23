@@ -6,7 +6,8 @@ import java.util.*;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.EtchedBorder;
-import Controlers.*;
+
+import Controllers.*;
 import DataModel.DimensionalSpace;
 import DataModel.Point;
 

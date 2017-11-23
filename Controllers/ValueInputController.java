@@ -1,4 +1,4 @@
-package Controlers;
+package Controllers;
 
 import DataModel.*;
 import View.*;
@@ -6,12 +6,12 @@ import View.*;
 
 import java.util.HashMap;
 
-public abstract class ValueInputControler extends MainController {
+public abstract class ValueInputController extends MainController {
 
     protected View view;
     protected PromptFrame frame;
 
-    public ValueInputControler(View view, PromptFrame promt){
+    public ValueInputController(View view, PromptFrame promt){
         this.view = view;
         this.frame = promt;
     }

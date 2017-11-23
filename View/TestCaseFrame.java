@@ -5,7 +5,8 @@ import java.awt.BorderLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-import Controlers.*;
+
+import Controllers.*;
 /**
  * A JFrame that lists all features (other than the feature being tested)
  * in a JLabel, with an associated JTextField
@@ -18,7 +19,7 @@ public class TestCaseFrame extends PromptFrame {
 	private String testValue;
 	private JLabel kLabel;
 	private JTextField kTextField;
-	private ValueTestFrameControler controller;
+	private ValueTestFrameController controller;
 	
 	
 	/**
@@ -32,7 +33,7 @@ public class TestCaseFrame extends PromptFrame {
 		kLabel = new JLabel("K value to test");
 		kTextField = new JTextField(15);
 		this.testValue = testValue;
-		controller = new ValueTestFrameControler( view, this);
+		controller = new ValueTestFrameController( view, this);
 		
 		
 		this.view = view;

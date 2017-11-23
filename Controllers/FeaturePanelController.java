@@ -1,4 +1,4 @@
-package Controlers;
+package Controllers;
 
 import View.FeaturePanel;
 import View.FeaturePanelSimple;

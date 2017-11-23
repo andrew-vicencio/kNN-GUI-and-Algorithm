@@ -1,9 +1,10 @@
-package Controlers;
+package Controllers;
 
-import Controlers.MainController;
 import View.View;
 
 import java.awt.event.ActionEvent;
+
+import Controllers.MainController;
 /**
  * Controller for JMenuItems. It checks what was clicked, and executes the appropriate method in the view
  * @author Gabrielle
