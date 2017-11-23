@@ -1,9 +1,6 @@
 package Maths;
 
 import DataModel.*;
-import Maths.NumericalDistance;
-import Maths.StringDistance;
-import Maths.kNN;
 
 import java.util.*;
 
@@ -71,14 +68,14 @@ public class EuclideanKNN extends kNN {
 				
 				for (String key: currentPtValues.keySet()) {
 					if (!(key.equals(targetKey))) {
-						if (currentPtValues.get(key) instanceof SimpleCell) {
-							if (((SimpleCell)currentPtValues.get(key)).getValue() instanceof String) {
-								distance += Math.pow(sDist.calcDistance((SimpleCell)targetPtValues.get(key), (SimpleCell)currentPtValues.get(key)), 2);
+						if (currentPtValues.get(key) instanceof CellSimple) {
+							if (((CellSimple)currentPtValues.get(key)).getValue() instanceof String) {
+								distance += Math.pow(sDist.calcDistance((CellSimple)targetPtValues.get(key), (CellSimple)currentPtValues.get(key)), 2);
 							} else {
-								distance += Math.pow(nDist.calcDistance((SimpleCell)targetPtValues.get(key), (SimpleCell)currentPtValues.get(key)), 2);
+								distance += Math.pow(nDist.calcDistance((CellSimple)targetPtValues.get(key), (CellSimple)currentPtValues.get(key)), 2);
 							}
 						} else {
-							distance += Math.pow(EuclideanComposite((CompositeCell) currentPtValues.get(key), (CompositeCell) targetPtValues.get(key)), 2);
+							distance += Math.pow(EuclideanComposite((CellComposite) currentPtValues.get(key), (CellComposite) targetPtValues.get(key)), 2);
 						}
 					}
 				}
@@ -128,14 +125,14 @@ public class EuclideanKNN extends kNN {
 	}
 	
 	/**
-	 * Iterates through all of the sub cells in a DataModel.CompositeCell and calculates the distance from that DataModel.CompositeCell to
-	 * the target point's corresponding DataModel.CompositeCell.
+	 * Iterates through all of the sub cells in a DataModel.CellComposite and calculates the distance from that DataModel.CellComposite to
+	 * the target point's corresponding DataModel.CellComposite.
 	 * 
-	 * @param current	The DataModel.CompositeCell of the non-target point
-	 * @param target	The DataModel.CompositeCell of the target point
+	 * @param current	The DataModel.CellComposite of the non-target point
+	 * @param target	The DataModel.CellComposite of the target point
 	 * @return			The distance between the Cells
 	 */
-	public float EuclideanComposite(CompositeCell current, CompositeCell target) {
+	public float EuclideanComposite(CellComposite current, CellComposite target) {
 	  	
 		NumericalDistance nDist = new NumericalDistance();
 		StringDistance sDist = new StringDistance();
@@ -143,14 +140,14 @@ public class EuclideanKNN extends kNN {
 		float distance = 0;
 		
 		for (Cell c: subCells) {
-			if (c instanceof SimpleCell) {
-				if (((SimpleCell) c).getValue() instanceof String) {
-					distance += Math.pow(sDist.calcDistance((SimpleCell) target.getSubCell(c.getKey()), (SimpleCell) c), 2);
+			if (c instanceof CellSimple) {
+				if (((CellSimple) c).getValue() instanceof String) {
+					distance += Math.pow(sDist.calcDistance((CellSimple) target.getSubCell(c.getKey()), (CellSimple) c), 2);
 				} else {
-					distance += Math.pow(nDist.calcDistance((SimpleCell) target.getSubCell(c.getKey()), (SimpleCell) c), 2);
+					distance += Math.pow(nDist.calcDistance((CellSimple) target.getSubCell(c.getKey()), (CellSimple) c), 2);
 				}
 			} else {
-				distance += EuclideanComposite((CompositeCell) c, (CompositeCell) target.getSubCell(c.getKey()));
+				distance += EuclideanComposite((CellComposite) c, (CellComposite) target.getSubCell(c.getKey()));
 			}
 		}
 		

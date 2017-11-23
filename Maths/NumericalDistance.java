@@ -1,6 +1,6 @@
 package Maths;
 
-import DataModel.SimpleCell;
+import DataModel.CellSimple;
 
 /**
  * Calculates the distance between two numerical SimpleCells. Simply returns the difference between the given values.
@@ -13,7 +13,7 @@ import DataModel.SimpleCell;
 public class NumericalDistance extends DistanceAlg {
 
 	@Override
-	public float calcDistance(SimpleCell target, SimpleCell current) {
+	public float calcDistance(CellSimple target, CellSimple current) {
 
 		float val1, val2;
 		

@@ -46,7 +46,7 @@ public class ValuePromtFrameControler extends ValueInputControler {
                         if(key.contains(".")){
                             String keyBrakDown = key.split("\\.")[0];
                             createCompFeature(keyBrakDown, newConfiguredData);
-                            createSubFeature(key, frame.getFieldMap().get(key).getText(), (CompositeCell) newConfiguredData.get(keyBrakDown));
+                            createSubFeature(key, frame.getFieldMap().get(key).getText(), (CellComposite) newConfiguredData.get(keyBrakDown));
                         }else{
                            newConfiguredData.put(key, createStanderedFeature(key, frame.getFieldMap().get(key).getText()));
                         }
