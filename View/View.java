@@ -29,7 +29,7 @@ public class View {
 	private JButton done;
 	private LinkedHashMap<String, Object> features;
 	private ArrayList<String> featureTypes;
-	private ButtonMeanuController menuController;
+	private ButtonMenuController menuController;
     private DimensionalSpace dataModel;
 
 	
@@ -58,7 +58,7 @@ public class View {
 		simpleFeature = new JMenuItem("Add a Simple Feature");
 		complexFeature = new JMenuItem("Add a Complex Feature");
 		done = new JButton("Done");
-		menuController = new ButtonMeanuController(this);
+		menuController = new ButtonMenuController(this);
         dataModel = menuController.getDataModel();
         dataModel.setView(this);
 
