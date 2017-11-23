@@ -1,12 +1,12 @@
 package View;
 
-import Controlers.PromptValueFrameController;
-import View.View;
+import Controlers.ValuePromtFrameControler;
+
 import java.awt.BorderLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-import Controlers.*;
+
 /**
  * A JFrame that prompts the user for values for each feature, using JTextfields
  * @author Gabrielle
@@ -15,7 +15,7 @@ import Controlers.*;
 public class PromptValueFrame extends PromptFrame {
 	
 	
-	private PromptValueFrameController controller;
+	private ValuePromtFrameControler controller;
 	
 	/**
 	 * Constructor, which initializes the frame and its layout
@@ -24,7 +24,7 @@ public class PromptValueFrame extends PromptFrame {
 	public PromptValueFrame(View view)
 	{
 		super(view, "Enter your data values");
-		controller = new PromptValueFrameController(view, this);
+		controller = new ValuePromtFrameControler(view, this);
 		fillPrompts();		
 	}
 	

@@ -18,7 +18,7 @@ public class TestCaseFrame extends PromptFrame {
 	private String testValue;
 	private JLabel kLabel;
 	private JTextField kTextField;
-	private TestCaseFrameController controller;
+	private ValueTestFrameControler controller;
 	
 	
 	/**
@@ -32,7 +32,7 @@ public class TestCaseFrame extends PromptFrame {
 		kLabel = new JLabel("K value to test");
 		kTextField = new JTextField(15);
 		this.testValue = testValue;
-		controller = new TestCaseFrameController( view, this);
+		controller = new ValueTestFrameControler( view, this);
 		
 		
 		this.view = view;

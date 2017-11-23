@@ -40,9 +40,7 @@ public class FeaturePanelComplex extends FeaturePanel
 		
 		addSimple = new JButton("Add a simple subfeature");
 		subFeaturePanels = new LinkedHashMap<String, Object>();
-		innerPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
-		innerPanel.add(name);
-		innerPanel.add(featureName);
+
 		innerPanel.add(addSimple);
 		innerPanel.add(add);
 		
@@ -56,19 +54,7 @@ public class FeaturePanelComplex extends FeaturePanel
 	 * Returns the key/feature name inputed by the user in the JTextField featureName
 	 * @return String
 	 */
-	public String getName()
-	{
-		String s="";
-		try
-		{
-			s = featureName.getText();
-		}
-		catch(Exception e)
-		{
-			view.sendErrorFrame("Not a valid feature name");
-		}
-		return s;
-	}
+
 
 	
 	/**

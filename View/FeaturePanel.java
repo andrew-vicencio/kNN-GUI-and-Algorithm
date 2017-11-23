@@ -1,7 +1,6 @@
 package View;
 
-import java.awt.BorderLayout;
-import java.awt.Dimension;
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 
@@ -32,13 +31,19 @@ public abstract class FeaturePanel extends JPanel {
 	public FeaturePanel(View view, ArrayList<String> types, String superFeatureName, int tab)
 	{
 		super();
-		
+        innerPanel = new JPanel();
 		setLayout(new BorderLayout());
+
 		name = new JLabel("Feature name: ");
 		superName = new JLabel(superFeatureName);
 		featureName = new JTextField(15);
 		add = new JButton("Add this feature");
-		innerPanel = new JPanel();
+
+
+        innerPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
+        innerPanel.add(name);
+        innerPanel.add(featureName);
+
 		this.view = view;
 		this.tab = tab;
 		this.setTypes(types);
@@ -75,6 +80,7 @@ public abstract class FeaturePanel extends JPanel {
 	 * @return String
 	 */
 	public String getKey() {
+        System.out.println("test");
 		String s="";
 		try
 		{

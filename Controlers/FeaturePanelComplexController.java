@@ -14,9 +14,9 @@ public class FeaturePanelComplexController extends FeaturePanelController{
 	 * Constructor to pass the View.FeaturePanelComplex using this controller
 	 * @param fp
 	 */
-	FeaturePanelComplex fp;
-	public FeaturePanelComplexController(FeaturePanelComplex fp) {
-		this.fp = fp;
+
+	public FeaturePanelComplexController(FeaturePanel fp) {
+		super(fp);
 	}
 
 	/**
@@ -26,28 +26,28 @@ public class FeaturePanelComplexController extends FeaturePanelController{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		String s = e.getActionCommand();
-		String key = fp.getKey();
-		
+		String key = currentPanel.getKey();
+		FeaturePanelComplex tempCast = (FeaturePanelComplex) currentPanel;
 		if(s.equals("Add a simple subfeature"))
 		{
 			if(key.isEmpty())
 			{
-				fp.getView().sendErrorFrame("Please enter a valid name");
+                currentPanel.getView().sendErrorFrame("Please enter a valid name");
 			}
 			else
 			{
 
-				FeaturePanelSimple newSimple = new FeaturePanelSimple(fp.getView(), fp.getTypes(), fp.getKey(), fp.getTab() + 1, fp);
+				FeaturePanelSimple newSimple = new FeaturePanelSimple(currentPanel.getView(), currentPanel.getTypes(), currentPanel.getKey(), currentPanel.getTab() + 1,tempCast);
 				newSimple.setParentComplexKey(key);
-				fp.getView().addFeaturePanelSimple(newSimple);
-				fp.disableFeatureName();
+                currentPanel.getView().addFeaturePanelSimple(newSimple);
+                tempCast.disableFeatureName();
 
 
 			}
 		}
 		else if(s.equals("Add a complex subfeature"))
 		{
-            fp.getView().sendErrorFrame("Complex subfeatures are not supported at the moment.");
+            currentPanel.getView().sendErrorFrame("Complex subfeatures are not supported at the moment.");
 		    /* CODE FOR A LATER IMPLEMENTATION
 			if(key.isEmpty())
 			{
@@ -72,26 +72,27 @@ public class FeaturePanelComplexController extends FeaturePanelController{
 
 			if(key.isEmpty())
 			{
-				fp.getView().sendErrorFrame("Please enter a valid name");
+                currentPanel.getView().sendErrorFrame("Please enter a valid name");
 
 			}
 			else
 			{
-			    addValueToDataModel(key);
+			    addValueToDataModel(key, tempCast);
 			}
 		}
 
 	}
 
-	public void addValueToDataModel(String key){
+	public void addValueToDataModel(String key, FeaturePanelComplex tempCast){
+
         if(MainController.dataModel.cellTypeComp(key) < 2){
-            fp.getView().sendErrorFrame("Please add at least 2 subfeatures");
+            tempCast.getView().sendErrorFrame("Please add at least 2 subfeatures");
         }
         else
         {
-            fp.disableAddSimpleButton();
-            fp.disable();
-            if(fp.getParentComplex() == null)
+            tempCast.disableAddSimpleButton();
+            tempCast.disable();
+            if(currentPanel.getParentComplex() == null)
             {
                 if(!MainController.dataModel.getCellTypes().keySet().contains(key)){
                     MainController.dataModel.setSingleCellType(key, "comp");

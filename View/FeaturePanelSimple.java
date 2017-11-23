@@ -23,10 +23,10 @@ import Controlers.*;
  *
  */
 public class FeaturePanelSimple extends FeaturePanel{
-	
-	private JLabel key, value;
+
+	//Things specialized for this particular input
+	private JLabel  value;
 	private JComboBox<String> featureClass;
-	private JTextField  featureName;
 
 	/**
 	 * Default constructor for a View.FeaturePanelSimple with no parent
@@ -41,21 +41,12 @@ public class FeaturePanelSimple extends FeaturePanel{
 		String[] typesArray = types.toArray(new String[0]);
 		featureClass = new JComboBox<String>(typesArray);
 		value = new JLabel("Feature type: ");
-		key = new JLabel("Feature name: ");
 
-		featureName = new JTextField(15);
-
-		
-		innerPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
-		innerPanel.add(key);
-		innerPanel.add(featureName);
 		innerPanel.add(value);
 		innerPanel.add(featureClass);
-		innerPanel.add(add);
-		
+        innerPanel.add(add);
 		controller = new FeaturePanelSimpleController(this);
-		add.addActionListener(controller);		
-		
+		add.addActionListener(controller);
 	}
 	
 	/**
@@ -94,12 +85,14 @@ public class FeaturePanelSimple extends FeaturePanel{
 		}
 		return s;
 	}
+
+
 	
 	/**
 	 * Disables the JTextField and JComBobox
 	 */
 	public void disable()
-	{
+    {
 		featureName.setEnabled(false);
 		featureClass.setEnabled(false);
 		add.setEnabled(false);
