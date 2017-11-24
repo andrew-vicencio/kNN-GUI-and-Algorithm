@@ -2,7 +2,6 @@ package Maths;
 
 import DataModel.*;
 import Maths.NumericalDistance;
-import Maths.StringDistance;
 import Maths.kNN;
 
 import java.util.*;
@@ -45,6 +44,7 @@ public class EuclideanKNN extends kNN {
 		StringDistance sDist = new StringDistance();
 		
 		ds.findStatistics();
+		targetPoint.normalize(ds.getMean(), ds.getStdDev());
 		
 		ArrayList<Point> points = ds.getPoints();
 		

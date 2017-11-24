@@ -1,6 +1,5 @@
 package DataModel;
 
-import DataModel.Cell;
 import DataModel.CompositeCell;
 import DataModel.SimpleCell;
 
@@ -94,12 +93,14 @@ public class Point
     public void normalize(ConcurrentHashMap<String, Float> mean, ConcurrentHashMap<String, Float> stddev) {
     	float val;
     	for (String k: mean.keySet()) {
-    		if (((SimpleCell)getCell(k)).getValue() instanceof Integer) {
-    			val = (float)(int)((SimpleCell)getCell(k)).getValue();
-    		} else {
-    			val = (float)((SimpleCell)getCell(k)).getValue();
-    		}
-    		stdValues.put(k, new SimpleCell<Float>(k, (val - mean.get(k) / stddev.get(k))));
+    		try {
+	    		if (((SimpleCell)getCell(k)).getValue() instanceof Integer) {
+	    			val = (float)(int)((SimpleCell)getCell(k)).getValue();
+	    		} else {
+	    			val = (float)((SimpleCell)getCell(k)).getValue();
+	    		}
+	    		stdValues.put(k, new SimpleCell<Float>(k, (val - mean.get(k) / stddev.get(k))));
+    		} catch (NullPointerException ne) {}
     	}
     }
 
