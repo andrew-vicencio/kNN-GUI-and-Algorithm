@@ -6,6 +6,8 @@ import DataModel.*;
 
 import java.awt.event.ActionEvent;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
+
 import View.*;
 
 /**
@@ -29,9 +31,8 @@ public class ValueTestFrameController extends ValueInputController {
         String distanceMetric = tempCast.getDistanceMetric();
 	    String testKey = tempCast.getTestValue();
         Point newPoint = new Point();
-        HashMap<String, Cell> newConfiguredData = new HashMap<String, Cell>();
+        LinkedHashMap<String, Cell> newConfiguredData = new LinkedHashMap<String, Cell>();
         int k =0;
-        int mink = 0;
         System.out.println(testKey);
         for(String key : MainController.dataModel.getCellTypes().keySet()){
             if(MainController.dataModel.getCellTypes().get(key).equals("comp")){
@@ -53,18 +54,8 @@ public class ValueTestFrameController extends ValueInputController {
         }catch (NumberFormatException ex){
             view.sendErrorFrame("Invalid K value was provided");
         }
-        if(distanceMetric.equals("Minkowski"))
-        {
-        	try{
-            		mink = Integer.parseInt(tempCast.getMinkTextField().getText());
-            	}
-        	catch (NumberFormatException ex){
-        		view.sendErrorFrame("Invalid polynomial value was provided");
-        	}
-		}
-        
 
-        view.addTestCaseResult(MainController.dataModel.findkNN(testKey, newPoint, k, distanceMetric, mink));
+        view.addTestCaseResult(MainController.dataModel.findkNN(testKey, newPoint, k, distanceMetric, tempCast.getMinkPolynomial()));
 
 	}
 

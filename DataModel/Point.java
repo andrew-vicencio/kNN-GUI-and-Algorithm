@@ -4,6 +4,7 @@ import DataModel.CellComposite;
 import DataModel.CellSimple;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -17,8 +18,8 @@ import java.util.concurrent.ConcurrentHashMap;
 
 public class Point 
 {
-    private HashMap<String, Cell> rawValues;
-    private HashMap<String, Cell> stdValues;
+    private LinkedHashMap<String, Cell> rawValues;
+    private LinkedHashMap<String, Cell> stdValues;
 	
     /**
     * DataModel.Point constructor for a point with a given value.
@@ -27,8 +28,8 @@ public class Point
     */
 
     public Point() {
-        rawValues = new HashMap<String, Cell>();
-        stdValues = new HashMap<String, Cell>();
+        rawValues = new LinkedHashMap<String, Cell>();
+        stdValues = new LinkedHashMap<String, Cell>();
 
     }
 	
@@ -43,7 +44,7 @@ public class Point
     }
 
 
-      public void setHashMaprawValues( HashMap<String,Cell> f){
+      public void setHashMaprawValues(LinkedHashMap<String,Cell> f){
         rawValues = f;
     }
 
@@ -123,7 +124,7 @@ public class Point
     * 
     * @param stdValues		The HashMap containing the new standard deviations.
     */
-    public void setStdValues(HashMap<String, Cell> stdValues) {
+    public void setStdValues(LinkedHashMap<String, Cell> stdValues) {
         this.stdValues = stdValues;
     }
     
@@ -137,9 +138,21 @@ public class Point
         System.out.println("Size of DataModel.Point" + rawValues.values().size());
         String finalString = "";
         for (Cell x: rawValues.values()) {
-            finalString += x.toString() + "\n";
+        	 if(x instanceof CellComposite){		
+        		 if(finalString == ""){		
+        		 finalString =    ((CellComposite)(x)).toString();		
+        		 }else{		
+        		 finalString = finalString +", " +  ((CellComposite)(x)).toString();		
+        	 }		
+        	 }else{		
+        		 	if(finalString == ""){		
+        	                    finalString =  ((CellSimple)(x)).toString();		
+        	                 }else{		
+        	                     finalString = finalString + ", " + ((CellSimple)(x)).toString();		
+        	                 }		
+        	 	
+        	             }	
         }
-
 		return finalString;
     }
 }

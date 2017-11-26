@@ -33,8 +33,10 @@ public class PromptValueFrame extends PromptFrame {
 	 */
 	public void fillPrompts()
 	{
+		System.out.println("In PVF: " + view.getDataModel().getCellTypes().keySet());
 		for(String str: view.getDataModel().getCellTypes().keySet())
 		{
+			
 		    if(!view.getDataModel().getCellTypes().get(str).equals("comp")){
 		    	name = new JLabel(str);
 		    	type = new JLabel(view.getDataModel().getCellTypes().get(str));
