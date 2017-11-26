@@ -5,6 +5,7 @@ import java.awt.BorderLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.text.JTextComponent;
 
 import Controllers.*;
 /**
@@ -17,9 +18,10 @@ public class TestCaseFrame extends PromptFrame {
 	
 
 	private String testValue, distanceMetric;
-	private JLabel kLabel;
-	private JTextField kTextField;
+	private JLabel kLabel, minkLabel;
+	private JTextField kTextField, minkTextField;
 	private ValueTestFrameController controller;
+	private JPanel kPanel, minkPanel;
 	
 	
 	/**
@@ -30,8 +32,12 @@ public class TestCaseFrame extends PromptFrame {
 	public TestCaseFrame(View view, String testValue, String distanceMetric)
 	{
 		super(view, "Enter your test case values");
-		kLabel = new JLabel("K value to test");
+		kLabel = new JLabel("K value: ");
+		minkLabel = new JLabel("Polynomial Order (3 - 6): ");
 		kTextField = new JTextField(15);
+		minkTextField = new JTextField(15);
+		kPanel = new JPanel();
+		minkPanel = new JPanel();
 		this.testValue = testValue;
 		controller = new ValueTestFrameController( view, this);
 		
@@ -39,6 +45,8 @@ public class TestCaseFrame extends PromptFrame {
 		this.view = view;
 		this.testValue = testValue;
 		this.distanceMetric = distanceMetric;
+		fillPrompts();
+	
 	}
 			
 	/**
@@ -66,14 +74,27 @@ public class TestCaseFrame extends PromptFrame {
 		}
 		
 		done.addActionListener(controller);
-		footerPanel.add(kLabel);
-		footerPanel.add(kTextField);
+		kPanel.add(kLabel);
+		kPanel.add(kTextField);
+		footerPanel.add(kPanel);
+		if(distanceMetric.equals("Minkowski"))
+		{
+			addMinkPrompt();
+		}
 		footerPanel.add(done);
 		add(mainPanel, BorderLayout.CENTER);
 		add(footerPanel, BorderLayout.SOUTH);
 		setVisible(true);
 	}
 	
+	private void addMinkPrompt() 
+	{
+		minkPanel.add(minkLabel);
+		minkPanel.add(minkTextField);
+		footerPanel.add(minkPanel);
+		
+	}
+
 	/**
 	 * Provides the JTextField where the user inputed the K value they require
 	 * @return
@@ -98,4 +119,15 @@ public class TestCaseFrame extends PromptFrame {
     public void setTestValue(String testValue) {
         this.testValue = testValue;
     }
+
+	public JTextField getMinkTextField() {
+		return minkTextField;
+	}
+	
+	public String getDistanceMetric()
+	{
+		return distanceMetric;
+	}
 }
+
+

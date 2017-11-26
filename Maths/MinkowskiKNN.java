@@ -4,10 +4,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import DataModel.Cell;
-import DataModel.CompositeCell;
+import DataModel.CellComposite;
 import DataModel.DimensionalSpace;
 import DataModel.Point;
-import DataModel.SimpleCell;
+import DataModel.CellSimple;
 import Maths.kNN.Tuple;
 
 /**
@@ -79,14 +79,14 @@ public class MinkowskiKNN extends kNN {
 				
 				for (String key: currentPtValues.keySet()) {
 					if (!(key.equals(targetKey))) {
-						if (currentPtValues.get(key) instanceof SimpleCell) {
-							if (((SimpleCell)currentPtValues.get(key)).getValue() instanceof String) {
-								distance += Math.pow(sDist.calcDistance((SimpleCell)targetPtValues.get(key), (SimpleCell)currentPtValues.get(key)), order);
+						if (currentPtValues.get(key) instanceof CellSimple) {
+							if (((CellSimple)currentPtValues.get(key)).getValue() instanceof String) {
+								distance += Math.pow(sDist.calcDistance((CellSimple)targetPtValues.get(key), (CellSimple)currentPtValues.get(key)), order);
 							} else {
-								distance += Math.pow(nDist.calcDistance((SimpleCell)targetPtValues.get(key), (SimpleCell)currentPtValues.get(key)), order);
+								distance += Math.pow(nDist.calcDistance((CellSimple)targetPtValues.get(key), (CellSimple)currentPtValues.get(key)), order);
 							}
 						} else {
-							distance += Math.pow(MinkowskiComposite((CompositeCell) currentPtValues.get(key), (CompositeCell) targetPtValues.get(key)), order);
+							distance += Math.pow(MinkowskiComposite((CellComposite) currentPtValues.get(key), (CellComposite) targetPtValues.get(key)), order);
 						}
 					}
 				}
@@ -143,7 +143,7 @@ public class MinkowskiKNN extends kNN {
 	 * @param target	The DataModel.CompositeCell of the target point
 	 * @return			The distance between the Cells
 	 */
-	public float MinkowskiComposite(CompositeCell current, CompositeCell target) {
+	public float MinkowskiComposite(CellComposite current, CellComposite target) {
 	  	
 		NumericalDistance nDist = new NumericalDistance();
 		StringDistance sDist = new StringDistance();
@@ -151,14 +151,14 @@ public class MinkowskiKNN extends kNN {
 		float distance = 0;
 		
 		for (Cell c: subCells) {
-			if (c instanceof SimpleCell) {
-				if (((SimpleCell) c).getValue() instanceof String) {
-					distance += Math.pow(sDist.calcDistance((SimpleCell) target.getSubCell(c.getKey()), (SimpleCell) c), order);
+			if (c instanceof CellSimple) {
+				if (((CellSimple) c).getValue() instanceof String) {
+					distance += Math.pow(sDist.calcDistance((CellSimple) target.getSubCell(c.getKey()), (CellSimple) c), order);
 				} else {
-					distance += Math.pow(nDist.calcDistance((SimpleCell) target.getSubCell(c.getKey()), (SimpleCell) c), order);
+					distance += Math.pow(nDist.calcDistance((CellSimple) target.getSubCell(c.getKey()), (CellSimple) c), order);
 				}
 			} else {
-				distance += MinkowskiComposite((CompositeCell) c, (CompositeCell) target.getSubCell(c.getKey()));
+				distance += MinkowskiComposite((CellComposite) c, (CellComposite) target.getSubCell(c.getKey()));
 			}
 		}
 		

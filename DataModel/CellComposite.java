@@ -9,7 +9,7 @@ import java.util.ArrayList;
  * @version Milestone 2
  *
  */
-public class CompositeCell extends Cell {
+public class CellComposite extends Cell {
 
 	private ArrayList<Cell> value;
 	
@@ -19,7 +19,7 @@ public class CompositeCell extends Cell {
 	 * 
 	 * @param key	The cell's key
 	 */
-	public CompositeCell(String key) {
+	public CellComposite(String key) {
 		super(key);
 		value = new ArrayList<Cell>();
 	}
@@ -51,8 +51,8 @@ public class CompositeCell extends Cell {
 		for (Cell c: value) {
 			if(c.getKey().equals(key)) {
 				return c;
-			} else if (c instanceof CompositeCell){
-				Cell d = ((CompositeCell)c).getSubCell(key);
+			} else if (c instanceof CellComposite){
+				Cell d = ((CellComposite)c).getSubCell(key);
 				if (d != null) {
 					return d;
 				}

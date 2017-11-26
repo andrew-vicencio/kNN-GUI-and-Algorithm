@@ -1,7 +1,7 @@
 package DataModel;
 
-import DataModel.CompositeCell;
-import DataModel.SimpleCell;
+import DataModel.CellComposite;
+import DataModel.CellSimple;
 
 import java.util.HashMap;
 import java.util.Set;
@@ -71,8 +71,8 @@ public class Point
     	if (targ == null) {
     		for (String k: rawValues.keySet()) {
     			targ = rawValues.get(k);
-    			if (targ instanceof CompositeCell) {
-    				targ = ((CompositeCell)targ).getSubCell(att);
+    			if (targ instanceof CellComposite) {
+    				targ = ((CellComposite)targ).getSubCell(att);
     				if (targ != null) {
     					break;
     				}
@@ -94,12 +94,12 @@ public class Point
     	float val;
     	for (String k: mean.keySet()) {
     		try {
-	    		if (((SimpleCell)getCell(k)).getValue() instanceof Integer) {
-	    			val = (float)(int)((SimpleCell)getCell(k)).getValue();
+	    		if (((CellSimple)getCell(k)).getValue() instanceof Integer) {
+	    			val = (float)(int)((CellSimple)getCell(k)).getValue();
 	    		} else {
-	    			val = (float)((SimpleCell)getCell(k)).getValue();
+	    			val = (float)((CellSimple)getCell(k)).getValue();
 	    		}
-	    		stdValues.put(k, new SimpleCell<Float>(k, (val - mean.get(k) / stddev.get(k))));
+	    		stdValues.put(k, new CellSimple<Float>(k, (val - mean.get(k) / stddev.get(k))));
     		} catch (NullPointerException ne) {}
     	}
     }

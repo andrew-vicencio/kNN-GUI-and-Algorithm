@@ -98,12 +98,12 @@ public class DimensionalSpace {
 		  for (String k: cellList.keySet()) {
 			  Cell c = cellList.get(k);
 			  
-			  if (c instanceof SimpleCell) {
-				  if (!(((SimpleCell)c).getValue() instanceof String)) {
-					  calcSimpleSum((SimpleCell)c);
+			  if (c instanceof CellSimple) {
+				  if (!(((CellSimple)c).getValue() instanceof String)) {
+					  calcSimpleSum((CellSimple)c);
 				  }
 			  } else {
-				  calcComplexSum((CompositeCell)c);
+				  calcComplexSum((CellComposite)c);
 			  }
 		  }
 	  }
@@ -114,16 +114,16 @@ public class DimensionalSpace {
    * 
    * @param c		The DataModel.CompositeCell to be used to increment the corresponding sums.
    */
-  private void calcComplexSum(CompositeCell c) {
+  private void calcComplexSum(CellComposite c) {
 	  ArrayList<Cell> subCells = c.getSubCells();
 	  
 	  for (Cell subC: subCells) {
-		  if (subC instanceof SimpleCell) {
-			  if (!(((SimpleCell)subC).getValue() instanceof String)) {
-				  calcSimpleSum((SimpleCell)subC);
+		  if (subC instanceof CellSimple) {
+			  if (!(((CellSimple)subC).getValue() instanceof String)) {
+				  calcSimpleSum((CellSimple)subC);
 			  }
 		  } else {
-			  calcComplexSum((CompositeCell)subC);
+			  calcComplexSum((CellComposite)subC);
 		  }
 	  }
   }
@@ -133,7 +133,7 @@ public class DimensionalSpace {
    * 
    * @param c		The DataModel.SimpleCell to use to increment the sum
    */
-  private void calcSimpleSum(SimpleCell c) {
+  private void calcSimpleSum(CellSimple c) {
 	  float val;
 	  if (c.getValue() instanceof Integer) {
 		  val = (float)(int)c.getValue();
@@ -166,13 +166,13 @@ public class DimensionalSpace {
 	  for (String k: mean.keySet()) {
 		  val = 0;
 		  u = mean.get(k);
-		  if (((SimpleCell)points.get(0).getCell(k)).getValue() instanceof Integer) {
+		  if (((CellSimple)points.get(0).getCell(k)).getValue() instanceof Integer) {
 			  for (Point pt: points) {
-				  val += Math.pow(((float)(int)((SimpleCell)pt.getCell(k)).getValue()) - u, 2);
+				  val += Math.pow(((float)(int)((CellSimple)pt.getCell(k)).getValue()) - u, 2);
 			  }
 		  } else {
 			  for (Point pt: points) {
-				  val += Math.pow(((float)((SimpleCell)pt.getCell(k)).getValue()) - u, 2);
+				  val += Math.pow(((float)((CellSimple)pt.getCell(k)).getValue()) - u, 2);
 			  }
 		  }
 		  stddev.put(k, (float) Math.sqrt(val / (numberOfPoints - 1)));

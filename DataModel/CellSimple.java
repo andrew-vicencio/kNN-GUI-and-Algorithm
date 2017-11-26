@@ -9,7 +9,7 @@ package DataModel;
  *
  * @param <E>	Type of the value to be stored.
  */
-public class SimpleCell<E> extends Cell {
+public class CellSimple<E> extends Cell {
 	
 	private E value;
 	
@@ -19,7 +19,7 @@ public class SimpleCell<E> extends Cell {
 	 * @param key		The key of the cell.
 	 * @param value		The cell's value, of type E
 	 */
-	public SimpleCell(String key, E value) {
+	public CellSimple(String key, E value) {
 		super(key);
 		this.value = value;
 	}

@@ -346,6 +346,7 @@ public class View {
 		 "Feature", JOptionPane.QUESTION_MESSAGE, null, optionsArray, optionsArray[0]);
 		 String distanceMetric = (String) JOptionPane.showInputDialog(chooseValueFrame, "Choose a distance metric",
 				 "Feature", JOptionPane.QUESTION_MESSAGE, null, metricsArray, metricsArray[0]);
+		 System.out.println("POINT 1");
 		 TestCaseFrame testFrame = new TestCaseFrame(this, testValue, distanceMetric);
 	}
 	
