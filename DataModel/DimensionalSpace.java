@@ -25,10 +25,9 @@ public class DimensionalSpace {
   private ConcurrentHashMap<String, Float> sum;
   private HashMap<String, String> cellTypes;
   private int numberOfPoints;
-  private int numberOfFields;
+    private int numberOfFields;
   private ArrayList<Point> points;
   private View view;
-  private ArrayList<String> distanceMetrics;
   
   /**
    * Constructor for instances of the DataModel.DimensionalSpace class. Initializes the class variables and sets the
@@ -42,12 +41,6 @@ public class DimensionalSpace {
     numberOfPoints = 0;
     numberOfFields = 0;
     cellTypes = new HashMap<String, String>();
-    distanceMetrics = new ArrayList<String>();
-    distanceMetrics.add("Manhattan");
-    distanceMetrics.add("Minkowski");
-    distanceMetrics.add("Chebyshev");
-    distanceMetrics.add("Euclidean");
-    
   }
   
   
@@ -168,11 +161,15 @@ public class DimensionalSpace {
 		  u = mean.get(k);
 		  if (((CellSimple)points.get(0).getCell(k)).getValue() instanceof Integer) {
 			  for (Point pt: points) {
-				  val += Math.pow(((float)(int)((CellSimple)pt.getCell(k)).getValue()) - u, 2);
+				  try {
+					  val += Math.pow(((float)(int)((CellSimple)pt.getCell(k)).getValue()) - u, 2);
+				  } catch (NullPointerException ne){}
 			  }
 		  } else {
 			  for (Point pt: points) {
-				  val += Math.pow(((float)((CellSimple)pt.getCell(k)).getValue()) - u, 2);
+				  try {
+					  val += Math.pow(((float)((CellSimple)pt.getCell(k)).getValue()) - u, 2);
+				  } catch (NullPointerException ne){}
 			  }
 		  }
 		  stddev.put(k, (float) Math.sqrt(val / (numberOfPoints - 1)));
@@ -346,14 +343,6 @@ public class DimensionalSpace {
     //TODO: DOCUMENT
     public HashMap<String, String> getCellTypes(){
         return cellTypes;
-    }
-    
-    /**
-     * Returns an ArrayList of the names of the distance metrics available
-     * @return
-     */
-    public ArrayList<String> getDistanceMetrics(){
-    	return distanceMetrics;
     }
 
 }
