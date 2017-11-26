@@ -6,6 +6,8 @@ import DataModel.*;
 
 import java.awt.event.ActionEvent;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
+
 import View.*;
 /**
  * A Controller class for a View.PromptValueFrame.
@@ -35,7 +37,7 @@ public class ValuePromptFrameController extends ValueInputController {
 	public void actionPerformed(ActionEvent e) {
 		
                 Point newPoint = new Point();
-                HashMap<String, Cell> newConfiguredData = new HashMap<String, Cell>();
+                LinkedHashMap<String, Cell> newConfiguredData = new LinkedHashMap<String, Cell>();
 
                 frame.dispose();
 

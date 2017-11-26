@@ -16,7 +16,7 @@ import Controllers.*;
 public class TestCaseFrame extends PromptFrame {
 	
 
-	private String testValue;
+	private String testValue, distanceMetric;
 	private JLabel kLabel;
 	private JTextField kTextField;
 	private ValueTestFrameController controller;
@@ -27,7 +27,7 @@ public class TestCaseFrame extends PromptFrame {
 	 * @param view: View.View object this JFrame was spawned from
 	 * @param testValue: String
 	 */
-	public TestCaseFrame(View view, String testValue)
+	public TestCaseFrame(View view, String testValue, String distanceMetric)
 	{
 		super(view, "Enter your test case values");
 		kLabel = new JLabel("K value to test");
@@ -38,6 +38,7 @@ public class TestCaseFrame extends PromptFrame {
 		
 		this.view = view;
 		this.testValue = testValue;
+		this.distanceMetric = distanceMetric;
 	}
 			
 	/**

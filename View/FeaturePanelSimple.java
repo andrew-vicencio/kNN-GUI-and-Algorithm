@@ -25,8 +25,8 @@ import Controllers.*;
 public class FeaturePanelSimple extends FeaturePanel{
 
 	//Things specialized for this particular input
-	private JLabel  value;
-	private JComboBox<String> featureClass;
+	private JLabel  featureTypeLabel;
+	private JComboBox<String> featureType;
 
 	/**
 	 * Default constructor for a View.FeaturePanelSimple with no parent
@@ -39,14 +39,16 @@ public class FeaturePanelSimple extends FeaturePanel{
 	{
 		super(view, types, superFeatureName, tab);
 		String[] typesArray = types.toArray(new String[0]);
-		featureClass = new JComboBox<String>(typesArray);
-		value = new JLabel("Feature type: ");
+		String[] metricsArray = {"Example1", "Example2", "Example3"};
+		featureType = new JComboBox<String>(typesArray);
+		featureTypeLabel = new JLabel("Feature type: ");
 
-		innerPanel.add(value);
-		innerPanel.add(featureClass);
+		innerPanel.add(featureTypeLabel);
+		innerPanel.add(featureType);
         innerPanel.add(add);
 		controller = new FeaturePanelSimpleController(this);
 		add.addActionListener(controller);
+		
 	}
 	
 	/**
@@ -77,7 +79,7 @@ public class FeaturePanelSimple extends FeaturePanel{
 		String s="";
 		try
 		{
-			s = (String) featureClass.getSelectedItem();
+			s = (String) featureType.getSelectedItem();
 		}
 		catch(Exception e)
 		{
@@ -86,23 +88,15 @@ public class FeaturePanelSimple extends FeaturePanel{
 		return s;
 	}
 
-
-	
 	/**
 	 * Disables the JTextField and JComBobox
 	 */
 	public void disable()
     {
 		featureName.setEnabled(false);
-		featureClass.setEnabled(false);
+		featureType.setEnabled(false);
 		add.setEnabled(false);
 	}
-
-	public String getKeyParentName() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 }
-	
 
 

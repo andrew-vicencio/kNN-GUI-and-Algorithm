@@ -17,7 +17,7 @@ public class FeaturePanelSimpleController extends FeaturePanelController {
 	 * Constructor to pass the View.FeaturePanelComplex using this controller
 	 * @param fp
 	 */
-	public FeaturePanelSimpleController(FeaturePanel fp)
+	public FeaturePanelSimpleController(FeaturePanelSimple fp)
 	{
 		super(fp);
 	}
