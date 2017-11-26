@@ -313,7 +313,8 @@ public class View {
 	 */
 	public void promptTestCase()
 	{
-		 String[] metricsArray = {"Example1", "Example2"};
+		 String[] metricsArray = new String[dataModel.getDistanceMetrics().size()];
+		 dataModel.getDistanceMetrics().toArray(metricsArray);
 		 Set<String> optionsSet = dataModel.getCellTypes().keySet();
 		 ArrayList<String> optionsArrayList = new ArrayList<String>();
 		 for(String s: optionsSet)
