@@ -6,7 +6,8 @@ import java.util.*;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.EtchedBorder;
-import Controlers.*;
+
+import Controllers.*;
 import DataModel.DimensionalSpace;
 import DataModel.Point;
 
@@ -28,7 +29,7 @@ public class View {
 	private JButton done;
 	private LinkedHashMap<String, Object> features;
 	private ArrayList<String> featureTypes;
-	private MenuController menuController;
+	private ButtonMenuController menuController;
     private DimensionalSpace dataModel;
 
 	
@@ -57,7 +58,7 @@ public class View {
 		simpleFeature = new JMenuItem("Add a Simple Feature");
 		complexFeature = new JMenuItem("Add a Complex Feature");
 		done = new JButton("Done");
-		menuController = new MenuController(this);
+		menuController = new ButtonMenuController(this);
         dataModel = menuController.getDataModel();
         dataModel.setView(this);
 
@@ -91,7 +92,7 @@ public class View {
 		simpleFeature.setEnabled(false);
 		
 		//Action Listeners
-		done.addActionListener(new DoneButtonController(this));
+		done.addActionListener(new ButtonAddFeaturesController(this));
 		create.addActionListener(menuController);
 		simpleFeature.addActionListener(menuController);
 		complexFeature.addActionListener(menuController);

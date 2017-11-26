@@ -1,6 +1,6 @@
 package Maths;
 
-import DataModel.SimpleCell;
+import DataModel.CellSimple;
 
 /**
  * Calculates a distance between two String values. This algorithm uses the Hamming Distance calculation. This
@@ -16,7 +16,7 @@ import DataModel.SimpleCell;
 public class StringDistance extends DistanceAlg {
 
 	@Override
-	public float calcDistance(SimpleCell target, SimpleCell current) {
+	public float calcDistance(CellSimple target, CellSimple current) {
 
 		String targetString = (String) target.getValue();
 		String currentString = (String) current.getValue();

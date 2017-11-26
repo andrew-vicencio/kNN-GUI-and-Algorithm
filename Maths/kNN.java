@@ -46,12 +46,12 @@ public abstract class kNN {
 	 * @return						A cell containing the calculated value(s)
 	 */
 	public Cell findValue(ArrayList<Tuple<Float, Cell>> closestKNeighbours, String targetKey) {
-		if (closestKNeighbours.get(0).getValue2() instanceof SimpleCell) {
-			if (((SimpleCell)closestKNeighbours.get(0).getValue2()).getValue() instanceof String) {
+		if (closestKNeighbours.get(0).getValue2() instanceof CellSimple) {
+			if (((CellSimple)closestKNeighbours.get(0).getValue2()).getValue() instanceof String) {
 				return calculateSimpleCell(closestKNeighbours, "String", targetKey);
-			} else if (((SimpleCell)closestKNeighbours.get(0).getValue2()).getValue() instanceof Integer) {
+			} else if (((CellSimple)closestKNeighbours.get(0).getValue2()).getValue() instanceof Integer) {
 				return calculateSimpleCell(closestKNeighbours, "Integer", targetKey);
-			} else if (((SimpleCell)closestKNeighbours.get(0).getValue2()).getValue() instanceof Float) {
+			} else if (((CellSimple)closestKNeighbours.get(0).getValue2()).getValue() instanceof Float) {
 				return calculateSimpleCell(closestKNeighbours, "Float", targetKey);
 			}
 		} else {
@@ -61,31 +61,31 @@ public abstract class kNN {
 	}
 	
 	/**
-	 * calculateCompositeCell calculates the Maths.kNN value if the target key corresponds to a DataModel.CompositeCell
+	 * calculateCompositeCell calculates the Maths.kNN value if the target key corresponds to a DataModel.CellComposite
 	 * 
 	 * @param closestKNeighbours	An ArrayList of Tuples containing the distance and corresponding DataModel.Cell of
 	 * 									each of the k nearest neighbours.
 	 * @param targetKey				The key of the value to be found
-	 * @return						A DataModel.CompositeCell containing the calculated value(s)
+	 * @return						A DataModel.CellComposite containing the calculated value(s)
 	 */
 
-	public CompositeCell calculateCompositeCell(ArrayList<Tuple<Float, Cell>> closestKNeighbours, String targetKey) {
+	public CellComposite calculateCompositeCell(ArrayList<Tuple<Float, Cell>> closestKNeighbours, String targetKey) {
 		
-		ArrayList<Cell> cellsToCalc = ((CompositeCell)closestKNeighbours.get(0).getValue2()).getSubCells();
-		CompositeCell target = new CompositeCell(targetKey);
+		ArrayList<Cell> cellsToCalc = ((CellComposite)closestKNeighbours.get(0).getValue2()).getSubCells();
+		CellComposite target = new CellComposite(targetKey);
 		
 		for (Cell c: cellsToCalc) {
 			ArrayList<Tuple<Float, Cell>> subList = new ArrayList<Tuple<Float, Cell>>(closestKNeighbours.size());
 			for(int i = 0; i < closestKNeighbours.size(); i++) {
-				subList.add(i, new Tuple<Float, Cell>(closestKNeighbours.get(i).getValue1(), ((CompositeCell)closestKNeighbours.get(i).getValue2()).getSubCell(c.getKey())));
+				subList.add(i, new Tuple<Float, Cell>(closestKNeighbours.get(i).getValue1(), ((CellComposite)closestKNeighbours.get(i).getValue2()).getSubCell(c.getKey())));
 			}
 			
-			if (c instanceof SimpleCell) {
-				if (((SimpleCell) c).getValue() instanceof String) {
+			if (c instanceof CellSimple) {
+				if (((CellSimple) c).getValue() instanceof String) {
 					target.addCell(calculateSimpleCell(subList, "String", c.getKey()));
-				} else if (((SimpleCell) c).getValue() instanceof Integer) {
+				} else if (((CellSimple) c).getValue() instanceof Integer) {
 					target.addCell(calculateSimpleCell(subList, "Integer", c.getKey()));
-				} else if (((SimpleCell) c).getValue() instanceof Float) {
+				} else if (((CellSimple) c).getValue() instanceof Float) {
 					target.addCell(calculateSimpleCell(subList, "Float", c.getKey()));
 				}
 			} else {
@@ -97,8 +97,8 @@ public abstract class kNN {
 	}
 
 	/**
-	 * calculateSimpleCell calculates the Maths.kNN value if the target key corresponds to a DataModel.SimpleCell. This is called by
-	 * calculateCompositeCell when it needs to calculate DataModel.SimpleCell values. For numeric values, this funcitons returns
+	 * calculateSimpleCell calculates the Maths.kNN value if the target key corresponds to a DataModel.CellSimple. This is called by
+	 * calculateCompositeCell when it needs to calculate DataModel.CellSimple values. For numeric values, this funcitons returns
 	 * the average as the value. For String values, this function returnseither the most common String among the nearest 
 	 * neighbours, or in the case of a tie, the closest String of the nighbours involved. For example, if every String 
 	 * appears once, this function will return the String of the nearest neighbour.
@@ -106,7 +106,7 @@ public abstract class kNN {
 	 * @param closestKNeighbours	An ArrayList of Tuples containing the distance and corresponding DataModel.Cell of
 	 * 									each of the k nearest neighbours.
 	 * @param targetKey				The key of the value to be found
-	 * @return						A DataModel.SimpleCell containing the calculated value(s)
+	 * @return						A DataModel.CellSimple containing the calculated value(s)
 	 */
 
 	public Cell calculateSimpleCell(ArrayList<Tuple<Float, Cell>> closestKNeighbours, String type, String targetKey) {
@@ -117,7 +117,7 @@ public abstract class kNN {
 				String s;
 				
 				for (int i= 0; i < closestKNeighbours.size(); i++) {
-					s = (String)((SimpleCell)closestKNeighbours.get(i).getValue2()).getValue();
+					s = (String)((CellSimple)closestKNeighbours.get(i).getValue2()).getValue();
 					if (stringCount.containsKey(s)) {
 						stringCount.put(s, stringCount.get(s) + 1);
 					} else {
@@ -125,7 +125,7 @@ public abstract class kNN {
 					}
 				}
 				
-				s = (String)((SimpleCell)closestKNeighbours.get(0).getValue2()).getValue();
+				s = (String)((CellSimple)closestKNeighbours.get(0).getValue2()).getValue();
 				int count = stringCount.get(s);
 				
 				for (String key: stringCount.keySet()) {
@@ -135,9 +135,9 @@ public abstract class kNN {
 					} else if (stringCount.get(key) == count) {
 						for (Tuple<Float, Cell> t: closestKNeighbours) {
 
-							if (((String)((SimpleCell)t.getValue2()).getValue()).equals(s)) {
+							if (((String)((CellSimple)t.getValue2()).getValue()).equals(s)) {
 								break;
-							} else if (((String)((SimpleCell)t.getValue2()).getValue()).equals(key)) {
+							} else if (((String)((CellSimple)t.getValue2()).getValue()).equals(key)) {
 
 								s = key;
 								break;
@@ -145,23 +145,23 @@ public abstract class kNN {
 						}
 					}
 				}
-				return new SimpleCell<String>(targetKey, s);
+				return new CellSimple<String>(targetKey, s);
 				
 			case "Integer":
 				int iValue = 0;
 				
 				for (Tuple<Float, Cell> t: closestKNeighbours) {
-					iValue += (int)((SimpleCell)t.getValue2()).getValue();
+					iValue += (int)((CellSimple)t.getValue2()).getValue();
 				}
-				return new SimpleCell<Integer>(targetKey, iValue/closestKNeighbours.size());
+				return new CellSimple<Integer>(targetKey, iValue/closestKNeighbours.size());
 				
 			case "Float":
 				float fValue = 0;
 				
 				for (Tuple<Float, Cell> t: closestKNeighbours) {
-					fValue += (float)((SimpleCell)t.getValue2()).getValue();
+					fValue += (float)((CellSimple)t.getValue2()).getValue();
 				}
-				return new SimpleCell<Float>(targetKey, fValue/closestKNeighbours.size());
+				return new CellSimple<Float>(targetKey, fValue/closestKNeighbours.size());
 		}
 		
 		return null;

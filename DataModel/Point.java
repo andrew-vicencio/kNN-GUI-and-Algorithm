@@ -3,6 +3,7 @@ package DataModel;
 import DataModel.CompositeCell;
 import DataModel.SimpleCell;
 
+
 import java.util.HashMap;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
@@ -71,8 +72,8 @@ public class Point
     	if (targ == null) {
     		for (String k: rawValues.keySet()) {
     			targ = rawValues.get(k);
-    			if (targ instanceof CompositeCell) {
-    				targ = ((CompositeCell)targ).getSubCell(att);
+    			if (targ instanceof CellComposite) {
+    				targ = ((CellComposite)targ).getSubCell(att);
     				if (targ != null) {
     					break;
     				}
@@ -93,6 +94,7 @@ public class Point
     public void normalize(ConcurrentHashMap<String, Float> mean, ConcurrentHashMap<String, Float> stddev) {
     	float val;
     	for (String k: mean.keySet()) {
+
     		try {
 	    		if (((SimpleCell)getCell(k)).getValue() instanceof Integer) {
 	    			val = (float)(int)((SimpleCell)getCell(k)).getValue();
@@ -101,6 +103,7 @@ public class Point
 	    		}
 	    		stdValues.put(k, new SimpleCell<Float>(k, (val - mean.get(k) / stddev.get(k))));
     		} catch (NullPointerException ne) {}
+
     	}
     }
 
@@ -133,18 +136,18 @@ public class Point
         String finalString = "";
         for (Cell x: rawValues.values()) {
             System.out.println(x.getKey());
-            if(x instanceof CompositeCell){
+            if(x instanceof CellComposite){
                 if(finalString == ""){
-                    finalString =    ((CompositeCell)(x)).toString();
+                    finalString =    ((CellComposite)(x)).toString();
                 }else{
-                    finalString = finalString +", " +  ((CompositeCell)(x)).toString();
+                    finalString = finalString +", " +  ((CellComposite)(x)).toString();
                 }
 
             }else{
                 if(finalString == ""){
-                    finalString =  ((SimpleCell)(x)).toString();
+                    finalString =  ((CellSimple)(x)).toString();
                 }else{
-                    finalString = finalString + ", " + ((SimpleCell)(x)).toString();
+                    finalString = finalString + ", " + ((CellSimple)(x)).toString();
                 }
 
             }
