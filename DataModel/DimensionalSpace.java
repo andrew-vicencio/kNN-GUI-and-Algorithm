@@ -203,6 +203,9 @@ public class DimensionalSpace {
 	  		case "Minkowski":
 	  			calculator = new MinkowskiKNN(this, n);
 	  			break;
+	  		case "Chebyshev":
+	  			calculator = new ChebyshevKNN(this);
+	  			break;
 	  		default:
 	  			calculator = new EuclideanKNN(this);
 	  			break;
