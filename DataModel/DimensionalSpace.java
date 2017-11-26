@@ -2,7 +2,7 @@ package DataModel;
 
 
 import View.View;
-import Maths.EuclideanKNN;
+import Maths.*;
 
 import java.util.HashMap;
 import java.util.ArrayList;
@@ -25,9 +25,10 @@ public class DimensionalSpace {
   private ConcurrentHashMap<String, Float> sum;
   private HashMap<String, String> cellTypes;
   private int numberOfPoints;
-    private int numberOfFields;
+  private int numberOfFields;
   private ArrayList<Point> points;
   private View view;
+  private ArrayList<String> distanceMetrics;
   
   /**
    * Constructor for instances of the DataModel.DimensionalSpace class. Initializes the class variables and sets the
@@ -40,7 +41,13 @@ public class DimensionalSpace {
     points = new ArrayList<Point>();
     numberOfPoints = 0;
     numberOfFields = 0;
-     cellTypes = new HashMap<String, String>();
+    cellTypes = new HashMap<String, String>();
+    distanceMetrics = new ArrayList<String>();
+    distanceMetrics.add("Manhattan");
+    distanceMetrics.add("Minkowski");
+    distanceMetrics.add("Chebyshev");
+    distanceMetrics.add("Euclidean");
+    
   }
   
   
@@ -103,9 +110,9 @@ public class DimensionalSpace {
   }
   
   /**
-   * Increments the sum for all of the numeric values contained within a DataModel.CellComposite
+   * Increments the sum for all of the numeric values contained within a DataModel.CompositeCell
    * 
-   * @param c		The DataModel.CellComposite to be used to increment the corresponding sums.
+   * @param c		The DataModel.CompositeCell to be used to increment the corresponding sums.
    */
   private void calcComplexSum(CellComposite c) {
 	  ArrayList<Cell> subCells = c.getSubCells();
@@ -122,9 +129,9 @@ public class DimensionalSpace {
   }
 
   /**
-   * Increments the sum for the key corresponding to a numeric DataModel.CellSimple
+   * Increments the sum for the key corresponding to a numeric DataModel.SimpleCell
    * 
-   * @param c		The DataModel.CellSimple to use to increment the sum
+   * @param c		The DataModel.SimpleCell to use to increment the sum
    */
   private void calcSimpleSum(CellSimple c) {
 	  float val;
@@ -187,27 +194,33 @@ public class DimensionalSpace {
    * 
    * @param targetKey		The key of the value to be found.
    * @param targetPoint		The point whose value is to be found
-   * @param k				The number of nearest neighbours to query
+   * @param neighbours		The number of nearest neighbours to query
+   * @param metric			The distance metric to be used
+   * @param n				The order to use (only applicable when metric is "Minkowski")				
    * 
    * @return				The unknown value of the given point
    */
-  public String findkNN(String targetKey, Point targetPoint, int neighbours){
-	  String resultStr = "";
-	  EuclideanKNN eucKNN = new EuclideanKNN(this);
+  public String findkNN(String targetKey, Point targetPoint, int neighbours, String metric, int n){
+	  kNN calculator;
 	  
-	  Cell resultCell = eucKNN.findKNN(targetKey, targetPoint, neighbours);
-	  
-	  if (resultCell instanceof CellSimple) {
-		  resultStr = "The " + neighbours + " nearest neighbours to the target point gave a value of " + ((CellSimple)resultCell).getValue() + " for the " + targetKey + " parameter.";
-	  } else {
-		  resultStr = "The " + neighbours + " nearest neighbours to the target point gave a composite value for the " + targetKey + " parameter:\n";
-		  
-		  for (Cell c: ((CellComposite)resultCell).getSubCells()) {
-			  resultStr += c.getKey() + ": " + ((CellSimple)c).getValue();
-		  }
+	  switch (metric) {
+	  		case "Manhattan":
+	  			calculator = new ManhattanKNN(this);
+	  			break;
+	  		case "Minkowski":
+	  			calculator = new MinkowskiKNN(this, n);
+	  			break;
+	  		case "Chebyshev":
+	  			calculator = new ChebyshevKNN(this);
+	  			break;
+	  		default:
+	  			calculator = new EuclideanKNN(this);
+	  			break;
 	  }
 	  
-	  return resultStr;	    
+	  Cell resultCell = calculator.findKNN(targetKey, targetPoint, neighbours);
+	  
+	  return resultCell.toString();	    
   }
   
   /**
@@ -333,6 +346,14 @@ public class DimensionalSpace {
     //TODO: DOCUMENT
     public HashMap<String, String> getCellTypes(){
         return cellTypes;
+    }
+    
+    /**
+     * Returns an ArrayList of the names of the distance metrics available
+     * @return
+     */
+    public ArrayList<String> getDistanceMetrics(){
+    	return distanceMetrics;
     }
 
 }

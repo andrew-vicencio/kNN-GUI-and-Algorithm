@@ -3,7 +3,7 @@ package DataModel;
 import java.util.ArrayList;
 
 /**
- * DataModel.CellComposite provides functionality for a grouped set of attributes within a DataModel.Point.
+ * DataModel.CompositeCell provides functionality for a grouped set of attributes within a DataModel.Point.
  * 
  * @author Darren
  * @version Milestone 2
@@ -14,7 +14,7 @@ public class CellComposite extends Cell {
 	private ArrayList<Cell> value;
 	
 	/**
-	 * Constructor for DataModel.CellComposite. Sets the cell's key through the super class' constructor and initializes
+	 * Constructor for DataModel.CompositeCell. Sets the cell's key through the super class' constructor and initializes
 	 * the subcell list.
 	 * 
 	 * @param key	The cell's key
@@ -25,7 +25,7 @@ public class CellComposite extends Cell {
 	}
 	
 	/**
-	 * getSubCells returns the list of Cells that are contained within the DataModel.CellComposite
+	 * getSubCells returns the list of Cells that are contained within the DataModel.CompositeCell
 	 * 
 	 * @return		The list of cells
 	 */
@@ -70,20 +70,16 @@ public class CellComposite extends Cell {
 		value.add(f);
 	}
 	
-	//TODO: BB Documentation
+	/**
+	 * Generates a string representation of the cell.
+	 * 
+	 * @return		A string with the composite cells key, followed by the string representation of every sub-cell.
+	 */
 	public String toString(){
-        String finalString = "";
+        String finalString = "For Composite Cell " + this.getKey() + ":\n";
         System.out.println(value.size());
         for (Cell x: value) {
-            System.out.println(finalString);
-            CellSimple i = (CellSimple)x;
-            if(finalString == ""){
-                finalString = i.toString();
-            }else{
-                finalString = finalString + ", " + i.toString();
-            }
-
-
+            finalString += x.toString() + "/n";
         }
 
         return finalString;

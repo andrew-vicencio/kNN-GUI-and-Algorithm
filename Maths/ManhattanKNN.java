@@ -1,34 +1,37 @@
 package Maths;
 
-import DataModel.*;
-import Maths.NumericalDistance;
-import Maths.kNN;
+import java.util.ArrayList;
+import java.util.HashMap;
 
-import java.util.*;
-
+import DataModel.Cell;
+import DataModel.CellComposite;
+import DataModel.DimensionalSpace;
+import DataModel.Point;
+import DataModel.CellSimple;
+import Maths.kNN.Tuple;
 
 /**
- * Maths.EuclideanKNN extends the Maths.kNN abstract method and uses an euclidean distance metric for the calculations.
- * The formula is [distance] = sqrt(sum((endPoint - origin) ^ 2)) where the sum adds the values for every dimension.
+ * Maths.ManhattanKNN extends the Maths.kNN abstract method and uses an Manhattan distance metric for the calculations.
+ * The formula is [distance] = sum(endPoint - origin) where the sum adds the values for every dimension.
  * 
  * @author Darren
  * @version Milestone 3
  *
  */
-public class EuclideanKNN extends kNN {
-
+public class ManhattanKNN extends kNN {
 	
 	/**
-	 * Constructor for Maths.EuclideanKNN. Takes a DataModel.DimensionalSpace object that it will work in. Calls the Maths.kNN constructor.
+	 * Constructor for Maths.ManhattanKNN. Takes a DataModel.DimensionalSpace object that it will work in and the order
+	 * to be used for the calculation. Calls the Maths.kNN constructor.
 	 * 
 	 * @param ds	The DataModel.DimensionalSpace the the funciton will work in.
 	 */
-	public EuclideanKNN(DimensionalSpace ds) {
+	public ManhattanKNN(DimensionalSpace ds) {
 		super(ds);
 	}
 
 	/**
-	   * findKNN finds the target value for the given point using an euclidean KNN algorithm
+	   * findKNN finds the target value for the given point using an manhattan KNN algorithm
 	   * with the k nearest points. Calls the super class's findValue funtion once the nearest neighbours
 	   * are found.
 	   * 
@@ -74,18 +77,15 @@ public class EuclideanKNN extends kNN {
 					if (!(key.equals(targetKey))) {
 						if (currentPtValues.get(key) instanceof CellSimple) {
 							if (((CellSimple)currentPtValues.get(key)).getValue() instanceof String) {
-								distance += Math.pow(sDist.calcDistance((CellSimple)targetPtValues.get(key), (CellSimple)currentPtValues.get(key)), 2);
+								distance += sDist.calcDistance((CellSimple)targetPtValues.get(key), (CellSimple)currentPtValues.get(key));
 							} else {
-								distance += Math.pow(nDist.calcDistance((CellSimple)targetPtValues.get(key), (CellSimple)currentPtValues.get(key)), 2);
+								distance += nDist.calcDistance((CellSimple)targetPtValues.get(key), (CellSimple)currentPtValues.get(key));
 							}
 						} else {
-							distance += Math.pow(EuclideanComposite((CellComposite) currentPtValues.get(key), (CellComposite) targetPtValues.get(key)), 2);
+							distance += ManhattanComposite((CellComposite) currentPtValues.get(key), (CellComposite) targetPtValues.get(key));
 						}
 					}
 				}
-		
-				distance = (float) Math.sqrt(distance);
-
 				
 				for (int i = 0; i < neighbours; i ++) {
 					if (!displacement) {
@@ -136,7 +136,7 @@ public class EuclideanKNN extends kNN {
 	 * @param target	The DataModel.CompositeCell of the target point
 	 * @return			The distance between the Cells
 	 */
-	public float EuclideanComposite(CellComposite current, CellComposite target) {
+	public float ManhattanComposite(CellComposite current, CellComposite target) {
 	  	
 		NumericalDistance nDist = new NumericalDistance();
 		StringDistance sDist = new StringDistance();
@@ -146,16 +146,16 @@ public class EuclideanKNN extends kNN {
 		for (Cell c: subCells) {
 			if (c instanceof CellSimple) {
 				if (((CellSimple) c).getValue() instanceof String) {
-					distance += Math.pow(sDist.calcDistance((CellSimple) target.getSubCell(c.getKey()), (CellSimple) c), 2);
+					distance += sDist.calcDistance((CellSimple) target.getSubCell(c.getKey()), (CellSimple) c);
 				} else {
-					distance += Math.pow(nDist.calcDistance((CellSimple) target.getSubCell(c.getKey()), (CellSimple) c), 2);
+					distance += nDist.calcDistance((CellSimple) target.getSubCell(c.getKey()), (CellSimple) c);
 				}
 			} else {
-				distance += EuclideanComposite((CellComposite) c, (CellComposite) target.getSubCell(c.getKey()));
+				distance += ManhattanComposite((CellComposite) c, (CellComposite) target.getSubCell(c.getKey()));
 			}
 		}
 		
-		return (float) Math.sqrt(distance);
+		return distance;
 	}
 
 }

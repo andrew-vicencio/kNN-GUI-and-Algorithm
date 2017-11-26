@@ -1,9 +1,8 @@
 package DataModel;
 
-import DataModel.Cell;
 
 /**
- * DataModel.CellSimple stores a single value of given type E.
+ * DataModel.SimpleCell stores a single value of given type E.
  * 
  * @author Darren
  * @version Milestone 2
@@ -15,7 +14,7 @@ public class CellSimple<E> extends Cell {
 	private E value;
 	
 	/**
-	 * Constructor for a DataModel.CellSimple. Sets the key and value of the cell.
+	 * Constructor for a DataModel.SimpleCell. Sets the key and value of the cell.
 	 * 
 	 * @param key		The key of the cell.
 	 * @param value		The cell's value, of type E
@@ -42,7 +41,12 @@ public class CellSimple<E> extends Cell {
 	public void setValue(E value) {
 		this.value = value;		
 	}
-
+	
+	/**
+	 * Generates a string representation of the cell.
+	 * 
+	 * @return		A string in the format "key: value"
+	 */
 	public String toString(){
 	    return getKey() + ": " + value;
     }
