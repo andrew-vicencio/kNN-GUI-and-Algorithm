@@ -1,34 +1,42 @@
 package Maths;
 
-import DataModel.*;
-import Maths.NumericalDistance;
-import Maths.kNN;
+import java.util.ArrayList;
+import java.util.HashMap;
 
-import java.util.*;
-
+import DataModel.Cell;
+import DataModel.CompositeCell;
+import DataModel.DimensionalSpace;
+import DataModel.Point;
+import DataModel.SimpleCell;
+import Maths.kNN.Tuple;
 
 /**
- * Maths.EuclideanKNN extends the Maths.kNN abstract method and uses an euclidean distance metric for the calculations.
- * The formula is [distance] = sqrt(sum((endPoint - origin) ^ 2)) where the sum adds the values for every dimension.
+ * Maths.MinkowskiKNN extends the Maths.kNN abstract method and uses an Minkowski distance metric for the calculations.
+ * The formula is [distance] = (sum((endPoint - origin) ^ order)) ^ (1/order) where the sum adds the values for every 
+ * dimension, and order is the power to use.
  * 
  * @author Darren
  * @version Milestone 3
  *
  */
-public class EuclideanKNN extends kNN {
+public class MinkowskiKNN extends kNN {
 
+	private int order;
 	
 	/**
-	 * Constructor for Maths.EuclideanKNN. Takes a DataModel.DimensionalSpace object that it will work in. Calls the Maths.kNN constructor.
+	 * Constructor for Maths.EuclideanKNN. Takes a DataModel.DimensionalSpace object that it will work in and the order
+	 * to be used for the calculation. Calls the Maths.kNN constructor.
 	 * 
 	 * @param ds	The DataModel.DimensionalSpace the the funciton will work in.
+	 * @param n		The order for the Minkowski function.
 	 */
-	public EuclideanKNN(DimensionalSpace ds) {
+	public MinkowskiKNN(DimensionalSpace ds, int n) {
 		super(ds);
+		this.order = n;
 	}
 
 	/**
-	   * findKNN finds the target value for the given point using an euclidean KNN algorithm
+	   * findKNN finds the target value for the given point using a Minkowski KNN algorithm
 	   * with the k nearest points. Calls the super class's findValue funtion once the nearest neighbours
 	   * are found.
 	   * 
@@ -40,7 +48,6 @@ public class EuclideanKNN extends kNN {
 	   */
 	@Override
 	public Cell findKNN(String targetKey, Point targetPoint, int neighbours) {
-	  	
 		NumericalDistance nDist = new NumericalDistance();
 		StringDistance sDist = new StringDistance();
 		
@@ -74,17 +81,17 @@ public class EuclideanKNN extends kNN {
 					if (!(key.equals(targetKey))) {
 						if (currentPtValues.get(key) instanceof SimpleCell) {
 							if (((SimpleCell)currentPtValues.get(key)).getValue() instanceof String) {
-								distance += Math.pow(sDist.calcDistance((SimpleCell)targetPtValues.get(key), (SimpleCell)currentPtValues.get(key)), 2);
+								distance += Math.pow(sDist.calcDistance((SimpleCell)targetPtValues.get(key), (SimpleCell)currentPtValues.get(key)), order);
 							} else {
-								distance += Math.pow(nDist.calcDistance((SimpleCell)targetPtValues.get(key), (SimpleCell)currentPtValues.get(key)), 2);
+								distance += Math.pow(nDist.calcDistance((SimpleCell)targetPtValues.get(key), (SimpleCell)currentPtValues.get(key)), order);
 							}
 						} else {
-							distance += Math.pow(EuclideanComposite((CompositeCell) currentPtValues.get(key), (CompositeCell) targetPtValues.get(key)), 2);
+							distance += Math.pow(MinkowskiComposite((CompositeCell) currentPtValues.get(key), (CompositeCell) targetPtValues.get(key)), order);
 						}
 					}
 				}
 		
-				distance = (float) Math.sqrt(distance);
+				distance = (float) Math.pow(distance, 1.0 / order);
 
 				
 				for (int i = 0; i < neighbours; i ++) {
@@ -127,7 +134,7 @@ public class EuclideanKNN extends kNN {
 		
 		return c;
 	}
-	
+
 	/**
 	 * Iterates through all of the sub cells in a DataModel.CompositeCell and calculates the distance from that DataModel.CompositeCell to
 	 * the target point's corresponding DataModel.CompositeCell.
@@ -136,7 +143,7 @@ public class EuclideanKNN extends kNN {
 	 * @param target	The DataModel.CompositeCell of the target point
 	 * @return			The distance between the Cells
 	 */
-	public float EuclideanComposite(CompositeCell current, CompositeCell target) {
+	public float MinkowskiComposite(CompositeCell current, CompositeCell target) {
 	  	
 		NumericalDistance nDist = new NumericalDistance();
 		StringDistance sDist = new StringDistance();
@@ -146,16 +153,15 @@ public class EuclideanKNN extends kNN {
 		for (Cell c: subCells) {
 			if (c instanceof SimpleCell) {
 				if (((SimpleCell) c).getValue() instanceof String) {
-					distance += Math.pow(sDist.calcDistance((SimpleCell) target.getSubCell(c.getKey()), (SimpleCell) c), 2);
+					distance += Math.pow(sDist.calcDistance((SimpleCell) target.getSubCell(c.getKey()), (SimpleCell) c), order);
 				} else {
-					distance += Math.pow(nDist.calcDistance((SimpleCell) target.getSubCell(c.getKey()), (SimpleCell) c), 2);
+					distance += Math.pow(nDist.calcDistance((SimpleCell) target.getSubCell(c.getKey()), (SimpleCell) c), order);
 				}
 			} else {
-				distance += EuclideanComposite((CompositeCell) c, (CompositeCell) target.getSubCell(c.getKey()));
+				distance += MinkowskiComposite((CompositeCell) c, (CompositeCell) target.getSubCell(c.getKey()));
 			}
 		}
 		
-		return (float) Math.sqrt(distance);
+		return (float) Math.pow(distance, 1.0 / order);
 	}
-
 }

@@ -2,7 +2,7 @@ package DataModel;
 
 
 import View.View;
-import Maths.EuclideanKNN;
+import Maths.*;
 
 import java.util.HashMap;
 import java.util.ArrayList;
@@ -40,7 +40,7 @@ public class DimensionalSpace {
     points = new ArrayList<Point>();
     numberOfPoints = 0;
     numberOfFields = 0;
-     cellTypes = new HashMap<String, String>();
+    cellTypes = new HashMap<String, String>();
   }
   
   
@@ -91,42 +91,42 @@ public class DimensionalSpace {
 		  for (String k: cellList.keySet()) {
 			  Cell c = cellList.get(k);
 			  
-			  if (c instanceof CellSimple) {
-				  if (!(((CellSimple)c).getValue() instanceof String)) {
-					  calcSimpleSum((CellSimple)c);
+			  if (c instanceof SimpleCell) {
+				  if (!(((SimpleCell)c).getValue() instanceof String)) {
+					  calcSimpleSum((SimpleCell)c);
 				  }
 			  } else {
-				  calcComplexSum((CellComposite)c);
+				  calcComplexSum((CompositeCell)c);
 			  }
 		  }
 	  }
   }
   
   /**
-   * Increments the sum for all of the numeric values contained within a DataModel.CellComposite
+   * Increments the sum for all of the numeric values contained within a DataModel.CompositeCell
    * 
-   * @param c		The DataModel.CellComposite to be used to increment the corresponding sums.
+   * @param c		The DataModel.CompositeCell to be used to increment the corresponding sums.
    */
-  private void calcComplexSum(CellComposite c) {
+  private void calcComplexSum(CompositeCell c) {
 	  ArrayList<Cell> subCells = c.getSubCells();
 	  
 	  for (Cell subC: subCells) {
-		  if (subC instanceof CellSimple) {
-			  if (!(((CellSimple)subC).getValue() instanceof String)) {
-				  calcSimpleSum((CellSimple)subC);
+		  if (subC instanceof SimpleCell) {
+			  if (!(((SimpleCell)subC).getValue() instanceof String)) {
+				  calcSimpleSum((SimpleCell)subC);
 			  }
 		  } else {
-			  calcComplexSum((CellComposite)subC);
+			  calcComplexSum((CompositeCell)subC);
 		  }
 	  }
   }
 
   /**
-   * Increments the sum for the key corresponding to a numeric DataModel.CellSimple
+   * Increments the sum for the key corresponding to a numeric DataModel.SimpleCell
    * 
-   * @param c		The DataModel.CellSimple to use to increment the sum
+   * @param c		The DataModel.SimpleCell to use to increment the sum
    */
-  private void calcSimpleSum(CellSimple c) {
+  private void calcSimpleSum(SimpleCell c) {
 	  float val;
 	  if (c.getValue() instanceof Integer) {
 		  val = (float)(int)c.getValue();
@@ -159,13 +159,13 @@ public class DimensionalSpace {
 	  for (String k: mean.keySet()) {
 		  val = 0;
 		  u = mean.get(k);
-		  if (((CellSimple)points.get(0).getCell(k)).getValue() instanceof Integer) {
+		  if (((SimpleCell)points.get(0).getCell(k)).getValue() instanceof Integer) {
 			  for (Point pt: points) {
-				  val += Math.pow(((float)(int)((CellSimple)pt.getCell(k)).getValue()) - u, 2);
+				  val += Math.pow(((float)(int)((SimpleCell)pt.getCell(k)).getValue()) - u, 2);
 			  }
 		  } else {
 			  for (Point pt: points) {
-				  val += Math.pow(((float)((CellSimple)pt.getCell(k)).getValue()) - u, 2);
+				  val += Math.pow(((float)((SimpleCell)pt.getCell(k)).getValue()) - u, 2);
 			  }
 		  }
 		  stddev.put(k, (float) Math.sqrt(val / (numberOfPoints - 1)));
@@ -187,23 +187,37 @@ public class DimensionalSpace {
    * 
    * @param targetKey		The key of the value to be found.
    * @param targetPoint		The point whose value is to be found
-   * @param k				The number of nearest neighbours to query
+   * @param neighbours		The number of nearest neighbours to query
+   * @param metric			The distance metric to be used
+   * @param n				The order to use (only applicable when metric is "Minkowski")				
    * 
    * @return				The unknown value of the given point
    */
-  public String findkNN(String targetKey, Point targetPoint, int neighbours){
+  public String findkNN(String targetKey, Point targetPoint, int neighbours, String metric, int n){
 	  String resultStr = "";
-	  EuclideanKNN eucKNN = new EuclideanKNN(this);
+	  kNN calculator;
 	  
-	  Cell resultCell = eucKNN.findKNN(targetKey, targetPoint, neighbours);
+	  switch (metric) {
+	  		case "Manhattan":
+	  			calculator = new ManhattanKNN(this);
+	  			break;
+	  		case "Minkowski":
+	  			calculator = new MinkowskiKNN(this, n);
+	  			break;
+	  		default:
+	  			calculator = new EuclideanKNN(this);
+	  			break;
+	  }
 	  
-	  if (resultCell instanceof CellSimple) {
-		  resultStr = "The " + neighbours + " nearest neighbours to the target point gave a value of " + ((CellSimple)resultCell).getValue() + " for the " + targetKey + " parameter.";
+	  Cell resultCell = calculator.findKNN(targetKey, targetPoint, neighbours);
+	  
+	  if (resultCell instanceof SimpleCell) {
+		  resultStr = "The " + neighbours + " nearest neighbours to the target point gave a value of " + ((SimpleCell)resultCell).getValue() + " for the " + targetKey + " parameter.";
 	  } else {
 		  resultStr = "The " + neighbours + " nearest neighbours to the target point gave a composite value for the " + targetKey + " parameter:\n";
 		  
-		  for (Cell c: ((CellComposite)resultCell).getSubCells()) {
-			  resultStr += c.getKey() + ": " + ((CellSimple)c).getValue();
+		  for (Cell c: ((CompositeCell)resultCell).getSubCells()) {
+			  resultStr += c.getKey() + ": " + ((SimpleCell)c).getValue();
 		  }
 	  }
 	  
