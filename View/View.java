@@ -1,12 +1,14 @@
 package View;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.util.*;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.EtchedBorder;
-
+import static java.awt.event.InputEvent.CTRL_DOWN_MASK;
 import Controllers.*;
 import DataModel.DimensionalSpace;
 import DataModel.Point;
@@ -31,6 +33,7 @@ public class View {
 	private ArrayList<String> featureTypes;
 	private ButtonMenuController menuController;
     private DimensionalSpace dataModel;
+    private int pointCount;
 
 	
 	 /**
@@ -60,6 +63,7 @@ public class View {
 		done = new JButton("Done");
 		menuController = new ButtonMenuController(this);
         dataModel = menuController.getDataModel();
+        pointCount = 0;
         dataModel.setView(this);
 
         //Placement and sizing of View.View elements
@@ -111,6 +115,11 @@ public class View {
 		//Added close application operation when window closes
 		mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
+		//Set keyboard shortcuts
+		simpleFeature.setAccelerator(KeyStroke.getKeyStroke('S', CTRL_DOWN_MASK));
+		complexFeature.setAccelerator(KeyStroke.getKeyStroke('D', CTRL_DOWN_MASK));
+		addValue.setAccelerator(KeyStroke.getKeyStroke('A', CTRL_DOWN_MASK));
+		newTestCase.setAccelerator(KeyStroke.getKeyStroke('N', CTRL_DOWN_MASK));
 		//Initialize main panel
 		displayInfo();
 		
@@ -197,16 +206,22 @@ public class View {
 	{
 		contentPanel.removeAll();
 		footerPanel.removeAll();
-		headerPanel.setLayout(new GridLayout(1, features.size()));
-	
-		for (String key : dataModel.getCellTypes().keySet()){
-			JLabel jl = new JLabel("    " + key);
-			jl.setBorder(BorderFactory.createCompoundBorder(new EtchedBorder(), new EmptyBorder(6, 6, 6, 6)));
-			headerPanel.add(jl);
+		headerPanel.setLayout(new GridLayout(1, features.size() + 1));
+		headerPanel.setPreferredSize(new Dimension(1000, 40));
+		JLabel countLabel = new JLabel("Count");
+		countLabel.setBorder(BorderFactory.createCompoundBorder(new EtchedBorder(), new EmptyBorder(6, 6, 6, 6)));
+		headerPanel.add(countLabel);
+		for(String str: dataModel.getCellTypes().keySet())
+		{
+		    if(!dataModel.getCellTypes().get(str).equals("comp"))
+			{
+				JLabel jl = new JLabel("    " + str);
+				jl.setBorder(BorderFactory.createCompoundBorder(new EtchedBorder(), new EmptyBorder(6, 6, 6, 6)));
+				headerPanel.add(jl);
+			}	
 	    }
 		headerPanel.revalidate();
 		headerPanel.repaint();
-	
 	}
 
 	/**
@@ -335,9 +350,28 @@ public class View {
 	}
 	
 	public void updateDisplay(Point x) {
-					
-		JLabel jl = new JLabel(x.toString());
-		contentPanel.add(jl);
+		
+		JPanel point = new JPanel();
+		String values[] = x.toString().split(",");
+		point.setLayout(new GridLayout(1, values.length + 1));
+		pointCount++;
+		JLabel countLabel = new JLabel(Integer.toString(pointCount));
+		countLabel.setBorder(BorderFactory.createCompoundBorder(new EtchedBorder(), new EmptyBorder(6, 6, 6, 6)));
+		point.add(countLabel);
+		for(String value: values)
+		{
+			String[] substrings = value.split(":");
+			JLabel jl = new JLabel(substrings[1]);
+			jl.setHorizontalTextPosition(SwingConstants.LEFT);
+			jl.setBorder(BorderFactory.createCompoundBorder(new EtchedBorder(), new EmptyBorder(6, 6, 6, 6)));
+			point.add(jl);
+		}
+		point.setAlignmentY(JPanel.TOP_ALIGNMENT);
+		point.setAlignmentX(0);
+		point.setMaximumSize(new Dimension(1000, 25));
+		point.setBackground(new Color(255, 255, 255));
+		
+		contentPanel.add(point);
 		contentPanel.revalidate();
 		contentPanel.repaint();
 		
