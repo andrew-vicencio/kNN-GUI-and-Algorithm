@@ -313,7 +313,7 @@ public class View {
 	 */
 	public void promptTestCase()
 	{
-		
+		 String[] metricsArray = {"Example1", "Example2"};
 		 Set<String> optionsSet = dataModel.getCellTypes().keySet();
 		 ArrayList<String> optionsArrayList = new ArrayList<String>();
 		 for(String s: optionsSet)
@@ -328,8 +328,9 @@ public class View {
 		 JFrame chooseValueFrame = new JFrame("New Test Case");
 		 String testValue = (String) JOptionPane.showInputDialog(chooseValueFrame, "Choose a value to test",
 		 "Feature", JOptionPane.QUESTION_MESSAGE, null, optionsArray, optionsArray[0]);
-		 System.out.println(testValue);
-		 TestCaseFrame testFrame = new TestCaseFrame(this, testValue);
+		 String distanceMetric = (String) JOptionPane.showInputDialog(chooseValueFrame, "Choose a distance metric",
+				 "Feature", JOptionPane.QUESTION_MESSAGE, null, metricsArray, metricsArray[0]);
+		 TestCaseFrame testFrame = new TestCaseFrame(this, testValue, distanceMetric);
 	}
 	
 	public void updateDisplay(Point x) {

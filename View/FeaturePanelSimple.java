@@ -25,8 +25,8 @@ import Controllers.*;
 public class FeaturePanelSimple extends FeaturePanel{
 
 	//Things specialized for this particular input
-	private JLabel  featureTypeLabel, distanceMetricLabel;
-	private JComboBox<String> featureType, distanceMetric;
+	private JLabel  featureTypeLabel;
+	private JComboBox<String> featureType;
 
 	/**
 	 * Default constructor for a View.FeaturePanelSimple with no parent
@@ -41,14 +41,10 @@ public class FeaturePanelSimple extends FeaturePanel{
 		String[] typesArray = types.toArray(new String[0]);
 		String[] metricsArray = {"Example1", "Example2", "Example3"};
 		featureType = new JComboBox<String>(typesArray);
-		distanceMetric = new JComboBox<String>(metricsArray);
 		featureTypeLabel = new JLabel("Feature type: ");
-		distanceMetricLabel = new JLabel("Distance Metric:  ");
 
 		innerPanel.add(featureTypeLabel);
 		innerPanel.add(featureType);
-		innerPanel.add(distanceMetricLabel);
-		innerPanel.add(distanceMetric);
         innerPanel.add(add);
 		controller = new FeaturePanelSimpleController(this);
 		add.addActionListener(controller);
@@ -99,15 +95,8 @@ public class FeaturePanelSimple extends FeaturePanel{
     {
 		featureName.setEnabled(false);
 		featureType.setEnabled(false);
-		distanceMetric.setEnabled(false);
 		add.setEnabled(false);
 	}
-	
-	public String getDistanceMetric()
-	{
-		return (String) distanceMetric.getSelectedItem();
-	}
 }
-	
 
 

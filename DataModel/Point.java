@@ -45,7 +45,7 @@ public class Point
     }
 
 
-      public void setHashMaprawValues(LinkedHashMap<String,Cell> f){
+     public void setHashMaprawValues(LinkedHashMap<String,Cell> f){
         rawValues = f;
     }
 
