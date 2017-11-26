@@ -17,7 +17,7 @@ public class FeaturePanelSimpleController extends FeaturePanelController {
 	 * Constructor to pass the View.FeaturePanelComplex using this controller
 	 * @param fp
 	 */
-	public FeaturePanelSimpleController(FeaturePanel fp)
+	public FeaturePanelSimpleController(FeaturePanelSimple fp)
 	{
 		super(fp);
 	}
@@ -30,6 +30,7 @@ public class FeaturePanelSimpleController extends FeaturePanelController {
 
 		String key = currentPanel.getKey();
 		String value = ((FeaturePanelSimple)currentPanel).getValue();
+		String distanceMetric = ((FeaturePanelSimple) currentPanel).getDistanceMetric();
 
 		//Make sure there is a valid key
 		if(key.isEmpty())
