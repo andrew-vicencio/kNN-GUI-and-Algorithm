@@ -54,9 +54,6 @@ public class FeaturePanelSimpleController extends FeaturePanelController {
 				MainController.dataModel.setSingleCellType(key, value);
 			}
 		}
-		for(String type: dataModel.getCellTypes().keySet()){
-		    System.out.println(type);
-        }
 
 	}
 }
