@@ -194,7 +194,6 @@ public class DimensionalSpace {
    * @return				The unknown value of the given point
    */
   public String findkNN(String targetKey, Point targetPoint, int neighbours, String metric, int n){
-	  String resultStr = "";
 	  kNN calculator;
 	  
 	  switch (metric) {
@@ -211,17 +210,7 @@ public class DimensionalSpace {
 	  
 	  Cell resultCell = calculator.findKNN(targetKey, targetPoint, neighbours);
 	  
-	  if (resultCell instanceof SimpleCell) {
-		  resultStr = "The " + neighbours + " nearest neighbours to the target point gave a value of " + ((SimpleCell)resultCell).getValue() + " for the " + targetKey + " parameter.";
-	  } else {
-		  resultStr = "The " + neighbours + " nearest neighbours to the target point gave a composite value for the " + targetKey + " parameter:\n";
-		  
-		  for (Cell c: ((CompositeCell)resultCell).getSubCells()) {
-			  resultStr += c.getKey() + ": " + ((SimpleCell)c).getValue();
-		  }
-	  }
-	  
-	  return resultStr;	    
+	  return resultCell.toString();	    
   }
   
   /**

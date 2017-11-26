@@ -1,6 +1,5 @@
 package DataModel;
 
-import DataModel.Cell;
 
 /**
  * DataModel.SimpleCell stores a single value of given type E.
@@ -42,7 +41,12 @@ public class SimpleCell<E> extends Cell {
 	public void setValue(E value) {
 		this.value = value;		
 	}
-
+	
+	/**
+	 * Generates a string representation of the cell.
+	 * 
+	 * @return		A string in the format "key: value"
+	 */
 	public String toString(){
 	    return getKey() + ": " + value;
     }

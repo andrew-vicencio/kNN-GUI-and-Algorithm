@@ -1,7 +1,7 @@
 package DataModel;
 
 /**
- * DataModel.Cell is an abstract class providing functions and a key variable for the DataModel.CellSimple and DataModel.CellComposite subclasses.
+ * DataModel.Cell is an abstract class providing functions and a key variable for the DataModel.SimpleCell and DataModel.CompositeCell subclasses.
  * 
  * @author Darren
  * @version Milestone 2
@@ -36,4 +36,9 @@ public abstract class Cell {
 	public void setKey(String key) {
 		this.key = key;
 	}
+	
+	/**
+	 * Generates a string representation of the cell.
+	 */
+	public abstract String toString();
 }

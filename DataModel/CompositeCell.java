@@ -70,20 +70,16 @@ public class CompositeCell extends Cell {
 		value.add(f);
 	}
 	
-	//TODO: BB Documentation
+	/**
+	 * Generates a string representation of the cell.
+	 * 
+	 * @return		A string with the composite cells key, followed by the string representation of every sub-cell.
+	 */
 	public String toString(){
-        String finalString = "";
+        String finalString = "For Composite Cell " + this.getKey() + ":\n";
         System.out.println(value.size());
         for (Cell x: value) {
-            System.out.println(finalString);
-            SimpleCell i = (SimpleCell)x;
-            if(finalString == ""){
-                finalString = i.toString();
-            }else{
-                finalString = finalString + ", " + i.toString();
-            }
-
-
+            finalString += x.toString() + "/n";
         }
 
         return finalString;

@@ -3,9 +3,7 @@ package DataModel;
 import DataModel.CompositeCell;
 import DataModel.SimpleCell;
 
-
 import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -19,8 +17,8 @@ import java.util.concurrent.ConcurrentHashMap;
 
 public class Point 
 {
-    private LinkedHashMap<String, Cell> rawValues;
-    private LinkedHashMap<String, Cell> stdValues;
+    private HashMap<String, Cell> rawValues;
+    private HashMap<String, Cell> stdValues;
 	
     /**
     * DataModel.Point constructor for a point with a given value.
@@ -29,8 +27,8 @@ public class Point
     */
 
     public Point() {
-        rawValues = new LinkedHashMap<String, Cell>();
-        stdValues = new LinkedHashMap<String, Cell>();
+        rawValues = new HashMap<String, Cell>();
+        stdValues = new HashMap<String, Cell>();
 
     }
 	
@@ -45,7 +43,7 @@ public class Point
     }
 
 
-     public void setHashMaprawValues(LinkedHashMap<String,Cell> f){
+      public void setHashMaprawValues( HashMap<String,Cell> f){
         rawValues = f;
     }
 
@@ -73,8 +71,8 @@ public class Point
     	if (targ == null) {
     		for (String k: rawValues.keySet()) {
     			targ = rawValues.get(k);
-    			if (targ instanceof CellComposite) {
-    				targ = ((CellComposite)targ).getSubCell(att);
+    			if (targ instanceof CompositeCell) {
+    				targ = ((CompositeCell)targ).getSubCell(att);
     				if (targ != null) {
     					break;
     				}
@@ -95,7 +93,6 @@ public class Point
     public void normalize(ConcurrentHashMap<String, Float> mean, ConcurrentHashMap<String, Float> stddev) {
     	float val;
     	for (String k: mean.keySet()) {
-
     		try {
 	    		if (((SimpleCell)getCell(k)).getValue() instanceof Integer) {
 	    			val = (float)(int)((SimpleCell)getCell(k)).getValue();
@@ -104,7 +101,6 @@ public class Point
 	    		}
 	    		stdValues.put(k, new SimpleCell<Float>(k, (val - mean.get(k) / stddev.get(k))));
     		} catch (NullPointerException ne) {}
-
     	}
     }
 
@@ -127,38 +123,23 @@ public class Point
     * 
     * @param stdValues		The HashMap containing the new standard deviations.
     */
-    public void setStdValues(LinkedHashMap<String, Cell> stdValues) {
+    public void setStdValues(HashMap<String, Cell> stdValues) {
         this.stdValues = stdValues;
     }
-
-	 public String toString()
+    
+    /**
+     * Creates a string representation of the point.
+     * 
+     * @return	The string representation listing all of the values for the 
+     */
+	public String toString()
     {
         System.out.println("Size of DataModel.Point" + rawValues.values().size());
         String finalString = "";
         for (Cell x: rawValues.values()) {
-            System.out.println(x.getKey());
-            if(x instanceof CellComposite){
-                if(finalString == ""){
-                    finalString =    ((CellComposite)(x)).toString();
-                }else{
-                    finalString = finalString +", " +  ((CellComposite)(x)).toString();
-                }
-
-            }else{
-                if(finalString == ""){
-                    finalString =  ((CellSimple)(x)).toString();
-                }else{
-                    finalString = finalString + ", " + ((CellSimple)(x)).toString();
-                }
-
-            }
-
+            finalString += x.toString() + "\n";
         }
 
 		return finalString;
-    	//TODO. Preferred format is a series of "keyName: value"
-
-
-
     }
 }
