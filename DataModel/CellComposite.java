@@ -76,16 +76,12 @@ public class CellComposite extends Cell {
 	 * @return		A string with the composite cells key, followed by the string representation of every sub-cell.
 	 */
 	public String toString(){
-		String finalString = "";
-        for (Cell x: value) {		          
-            System.out.println(finalString);
-            CellSimple i = (CellSimple)x;		
-            if(finalString == ""){		
-                finalString = i.toString();		
-            }else{		
-                finalString = finalString + ", " + i.toString();		
-            }				
+        String finalString = "For Composite Cell " + this.getKey() + ":\n";
+        System.out.println(value.size());
+        for (Cell x: value) {
+            finalString += x.toString() + "/n";
         }
+
         return finalString;
     }
 }

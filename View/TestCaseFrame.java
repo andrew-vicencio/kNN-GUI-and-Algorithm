@@ -18,10 +18,10 @@ public class TestCaseFrame extends PromptFrame {
 	
 
 	private String testValue, distanceMetric;
-	private JLabel kLabel;
-	private JTextField kTextField;
+	private JLabel kLabel, minkLabel;
+	private JTextField kTextField, minkTextField;
 	private ValueTestFrameController controller;
-	private int minkValue;
+	private JPanel kPanel, minkPanel;
 	
 	
 	/**
@@ -29,11 +29,15 @@ public class TestCaseFrame extends PromptFrame {
 	 * @param view: View.View object this JFrame was spawned from
 	 * @param testValue: String
 	 */
-	public TestCaseFrame(View view, String testValue, String distanceMetric, int minkValue)
+	public TestCaseFrame(View view, String testValue, String distanceMetric)
 	{
 		super(view, "Enter your test case values");
 		kLabel = new JLabel("K value: ");
+		minkLabel = new JLabel("Polynomial Order (3 - 6): ");
 		kTextField = new JTextField(15);
+		minkTextField = new JTextField(15);
+		kPanel = new JPanel();
+		minkPanel = new JPanel();
 		this.testValue = testValue;
 		controller = new ValueTestFrameController( view, this);
 		
@@ -41,8 +45,8 @@ public class TestCaseFrame extends PromptFrame {
 		this.view = view;
 		this.testValue = testValue;
 		this.distanceMetric = distanceMetric;
-		this.minkValue = minkValue;
 		fillPrompts();
+	
 	}
 			
 	/**
@@ -70,12 +74,25 @@ public class TestCaseFrame extends PromptFrame {
 		}
 		
 		done.addActionListener(controller);
-		footerPanel.add(kLabel);
-		footerPanel.add(kTextField);
+		kPanel.add(kLabel);
+		kPanel.add(kTextField);
+		footerPanel.add(kPanel);
+		if(distanceMetric.equals("Minkowski"))
+		{
+			addMinkPrompt();
+		}
 		footerPanel.add(done);
 		add(mainPanel, BorderLayout.CENTER);
 		add(footerPanel, BorderLayout.SOUTH);
 		setVisible(true);
+	}
+	
+	private void addMinkPrompt() 
+	{
+		minkPanel.add(minkLabel);
+		minkPanel.add(minkTextField);
+		footerPanel.add(minkPanel);
+		
 	}
 
 	/**
@@ -102,15 +119,14 @@ public class TestCaseFrame extends PromptFrame {
     public void setTestValue(String testValue) {
         this.testValue = testValue;
     }
+
+	public JTextField getMinkTextField() {
+		return minkTextField;
+	}
 	
 	public String getDistanceMetric()
 	{
 		return distanceMetric;
-	}
-	
-	public int getMinkPolynomial()
-	{
-		return minkValue;
 	}
 }
 
