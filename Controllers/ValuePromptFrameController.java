@@ -45,9 +45,7 @@ public class ValuePromptFrameController extends ValueInputController {
                 {
                     view.enableTesting(true);
                 }
-                
-                
-                
+
                 for(String key : MainController.dataModel.getCellTypes().keySet()){
                     if(MainController.dataModel.getCellTypes().get(key).equals("comp")){
                         createCompFeature(key, newConfiguredData);

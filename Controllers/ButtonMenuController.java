@@ -53,6 +53,13 @@ public class ButtonMenuController extends MainController {
 		}
 		else if(s.equals("Load Sample Data"))
 		{
+			dataModel.presetTestData();
+			view.enableFeatureCreation(false);
+			view.enableDataInput(true);
+			view.enableTesting(true);
+			view.enableNewDataSet(false);
+			view.enableTestData(false);
+			view.getDoneButton().setVisible(false);
 		}
 
 	}

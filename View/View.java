@@ -414,11 +414,29 @@ public class View {
 		footerPanel.revalidate();
 		footerPanel.repaint();
 	}
+	
+	/**
+	 * Returns a boolean value representing whether or not the header for the point view is set up
+	 * @return
+	 */
 	public boolean isSetUp() {
 		return setUp;
 	}
+	
+	/**
+	 * Changes the value representing whether or not the header for the point view is set up
+	 * @param b
+	 */
 	public void setSetUp(boolean b) {
 		setUp = b;	
+	}
+	/**
+	 * Disables or enables the ability to load sample data
+	 * @param b
+	 */
+	public void enableTestData(boolean b) {
+		loadSampleData.setEnabled(b);
+		
 	}
 	
 }

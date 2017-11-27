@@ -57,7 +57,6 @@ public abstract class ValueInputController extends MainController {
                 CellSimple<Float> newCell = new CellSimple<Float>(key, valueInt);
                 return newCell;
             }catch (NumberFormatException ex){
-                //view.sendErrorFrame("Invalid float value was provided");
             }
         }else{
             CellSimple<String> newCell = new CellSimple<String>(key, value);
