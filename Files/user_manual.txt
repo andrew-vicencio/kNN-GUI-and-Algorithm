@@ -1,0 +1,38 @@
+********************************************
+User manual for Coder's Inc Milestone 2
+November 13th 2017
+Group members:
+- Benjamin Bichel
+- Darren Holden
+- Gabrielle Hubert
+- Andrew Vicencio
+********************************************
+
+1. Start application and click Create -> New Data Set in the top Menu Bar to start with an 
+   empty set of data. A set of sample data can be accessed under Create -> Load Sample Data.
+2. Click Edit and choose which type of feature you require
+    a) Simple Feature: A feature with a name and a primitive type (Ctrl + S)
+    b) Complex Feature: A feature containing two or more simple features (Ctrl + D)
+3. Enter a feature name, and for
+    a) Simple Features: choose the type and click "Add"
+    b) Complex Features: add two or more subfeatures with the "Add a simple subfeature"
+       button. Click the "Add" button for each simple feature after initializing the 
+       name, and finalize the complex feature by clicking the top "Add this feature"
+       button
+4. Repeat steps 2 - 3 for at least one more feature.
+5. Press "Done" at the bottom to finalize your features.
+   NOTE: You cannot add more features after doing this!
+6. Click Edit -> Add Value in the top menu bar to add a value (Ctrl + A)
+7. Fill in each text field and press done. You will encounter an error message if
+   a entered value is incompatible or blank.
+   NOTE: You cannot edit a value after clicking done!
+8. Continue steps 6 - 7 until all your data is inputted.
+9. Create a test case by clicking Create -> New Test Case in the top menu bar (Ctrl + N)
+10. Choose a value to test from the drop-down list and click OK.
+11. Choose a distance metric to use. If you choose Minkowski, you will also have to choose a poynomial
+    value between 3 and 6.
+11. Fill out the text fields provided to provide the remaining information
+12. Fill the field at the bottom for the K value and click Done.
+13. Your test case result will be displayed on the bottom of the page.
+14. You can execute any number of test cases, and add any number of values
+    after you execute a test case
