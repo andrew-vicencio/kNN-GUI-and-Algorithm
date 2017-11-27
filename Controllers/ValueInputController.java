@@ -30,15 +30,15 @@ public abstract class ValueInputController extends MainController {
 
     protected Cell createStanderedFeature(String key, String value){
         String type = MainController.dataModel.getCellTypes().get(key);
-        if(value.isEmpty())
-        {
-        	System.out.println("Key " + key + " is empty");
-        	CellSimple<String> newCell = new CellSimple<String>(key, " ");
-            return newCell;
-        }
-        else if(type.equals("int")){
+        if(type.equals("int")){
             try{
-                int valueInt = Integer.parseInt(value.replaceAll(" ", ""));
+                int valueInt;
+                if(value != null ){
+                    valueInt = Integer.parseInt(value.replaceAll(" ", ""));;
+                }else{
+                    valueInt = 0;
+                }
+
                 CellSimple<Integer> newCell = new CellSimple<Integer>(key, valueInt);
                 return newCell;
             }catch (NumberFormatException ex){
@@ -47,7 +47,13 @@ public abstract class ValueInputController extends MainController {
 
         }else if(type.equals("float")){
             try{
-                float valueInt = Float.parseFloat(value);
+                float valueInt;
+                if(value != null ){
+                    valueInt = Float.parseFloat(value);
+                }else{
+                    valueInt = 0;
+                }
+
                 CellSimple<Float> newCell = new CellSimple<Float>(key, valueInt);
                 return newCell;
             }catch (NumberFormatException ex){
