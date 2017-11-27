@@ -7,6 +7,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 
 /**
@@ -26,6 +27,7 @@ public abstract class PromptFrame extends JFrame {
 	protected JTextField jt;
 	protected JButton done;
 	protected HashMap<String, JTextField> fieldMap;
+    protected JScrollPane scrollPane;
 	
 	/**
 	 * Sets the main aspects of the frame, such as the layout, the done button

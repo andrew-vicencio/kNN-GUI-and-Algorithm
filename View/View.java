@@ -33,6 +33,7 @@ public class View {
 	private ArrayList<String> featureTypes;
 	private ButtonMenuController menuController;
     private DimensionalSpace dataModel;
+    private JScrollPane scrollPane;
     private int pointCount;
 
 	
@@ -49,6 +50,7 @@ public class View {
 		headerPanel = new JPanel();
 		contentPanel = new JPanel();
 		footerPanel = new  JPanel();
+		scrollPane = new JScrollPane(contentPanel);
 		menuBar = new JMenuBar();
 		create = new JMenu("Create");
 		edit = new JMenu("Edit");
@@ -71,7 +73,7 @@ public class View {
 		mainFrame.add(mainPanel);
 		mainPanel.setLayout(new BorderLayout());
 		mainPanel.add(headerPanel, BorderLayout.NORTH);
-		mainPanel.add(contentPanel, BorderLayout.CENTER);
+		mainPanel.add(scrollPane, BorderLayout.CENTER);
 		mainPanel.add(footerPanel, BorderLayout.SOUTH);
 		contentPanel.setLayout(new BoxLayout(contentPanel, BoxLayout.Y_AXIS));
 		menuBar.add(create);
@@ -346,8 +348,18 @@ public class View {
 		 "Feature", JOptionPane.QUESTION_MESSAGE, null, optionsArray, optionsArray[0]);
 		 String distanceMetric = (String) JOptionPane.showInputDialog(chooseValueFrame, "Choose a distance metric",
 				 "Feature", JOptionPane.QUESTION_MESSAGE, null, metricsArray, metricsArray[0]);
-		 System.out.println("POINT 1");
-		 TestCaseFrame testFrame = new TestCaseFrame(this, testValue, distanceMetric);
+		 
+		 int minkInt = 0;
+		 
+		 if(distanceMetric.equals("Minkowski"))
+		 {
+			 String minkArray[] = {"3", "4", "5", "6"};
+			 String minkString = (String) JOptionPane.showInputDialog(chooseValueFrame, "Choose a polynomial value",
+					 "Feature", JOptionPane.QUESTION_MESSAGE, null, minkArray, minkArray[0]);
+			 minkInt = Integer.parseInt(minkString);
+		 }
+		 
+		 TestCaseFrame testFrame = new TestCaseFrame(this, testValue, distanceMetric, minkInt);
 	}
 	
 	public void updateDisplay(Point x) {
