@@ -135,12 +135,15 @@ public class DimensionalSpace {
    */
   private void calcSimpleSum(CellSimple c) {
 	  float val;
-	  if (c.getValue() instanceof Integer) {
-		  val = (float)(int)c.getValue();
-	  } else if (c.getValue() instanceof Double){
-		  val = (float)(double)c.getValue();
-	  } else {
-		  val = (float)c.getValue();
+	  
+	  try {
+		  if (c.getValue() instanceof Integer) {
+			  val = (float)(int)c.getValue();
+		  } else {
+			  val = (float)c.getValue();
+		  }
+	  } catch (NullPointerException ne) {
+		  val = 0;
 	  }
 	  
 	  if (sum.containsKey(c.getKey())) {
@@ -168,19 +171,20 @@ public class DimensionalSpace {
 	  for (String k: mean.keySet()) {
 		  val = 0;
 		  u = mean.get(k);
-		  if (((CellSimple)points.get(0).getCell(k)).getValue() instanceof Integer) {
-			  for (Point pt: points) {
+		  
+		  for (Point pt: points) {
+			  try {
 				  try {
-					  val += Math.pow(((float)(int)((CellSimple)pt.getCell(k)).getValue()) - u, 2);
-				  } catch (NullPointerException ne){}
-			  }
-		  } else {
-			  for (Point pt: points) {
-				  try {
-					  val += (float) (double) Math.pow(((float)(double)((CellSimple)pt.getCell(k)).getValue()) - u, 2);
-				  } catch (NullPointerException ne){}
-			  }
+					  val += (float)(int)((CellSimple)pt.getCell(k)).getValue();
+				  } catch (ClassCastException te) {
+					  try {
+						  val += (float)((CellSimple)pt.getCell(k)).getValue();
+					  } catch (ClassCastException te3) {}
+				  }
+			  } catch (NullPointerException ne) {}
 		  }
+		  
+		  val = (float) Math.pow(val - u, 2);
 		  stddev.put(k, (float) Math.sqrt(val / (numberOfPoints - 1)));
 	  }
   }
