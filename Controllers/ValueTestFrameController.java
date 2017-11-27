@@ -32,17 +32,20 @@ public class ValueTestFrameController extends ValueInputController {
         HashMap<String, Cell> newConfiguredData = new HashMap<String, Cell>();
         int k =0;
         int mink = 0;
-        System.out.println(testKey);
+
+
         for(String key : MainController.dataModel.getCellTypes().keySet()){
-        	System.out.println(key);
+
+            if(!key.contains(testKey)){
             if(MainController.dataModel.getCellTypes().get(key).equals("comp")){
                 createCompFeature(key, newConfiguredData);
             }else{
-                if(!key.equals(testKey)){
                 	if(key.contains(".")){
                 		String keyBrakDown = key.split("\\.")[0];
                 		createCompFeature(keyBrakDown, newConfiguredData);
-                    	createSubFeature(key, frame.getFieldMap().get(key).getText(), (CellComposite) newConfiguredData.get(keyBrakDown));
+
+                            createSubFeature(key, frame.getFieldMap().get(key).getText(), (CellComposite) newConfiguredData.get(keyBrakDown));
+
                 	}else{
                 		try
                 		{
@@ -50,8 +53,9 @@ public class ValueTestFrameController extends ValueInputController {
                 		}
                 		catch(Exception z)
                 		{}
-                }}
+                }
             }
+         }
         }
         newPoint.setHashMaprawValues(newConfiguredData);
         try{
