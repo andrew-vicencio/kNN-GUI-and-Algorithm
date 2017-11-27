@@ -27,7 +27,7 @@ public class View {
 	private JPanel mainPanel, headerPanel, contentPanel, footerPanel;
 	private JMenuBar menuBar;
 	private JMenu create, edit, display, help;
-	private JMenuItem newDataSet, newTestCase, simpleFeature, complexFeature, addValue, helpDoc;
+	private JMenuItem newDataSet, newTestCase, simpleFeature, complexFeature, addValue, helpDoc, loadSampleData;
 	private JButton done;
 	private LinkedHashMap<String, Object> features;
 	private ArrayList<String> featureTypes;
@@ -62,6 +62,7 @@ public class View {
 		helpDoc = new JMenuItem("View.View Help Documents");
 		simpleFeature = new JMenuItem("Add a Simple Feature");
 		complexFeature = new JMenuItem("Add a Complex Feature");
+		loadSampleData = new JMenuItem("Load Sample Data");
 		done = new JButton("Done");
 		menuController = new ButtonMenuController(this);
         dataModel = menuController.getDataModel();
@@ -82,6 +83,7 @@ public class View {
 		menuBar.add(help);
 		create.add(newDataSet);
 		create.add(newTestCase);
+		create.add(loadSampleData);
 		edit.add(complexFeature);
 		edit.add(simpleFeature);
 		edit.add(addValue);
@@ -106,6 +108,7 @@ public class View {
 		newTestCase.addActionListener(menuController);
 		addValue.addActionListener(menuController);
 		helpDoc.addActionListener(menuController);
+		loadSampleData.addActionListener(menuController);
 		
 		//Set up list of primitive types the user can choose from
 		features = new LinkedHashMap<String, Object>();

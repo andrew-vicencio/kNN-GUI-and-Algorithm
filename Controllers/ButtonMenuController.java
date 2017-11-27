@@ -35,21 +35,24 @@ public class ButtonMenuController extends MainController {
 			view.enableFeatureCreation(true);
 			view.clearContentPanel();
 		}
-		if(s.equals("Add a Simple Feature"))
+		else if(s.equals("Add a Simple Feature"))
 		{
 			view.addFeaturePanelSimple("", 0);
 		}
-		if(s.equals("Add a Complex Feature"))
+		else if(s.equals("Add a Complex Feature"))
 		{
 			view.addFeaturePanelComplex("", 0);
 		}
-		if(s.equals("Add Value"))
+		else if(s.equals("Add Value"))
 		{
 			view.promptValue();
 		}
-		if(s.equals("New Test Case"))
+		else if(s.equals("New Test Case"))
 		{
 			view.promptTestCase();
+		}
+		else if(s.equals("Load Sample Data"))
+		{
 		}
 
 	}
