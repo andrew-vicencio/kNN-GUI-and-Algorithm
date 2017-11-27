@@ -58,7 +58,15 @@ public class TestEnviroment {
      */
     public static void main(String[] args) {
     	View view = new View();
-    	view.getDataModel().setSingleCellType("Ball","comp");
+    	
+    	// The following is code to input the tabulated data provided. To start from scratch, comment it out
+    	presetTestData(view);
+    	
+
+    }
+
+	private static void presetTestData(View view) {
+		view.getDataModel().setSingleCellType("Ball","comp");
     	view.getDataModel().setSingleCellType("Ball.Distance","float");
     	view.getDataModel().setSingleCellType("Ball.Direction","int");
     	view.getDataModel().setSingleCellType("Goal","comp");
@@ -264,15 +272,15 @@ public class TestEnviroment {
     	view.getDataModel().addPoint(p9);
     	
     	Point p10 = new Point();
-    	CellSimple c101 = new CellSimple("Ball.Distance", 10);
-    	CellSimple c102 = new CellSimple("Ball.Direction", 1);
-    	CellSimple c103 = new CellSimple("Goal.Distance", 61.3);
-    	CellSimple c104 = new CellSimple("Goal.Direction", -31);
-    	CellSimple c105 = new CellSimple("FCT.Distance", "");
-    	CellSimple c106 = new CellSimple("FCT.Direction","");
-    	CellSimple c107 = new CellSimple("FCB.Distance", 41.4);
-    	CellSimple c108 = new CellSimple("FCB.Direction", 43);
-    	CellSimple c109 = new CellSimple("Action", "Dash");
+    	CellSimple c101 = new CellSimple("Ball.Distance", 50.4);
+    	CellSimple c102 = new CellSimple("Ball.Direction", -1);
+    	CellSimple c103 = new CellSimple("Goal.Distance", 101.5);
+    	CellSimple c104 = new CellSimple("Goal.Direction", 14);
+    	CellSimple c105 = new CellSimple("FCT.Distance", 75.4);
+    	CellSimple c106 = new CellSimple("FCT.Direction",-24);
+    	CellSimple c107 = new CellSimple("FCB.Distance", 46.2);
+    	CellSimple c108 = new CellSimple("FCB.Direction", 40);
+    	CellSimple c109 = new CellSimple("Action", "Turn");
     	p10.addAttribute(c101);
     	p10.addAttribute(c102);
     	p10.addAttribute(c103);
@@ -284,9 +292,175 @@ public class TestEnviroment {
     	p10.addAttribute(c109);
     	view.getDataModel().addPoint(p10);
     	
-    	view.enableTesting(true);
+    	Point p11 = new Point();
+    	CellSimple c111 = new CellSimple("Ball.Distance", 41.4);
+    	CellSimple c112 = new CellSimple("Ball.Direction", 0);
+    	CellSimple c113 = new CellSimple("Goal.Distance", 90.1);
+    	CellSimple c114 = new CellSimple("Goal.Direction", 18);
+    	CellSimple c115 = new CellSimple("FCT.Distance", 65.1);
+    	CellSimple c116 = new CellSimple("FCT.Direction",-27);
+    	CellSimple c117 = new CellSimple("FCB.Distance", "");
+    	CellSimple c118 = new CellSimple("FCB.Direction", "");
+    	CellSimple c119 = new CellSimple("Action", "Turn");
+    	p11.addAttribute(c111);
+    	p11.addAttribute(c112);
+    	p11.addAttribute(c113);
+    	p11.addAttribute(c114);
+    	p11.addAttribute(c115);
+    	p11.addAttribute(c116);
+    	p11.addAttribute(c117);
+    	p11.addAttribute(c118);
+    	p11.addAttribute(c119);
+    	view.getDataModel().addPoint(p11);
     	
-
-    }
+    	Point p12 = new Point();
+    	CellSimple c121 = new CellSimple("Ball.Distance", 14.5);
+    	CellSimple c122 = new CellSimple("Ball.Direction", 15);
+    	CellSimple c123 = new CellSimple("Goal.Distance", 60.1);
+    	CellSimple c124 = new CellSimple("Goal.Direction", 27);
+    	CellSimple c125 = new CellSimple("FCT.Distance", "");
+    	CellSimple c126 = new CellSimple("FCT.Direction","");
+    	CellSimple c127 = new CellSimple("FCB.Distance", "");
+    	CellSimple c128 = new CellSimple("FCB.Direction", "");
+    	CellSimple c129 = new CellSimple("Action", "Turn");
+    	p12.addAttribute(c121);
+    	p12.addAttribute(c122);
+    	p12.addAttribute(c123);
+    	p12.addAttribute(c124);
+    	p12.addAttribute(c125);
+    	p12.addAttribute(c126);
+    	p12.addAttribute(c127);
+    	p12.addAttribute(c128);
+    	p12.addAttribute(c129);
+    	view.getDataModel().addPoint(p12);
+    	
+    	Point p13 = new Point();
+    	CellSimple c131 = new CellSimple("Ball.Distance", 41.4);
+    	CellSimple c132 = new CellSimple("Ball.Direction", 3);
+    	CellSimple c133 = new CellSimple("Goal.Distance", 94.7);
+    	CellSimple c134 = new CellSimple("Goal.Direction", 4);
+    	CellSimple c135 = new CellSimple("FCT.Distance", 55.1);
+    	CellSimple c136 = new CellSimple("FCT.Direction",-36);
+    	CellSimple c137 = new CellSimple("FCB.Distance", 53.5);
+    	CellSimple c138 = new CellSimple("FCB.Direction", 43);
+    	CellSimple c139 = new CellSimple("Action", "Turn");
+    	p13.addAttribute(c131);
+    	p13.addAttribute(c132);
+    	p13.addAttribute(c133);
+    	p13.addAttribute(c134);
+    	p13.addAttribute(c135);
+    	p13.addAttribute(c136);
+    	p13.addAttribute(c137);
+    	p13.addAttribute(c138);
+    	p13.addAttribute(c139);
+    	view.getDataModel().addPoint(p13);
+    	
+    	Point p14 = new Point();
+    	CellSimple c141 = new CellSimple("Ball.Distance", 23.2);
+    	CellSimple c142 = new CellSimple("Ball.Direction", 0);
+    	CellSimple c143 = new CellSimple("Goal.Distance", 76.9);
+    	CellSimple c144 = new CellSimple("Goal.Direction", 2);
+    	CellSimple c145 = new CellSimple("FCT.Distance", "");
+    	CellSimple c146 = new CellSimple("FCT.Direction","");
+    	CellSimple c147 = new CellSimple("FCB.Distance", "");
+    	CellSimple c148 = new CellSimple("FCB.Direction", "");
+    	CellSimple c149 = new CellSimple("Action", "Turn");
+    	p14.addAttribute(c141);
+    	p14.addAttribute(c142);
+    	p14.addAttribute(c143);
+    	p14.addAttribute(c144);
+    	p14.addAttribute(c145);
+    	p14.addAttribute(c146);
+    	p14.addAttribute(c147);
+    	p14.addAttribute(c148);
+    	p14.addAttribute(c149);
+    	view.getDataModel().addPoint(p14);
+    	
+    	Point p15 = new Point();
+    	CellSimple c151 = new CellSimple("Ball.Distance", 12);
+    	CellSimple c152 = new CellSimple("Ball.Direction", 24);
+    	CellSimple c153 = new CellSimple("Goal.Distance", "");
+    	CellSimple c154 = new CellSimple("Goal.Direction", "");
+    	CellSimple c155 = new CellSimple("FCT.Distance", "");
+    	CellSimple c156 = new CellSimple("FCT.Direction","");
+    	CellSimple c157 = new CellSimple("FCB.Distance", 42.7);
+    	CellSimple c158 = new CellSimple("FCB.Direction", -40);
+    	CellSimple c159 = new CellSimple("Action", "Turn");
+    	p15.addAttribute(c151);
+    	p15.addAttribute(c152);
+    	p15.addAttribute(c153);
+    	p15.addAttribute(c154);
+    	p15.addAttribute(c155);
+    	p15.addAttribute(c156);
+    	p15.addAttribute(c157);
+    	p15.addAttribute(c158);
+    	p15.addAttribute(c159);
+    	view.getDataModel().addPoint(p15);
+    	
+    	Point p16 = new Point();
+    	CellSimple c161 = new CellSimple("Ball.Distance", "");
+    	CellSimple c162 = new CellSimple("Ball.Direction", "");
+    	CellSimple c163 = new CellSimple("Goal.Distance", 26.3);
+    	CellSimple c164 = new CellSimple("Goal.Direction", 2);
+    	CellSimple c165 = new CellSimple("FCT.Distance", "");
+    	CellSimple c166 = new CellSimple("FCT.Direction","");
+    	CellSimple c167 = new CellSimple("FCB.Distance", "");
+    	CellSimple c168 = new CellSimple("FCB.Direction", "");
+    	CellSimple c169 = new CellSimple("Action", "Turn");
+    	p16.addAttribute(c161);
+    	p16.addAttribute(c162);
+    	p16.addAttribute(c163);
+    	p16.addAttribute(c164);
+    	p16.addAttribute(c165);
+    	p16.addAttribute(c166);
+    	p16.addAttribute(c167);
+    	p16.addAttribute(c168);
+    	p16.addAttribute(c169);
+    	view.getDataModel().addPoint(p16);
+    	
+    	Point p17 = new Point();
+    	CellSimple c171 = new CellSimple("Ball.Distance", 3.5);
+    	CellSimple c172 = new CellSimple("Ball.Direction", 1);
+    	CellSimple c173 = new CellSimple("Goal.Distance", 56.1);
+    	CellSimple c174 = new CellSimple("Goal.Direction", 4);
+    	CellSimple c175 = new CellSimple("FCT.Distance", "");
+    	CellSimple c176 = new CellSimple("FCT.Direction","");
+    	CellSimple c177 = new CellSimple("FCB.Distance", "");
+    	CellSimple c178 = new CellSimple("FCB.Direction", "");
+    	CellSimple c179 = new CellSimple("Action", "Dash");
+    	p17.addAttribute(c171);
+    	p17.addAttribute(c172);
+    	p17.addAttribute(c173);
+    	p17.addAttribute(c174);
+    	p17.addAttribute(c175);
+    	p17.addAttribute(c176);
+    	p17.addAttribute(c177);
+    	p17.addAttribute(c178);
+    	p17.addAttribute(c169);
+    	view.getDataModel().addPoint(p17);
+    	
+    	Point p18 = new Point();
+    	CellSimple c181 = new CellSimple("Ball.Distance", 10);
+    	CellSimple c182 = new CellSimple("Ball.Direction", 1);
+    	CellSimple c183 = new CellSimple("Goal.Distance", 61.3);
+    	CellSimple c184 = new CellSimple("Goal.Direction", -31);
+    	CellSimple c185 = new CellSimple("FCT.Distance", "");
+    	CellSimple c186 = new CellSimple("FCT.Direction","");
+    	CellSimple c187 = new CellSimple("FCB.Distance", 41.4);
+    	CellSimple c188 = new CellSimple("FCB.Direction", 43);
+    	CellSimple c189 = new CellSimple("Action", "Dash");
+    	p18.addAttribute(c181);
+    	p18.addAttribute(c182);
+    	p18.addAttribute(c183);
+    	p18.addAttribute(c184);
+    	p18.addAttribute(c185);
+    	p18.addAttribute(c186);
+    	p18.addAttribute(c187);
+    	p18.addAttribute(c188);
+    	p18.addAttribute(c189);
+    	view.getDataModel().addPoint(p18);
+    	
+    	view.enableTesting(true);
+	}
 
 }
