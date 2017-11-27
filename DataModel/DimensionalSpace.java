@@ -177,7 +177,7 @@ public class DimensionalSpace {
 		  } else {
 			  for (Point pt: points) {
 				  try {
-					  val += (float) (double) Math.pow(((float)((CellSimple)pt.getCell(k)).getValue()) - u, 2);
+					  val += (float) (double) Math.pow(((float)(double)((CellSimple)pt.getCell(k)).getValue()) - u, 2);
 				  } catch (NullPointerException ne){}
 			  }
 		  }
