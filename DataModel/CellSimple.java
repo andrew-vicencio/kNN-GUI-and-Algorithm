@@ -50,7 +50,7 @@ public class CellSimple<E> extends Cell {
 	public String toString(){
 		if(value == "" || value == null)
 		{
-			return getKey() + ": null";
+			return getKey() + ": ";
 		}
 		else
 		{
