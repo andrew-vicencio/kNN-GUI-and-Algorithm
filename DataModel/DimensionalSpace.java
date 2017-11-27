@@ -137,6 +137,8 @@ public class DimensionalSpace {
 	  float val;
 	  if (c.getValue() instanceof Integer) {
 		  val = (float)(int)c.getValue();
+	  } else if (c.getValue() instanceof Double){
+		  val = (float)(double)c.getValue();
 	  } else {
 		  val = (float)c.getValue();
 	  }
