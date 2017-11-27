@@ -19,7 +19,7 @@ public class TestCaseFrame extends PromptFrame {
 
 	private String testValue, distanceMetric;
 	private JLabel kLabel;
-	private JTextField kTextField, minkTextField;
+	private JTextField kTextField;
 	private ValueTestFrameController controller;
 	private int minkInt;
 	
@@ -34,7 +34,6 @@ public class TestCaseFrame extends PromptFrame {
 		super(view, "Enter your test case values");
 		kLabel = new JLabel("K value: ");
 		kTextField = new JTextField(15);
-		minkTextField = new JTextField(15);
 		this.testValue = testValue;
 		controller = new ValueTestFrameController( view, this);
 		
@@ -104,15 +103,20 @@ public class TestCaseFrame extends PromptFrame {
         this.testValue = testValue;
     }
 
-	public JTextField getMinkTextField() {
-		return minkTextField;
-	}
-	
+    /**
+     * Returns a String representing the distance metric the user has chosen from a predetermined list
+     * @return
+     */
 	public String getDistanceMetric()
 	{
 		return distanceMetric;
 	}
 	
+	/**
+	 * Returns the value of polynomial the user has chosen if they are using the Minkowski metric (from 3 - 6 inclusive). 
+	 * Otherwise, it is 0.
+	 * @return
+	 */
 	public int getMinkPolynomial()
 	{
 		return minkInt;

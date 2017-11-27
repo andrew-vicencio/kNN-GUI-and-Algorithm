@@ -65,6 +65,10 @@ public class TestEnviroment {
 
     }
 
+    /**
+     * Loads the tabulated data provided by Prof. Esfandiari into the model, and displays it to the view.
+     * @param view
+     */
 	private static void presetTestData(View view) {
 		view.getDataModel().setSingleCellType("Ball","comp");
     	view.getDataModel().setSingleCellType("Ball.Distance","float");
@@ -461,6 +465,7 @@ public class TestEnviroment {
     	view.getDataModel().addPoint(p18);
     	
     	view.enableTesting(true);
+    	view.enableNewDataSet(false);
 	}
 
 }
