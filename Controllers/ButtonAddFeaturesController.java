@@ -36,7 +36,6 @@ public class ButtonAddFeaturesController extends MainController {
 		else
 		{
 			view.clearContentPanel();
-			view.setUpFeatures();
 			view.enableDataInput(true);
 		}
 		

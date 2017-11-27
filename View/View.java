@@ -35,6 +35,7 @@ public class View {
     private DimensionalSpace dataModel;
     private JScrollPane scrollPane;
     private int pointCount;
+	private boolean setUp;
 
 	
 	 /**
@@ -68,6 +69,7 @@ public class View {
         dataModel = menuController.getDataModel();
         pointCount = 0;
         dataModel.setView(this);
+        setUp = false;
 
         //Placement and sizing of View.View elements
 		mainFrame.setJMenuBar(menuBar);
@@ -208,7 +210,7 @@ public class View {
 	 * Sets up the main panel with the keys user has provided as JLabels in the 
 	 * headerPanel
 	 */
-	public void setUpFeatures()
+	public void setUpFeatures(Point x)
 	{
 		contentPanel.removeAll();
 		footerPanel.removeAll();
@@ -217,14 +219,13 @@ public class View {
 		JLabel countLabel = new JLabel("Count");
 		countLabel.setBorder(BorderFactory.createCompoundBorder(new EtchedBorder(), new EmptyBorder(6, 6, 6, 6)));
 		headerPanel.add(countLabel);
-		for(String str: dataModel.getCellTypes().keySet())
+		String values[] = x.toString().split(",");
+		for(String str: values)
 		{
-		    if(!dataModel.getCellTypes().get(str).equals("comp"))
-			{
-				JLabel jl = new JLabel("    " + str);
-				jl.setBorder(BorderFactory.createCompoundBorder(new EtchedBorder(), new EmptyBorder(6, 6, 6, 6)));
-				headerPanel.add(jl);
-			}	
+			String[] substrings = str.split(":");
+			JLabel jl = new JLabel(substrings[0]);
+			jl.setBorder(BorderFactory.createCompoundBorder(new EtchedBorder(), new EmptyBorder(6, 6, 6, 6)));
+			headerPanel.add(jl);	
 	    }
 		headerPanel.revalidate();
 		headerPanel.repaint();
@@ -317,6 +318,9 @@ public class View {
 	 */
 	public void clearContentPanel() {
 		contentPanel.removeAll();
+		contentPanel.revalidate();
+		contentPanel.repaint();
+		System.out.println("This worked");
 	}
 	
 	
@@ -389,7 +393,8 @@ public class View {
 		}
 		point.setAlignmentY(JPanel.TOP_ALIGNMENT);
 		point.setAlignmentX(0);
-		point.setMaximumSize(new Dimension(1000, 25));
+		point.setPreferredSize(new Dimension(1000, 25));
+		point.setMaximumSize(new Dimension(1500, 25));
 		point.setBackground(new Color(255, 255, 255));
 		
 		contentPanel.add(point);
@@ -408,6 +413,12 @@ public class View {
 		footerPanel.add(label);
 		footerPanel.revalidate();
 		footerPanel.repaint();
+	}
+	public boolean isSetUp() {
+		return setUp;
+	}
+	public void setSetUp(boolean b) {
+		setUp = b;	
 	}
 	
 }

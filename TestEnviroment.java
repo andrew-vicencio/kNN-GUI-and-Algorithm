@@ -83,7 +83,6 @@ public class TestEnviroment {
     	view.getDataModel().setSingleCellType("FCB.Distance","float");
     	view.getDataModel().setSingleCellType("FCB.Direction","int");
     	view.getDataModel().setSingleCellType("Action","String");
-    	view.setUpFeatures();
     	view.enableDataInput(true);
     	
     	Point p1 = new Point();
@@ -106,6 +105,7 @@ public class TestEnviroment {
     	p1.addAttribute(c18);
     	p1.addAttribute(c19);
     	view.getDataModel().addPoint(p1);
+    	view.setUpFeatures(p1);
     	
     	Point p2 = new Point();
     	CellSimple c21 = new CellSimple("Ball.Distance", 1.9);

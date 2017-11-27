@@ -365,5 +365,7 @@ public class DimensionalSpace {
     public ArrayList<String> getDistanceMetrics(){
     	return distanceMetrics;
     }
+    
+    
 
 }

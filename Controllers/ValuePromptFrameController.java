@@ -41,6 +41,13 @@ public class ValuePromptFrameController extends ValueInputController {
 
                 frame.dispose();
 
+                if(MainController.dataModel.getNumberOfPoints() > 0)
+                {
+                    view.enableTesting(true);
+                }
+                
+                
+                
                 for(String key : MainController.dataModel.getCellTypes().keySet()){
                     if(MainController.dataModel.getCellTypes().get(key).equals("comp")){
                         createCompFeature(key, newConfiguredData);
@@ -55,13 +62,15 @@ public class ValuePromptFrameController extends ValueInputController {
                     }
                 }
                 newPoint.setHashMaprawValues(newConfiguredData);
+                
+                if(!view.isSetUp())
+                {
+                	view.setUpFeatures(newPoint);
+                	view.setSetUp(true);
+                }
                 MainController.dataModel.addPoint(newPoint);
 
-
-                if(MainController.dataModel.getNumberOfPoints() > 0)
-                {
-                    view.enableTesting(true);
-                }
+                
 	}
 
 
