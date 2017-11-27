@@ -284,6 +284,8 @@ public class TestEnviroment {
     	p10.addAttribute(c109);
     	view.getDataModel().addPoint(p10);
     	
+    	view.enableTesting(true);
+    	
 
     }
 

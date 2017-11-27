@@ -48,9 +48,9 @@ public class CellSimple<E> extends Cell {
 	 * @return		A string in the format "key: value"
 	 */
 	public String toString(){
-		if(value == null)
+		if(value == "" || value == null)
 		{
-			return getKey() + ": NULL";
+			return getKey() + ": null";
 		}
 		else
 		{

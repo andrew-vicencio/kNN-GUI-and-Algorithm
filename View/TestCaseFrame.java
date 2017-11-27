@@ -18,10 +18,10 @@ public class TestCaseFrame extends PromptFrame {
 	
 
 	private String testValue, distanceMetric;
-	private JLabel kLabel, minkLabel;
+	private JLabel kLabel;
 	private JTextField kTextField, minkTextField;
 	private ValueTestFrameController controller;
-	private JPanel kPanel, minkPanel;
+	private int minkInt;
 	
 	
 	/**
@@ -29,19 +29,17 @@ public class TestCaseFrame extends PromptFrame {
 	 * @param view: View.View object this JFrame was spawned from
 	 * @param testValue: String
 	 */
-	public TestCaseFrame(View view, String testValue, String distanceMetric)
+	public TestCaseFrame(View view, String testValue, String distanceMetric, int minkInt)
 	{
 		super(view, "Enter your test case values");
 		kLabel = new JLabel("K value: ");
-		minkLabel = new JLabel("Polynomial Order (3 - 6): ");
 		kTextField = new JTextField(15);
 		minkTextField = new JTextField(15);
-		kPanel = new JPanel();
-		minkPanel = new JPanel();
 		this.testValue = testValue;
 		controller = new ValueTestFrameController( view, this);
 		
 		
+		this.minkInt = minkInt;
 		this.view = view;
 		this.testValue = testValue;
 		this.distanceMetric = distanceMetric;
@@ -74,27 +72,13 @@ public class TestCaseFrame extends PromptFrame {
 		}
 		
 		done.addActionListener(controller);
-		kPanel.add(kLabel);
-		kPanel.add(kTextField);
-		footerPanel.add(kPanel);
-		if(distanceMetric.equals("Minkowski"))
-		{
-			addMinkPrompt();
-		}
+		footerPanel.add(kLabel);
+		footerPanel.add(kTextField);
 		footerPanel.add(done);
 		add(mainPanel, BorderLayout.CENTER);
 		add(footerPanel, BorderLayout.SOUTH);
 		setVisible(true);
 	}
-	
-	private void addMinkPrompt() 
-	{
-		minkPanel.add(minkLabel);
-		minkPanel.add(minkTextField);
-		footerPanel.add(minkPanel);
-		
-	}
-
 	/**
 	 * Provides the JTextField where the user inputed the K value they require
 	 * @return
@@ -127,6 +111,11 @@ public class TestCaseFrame extends PromptFrame {
 	public String getDistanceMetric()
 	{
 		return distanceMetric;
+	}
+	
+	public int getMinkPolynomial()
+	{
+		return minkInt;
 	}
 }
 
