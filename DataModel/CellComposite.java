@@ -78,7 +78,6 @@ public class CellComposite extends Cell {
 	public String toString(){
 		String finalString = "";
         for (Cell x: value) {		          
-            System.out.println(finalString);
             CellSimple i = (CellSimple)x;		
             if(finalString == ""){		
                 finalString = i.toString();		

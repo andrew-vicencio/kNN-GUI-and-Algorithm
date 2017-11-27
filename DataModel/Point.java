@@ -135,14 +135,13 @@ public class Point
      */
 	public String toString()
     {
-        System.out.println("Size of DataModel.Point" + rawValues.values().size());
         String finalString = "";
         for (Cell x: rawValues.values()) {
         	 if(x instanceof CellComposite){		
         		 if(finalString == ""){		
-        		 finalString =    ((CellComposite)(x)).toString();		
+        			 finalString = ((CellComposite)(x)).toString();		
         		 }else{		
-        		 finalString = finalString +", " +  ((CellComposite)(x)).toString();		
+        			 finalString = finalString +", " +  ((CellComposite)(x)).toString();		
         	 }		
         	 }else{		
         		 	if(finalString == ""){		

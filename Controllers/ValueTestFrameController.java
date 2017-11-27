@@ -14,7 +14,7 @@ import View.*;
  * Controller for a View.TestCaseFrame.
  * Takes text inputed in the View.TestCaseFrame and creates a KNN test case for it
  * 
- * @author Gabrielle
+ * @author Gabrielle and Ben
  *
  */
 public class ValueTestFrameController extends ValueInputController {
@@ -35,16 +35,22 @@ public class ValueTestFrameController extends ValueInputController {
         int k =0;
         System.out.println(testKey);
         for(String key : MainController.dataModel.getCellTypes().keySet()){
+        	System.out.println(key);
             if(MainController.dataModel.getCellTypes().get(key).equals("comp")){
                 createCompFeature(key, newConfiguredData);
             }else{
                 if(!key.equals(testKey)){
-                if(key.contains(".")){
-                    String keyBrakDown = key.split("\\.")[0];
-                    createCompFeature(keyBrakDown, newConfiguredData);
-                    createSubFeature(key, frame.getFieldMap().get(key).getText(), (CellComposite) newConfiguredData.get(keyBrakDown));
-                }else{
-                    newConfiguredData.put(key, createStanderedFeature(key, frame.getFieldMap().get(key).getText()));
+                	if(key.contains(".")){
+                		String keyBrakDown = key.split("\\.")[0];
+                		createCompFeature(keyBrakDown, newConfiguredData);
+                    	createSubFeature(key, frame.getFieldMap().get(key).getText(), (CellComposite) newConfiguredData.get(keyBrakDown));
+                	}else{
+                		try
+                		{
+                			newConfiguredData.put(key, createStanderedFeature(key, frame.getFieldMap().get(key).getText()));
+                		}
+                		catch(Exception z)
+                		{}
                 }}
             }
         }
@@ -56,7 +62,7 @@ public class ValueTestFrameController extends ValueInputController {
         }
 
         view.addTestCaseResult(MainController.dataModel.findkNN(testKey, newPoint, k, distanceMetric, tempCast.getMinkPolynomial()));
-
+        tempCast.dispose();
 	}
 
 }

@@ -55,7 +55,6 @@ public class ValuePromptFrameController extends ValueInputController {
                     }
                 }
                 newPoint.setHashMaprawValues(newConfiguredData);
-                System.out.println(newPoint.toString());
                 MainController.dataModel.addPoint(newPoint);
 
 
