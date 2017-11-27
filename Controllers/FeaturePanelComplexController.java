@@ -45,27 +45,6 @@ public class FeaturePanelComplexController extends FeaturePanelController{
 
 			}
 		}
-		else if(s.equals("Add a complex subfeature"))
-		{
-            currentPanel.getView().sendErrorFrame("Complex subfeatures are not supported at the moment.");
-		    /* CODE FOR A LATER IMPLEMENTATION
-			if(key.isEmpty())
-			{
-				fp.getView().sendErrorFrame("Please enter a valid name");
-			}
-			else if(fp.getTab() > 0)
-			{
-				fp.getView().sendErrorFrame("We currently do not support a second layer of subfeatures");
-			}
-			else
-			{
-				View.FeaturePanelComplex newComplex = new View.FeaturePanelComplex(fp.getView(), fp.getTypes(), fp.getKey(), fp.getTab() + 1, fp);
-				newComplex.setParentComplexKey(key);
-				fp.getView().addFeaturePanelComplex(newComplex);
-				fp.disable();		
-
-			}*/
-		}
 		else if(s.equals("Add this feature"))
 		{
 		    //Disables add Simple button
@@ -83,6 +62,11 @@ public class FeaturePanelComplexController extends FeaturePanelController{
 
 	}
 
+	/**
+	 * Adds a feature to the data model, and disables the FeaturePanel that created the feature
+	 * @param key
+	 * @param tempCast
+	 */
 	public void addValueToDataModel(String key, FeaturePanelComplex tempCast){
 
         if(MainController.dataModel.cellTypeComp(key) < 2){

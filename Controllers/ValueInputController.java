@@ -6,13 +6,23 @@ import View.*;
 
 import java.util.HashMap;
 
-
+/**
+ * Abstract class for controllers that deal with the input of data
+ * - ValuePromptFrameController
+ * - VaslueTestFrameController
+ * @author Ben
+ *
+ */
 public abstract class ValueInputController extends MainController {
 
     protected View view;
     protected PromptFrame frame;
 
-
+/**
+ * Constructor that passes allong the frame that belongs to the controller, and the view
+ * @param view
+ * @param promt
+ */
     public ValueInputController(View view, PromptFrame promt){
         this.view = view;
         this.frame = promt;

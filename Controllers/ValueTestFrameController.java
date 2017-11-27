@@ -59,15 +59,6 @@ public class ValueTestFrameController extends ValueInputController {
         }catch (NumberFormatException ex){
             view.sendErrorFrame("Invalid K value was provided");
         }
-        if(distanceMetric.equals("Minkowski"))
-        {
-        	try{
-            		mink = Integer.parseInt(tempCast.getMinkTextField().getText());
-            	}
-        	catch (NumberFormatException ex){
-        		view.sendErrorFrame("Invalid polynomial value was provided");
-        	}
-		}
         view.addTestCaseResult(MainController.dataModel.findkNN(testKey, newPoint, k, distanceMetric, tempCast.getMinkPolynomial()));
         tempCast.dispose();
 	}
