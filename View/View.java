@@ -334,7 +334,6 @@ public class View {
 		 dataModel.getDistanceMetrics().toArray(metricsArray);
 		 Set<String> optionsSet = dataModel.getCellTypes().keySet();
 		 ArrayList<String> optionsArrayList = new ArrayList<String>();
-		 
 		 for(String s: optionsSet)
 		 {
 			 if(!s.contains("."))
@@ -342,11 +341,9 @@ public class View {
 				 optionsArrayList.add(s);
 			 }
 		 }
-		 
 		 String[] optionsArray = new String[optionsArrayList.size()];
 		 optionsArrayList.toArray(optionsArray);
 		 JFrame chooseValueFrame = new JFrame("New Test Case");
-		 
 		 String testValue = (String) JOptionPane.showInputDialog(chooseValueFrame, "Choose a value to test",
 		 "Feature", JOptionPane.QUESTION_MESSAGE, null, optionsArray, optionsArray[0]);
 		 String distanceMetric = (String) JOptionPane.showInputDialog(chooseValueFrame, "Choose a distance metric",

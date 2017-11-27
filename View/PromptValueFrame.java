@@ -35,7 +35,6 @@ public class PromptValueFrame extends PromptFrame {
 	{
 		for(String str: view.getDataModel().getCellTypes().keySet())
 		{
-			
 		    if(!view.getDataModel().getCellTypes().get(str).equals("comp")){
 		    	name = new JLabel(str);
 		    	type = new JLabel(view.getDataModel().getCellTypes().get(str));

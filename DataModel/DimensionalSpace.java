@@ -161,18 +161,22 @@ public class DimensionalSpace {
   /**
    * findStdDev calculates the standard deviation for every numeric value.
    */
-  public void findStdDev(){
+   public void findStdDev(){
 	  float val, u;
 	  for (String k: mean.keySet()) {
 		  val = 0;
 		  u = mean.get(k);
 		  if (((CellSimple)points.get(0).getCell(k)).getValue() instanceof Integer) {
 			  for (Point pt: points) {
-				  val += Math.pow(((float)(int)((CellSimple)pt.getCell(k)).getValue()) - u, 2);
+				  try {
+					  val += Math.pow(((float)(int)((CellSimple)pt.getCell(k)).getValue()) - u, 2);
+				  } catch (NullPointerException ne){}
 			  }
 		  } else {
 			  for (Point pt: points) {
-				  val += Math.pow(((float)((CellSimple)pt.getCell(k)).getValue()) - u, 2);
+				  try {
+					  val += Math.pow(((float)((CellSimple)pt.getCell(k)).getValue()) - u, 2);
+				  } catch (NullPointerException ne){}
 			  }
 		  }
 		  stddev.put(k, (float) Math.sqrt(val / (numberOfPoints - 1)));

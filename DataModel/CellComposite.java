@@ -83,8 +83,9 @@ public class CellComposite extends Cell {
                 finalString = i.toString();		
             }else{		
                 finalString = finalString + ", " + i.toString();		
-            }				
+            }			
         }
+
         return finalString;
     }
 }
