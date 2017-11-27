@@ -46,7 +46,6 @@
 
 
 ## Changes Since Last Milestone
-<<<<<<< HEAD
 * Added in new KNN distance metrics on top of Euclidean
 	* Including
 		* Chebyshev
@@ -58,38 +57,15 @@
 * Made the interface much more user friendly
 	* Keyboard shortcuts
 	* Better formatting
-	* More intuitive
-* Major refactoring of the GUI classes
-
-## Known Issues
-* 
-
-=======
-* Created a GUI
-* Features can now have one of three primitive types: int, float and String
-* Allowed test cases to be used to predict any features
-* Increased cohesion with new classes for distance algorithms
-* Support for composite/complex features
-
+	* More intuitive and easier to read
+* Major refactoring of the GUI classes to reduce coupling
+* Added GUI support for users to choose new distance metrics
+* Allowed blank values to be added, rather than giving an error frame to the user
 
 ## Known Issues
 * Currently a typecasting issue in DimensionalSpace somewhere
->>>>>>> refs/heads/GUI
 
 ## Future Steps
 * Add Save/Load functionality
-* Refactor kNN functions to reduce code duplication
-<<<<<<< HEAD
 * Increase flexibility
-* Implement save/load functionality
 
-
-
-
-
-
-
-=======
-* Increase flexibility (to be clarified at a later date)
-* Implement save/load functionality
->>>>>>> refs/heads/GUI
