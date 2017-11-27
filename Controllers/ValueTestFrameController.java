@@ -18,11 +18,18 @@ import View.*;
 public class ValueTestFrameController extends ValueInputController {
 
 
-	
+	/**
+	 * Constructor to pass along the testCaseFrame this controller is responsible for, and the View it belongs to
+	 * @param view
+	 * @param testCaseFrame
+	 */
 	public ValueTestFrameController(View view, TestCaseFrame testCaseFrame) {
 		super(view, testCaseFrame);
 	}
-    //Fix the TestCaseFrame Key
+	
+	/**
+	 * Calls the KNN function in the data model to pass along data that the user inputed
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
         TestCaseFrame tempCast = (TestCaseFrame)frame;

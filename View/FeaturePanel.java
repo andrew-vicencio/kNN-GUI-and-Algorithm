@@ -14,7 +14,11 @@ import javax.swing.border.EtchedBorder;
 
 import Controllers.FeaturePanelComplexController;
 import Controllers.FeaturePanelController;
-
+/**
+ * Abstract class for FeaturePanelSimple and FeaturePanelComplex
+ * @author Gabrielle and Ben
+ *
+ */
 public abstract class FeaturePanel extends JPanel {
 	
 	protected JPanel innerPanel;
@@ -28,6 +32,13 @@ public abstract class FeaturePanel extends JPanel {
 	protected String keyParentName;
 	private ArrayList<String> types;
 	
+	/**
+	 * Sets up the basic view of the panel
+	 * @param view
+	 * @param types
+	 * @param superFeatureName
+	 * @param tab
+	 */
 	public FeaturePanel(View view, ArrayList<String> types, String superFeatureName, int tab)
 	{
 		super();

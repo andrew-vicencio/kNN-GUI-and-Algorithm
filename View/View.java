@@ -179,6 +179,7 @@ public class View {
 		contentPanel.repaint();
 
 	}
+	
 	/**
 	 * The features from a featurePanel is added to the features list
 	 */
@@ -362,6 +363,10 @@ public class View {
 		 TestCaseFrame testFrame = new TestCaseFrame(this, testValue, distanceMetric, minkInt);
 	}
 	
+	/**
+	 * Adds the Point x to the contentPanel
+	 * @param x
+	 */
 	public void updateDisplay(Point x) {
 		
 		JPanel point = new JPanel();
@@ -390,6 +395,10 @@ public class View {
 		
 	}
 	
+	/**
+	 * Adds the result of a test case, in String s, to the footerPanel
+	 * @param s
+	 */
 	public void addTestCaseResult(String s)
 	{
 		JLabel label = new JLabel(s);

@@ -57,20 +57,27 @@ public class FeaturePanelComplex extends FeaturePanel
 
 	
 	/**
-	 * Disables the panel from being modified
+	 * Disables the add button, preventing the panel from being modified
 	 */
 	public void disable()
 	{
         add.setEnabled(false);
 	}
 
+	/**
+	 * Disables the FeaturenName from being modified
+	 */
 	public void disableFeatureName(){
 	    featureName.setEnabled(false);
     }
 
+	/**
+	 * Disables the ability of adding new simpel subfeatures
+	 */
     public void disableAddSimpleButton(){
 	    addSimple.setEnabled(false);
     }
+    
 	/**
 	 * Returns the list of panels which the panel is the parent of
 	 * @return LinkedHashMap<String, Object>
@@ -88,7 +95,5 @@ public class FeaturePanelComplex extends FeaturePanel
 	public void addSubFeaturePanel(String name, Object fp)
 	{
 		subFeaturePanels.put(name, fp);
-	}
-	
-	
+	}	
 }
