@@ -35,6 +35,7 @@ public class View {
     private DimensionalSpace dataModel;
     private JScrollPane scrollPane;
     private int pointCount;
+    private int testCount;
 	private boolean setUp;
 
 	
@@ -60,7 +61,7 @@ public class View {
 		newDataSet = new JMenuItem("New Data Set");
 		newTestCase = new JMenuItem("New Test Case");
 		addValue = new JMenuItem("Add Value");
-		helpDoc = new JMenuItem("View.View Help Documents");
+		//helpDoc = new JMenuItem("View Help Documents");
 		simpleFeature = new JMenuItem("Add a Simple Feature");
 		complexFeature = new JMenuItem("Add a Complex Feature");
 		loadSampleData = new JMenuItem("Load Sample Data");
@@ -68,6 +69,7 @@ public class View {
 		menuController = new ButtonMenuController(this);
         dataModel = menuController.getDataModel();
         pointCount = 0;
+        testCount = 0;
         dataModel.setView(this);
         setUp = false;
 
@@ -79,6 +81,7 @@ public class View {
 		mainPanel.add(scrollPane, BorderLayout.CENTER);
 		mainPanel.add(footerPanel, BorderLayout.SOUTH);
 		contentPanel.setLayout(new BoxLayout(contentPanel, BoxLayout.Y_AXIS));
+		footerPanel.setLayout(new BoxLayout(footerPanel, BoxLayout.PAGE_AXIS));
 		menuBar.add(create);
 		menuBar.add(edit);
 		menuBar.add(display);
@@ -89,7 +92,7 @@ public class View {
 		edit.add(complexFeature);
 		edit.add(simpleFeature);
 		edit.add(addValue);
-		help.add(helpDoc);
+		//help.add(helpDoc);
 		mainFrame.setSize(1000, 700);
 
 		//Initial disabling of menu items
@@ -109,7 +112,7 @@ public class View {
 		newDataSet.addActionListener(menuController);
 		newTestCase.addActionListener(menuController);
 		addValue.addActionListener(menuController);
-		helpDoc.addActionListener(menuController);
+		//helpDoc.addActionListener(menuController);
 		loadSampleData.addActionListener(menuController);
 		
 		//Set up list of primitive types the user can choose from
@@ -409,7 +412,8 @@ public class View {
 	 */
 	public void addTestCaseResult(String s)
 	{
-		JLabel label = new JLabel(s);
+		testCount++;
+		JLabel label = new JLabel("Test case #"+testCount+": " + s);
 		footerPanel.add(label);
 		footerPanel.revalidate();
 		footerPanel.repaint();
