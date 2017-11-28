@@ -348,12 +348,18 @@ public class DimensionalSpace {
         cellTypes.put(key, type);
     }
 
-    //TODO: DOCUMENT
+    /**
+     *  Sets all the Cell Types
+     * @param types
+     */
     public void setCellTypes(HashMap<String, String> types){
         cellTypes = types;
     }
 
-    //TODO: DOCUMENT
+    /**
+     * Returns all the hashmap cell types
+     * @return
+     */
     public HashMap<String, String> getCellTypes(){
         return cellTypes;
     }
@@ -368,7 +374,6 @@ public class DimensionalSpace {
     
     /**
      * Loads the tabulated data provided by Prof. Esfandiari into the model, and displays it to the view.
-     * @param view
      */
 	public void presetTestData() {
 		setSingleCellType("Ball","comp");

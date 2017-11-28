@@ -10,7 +10,7 @@ import View.*;
  *
  */
 public class FeaturePanelSimpleController extends FeaturePanelController {
-	//TODO: BB Change to utilize the data model
+
 
 	
 	/**
@@ -25,6 +25,7 @@ public class FeaturePanelSimpleController extends FeaturePanelController {
 	/**
 	 * Determines what actions to take depending on the contents of the JTextField
 	 * If the box is empty, or a feature already has that name, an error message is given
+     * @param e
 	 */
 	public void actionPerformed(ActionEvent e) {
 

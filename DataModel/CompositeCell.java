@@ -69,14 +69,21 @@ public class CompositeCell extends Cell {
 	public void addCell(Cell f) {
 		value.add(f);
 	}
-	
-	//TODO: BB Documentation
+
+    /**
+     * Returns the Cell in a specified format that is given
+     * @return
+     */
 	public String toString(){
         String finalString = "";
+
         System.out.println(value.size());
+
         for (Cell x: value) {
+
             System.out.println(finalString);
             SimpleCell i = (SimpleCell)x;
+
             if(finalString == ""){
                 finalString = i.toString();
             }else{
