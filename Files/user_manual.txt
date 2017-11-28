@@ -1,12 +1,13 @@
 ********************************************
 User manual for Coder's Inc Milestone 2
-November 13th 2017
+November 27th 2017
 Group members:
 - Benjamin Bichel
 - Darren Holden
 - Gabrielle Hubert
 - Andrew Vicencio
 ********************************************
+To run this application, make sure that your run configuration is set to Test/TestEnvrionment.
 
 1. Start application and click Create -> New Data Set in the top Menu Bar to start with an 
    empty set of data. A set of sample data can be accessed under Create -> Load Sample Data.
