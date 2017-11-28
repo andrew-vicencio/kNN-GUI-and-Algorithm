@@ -67,7 +67,7 @@ public class ManhattanKNN extends kNN {
 		}
 		
 		for (Point pt: points) {
-			if (!(pt.equals(targetPoint))) {
+			if (!(pt.equals(targetPoint)) && !pt.checkValueNull(targetKey)) {
 				displacement = false;
 				displacedPoint = null;
 				distance = 0;

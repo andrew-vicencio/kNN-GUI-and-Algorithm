@@ -154,4 +154,22 @@ public class Point
 
 		return finalString;
     }
+	
+	public boolean checkValueNull(String key) {
+		Cell c = rawValues.get(key);
+		
+		if (c instanceof CellSimple) {
+			return ((CellSimple)c).getValue() == null;
+		} else {
+			for (Cell d: ((CellComposite)c).getSubCells()) {
+				if (d instanceof CellSimple) {
+					if (((CellSimple)d).getValue() == null) {
+						return true;
+					}
+				}
+			}
+		}
+		
+		return false;
+	}
 }
