@@ -63,7 +63,6 @@
 * Allowed blank values to be added, rather than giving an error frame to the user
 
 ## Known Issues
-* Currently a typecasting issue in DimensionalSpace somewhere
 
 ## Future Steps
 * Add Save/Load functionality
