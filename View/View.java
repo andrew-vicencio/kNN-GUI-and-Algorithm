@@ -355,8 +355,10 @@ public class View {
 		 String[] optionsArray = new String[optionsArrayList.size()];
 		 optionsArrayList.toArray(optionsArray);
 		 JFrame chooseValueFrame = new JFrame("New Test Case");
+		 
 		 String testValue = (String) JOptionPane.showInputDialog(chooseValueFrame, "Choose a value to test",
 		 "Feature", JOptionPane.QUESTION_MESSAGE, null, optionsArray, optionsArray[0]);
+		 
 		 String expected = JOptionPane.showInputDialog(chooseValueFrame, "What is your expected value for " + testValue + "?");
 		 String distanceMetric = (String) JOptionPane.showInputDialog(chooseValueFrame, "Choose a distance metric",
 				 "Feature", JOptionPane.QUESTION_MESSAGE, null, metricsArray, metricsArray[0]); 

@@ -40,7 +40,6 @@ public class ValueTestFrameController extends ValueInputController {
         int k =0;
         int mink = 0;
 
-
         for(String key : MainController.dataModel.getCellTypes().keySet()){
 
             if(!key.contains(testKey)){
@@ -70,8 +69,19 @@ public class ValueTestFrameController extends ValueInputController {
         }catch (NumberFormatException ex){
             view.sendErrorFrame("Invalid K value was provided");
         }
-        view.addTestCaseResult(MainController.dataModel.findkNN(testKey, newPoint, k, distanceMetric, tempCast.getMinkPolynomial()));
+        String result = MainController.dataModel.findkNN(testKey, newPoint, k, distanceMetric, tempCast.getMinkPolynomial());
+        view.addTestCaseResult("(" + distanceMetric + ") Expected-" + testKey + ": " + tempCast.getExpectedValue() + "           Actual-" + result);
         tempCast.dispose();
+        if(e.getActionCommand().equals("Add Test"))
+        {
+        	//dataModel.addTest()
+        	view.promptTestCase();
+        }
+        else if(e.getActionCommand().equals("Done"))
+        {
+        	//dataModel.getFailureRate();
+        }
+        
 	}
 
 }

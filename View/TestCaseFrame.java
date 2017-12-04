@@ -2,6 +2,8 @@ package View;
 
 
 import java.awt.BorderLayout;
+
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
@@ -22,6 +24,7 @@ public class TestCaseFrame extends PromptFrame {
 	private JTextField kTextField;
 	private ValueTestFrameController controller;
 	private int minkInt;
+	private JButton addTest;
 	
 	
 	
@@ -37,7 +40,7 @@ public class TestCaseFrame extends PromptFrame {
 		kTextField = new JTextField(15);
 		this.testValue = testValue;
 		controller = new ValueTestFrameController( view, this);
-		
+		addTest = new JButton("Add Test");
 		
 		this.minkInt = minkInt;
 		this.view = view;
@@ -73,9 +76,11 @@ public class TestCaseFrame extends PromptFrame {
 		}
 		
 		done.addActionListener(controller);
+		addTest.addActionListener(controller);
 		footerPanel.add(kLabel);
 		footerPanel.add(kTextField);
 		footerPanel.add(done);
+		footerPanel.add(addTest);
 		add(mainPanel, BorderLayout.CENTER);
 		add(footerPanel, BorderLayout.SOUTH);
 		setVisible(true);
@@ -122,6 +127,11 @@ public class TestCaseFrame extends PromptFrame {
 	public int getMinkPolynomial()
 	{
 		return minkInt;
+	}
+	
+	public String getExpectedValue()
+	{
+		return expected;
 	}
 }
 

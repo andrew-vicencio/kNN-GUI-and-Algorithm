@@ -230,7 +230,7 @@ public class DimensionalSpace {
 	  
 	  Cell resultCell = calculator.findKNN(targetKey, targetPoint, neighbours);
 	  
-	  return "(" + metric +")" + resultCell.toString();	    
+	  return resultCell.toString();	    
   }
   
   /**
