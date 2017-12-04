@@ -355,13 +355,14 @@ public class View {
 		 String[] optionsArray = new String[optionsArrayList.size()];
 		 optionsArrayList.toArray(optionsArray);
 		 JFrame chooseValueFrame = new JFrame("New Test Case");
+		 
 		 String testValue = (String) JOptionPane.showInputDialog(chooseValueFrame, "Choose a value to test",
 		 "Feature", JOptionPane.QUESTION_MESSAGE, null, optionsArray, optionsArray[0]);
+		 
+		 String expected = JOptionPane.showInputDialog(chooseValueFrame, "What is your expected value for " + testValue + "?");
 		 String distanceMetric = (String) JOptionPane.showInputDialog(chooseValueFrame, "Choose a distance metric",
-				 "Feature", JOptionPane.QUESTION_MESSAGE, null, metricsArray, metricsArray[0]);
-		 
+				 "Feature", JOptionPane.QUESTION_MESSAGE, null, metricsArray, metricsArray[0]); 
 		 int minkInt = 0;
-		 
 		 if(distanceMetric.equals("Minkowski"))
 		 {
 			 String minkArray[] = {"3", "4", "5", "6"};
@@ -370,7 +371,7 @@ public class View {
 			 minkInt = Integer.parseInt(minkString);
 		 }
 		 
-		 TestCaseFrame testFrame = new TestCaseFrame(this, testValue, distanceMetric, minkInt);
+		 TestCaseFrame testFrame = new TestCaseFrame(this, testValue, expected, distanceMetric, minkInt);
 	}
 	
 	/**
@@ -441,6 +442,32 @@ public class View {
 	public void enableTestData(boolean b) {
 		loadSampleData.setEnabled(b);
 		
+	}
+	
+	/**
+	 * When a user ends a sequence of tests, the success rate is displayed from the data stored in the data model
+	 * in the footerPanel. This includes the number of successes, the number of failures, and the success rate
+	 * @param testSuccess
+	 * @param testFailure
+	 */
+	public void showSuccessRate(int testSuccess, int testFailure) {
+		JLabel divider = new JLabel("---------------------------------------------------------------------------------------------------------------------------------------");
+		JLabel total = new JLabel(testCount + " TOTAL TEST CASES - Successes: " + testSuccess + " Failures: " + testFailure);
+		JLabel stats = new JLabel("Success rate = " + testSuccess/(float)testCount * 100 + "%");
+		footerPanel.add(total);
+		footerPanel.add(stats);
+		footerPanel.add(divider);
+		footerPanel.revalidate();
+		footerPanel.repaint();
+		
+	}
+	
+	/**
+	 * Reinitialize the number of test to 0
+	 */
+	public void initTestStats()
+	{
+		testCount = 0;
 	}
 	
 }
