@@ -29,6 +29,8 @@ public class DimensionalSpace {
   private ArrayList<Point> points;
   private View view;
   private ArrayList<String> distanceMetrics;
+  private int testSuccess;
+  private int testFailure;
   
   /**
    * Constructor for instances of the DataModel.DimensionalSpace class. Initializes the class variables and sets the
@@ -47,6 +49,8 @@ public class DimensionalSpace {
     distanceMetrics.add("Minkowski");
     distanceMetrics.add("Chebyshev");
     distanceMetrics.add("Euclidean");
+    testSuccess = 0;
+    testFailure = 0;
     
   }
   
@@ -372,6 +376,28 @@ public class DimensionalSpace {
     	return distanceMetrics;
     }
     
+    public void initTestStats()
+    {
+    	testSuccess = 0;
+    	testFailure = 0;
+    }
+    
+    public void addTest(String actual, String expected)
+    {
+    	if(actual.equals(expected))
+    	{
+    		testSuccess++;
+    	}
+    	else
+    	{
+    		testFailure++;
+    	}
+    }
+    
+    public void getFailureRate()
+    {
+    	view.showFailureRate(testSuccess, testFailure);
+    }
     /**
      * Loads the tabulated data provided by Prof. Esfandiari into the model, and displays it to the view.
      */

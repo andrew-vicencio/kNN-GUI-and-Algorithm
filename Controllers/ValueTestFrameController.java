@@ -70,16 +70,20 @@ public class ValueTestFrameController extends ValueInputController {
             view.sendErrorFrame("Invalid K value was provided");
         }
         String result = MainController.dataModel.findkNN(testKey, newPoint, k, distanceMetric, tempCast.getMinkPolynomial());
-        view.addTestCaseResult("(" + distanceMetric + ") Expected-" + testKey + ": " + tempCast.getExpectedValue() + "           Actual-" + result);
+        view.addTestCaseResult("(" + distanceMetric + ") Expected " + testKey + ": " + tempCast.getExpectedValue() + "           Actual " + result);
         tempCast.dispose();
         if(e.getActionCommand().equals("Add Test"))
         {
-        	//dataModel.addTest()
+        	System.out.println(result.split(testKey+": ")[1].replaceAll("\\s+", "")+"ENDD");
+        	dataModel.addTest(result.split(testKey+": ")[1].replaceAll("\\s+", ""), tempCast.getExpectedValue());
         	view.promptTestCase();
         }
         else if(e.getActionCommand().equals("Done"))
         {
-        	//dataModel.getFailureRate();
+        	System.out.println(result.split(testKey+": ")[1].replaceAll("\\s+", "")+"ENDD");
+        	dataModel.addTest(result.split(testKey+": ")[1].replaceAll("\\s+", ""), tempCast.getExpectedValue());
+        	dataModel.getFailureRate();
+        	dataModel.initTestStats();
         }
         
 	}

@@ -443,6 +443,13 @@ public class View {
 		loadSampleData.setEnabled(b);
 		
 	}
+	public void showFailureRate(int testSuccess, int testFailure) {
+		JLabel label = new JLabel(testCount + " TOTAL TEST CASES - Sucesses: " + testSuccess + " Failures: " + testFailure);
+		footerPanel.add(label);
+		footerPanel.revalidate();
+		footerPanel.repaint();
+		
+	}
 	
 }
 
