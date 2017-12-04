@@ -74,16 +74,15 @@ public class ValueTestFrameController extends ValueInputController {
         tempCast.dispose();
         if(e.getActionCommand().equals("Add Test"))
         {
-        	System.out.println(result.split(testKey+": ")[1].replaceAll("\\s+", "")+"ENDD");
-        	dataModel.addTest(result.split(testKey+": ")[1].replaceAll("\\s+", ""), tempCast.getExpectedValue());
+        	dataModel.addTest(result.split(testKey+": ")[1].replaceAll("\\s+", ""), tempCast.getExpectedValue().replaceAll("\\s+", ""));
         	view.promptTestCase();
         }
         else if(e.getActionCommand().equals("Done"))
         {
-        	System.out.println(result.split(testKey+": ")[1].replaceAll("\\s+", "")+"ENDD");
-        	dataModel.addTest(result.split(testKey+": ")[1].replaceAll("\\s+", ""), tempCast.getExpectedValue());
-        	dataModel.getFailureRate();
+        	dataModel.addTest(result.split(testKey+": ")[1].replaceAll("\\s+", ""), tempCast.getExpectedValue().replaceAll("\\s+", ""));
+        	dataModel.getSuccessRate();
         	dataModel.initTestStats();
+        	view.initTestStats();
         }
         
 	}

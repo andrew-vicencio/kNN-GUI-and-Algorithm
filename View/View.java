@@ -443,12 +443,31 @@ public class View {
 		loadSampleData.setEnabled(b);
 		
 	}
-	public void showFailureRate(int testSuccess, int testFailure) {
-		JLabel label = new JLabel(testCount + " TOTAL TEST CASES - Sucesses: " + testSuccess + " Failures: " + testFailure);
-		footerPanel.add(label);
+	
+	/**
+	 * When a user ends a sequence of tests, the success rate is displayed from the data stored in the data model
+	 * in the footerPanel. This includes the number of successes, the number of failures, and the success rate
+	 * @param testSuccess
+	 * @param testFailure
+	 */
+	public void showSuccessRate(int testSuccess, int testFailure) {
+		JLabel divider = new JLabel("---------------------------------------------------------------------------------------------------------------------------------------");
+		JLabel total = new JLabel(testCount + " TOTAL TEST CASES - Successes: " + testSuccess + " Failures: " + testFailure);
+		JLabel stats = new JLabel("Success rate = " + testSuccess/(float)testCount * 100 + "%");
+		footerPanel.add(total);
+		footerPanel.add(stats);
+		footerPanel.add(divider);
 		footerPanel.revalidate();
 		footerPanel.repaint();
 		
+	}
+	
+	/**
+	 * Reinitialize the number of test to 0
+	 */
+	public void initTestStats()
+	{
+		testCount = 0;
 	}
 	
 }

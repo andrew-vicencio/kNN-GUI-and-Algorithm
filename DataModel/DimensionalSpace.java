@@ -376,12 +376,20 @@ public class DimensionalSpace {
     	return distanceMetrics;
     }
     
+    /**
+     * Reinitialize the test statistics to 0 sucesses and 0 failures
+     */
     public void initTestStats()
     {
     	testSuccess = 0;
     	testFailure = 0;
     }
     
+    /**
+     * Checks the actual test result with an expected String, and increments testSuccess or testFailure accordingly
+     * @param actual: String
+     * @param expected: String
+     */
     public void addTest(String actual, String expected)
     {
     	if(actual.equals(expected))
@@ -394,10 +402,50 @@ public class DimensionalSpace {
     	}
     }
     
-    public void getFailureRate()
+    /**
+     * Checks the actual test result with an expected String, and increments testSuccess or testFailure accordingly
+     * @param actual: int
+     * @param expected: String
+     */
+    public void addTest(int actual, String expected)
     {
-    	view.showFailureRate(testSuccess, testFailure);
+    	String actualString = Integer.toString(actual);
+    	if(actualString.equals(expected))
+    	{
+    		testSuccess++;
+    	}
+    	else
+    	{
+    		testFailure++;
+    	}
     }
+    
+    /**
+     * Checks the actual test result with an expected String, and increments testSuccess or testFailure accordingly
+     * @param actual: float
+     * @param expected: String
+     */
+    public void addTest(float actual, String expected)
+    {
+    	String actualString = Float.toString(actual);
+    	if(actualString.equals(expected))
+    	{
+    		testSuccess++;
+    	}
+    	else
+    	{
+    		testFailure++;
+    	}
+    }
+    
+    /**
+     * Displays final test rate to the view
+     */
+    public void getSuccessRate()
+    {
+    	view.showSuccessRate(testSuccess, testFailure);
+    }
+    
     /**
      * Loads the tabulated data provided by Prof. Esfandiari into the model, and displays it to the view.
      */
