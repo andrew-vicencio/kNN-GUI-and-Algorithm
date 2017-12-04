@@ -357,11 +357,10 @@ public class View {
 		 JFrame chooseValueFrame = new JFrame("New Test Case");
 		 String testValue = (String) JOptionPane.showInputDialog(chooseValueFrame, "Choose a value to test",
 		 "Feature", JOptionPane.QUESTION_MESSAGE, null, optionsArray, optionsArray[0]);
+		 String expected = JOptionPane.showInputDialog(chooseValueFrame, "What is your expected value for " + testValue + "?");
 		 String distanceMetric = (String) JOptionPane.showInputDialog(chooseValueFrame, "Choose a distance metric",
-				 "Feature", JOptionPane.QUESTION_MESSAGE, null, metricsArray, metricsArray[0]);
-		 
+				 "Feature", JOptionPane.QUESTION_MESSAGE, null, metricsArray, metricsArray[0]); 
 		 int minkInt = 0;
-		 
 		 if(distanceMetric.equals("Minkowski"))
 		 {
 			 String minkArray[] = {"3", "4", "5", "6"};
@@ -370,7 +369,7 @@ public class View {
 			 minkInt = Integer.parseInt(minkString);
 		 }
 		 
-		 TestCaseFrame testFrame = new TestCaseFrame(this, testValue, distanceMetric, minkInt);
+		 TestCaseFrame testFrame = new TestCaseFrame(this, testValue, expected, distanceMetric, minkInt);
 	}
 	
 	/**

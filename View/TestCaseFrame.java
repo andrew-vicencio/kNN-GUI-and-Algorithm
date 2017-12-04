@@ -17,11 +17,12 @@ import Controllers.*;
 public class TestCaseFrame extends PromptFrame {
 	
 
-	private String testValue, distanceMetric;
+	private String testValue, distanceMetric, expected;
 	private JLabel kLabel;
 	private JTextField kTextField;
 	private ValueTestFrameController controller;
 	private int minkInt;
+	
 	
 	
 	/**
@@ -29,7 +30,7 @@ public class TestCaseFrame extends PromptFrame {
 	 * @param view: View.View object this JFrame was spawned from
 	 * @param testValue: String
 	 */
-	public TestCaseFrame(View view, String testValue, String distanceMetric, int minkInt)
+	public TestCaseFrame(View view, String testValue, String expected, String distanceMetric, int minkInt)
 	{
 		super(view, "Enter your test case values");
 		kLabel = new JLabel("K value: ");
@@ -42,6 +43,7 @@ public class TestCaseFrame extends PromptFrame {
 		this.view = view;
 		this.testValue = testValue;
 		this.distanceMetric = distanceMetric;
+		this.expected = expected;
 		fillPrompts();
 	
 	}
