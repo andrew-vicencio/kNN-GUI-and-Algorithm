@@ -30,7 +30,7 @@ public class FeaturePanelSimpleController extends FeaturePanelController {
 	public void actionPerformed(ActionEvent e) {
 
 		String key = currentPanel.getKey();
-		String value = ((FeaturePanelSimple)currentPanel).getValue();
+		String value = ((FeaturePanelSimple)currentPanel).getFeatureType();
 
 		//Make sure there is a valid key
 		if(key.isEmpty())

@@ -28,7 +28,7 @@ public class SimpleCell<E> extends Cell {
 	 * 
 	 * @return		The cell's value
 	 */
-	public E getValue() {
+	public E getFeatureType() {
 		return value;
 	}
 	
