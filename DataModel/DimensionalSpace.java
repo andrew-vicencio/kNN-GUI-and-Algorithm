@@ -24,6 +24,7 @@ public class DimensionalSpace {
   private ConcurrentHashMap<String, Float> stddev;
   private ConcurrentHashMap<String, Float> sum;
   private HashMap<String, String> cellTypes;
+  private HashMap<String, String> cellDistanceMetrics;
   private int numberOfPoints;
   private int numberOfFields;
   private ArrayList<Point> points;
@@ -41,6 +42,7 @@ public class DimensionalSpace {
     stddev = new ConcurrentHashMap<String, Float>();
     sum = new ConcurrentHashMap<String, Float>();
     points = new ArrayList<Point>();
+    cellDistanceMetrics = new HashMap<String, String>();
     numberOfPoints = 0;
     numberOfFields = 0;
     cellTypes = new HashMap<String, String>();
@@ -444,6 +446,12 @@ public class DimensionalSpace {
     public void getSuccessRate()
     {
     	view.showSuccessRate(testSuccess, testFailure);
+    }
+    
+    public void addDistanceMetric(String featureName, String metric)
+    {
+    	cellDistanceMetrics.put(featureName, metric);
+    	System.out.println(cellDistanceMetrics.toString());
     }
     
     /**

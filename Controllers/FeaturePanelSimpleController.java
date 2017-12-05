@@ -49,10 +49,12 @@ public class FeaturePanelSimpleController extends FeaturePanelController {
 			if(currentPanel.getParentComplex() != null)
 			{
 				MainController.dataModel.setSingleCellType(currentPanel.getParentComplexKey() + "." + key, value);
+				MainController.dataModel.addDistanceMetric(currentPanel.getParentComplexKey() + "." + key, ((FeaturePanelSimple) currentPanel).getDistanceMetric());
 			}
 			else
 			{
 				MainController.dataModel.setSingleCellType(key, value);
+				MainController.dataModel.addDistanceMetric(key, ((FeaturePanelSimple) currentPanel).getDistanceMetric());
 			}
 		}
 
