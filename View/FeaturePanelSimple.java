@@ -7,6 +7,7 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.util.ArrayList;
 import javax.swing.BorderFactory;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
@@ -26,7 +27,8 @@ public class FeaturePanelSimple extends FeaturePanel{
 
 	//Things specialized for this particular input
 	private JLabel  featureTypeLabel, distanceMetricLabel;
-	private JComboBox<String> featureType, distanceMetric;
+	private JComboBox<String> featureType;
+	private JComboBox<String> numberMetrics, stringMetrics;
 
 	/**
 	 * Default constructor for a View.FeaturePanelSimple with no parent
@@ -39,21 +41,25 @@ public class FeaturePanelSimple extends FeaturePanel{
 	{
 		super(view, types, superFeatureName, tab);
 		String[] typesArray = types.toArray(new String[0]);
-		String[] metricsArray = view.getDataModel().getDistanceMetrics().toArray(new String[view.getDataModel().getDistanceMetrics().size()]);
 		featureType = new JComboBox<String>(typesArray);
-		distanceMetric = new JComboBox<String>(metricsArray);
+		numberMetrics = new JComboBox<String>(view.getDataModel().getNumberMetrics());
+		stringMetrics = new JComboBox<String>(view.getDataModel().getStringMetrics());
 		featureTypeLabel = new JLabel("Feature type: ");
 		distanceMetricLabel = new JLabel("Distance metric: ");
 		innerPanel.add(featureTypeLabel);
 		innerPanel.add(featureType);
 		innerPanel.add(distanceMetricLabel);
-		innerPanel.add(distanceMetric);
-        innerPanel.add(add);
+		innerPanel.add(numberMetrics);
+		innerPanel.add(stringMetrics);
+		innerPanel.add(add);
+		setMetricsArray();
 		controller = new FeaturePanelSimpleController(this);
 		add.addActionListener(controller);
+		featureType.addActionListener(new FeatureTypeController(this));
 		
 	}
 	
+
 	/**
 	 * Calls the default constructor, and initialized the parentComplex variable
 	 * 
@@ -100,7 +106,14 @@ public class FeaturePanelSimple extends FeaturePanel{
 		String s="";
 		try
 		{
-			s = (String) distanceMetric.getSelectedItem();
+			if(featureType.getSelectedItem().equals("String"))
+			{
+				s = (String) stringMetrics.getSelectedItem();
+			}
+			else
+			{
+				s = (String) numberMetrics.getSelectedItem();
+			}
 		}
 		catch(Exception e)
 		{
@@ -117,8 +130,23 @@ public class FeaturePanelSimple extends FeaturePanel{
     {
 		featureName.setEnabled(false);
 		featureType.setEnabled(false);
-		distanceMetric.setEnabled(false);
+		numberMetrics.setEnabled(false);
+		stringMetrics.setEnabled(false);
 		add.setEnabled(false);
+	}
+	
+	public void setMetricsArray() 
+	{
+		if(getFeatureType().equals("int") || getFeatureType().equals("float"))
+		{
+			numberMetrics.setVisible(true);
+			stringMetrics.setVisible(false);
+		}
+		else
+		{
+			numberMetrics.setVisible(false);
+			stringMetrics.setVisible(true);
+		}
 	}
 }
 

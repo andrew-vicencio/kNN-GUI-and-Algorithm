@@ -30,6 +30,8 @@ public class DimensionalSpace {
   private ArrayList<Point> points;
   private View view;
   private ArrayList<String> distanceMetrics;
+  private String[] stringMetrics;
+  private String[] numberMetrics;
   private int testSuccess;
   private int testFailure;
   
@@ -53,7 +55,8 @@ public class DimensionalSpace {
     distanceMetrics.add("Euclidean");
     testSuccess = 0;
     testFailure = 0;
-    
+    stringMetrics = new String[] {"Hamming", "Equal", "Character Value"};
+    numberMetrics = new String[] {"Difference", "Equality", "Standard Deviation"};  
   }
   
   
@@ -451,7 +454,16 @@ public class DimensionalSpace {
     public void addDistanceMetric(String featureName, String metric)
     {
     	cellDistanceMetrics.put(featureName, metric);
-    	System.out.println(cellDistanceMetrics.toString());
+    }
+    
+    public String[] getNumberMetrics()
+    {
+    	return numberMetrics;
+    }
+    
+    public String[] getStringMetrics()
+    {
+    	return stringMetrics;
     }
     
     /**
