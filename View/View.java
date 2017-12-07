@@ -323,7 +323,6 @@ public class View {
 		contentPanel.removeAll();
 		contentPanel.revalidate();
 		contentPanel.repaint();
-		System.out.println("This worked");
 	}
 	
 	
@@ -341,6 +340,7 @@ public class View {
 	 */
 	public void promptTestCase()
 	{
+		 //Set up JComboBox arrays and the Frame itselft
 		 String[] metricsArray = new String[dataModel.getDistanceMetrics().size()];
 		 dataModel.getDistanceMetrics().toArray(metricsArray);
 		 Set<String> optionsSet = dataModel.getCellTypes().keySet();
@@ -356,12 +356,46 @@ public class View {
 		 optionsArrayList.toArray(optionsArray);
 		 JFrame chooseValueFrame = new JFrame("New Test Case");
 		 
+		 //Prompt for a value to test
 		 String testValue = (String) JOptionPane.showInputDialog(chooseValueFrame, "Choose a value to test",
 		 "Feature", JOptionPane.QUESTION_MESSAGE, null, optionsArray, optionsArray[0]);
+		
+		 //Set up an array with all feature names that need to be tested. In the case of a simple feature, the array
+		 //will contain one String
+		 String testArray[];
+		 if(dataModel.cellTypeComp(testValue)>1)
+		 {
+			 testArray = dataModel.getChildren(testValue); 
+		 }
+		 else
+		 {
+			 testArray = new String[1];
+			 testArray[0] = testValue;
+		 }
 		 
-		 String expected = JOptionPane.showInputDialog(chooseValueFrame, "What is your expected value for " + testValue + "?");
+		 //For each test value, prompt for an expected value
+		 String expected[];
+		 if(dataModel.cellTypeComp(testValue)>1)
+		 {
+			 expected = new String[dataModel.cellTypeComp(testValue) - 1];
+			 String[] children = dataModel.getChildren(testValue);
+			 for(int i = 0; i < dataModel.cellTypeComp(testValue) - 1; i++)
+			 {
+				 expected[i]= JOptionPane.showInputDialog(chooseValueFrame, "What is your expected value for " + children[i] + "?");
+			 }
+			 System.out.println(expected.toString());
+		 }
+		 else
+		 {
+			 expected = new String[1];
+			 expected[0]= JOptionPane.showInputDialog(chooseValueFrame, "What is your expected value for " + testValue + "?");
+		 }
+		 
+		 //Prompt for a distance metric
 		 String distanceMetric = (String) JOptionPane.showInputDialog(chooseValueFrame, "Choose a distance metric",
 				 "Feature", JOptionPane.QUESTION_MESSAGE, null, metricsArray, metricsArray[0]); 
+		 
+		 //If the distance metric is Minkowski, we will also prompt for a p
 		 int minkInt = 0;
 		 if(distanceMetric.equals("Minkowski"))
 		 {
@@ -371,7 +405,7 @@ public class View {
 			 minkInt = Integer.parseInt(minkString);
 		 }
 		 
-		 TestCaseFrame testFrame = new TestCaseFrame(this, testValue, expected, distanceMetric, minkInt);
+		 new TestCaseFrame(this, testValue, testArray, expected, distanceMetric, minkInt);
 	}
 	
 	/**
@@ -413,11 +447,15 @@ public class View {
 	 */
 	public void addTestCaseResult(String s)
 	{
-		testCount++;
 		JLabel label = new JLabel("Test case #"+testCount+": " + s);
 		footerPanel.add(label);
 		footerPanel.revalidate();
 		footerPanel.repaint();
+	}
+	
+	public void incrementTestCount()
+	{
+		testCount++;
 	}
 	
 	/**
