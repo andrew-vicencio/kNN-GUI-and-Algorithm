@@ -39,11 +39,15 @@ public class ValueTestFrameController extends ValueInputController {
         HashMap<String, Cell> newConfiguredData = new HashMap<String, Cell>();
         int k =0;
         int mink = 0;
-
+		String testChildren[] = tempCast.getTestChildren();
+        
+		System.out.println("Test key: " + testKey);
+		System.out.println("Number of children: " + testChildren.length);
+		System.out.println("First child: " + testChildren[0]);
+		
         for(String key : MainController.dataModel.getCellTypes().keySet()){
-
             if(!key.contains(testKey)){
-            if(MainController.dataModel.getCellTypes().get(key).equals("comp")){
+            	if(MainController.dataModel.getCellTypes().get(key).equals("comp")){
                 createCompFeature(key, newConfiguredData);
             }else{
                 	if(key.contains(".")){
@@ -69,17 +73,35 @@ public class ValueTestFrameController extends ValueInputController {
         }catch (NumberFormatException ex){
             view.sendErrorFrame("Invalid K value was provided");
         }
-        String result = MainController.dataModel.findkNN(testKey, newPoint, k, distanceMetric, tempCast.getMinkPolynomial());
-        view.addTestCaseResult("(" + distanceMetric + ") Expected " + testKey + ": " + tempCast.getExpectedValue() + "           Actual " + result);
+        
+        String[] result = new String[testChildren.length];
+        for(int i = 0; i < result.length; i++ )
+        {
+        	result[i]= MainController.dataModel.findkNN(testChildren[i], newPoint, k, distanceMetric, tempCast.getMinkPolynomial());
+        	view.incrementTestCount();
+        	view.addTestCaseResult("(" + distanceMetric + ") Expected " + testChildren[i] + ": " + tempCast.getExpectedValue()[i] + "           Actual " + result[i]);
+        }
+        		
+        
         tempCast.dispose();
+        
         if(e.getActionCommand().equals("Add Test"))
         {
-        	dataModel.addTest(result.split(testKey+": ")[1].replaceAll("\\s+", ""), tempCast.getExpectedValue().replaceAll("\\s+", ""));
-        	view.promptTestCase();
+        	for(int i = 0; i < result.length; i++)
+        	{
+        		dataModel.addTest(result[i].split(testKey+": ")[1].replaceAll("\\s+", ""), tempCast.getExpectedValue()[i].replaceAll("\\s+", ""));
+            	view.promptTestCase();
+        	}
+        	
         }
         else if(e.getActionCommand().equals("Done"))
         {
-        	dataModel.addTest(result.split(testKey+": ")[1].replaceAll("\\s+", ""), tempCast.getExpectedValue().replaceAll("\\s+", ""));
+        	for(int i = 0; i < result.length; i++)
+        	{
+        		String s = result[i].replaceAll("\\s+", "");
+        		String t = tempCast.getExpectedValue()[i].replaceAll("\\s+", "");
+        		dataModel.addTest(s, t);
+        	}
         	dataModel.getSuccessRate();
         	dataModel.initTestStats();
         	view.initTestStats();

@@ -2,6 +2,10 @@ package View;
 
 
 import java.awt.BorderLayout;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -19,7 +23,7 @@ import Controllers.*;
 public class TestCaseFrame extends PromptFrame {
 	
 
-	private String testValue, distanceMetric, expected;
+	private String testValue, distanceMetric, expected[], testChildren[];
 	private JLabel kLabel;
 	private JTextField kTextField;
 	private ValueTestFrameController controller;
@@ -33,7 +37,7 @@ public class TestCaseFrame extends PromptFrame {
 	 * @param view: View.View object this JFrame was spawned from
 	 * @param testValue: String
 	 */
-	public TestCaseFrame(View view, String testValue, String expected, String distanceMetric, int minkInt)
+	public TestCaseFrame(View view, String testValue, String[] testChildren, String[] expected, String distanceMetric, int minkInt)
 	{
 		super(view, "Enter your test case values");
 		kLabel = new JLabel("K value: ");
@@ -47,6 +51,7 @@ public class TestCaseFrame extends PromptFrame {
 		this.testValue = testValue;
 		this.distanceMetric = distanceMetric;
 		this.expected = expected;
+		this.testChildren = testChildren;
 		fillPrompts();
 	
 	}
@@ -57,21 +62,21 @@ public class TestCaseFrame extends PromptFrame {
 	 */
 	public void fillPrompts()
 	{
-		for(String str: view.getDataModel().getCellTypes().keySet())
+	
+		for(String feature: view.getDataModel().getCellTypes().keySet())
 		{
-
-		    if(!str.contains(testValue) && !view.getDataModel().getCellTypes().get(str).equals("comp"))
+		    if(!feature.contains(testValue) && !fieldMap.containsKey(feature) && !view.getDataModel().isParent(feature))
 		    {
-		    	name = new JLabel(str);
-		    	type = new JLabel(view.getDataModel().getCellTypes().get(str));
+		    	name = new JLabel(feature);
+		    	type = new JLabel(view.getDataModel().getCellTypes().get(feature));
 		    	jt = new JTextField(15);
 		    	promptPanel = new JPanel();
 		    	promptPanel.add(name);
 		    	promptPanel.add(type);
 		    	promptPanel.add(jt);
 		    	mainPanel.add(promptPanel);
-		    	fieldMap.put(str, jt);
-		    }
+		    	fieldMap.put(feature, jt);
+			}
 	
 		}
 		
@@ -129,9 +134,14 @@ public class TestCaseFrame extends PromptFrame {
 		return minkInt;
 	}
 	
-	public String getExpectedValue()
+	public String[] getExpectedValue()
 	{
 		return expected;
+	}
+	
+	public String[] getTestChildren()
+	{
+		return testChildren;
 	}
 }
 
