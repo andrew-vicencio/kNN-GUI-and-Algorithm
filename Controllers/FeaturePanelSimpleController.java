@@ -30,7 +30,7 @@ public class FeaturePanelSimpleController extends FeaturePanelController {
 	public void actionPerformed(ActionEvent e) {
 
 		String key = currentPanel.getKey();
-		String value = ((FeaturePanelSimple)currentPanel).getValue();
+		String value = ((FeaturePanelSimple)currentPanel).getFeatureType();
 
 		//Make sure there is a valid key
 		if(key.isEmpty())
@@ -49,10 +49,12 @@ public class FeaturePanelSimpleController extends FeaturePanelController {
 			if(currentPanel.getParentComplex() != null)
 			{
 				MainController.dataModel.setSingleCellType(currentPanel.getParentComplexKey() + "." + key, value);
+				MainController.dataModel.addDistanceMetric(currentPanel.getParentComplexKey() + "." + key, ((FeaturePanelSimple) currentPanel).getDistanceMetric());
 			}
 			else
 			{
 				MainController.dataModel.setSingleCellType(key, value);
+				MainController.dataModel.addDistanceMetric(key, ((FeaturePanelSimple) currentPanel).getDistanceMetric());
 			}
 		}
 

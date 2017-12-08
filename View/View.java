@@ -3,6 +3,8 @@ package View;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.GraphicsEnvironment;
 import java.awt.GridLayout;
 import java.util.*;
 import javax.swing.*;
@@ -318,9 +320,22 @@ public class View {
 	 */
 	public void displayInfo()
 	{
-		JLabel info = new JLabel("CODERS INC by Benjamin Bichel, Darren Holden, Gabrielle Hubert, Andrew Vicencio");
-		contentPanel.add(info);
-		info.setVisible(true);
+		contentPanel.setLayout(new BoxLayout(contentPanel, BoxLayout.PAGE_AXIS));
+		GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+	    ge.getAllFonts();
+	    Font titleFont = new Font("Garamond", Font.BOLD, 25);
+	    Font subtitleFont = new Font("Garamond", Font.PLAIN, 18);
+		JLabel title = new JLabel("     CODERS INC");
+		JLabel subtitle = new JLabel("     by Benjamin Bichel, Darren Holden, Gabrielle Hubert, Andrew Vicencio");
+		title.setFont(titleFont);
+		subtitle.setFont(subtitleFont);
+		title.setMaximumSize(new Dimension(1000, 150));
+		subtitle.setMaximumSize(new Dimension(1000, 150));
+		title.setAlignmentX(JLabel.CENTER_ALIGNMENT);
+		subtitle.setAlignmentX(JLabel.CENTER_ALIGNMENT);
+		contentPanel.add(title);
+		contentPanel.add(subtitle);
+		contentPanel.setVisible(true);
 		contentPanel.revalidate();
 		contentPanel.repaint();
 	}

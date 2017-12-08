@@ -26,11 +26,14 @@ public class DimensionalSpace implements Serializable {
   private ConcurrentHashMap<String, Float> stddev;
   private ConcurrentHashMap<String, Float> sum;
   private HashMap<String, String> cellTypes;
+  private HashMap<String, String> cellDistanceMetrics;
   private int numberOfPoints;
   private int numberOfFields;
   private ArrayList<Point> points;
   private View view;
   private ArrayList<String> distanceMetrics;
+  private String[] stringMetrics;
+  private String[] numberMetrics;
   private int testSuccess;
   private int testFailure;
   
@@ -43,6 +46,7 @@ public class DimensionalSpace implements Serializable {
     stddev = new ConcurrentHashMap<String, Float>();
     sum = new ConcurrentHashMap<String, Float>();
     points = new ArrayList<Point>();
+    cellDistanceMetrics = new HashMap<String, String>();
     numberOfPoints = 0;
     numberOfFields = 0;
     cellTypes = new HashMap<String, String>();
@@ -53,7 +57,8 @@ public class DimensionalSpace implements Serializable {
     distanceMetrics.add("Euclidean");
     testSuccess = 0;
     testFailure = 0;
-    
+    stringMetrics = new String[] {"Hamming", "Equal", "Character Value"};
+    numberMetrics = new String[] {"Difference", "Equality", "Standard Deviation"};  
   }
   
   
@@ -446,6 +451,25 @@ public class DimensionalSpace implements Serializable {
     public void getSuccessRate()
     {
     	view.showSuccessRate(testSuccess, testFailure);
+    }
+    
+    public void addDistanceMetric(String featureName, String metric)
+    {
+    	cellDistanceMetrics.put(featureName, metric);
+    }
+    
+    public HashMap<String, String> getCellMetrics() {
+    	return cellDistanceMetrics;
+    }
+    
+    public String[] getNumberMetrics()
+    {
+    	return numberMetrics;
+    }
+    
+    public String[] getStringMetrics()
+    {
+    	return stringMetrics;
     }
     
     /**

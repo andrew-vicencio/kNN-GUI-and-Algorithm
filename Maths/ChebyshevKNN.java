@@ -25,7 +25,7 @@ public class ChebyshevKNN extends kNN {
 	 * Constructor for Maths.ChebyshevKNN. Takes a DataModel.DimensionalSpace object that it will work in and the order
 	 * to be used for the calculation. Calls the Maths.kNN constructor.
 	 * 
-	 * @param ds	The DataModel.DimensionalSpace the the funciton will work in.
+	 * @param ds	The DataModel.DimensionalSpace the the function will work in.
 	 */
 	public ChebyshevKNN(DimensionalSpace ds) {
 		super(ds);
@@ -44,9 +44,6 @@ public class ChebyshevKNN extends kNN {
 	   */
 	@Override
 	public Cell findKNN(String targetKey, Point targetPoint, int neighbours) {
-	  	
-		NumericalDistance nDist = new NumericalDistance();
-		StringDistance sDist = new StringDistance();
 		
 		ds.findStatistics();
 		targetPoint.normalize(ds.getMean(), ds.getStdDev());
@@ -78,11 +75,42 @@ public class ChebyshevKNN extends kNN {
 					tempDistance = 0;
 					if (!(key.equals(targetKey))) {
 						if (currentPtValues.get(key) instanceof CellSimple) {
-							if (((CellSimple)currentPtValues.get(key)).getValue() instanceof String) {
-								tempDistance = sDist.calcDistance((CellSimple)targetPtValues.get(key), (CellSimple)currentPtValues.get(key));
-							} else {
-								tempDistance = nDist.calcDistance((CellSimple)targetPtValues.get(key), (CellSimple)currentPtValues.get(key));
+							try {
+								switch (metrics.get(key)) {
+									case "Equality":
+										da = neq;
+										break;
+									case "Difference":
+										da = nd;
+										break;
+									case "Standard Deviation":
+										da = nsd;
+										break;
+									case "Equal":
+										da = seq;
+										break;
+									case "Hamming":
+										da = sh;
+										break;
+									case "Character Value":
+										da = scv;
+										break;
+									default:
+										if (((CellSimple) pt.getCell(key)).getValue() instanceof Float ||((CellSimple) pt.getCell(key)).getValue() instanceof Integer) {
+											da = nd;
+										} else {
+											da = sh;
+										}
+								}
+							} catch (NullPointerException ne) {
+								if (((CellSimple) pt.getCell(key)).getValue() instanceof Float ||((CellSimple) pt.getCell(key)).getValue() instanceof Integer) {
+									da = nd;
+								} else {
+									da = sh;
+								}
 							}
+							
+							tempDistance = da.calcDistance((CellSimple)targetPtValues.get(key), (CellSimple)currentPtValues.get(key));
 						} else {
 							tempDistance = ChebyshevComposite((CellComposite) currentPtValues.get(key), (CellComposite) targetPtValues.get(key));
 						}
@@ -141,19 +169,47 @@ public class ChebyshevKNN extends kNN {
 	 * @return			The distance between the Cells
 	 */
 	public float ChebyshevComposite(CellComposite current, CellComposite target) {
-	  	
-		NumericalDistance nDist = new NumericalDistance();
-		StringDistance sDist = new StringDistance();
 		ArrayList<Cell> subCells = current.getSubCells();
 		float distance = 0;
 		
 		for (Cell c: subCells) {
 			if (c instanceof CellSimple) {
-				if (((CellSimple) c).getValue() instanceof String) {
-					distance += Math.pow(sDist.calcDistance((CellSimple) target.getSubCell(c.getKey()), (CellSimple) c), 2);
-				} else {
-					distance += Math.pow(nDist.calcDistance((CellSimple) target.getSubCell(c.getKey()), (CellSimple) c), 2);
+				try {
+					switch (metrics.get(c.getKey())) {
+						case "Equality":
+							da = neq;
+							break;
+						case "Difference":
+							da = nd;
+							break;
+						case "Standard Deviation":
+							da = nsd;
+							break;
+						case "Equal":
+							da = seq;
+							break;
+						case "Hamming":
+							da = sh;
+							break;
+						case "Character Value":
+							da = scv;
+							break;
+						default:
+							if (((CellSimple) c).getValue() instanceof Float || ((CellSimple) c).getValue() instanceof Integer) {
+								da = nd;
+							} else {
+								da = sh;
+							}
+					}
+				} catch (NullPointerException ne) {
+					if (((CellSimple) c).getValue() instanceof Float || ((CellSimple) c).getValue() instanceof Integer) {
+						da = nd;
+					} else {
+						da = sh;
+					}
 				}
+				
+				distance += Math.pow(da.calcDistance((CellSimple) target.getSubCell(c.getKey()), (CellSimple) c), 2);
 			} else {
 				distance += ChebyshevComposite((CellComposite) c, (CellComposite) target.getSubCell(c.getKey()));
 			}
