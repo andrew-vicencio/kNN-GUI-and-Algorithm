@@ -78,25 +78,39 @@ public class MinkowskiKNN extends kNN {
 				for (String key: currentPtValues.keySet()) {
 					if (!(key.equals(targetKey))) {
 						if (currentPtValues.get(key) instanceof CellSimple) {
-							switch (metrics.get(key)) {
-								case "Equality":
-									da = neq;
-									break;
-								case "Difference":
+							try {
+								switch (metrics.get(key)) {
+									case "Equality":
+										da = neq;
+										break;
+									case "Difference":
+										da = nd;
+										break;
+									case "Standard Deviation":
+										da = nsd;
+										break;
+									case "Equal":
+										da = seq;
+										break;
+									case "Hamming":
+										da = sh;
+										break;
+									case "Character Value":
+										da = scv;
+										break;
+									default:
+										if (((CellSimple) pt.getCell(key)).getValue() instanceof Float ||((CellSimple) pt.getCell(key)).getValue() instanceof Integer) {
+											da = nd;
+										} else {
+											da = sh;
+										}
+								}
+							} catch (NullPointerException ne) {
+								if (((CellSimple) pt.getCell(key)).getValue() instanceof Float ||((CellSimple) pt.getCell(key)).getValue() instanceof Integer) {
 									da = nd;
-									break;
-								case "Standard Deviation":
-									da = nsd;
-									break;
-								case "Equal":
-									da = seq;
-									break;
-								case "Hamming":
+								} else {
 									da = sh;
-									break;
-								case "Character Value":
-									da = scv;
-									break;
+								}
 							}
 							
 							distance += Math.pow(da.calcDistance((CellSimple)targetPtValues.get(key), (CellSimple)currentPtValues.get(key)), order);
@@ -164,27 +178,42 @@ public class MinkowskiKNN extends kNN {
 		
 		for (Cell c: subCells) {
 			if (c instanceof CellSimple) {
-				switch (metrics.get(c.getKey())) {
-					case "Equality":
-						da = neq;
-						break;
-					case "Difference":
+				try {
+					switch (metrics.get(c.getKey())) {
+						case "Equality":
+							da = neq;
+							break;
+						case "Difference":
+							da = nd;
+							break;
+						case "Standard Deviation":
+							da = nsd;
+							break;
+						case "Equal":
+							da = seq;
+							break;
+						case "Hamming":
+							da = sh;
+							break;
+						case "Character Value":
+							da = scv;
+							break;
+						default:
+							if (((CellSimple) c).getValue() instanceof Float || ((CellSimple) c).getValue() instanceof Integer) {
+								da = nd;
+							} else {
+								da = sh;
+							}
+					}
+				} catch (NullPointerException ne) {
+					if (((CellSimple) c).getValue() instanceof Float || ((CellSimple) c).getValue() instanceof Integer) {
 						da = nd;
-						break;
-					case "Standard Deviation":
-						da = nsd;
-						break;
-					case "Equal":
-						da = seq;
-						break;
-					case "Hamming":
+					} else {
 						da = sh;
-						break;
-					case "Character Value":
-						da = scv;
-						break;
+					}
 				}
-					distance += Math.pow(da.calcDistance((CellSimple) target.getSubCell(c.getKey()), (CellSimple) c), order);
+				
+				distance += Math.pow(da.calcDistance((CellSimple) target.getSubCell(c.getKey()), (CellSimple) c), order);
 			} else {
 				distance += MinkowskiComposite((CellComposite) c, (CellComposite) target.getSubCell(c.getKey()));
 			}
