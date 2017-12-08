@@ -5,9 +5,11 @@ import View.View;
 import Maths.*;
 
 import java.util.HashMap;
+import java.util.Map;
 import java.util.ArrayList;
 import java.util.concurrent.ConcurrentHashMap;
 import java.lang.Math;
+import java.io.Serializable;
 
 /**
  * Class to hold the points from the dataset. This class calculates the sum, mean, and standard 
@@ -19,7 +21,7 @@ import java.lang.Math;
  * @version Milestone 2
  */
 
-public class DimensionalSpace {
+public class DimensionalSpace implements Serializable {
   private ConcurrentHashMap<String, Float> mean;
   private ConcurrentHashMap<String, Float> stddev;
   private ConcurrentHashMap<String, Float> sum;
@@ -404,19 +406,6 @@ public class DimensionalSpace {
     
     /**
      * Checks the actual test result with an expected String, and increments testSuccess or testFailure accordingly
-     * @param actual: String
-     * @param expected: String
-     */
-    public void addTest(String actual, String[] expected)
-    {
-    	for(String s: expected)
-    	{
-    		addTest(actual, s);
-    	}
-    }
-    
-    /**
-     * Checks the actual test result with an expected String, and increments testSuccess or testFailure accordingly
      * @param actual: int
      * @param expected: String
      */
@@ -457,19 +446,6 @@ public class DimensionalSpace {
     public void getSuccessRate()
     {
     	view.showSuccessRate(testSuccess, testFailure);
-    }
-    
-    public String[] getChildren(String key)
-    {
-    	ArrayList<String> containsKey = new ArrayList<String>();
-    	for(String name: cellTypes.keySet())
-    	{
-    		if(name.contains(key) && name.contains("."))
-    		{
-    			containsKey.add(name);
-    		}
-    	}
-    	return containsKey.toArray(new String[containsKey.size()]);
     }
     
     /**
@@ -875,23 +851,23 @@ public class DimensionalSpace {
     	view.enableTesting(true);
     	view.enableNewDataSet(false);
 	}
-
-
-	public boolean isParent(String feature) {
-		Boolean childFound = false;
-		if(feature.contains("."))
-		{
-			return false;
+	
+	public String toXML() {
+		String finalString = "<DimensionalSpace>" + System.lineSeparator();
+		//TODO AndrewVicencio: Finish DimensionalSpace toXML
+		finalString = finalString + "</DimensionalSpace>" + System.lineSeparator();
+		return finalString;
+	}
+	
+	public String hashMapToXML(Map<String, Object> map, String mapName) {
+		String finalString = "<" + mapName + ">" + System.lineSeparator();
+		for (String key : map.keySet()) {
+			finalString = finalString + "<" + key + ">";
+			finalString = finalString + map.get(key).toString();
+			finalString = finalString + "</" + key + ">" + System.lineSeparator();
 		}
-		for(String s: cellTypes.keySet())
-		{
-			if(s.contains(feature) && s.contains("."))
-			{
-				childFound = true;
-			}
-				
-		}
-		return childFound;
+		finalString = finalString + "</" + mapName + ">" + System.lineSeparator();
+		return finalString;
 	}
 
 }

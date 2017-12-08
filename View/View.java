@@ -26,8 +26,8 @@ public class View {
 	private JFrame mainFrame, errorFrame;
 	private JPanel mainPanel, headerPanel, contentPanel, footerPanel;
 	private JMenuBar menuBar;
-	private JMenu create, edit, display, help;
-	private JMenuItem newDataSet, newTestCase, simpleFeature, complexFeature, addValue, helpDoc, loadSampleData;
+	private JMenu create, edit, display, help, save;
+	private JMenuItem newDataSet, newTestCase, simpleFeature, complexFeature, addValue, helpDoc, loadSampleData, loadData, saveData;
 	private JButton done;
 	private LinkedHashMap<String, Object> features;
 	private ArrayList<String> featureTypes;
@@ -58,6 +58,7 @@ public class View {
 		edit = new JMenu("Edit");
 		display = new JMenu("Display");
 		help = new JMenu("Help");
+		save = new JMenu("Save");
 		newDataSet = new JMenuItem("New Data Set");
 		newTestCase = new JMenuItem("New Test Case");
 		addValue = new JMenuItem("Add Value");
@@ -65,6 +66,8 @@ public class View {
 		simpleFeature = new JMenuItem("Add a Simple Feature");
 		complexFeature = new JMenuItem("Add a Complex Feature");
 		loadSampleData = new JMenuItem("Load Sample Data");
+		loadData = new JMenuItem("Import Data");
+		saveData = new JMenuItem("Export Data");
 		done = new JButton("Done");
 		menuController = new ButtonMenuController(this);
         dataModel = menuController.getDataModel();
@@ -85,6 +88,7 @@ public class View {
 		menuBar.add(create);
 		menuBar.add(edit);
 		menuBar.add(display);
+		menuBar.add(save);
 		menuBar.add(help);
 		create.add(newDataSet);
 		create.add(newTestCase);
@@ -93,6 +97,8 @@ public class View {
 		edit.add(simpleFeature);
 		edit.add(addValue);
 		//help.add(helpDoc);
+        save.add(loadData);
+        save.add(saveData);
 		mainFrame.setSize(1000, 700);
 
 		//Initial disabling of menu items
@@ -106,7 +112,10 @@ public class View {
 		
 		//Action Listeners
 		done.addActionListener(new ButtonAddFeaturesController(this));
-		create.addActionListener(menuController);
+
+		
+        loadData.addActionListener(menuController);
+        saveData.addActionListener(menuController);
 		simpleFeature.addActionListener(menuController);
 		complexFeature.addActionListener(menuController);
 		newDataSet.addActionListener(menuController);
