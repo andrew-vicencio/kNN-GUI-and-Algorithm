@@ -6,6 +6,7 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GraphicsEnvironment;
 import java.awt.GridLayout;
+import java.io.Serializable;
 import java.util.*;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -23,7 +24,7 @@ import DataModel.Point;
  */
 
 
-public class View {
+public class View implements Serializable {
 
 	private JFrame mainFrame, errorFrame;
 	private JPanel mainPanel, headerPanel, contentPanel, footerPanel;
@@ -357,7 +358,10 @@ public class View {
 	{
 		new PromptValueFrame(this);
 	}
-	
+
+	public void promptSaveLocation(){
+
+    }
 	/**
 	 * Prompts the user for a test case, by asking for which value they want to test for, and 
 	 * then providing the rest of the values
@@ -531,6 +535,10 @@ public class View {
 	{
 		testCount = 0;
 	}
+
+	public void setDataModel(){
+        dataModel = menuController.getDataModel();
+    }
 	
 }
 

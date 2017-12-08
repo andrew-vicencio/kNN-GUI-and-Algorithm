@@ -875,6 +875,19 @@ public class DimensionalSpace implements Serializable {
     	view.enableTesting(true);
     	view.enableNewDataSet(false);
 	}
+
+    public String[] getChildren(String key)
+    {
+            	ArrayList<String> containsKey = new ArrayList<String>();
+        	for(String name: cellTypes.keySet())
+                	{
+                        		if(name.contains(key) && name.contains("."))
+                		{
+                        			containsKey.add(name);
+            		}
+            	}
+            	return containsKey.toArray(new String[containsKey.size()]);
+           }
 	
 	public String toXML() {
 		String finalString = "<DimensionalSpace>" + System.lineSeparator();
@@ -894,4 +907,33 @@ public class DimensionalSpace implements Serializable {
 		return finalString;
 	}
 
+    public boolean isParent(String feature) {
+        		Boolean childFound = false;
+        		if(feature.contains("."))
+            		{
+                    			return false;
+        		}
+        		for(String s: cellTypes.keySet())
+            		{
+                    			if(s.contains(feature) && s.contains("."))
+            			{
+                    				childFound = true;
+        			}
+
+                		}
+        		return childFound;
+        	}
+
+    public void updateView(){
+
+        for (Point x: points) {
+            if(!view.isSetUp()){
+                view.setUpFeatures(x);
+                view.setSetUp(true);
+
+            }else{
+            view.updateDisplay(x);
+            }
+        }
+    }
 }

@@ -1,8 +1,12 @@
 package Controllers;
 
+import DataModel.DimensionalSpace;
+import ImportExport.SerialExport;
+import ImportExport.SerialImport;
 import View.View;
 
 import java.awt.event.ActionEvent;
+import java.io.IOException;
 
 import Controllers.MainController;
 /**
@@ -54,6 +58,8 @@ public class ButtonMenuController extends MainController {
 		else if(s.equals("Load Sample Data"))
 		{
 			dataModel.presetTestData();
+            view.enableTesting(true);
+            view.enableNewDataSet(false);
 			view.enableFeatureCreation(false);
 			view.enableDataInput(true);
 			view.enableTesting(true);
@@ -62,11 +68,38 @@ public class ButtonMenuController extends MainController {
 			view.getDoneButton().setVisible(false);
 		}
 		else if(s.equals("Import Data")){
-		    System.out.println("test");
-            //TODO: AV Make the thing load the data from a test case
+
+		    //TODO: BB Finish and make clean
+            SerialImport importFile = new SerialImport();
+            DimensionalSpace tempHold;
+            try {
+                 tempHold = importFile.importDimensionalSpace("test.txt");
+                tempHold.setView(view);
+                this.setDataModel(tempHold);
+                view.setDataModel();
+                view.clearContentPanel();
+                this.getDataModel().updateView();
+
+                view.enableTesting(true);
+                view.enableNewDataSet(false);
+                view.enableFeatureCreation(false);
+                view.enableDataInput(true);
+                view.enableTesting(true);
+                view.enableNewDataSet(false);
+                view.enableTestData(false);
+                view.getDoneButton().setVisible(false);
+            } catch (IOException e1) {
+                e1.printStackTrace();
+            }
+
+
         }else if(s.equals("Export Data")){
-            System.out.println("t1est");
-            //TODO: AV Make the thing export to a file for now
+            SerialExport exportFile = new SerialExport();
+            try {
+                exportFile.exportDimensionalSpace("test.txt", this.getDataModel());
+            } catch (IOException e1) {
+                e1.printStackTrace();
+            }
         }
 
 	}
