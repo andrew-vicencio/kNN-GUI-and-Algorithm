@@ -7,7 +7,7 @@ import View.View;
 /**
  * Class to test the Maths.kNN algorithm using a dataset and a test point.
  *
- * @version Milestone 1
+ * @version Milestone 4
  * @author Benjamin
  */
 public class TestEnviroment {

@@ -9,7 +9,7 @@ import DataModel.CellSimple;
  * distance of 2 between them.
  * 
  * @author Darren
- * @version Milestone 2
+ * @version Milestone 4
  *
  */
 

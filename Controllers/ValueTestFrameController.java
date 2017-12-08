@@ -13,6 +13,7 @@ import View.*;
  * Takes text inputed in the View.TestCaseFrame and creates a KNN test case for it
  * 
  * @author Gabrielle and Ben
+ * @version Milestone 4
  *
  */
 public class ValueTestFrameController extends ValueInputController {

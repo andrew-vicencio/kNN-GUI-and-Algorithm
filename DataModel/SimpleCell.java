@@ -7,7 +7,7 @@ import java.io.Serializable;
  * DataModel.SimpleCell stores a single value of given type E.
  * 
  * @author Darren
- * @version Milestone 2
+ * @version Milestone 4
  *
  * @param <E>	Type of the value to be stored.
  */

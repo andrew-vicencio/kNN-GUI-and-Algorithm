@@ -14,6 +14,7 @@ import View.*;
  * Takes data inputed in the View.PromptValueFrame, and creates DataModel.Cell objects and a DataModel.Point object, and adds
  * it to the model (DataModel.DimensionalSpace)
  * @author Gabrielle and Ben
+ * @version Milestone 4
  *
  */
 

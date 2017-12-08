@@ -3,10 +3,10 @@ package Maths;
 import DataModel.CellSimple;
 
 /**
- * Calculates the distance between two numerical SimpleCells. Simply returns the difference between the given values.
+ * Calculates the distance between two numerical SimpleCells. Simply returns the absolute difference between the given values.
  * 
  * @author Darren
- * @version Milestone 2
+ * @version Milestone 4
  *
  */
 

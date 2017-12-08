@@ -9,6 +9,7 @@ import java.io.Serializable;
  * Controlers.MainController abstract class to provide static shared information of the model
  * to all controllers
  * @author Ben
+ * @version Milestone 4
  *
  */
 public abstract class MainController implements ActionListener, Serializable{

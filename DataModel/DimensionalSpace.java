@@ -18,7 +18,7 @@ import java.io.Serializable;
  * of a new point.
  * 
  * @author Darren and Andrew
- * @version Milestone 2
+ * @version Milestone 4
  */
 
 public class DimensionalSpace implements Serializable {
@@ -318,12 +318,21 @@ public class DimensionalSpace implements Serializable {
 	  return numberOfPoints;
   }
 
+  /**
+   * Adds a point to the DimensionalSpace.
+   * @param x	The Point to be added
+   */
   public void addPoint(Point x){
         points.add(x);
-        numberOfPoints = points.size();
+        numberOfPoints ++;
         view.updateDisplay(x);
     }
-
+  
+  /**
+   * 
+   * @param key
+   * @return
+   */
   public int cellTypeComp(String key){
         int x = 0;
         String[] keys = cellTypes.keySet().toArray(new String[0]);
@@ -466,20 +475,42 @@ public class DimensionalSpace implements Serializable {
     	}
     	return containsKey.toArray(new String[containsKey.size()]);
     }
+    
+    /**
+     * Adds the distance metric for a feature to the map.
+     * 
+     * @param featureName	The feature of interest
+     * @param metric		The metric to be used
+     */
     public void addDistanceMetric(String featureName, String metric)
     {
     	cellDistanceMetrics.put(featureName, metric);
     }
     
+    /** 
+     * Gives the set of metrics for each feature
+     * 
+     * @return	A hashmap of the feature-metric pairs
+     */
     public HashMap<String, String> getCellMetrics() {
     	return cellDistanceMetrics;
     }
     
+    /**
+     * Returns the available metrics for numerical features
+     * 
+     * @return	The array of metrics
+     */
     public String[] getNumberMetrics()
     {
     	return numberMetrics;
     }
     
+    /**
+     * Returns the available metrics for string features
+     * 
+     * @return	The array of metrics
+     */
     public String[] getStringMetrics()
     {
     	return stringMetrics;

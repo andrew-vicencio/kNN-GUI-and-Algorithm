@@ -7,7 +7,7 @@ import java.io.Serializable;
  * DataModel.CompositeCell provides functionality for a grouped set of attributes within a DataModel.Point.
  * 
  * @author Darren
- * @version Milestone 2
+ * @version Milestone 4
  *
  */
 public class CompositeCell extends Cell implements Serializable {

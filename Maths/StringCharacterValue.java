@@ -2,6 +2,14 @@ package Maths;
 
 import DataModel.CellSimple;
 
+/**
+ * Calculates the distance between two String SimpleCells. Simply returns the difference in the sum of the character
+ * ASCII values.
+ * 
+ * @author Darren
+ * @version Milestone 4
+ *
+ */
 public class StringCharacterValue extends DistanceAlg {
 
 	@Override

@@ -12,7 +12,7 @@ import java.io.Serializable;
  * Class to hold a point from the dataset.
  * 
  * @author Gabrielle and Andrew
- * @version Milestone 2
+ * @version Milestone 4
  *
  */
 

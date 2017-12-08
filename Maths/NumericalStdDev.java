@@ -4,6 +4,14 @@ import java.util.concurrent.ConcurrentHashMap;
 
 import DataModel.CellSimple;
 
+/**
+ * Calculates the distance between two numerical SimpleCells. Simply returns 0 if the values are within the 
+ * same number of standard deviations of the mean, and 1 otherwise.
+ * 
+ * @author Darren
+ * @version Milestone 4
+ *
+ */
 public class NumericalStdDev extends DistanceAlg {
 	
 	private ConcurrentHashMap<String, Float> stdDev, avg;

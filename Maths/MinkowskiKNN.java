@@ -16,7 +16,7 @@ import Maths.kNN.Tuple;
  * dimension, and order is the power to use.
  * 
  * @author Darren
- * @version Milestone 3
+ * @version Milestone 4
  *
  */
 public class MinkowskiKNN extends kNN {

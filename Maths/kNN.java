@@ -9,9 +9,7 @@ import java.util.HashMap;
  * Maths.kNN is an abstarct class providing methods and variables for various Maths.kNN algorithms.
  * 
  * @author Darren
- * @version Milestone 2
- * 
- * @author Darren
+ * @version Milestone 4
  *
  */
 public abstract class kNN {

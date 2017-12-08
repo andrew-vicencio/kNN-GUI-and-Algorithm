@@ -2,6 +2,13 @@ package Maths;
 
 import DataModel.CellSimple;
 
+/**
+ * Calculates the distance between two string SimpleCells. Simply returns 0 if the values are equal, and 1 otherwise.
+ * 
+ * @author Darren
+ * @version Milestone 4
+ *
+ */
 public class StringEquality extends DistanceAlg {
 
 	@Override

@@ -16,7 +16,7 @@ import Maths.kNN.Tuple;
  * each point.
  * 
  * @author Darren
- * @version Milestone 3
+ * @version Milestone 4
  *
  */
 public class ChebyshevKNN extends kNN {
