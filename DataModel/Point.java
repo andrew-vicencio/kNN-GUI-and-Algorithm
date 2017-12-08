@@ -156,20 +156,32 @@ public class Point implements Serializable {
     }
 	
 	public boolean checkValueNull(String key) {		
-		 		Cell c = rawValues.get(key);		
-		 				
-		 		if (c instanceof CellSimple) {		
-		 			return ((CellSimple)c).getValue() == null;		
-		 		} else {		
-		 			for (Cell d: ((CellComposite)c).getSubCells()) {		
-		 				if (d instanceof CellSimple) {		
-		 					if (((CellSimple)d).getValue() == null) {		
-		 						return true;		
-		 					}		
-		 				}		
-		 			}		
-		 		}		
-		 				
-		 		return false;		
-		 	}
+		Cell c = rawValues.get(key);		
+				
+		if (c instanceof CellSimple) {		
+			return ((CellSimple)c).getValue() == null;		
+		} else {		
+			for (Cell d: ((CellComposite)c).getSubCells()) {		
+				if (d instanceof CellSimple) {		
+					if (((CellSimple)d).getValue() == null) {		
+						return true;		
+					}		
+				}		
+			}		
+		}		
+				
+		return false;		
+	}
+	
+	public String toXMLRaw() {
+		String finalString = "<Point>" + System.lineSeparator();
+		for (String key : rawValues.keySet()) {
+			Cell cell = rawValues.get(key);
+			finalString = finalString + cell.toXML();
+		}
+		finalString = finalString + "</Point>" + System.lineSeparator();
+		return finalString;
+		
+	}
+	
 }

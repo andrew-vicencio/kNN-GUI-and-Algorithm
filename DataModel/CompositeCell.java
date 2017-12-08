@@ -96,4 +96,13 @@ public class CompositeCell extends Cell implements Serializable {
 
         return finalString;
     }
+	
+	public String toXML() {
+		String finalString = "<CompositeCell>" + System.lineSeparator();
+		for (Cell x: value) {
+			x.toXML();
+		}
+		finalString = finalString + "</CompositeCell>" + System.lineSeparator();
+		return finalString;
+	}
 }

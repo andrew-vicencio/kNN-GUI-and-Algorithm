@@ -5,6 +5,7 @@ import View.View;
 import Maths.*;
 
 import java.util.HashMap;
+import java.util.Map;
 import java.util.ArrayList;
 import java.util.concurrent.ConcurrentHashMap;
 import java.lang.Math;
@@ -849,6 +850,24 @@ public class DimensionalSpace implements Serializable {
     	
     	view.enableTesting(true);
     	view.enableNewDataSet(false);
+	}
+	
+	public String toXML() {
+		String finalString = "<DimensionalSpace>" + System.lineSeparator();
+		//TODO AndrewVicencio: Finish DimensionalSpace toXML
+		finalString = finalString + "</DimensionalSpace>" + System.lineSeparator();
+		return finalString;
+	}
+	
+	public String hashMapToXML(Map<String, Object> map, String mapName) {
+		String finalString = "<" + mapName + ">" + System.lineSeparator();
+		for (String key : map.keySet()) {
+			finalString = finalString + "<" + key + ">";
+			finalString = finalString + map.get(key).toString();
+			finalString = finalString + "</" + key + ">" + System.lineSeparator();
+		}
+		finalString = finalString + "</" + mapName + ">" + System.lineSeparator();
+		return finalString;
 	}
 
 }

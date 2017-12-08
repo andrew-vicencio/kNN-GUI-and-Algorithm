@@ -43,4 +43,6 @@ public abstract class Cell implements Serializable {
 	 * Generates a string representation of the cell.
 	 */
 	public abstract String toString();
+	
+	public abstract String toXML();
 }
