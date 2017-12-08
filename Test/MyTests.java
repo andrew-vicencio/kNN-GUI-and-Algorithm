@@ -4,8 +4,8 @@ import java.util.ArrayList;
 
 import DataModel.*;
 import Maths.EuclideanKNN;
-import Maths.NumericalDistance;
-import Maths.StringDistance;
+import Maths.NumericalDifference;
+import Maths.StringHamming;
 import Maths.kNN;
 import junit.framework.*;
 
@@ -21,7 +21,7 @@ public class MyTests extends TestCase {
 	public void testNumericalDistanceWithInteger() {
 		CellSimple<Integer> c1 = new CellSimple<Integer>("test1", 10);
 		CellSimple<Integer> c2 = new CellSimple<Integer>("test1", 7);
-		NumericalDistance nd = new NumericalDistance();
+		NumericalDifference nd = new NumericalDifference();
 		
 		float value = nd.calcDistance(c1, c2);
 		assertEquals(value, (float) 10 - 7);
@@ -33,7 +33,7 @@ public class MyTests extends TestCase {
 	public void testNumericalDistanceWithFloat() {
 		CellSimple<Float> c1 = new CellSimple<Float>("test1", (float)3.76);
 		CellSimple<Float> c2 = new CellSimple<Float>("test1", (float)2.385);
-		NumericalDistance nd = new NumericalDistance();
+		NumericalDifference nd = new NumericalDifference();
 		
 		float value = nd.calcDistance(c1, c2);
 		assertTrue(Math.abs(value - ((float) 3.76 - 2.385)) < 0.000001 );
@@ -45,7 +45,7 @@ public class MyTests extends TestCase {
 	public void testStringDistance() {
 		CellSimple<String> c1 = new CellSimple<String>("test1", "Cat");
 		CellSimple<String> c2 = new CellSimple<String>("test1", "Soup");
-		StringDistance sd = new StringDistance();
+		StringHamming sd = new StringHamming();
 		
 		float value = sd.calcDistance(c1, c2);
 		assertEquals(value, (float) 4);
@@ -206,6 +206,10 @@ public class MyTests extends TestCase {
 		ds.addPt(p2);
 		ds.addPt(p3);
 		
+		ds.addDistanceMetric("a1", "Standard Deviation");
+		ds.addDistanceMetric("a2", "Equality");
+		ds.addDistanceMetric("s3", "Character Value");
+		
 		ds.findStatistics();
 		
 		Point targetPoint = new Point();
@@ -223,12 +227,12 @@ public class MyTests extends TestCase {
 		kNN testKNN = new EuclideanKNN(ds);
 		
 		Cell result = testKNN.findKNN("a1", targetPoint, 1);
-		assertEquals((int)((CellSimple<Integer>)result).getValue(), 35);
+		assertEquals((int)((CellSimple<Integer>)result).getValue(), 15);
 		
 		result = testKNN.findKNN("a1", targetPoint, 2);
-		assertEquals((int)((CellSimple<Integer>)result).getValue(), 25);
+		assertEquals((int)((CellSimple<Integer>)result).getValue(), 21);
 		
 		result = testKNN.findKNN("a1", targetPoint, 3);
-		assertEquals((int)((CellSimple<Integer>)result).getValue(), 28);
+		assertEquals((int)((CellSimple<Integer>)result).getValue(), 26);
 	}
 }
