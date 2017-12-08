@@ -6,6 +6,7 @@ import DataModel.CellSimple;
 import java.util.HashMap;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
+import java.io.Serializable;
 
 /**
  * Class to hold a point from the dataset.
@@ -15,8 +16,7 @@ import java.util.concurrent.ConcurrentHashMap;
  *
  */
 
-public class Point 
-{
+public class Point implements Serializable {
     private HashMap<String, Cell> rawValues;
     private HashMap<String, Cell> stdValues;
 	
@@ -156,20 +156,32 @@ public class Point
     }
 	
 	public boolean checkValueNull(String key) {		
-		 		Cell c = rawValues.get(key);		
-		 				
-		 		if (c instanceof CellSimple) {		
-		 			return ((CellSimple)c).getValue() == null;		
-		 		} else {		
-		 			for (Cell d: ((CellComposite)c).getSubCells()) {		
-		 				if (d instanceof CellSimple) {		
-		 					if (((CellSimple)d).getValue() == null) {		
-		 						return true;		
-		 					}		
-		 				}		
-		 			}		
-		 		}		
-		 				
-		 		return false;		
-		 	}
+		Cell c = rawValues.get(key);		
+				
+		if (c instanceof CellSimple) {		
+			return ((CellSimple)c).getValue() == null;		
+		} else {		
+			for (Cell d: ((CellComposite)c).getSubCells()) {		
+				if (d instanceof CellSimple) {		
+					if (((CellSimple)d).getValue() == null) {		
+						return true;		
+					}		
+				}		
+			}		
+		}		
+				
+		return false;		
+	}
+	
+	public String toXMLRaw() {
+		String finalString = "<Point>" + System.lineSeparator();
+		for (String key : rawValues.keySet()) {
+			Cell cell = rawValues.get(key);
+			finalString = finalString + cell.toXML();
+		}
+		finalString = finalString + "</Point>" + System.lineSeparator();
+		return finalString;
+		
+	}
+	
 }

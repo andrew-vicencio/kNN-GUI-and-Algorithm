@@ -7,64 +7,72 @@
 * Andrew Vicencio
 
 ## Deliverables
-* ButtonAddFeaturesController.java
-* ButtonMenuController.java
-* Cell.java
-* CellComposite.java
-* CellSimple.java
-* ChebyshevKNN.java
-* DimensionalSpace.java
-* DistanceAlg.java
-* DoneButtonController.java
-* EuclideanKNN.java
-* FeaturePanelComplex.java
-* FeaturePanelComplexController.java
-* FeaturePanelController.java
-* FeaturePanelSimple.java
-* FeaturePanelSimpleController.java
-* KNN.java
-* MainController.java
-* ManhattanKNN.java
-* MenuController.java
-* MinkowskiKNN.java
-* MyTests.java
-* NumericalDistance.java
-* Point.java
-* PromptValueFrame.java
-* PromptValueFrameController.java
-* StringDistance.java
-* TestCaseFrame.java
-* TestCaseFrameController.java
-* TestEnvironment.java
-* ValueInputController.java
-* ValuePromptFrameController.java
-* ValueTestFrameController.java
-* View.java
+* Controllers
+	* ButtonAddFeaturesController.java
+	* ButtonMenuController.java
+	* FeaturePanelController.java
+	* FeaturePanelComplexController.java
+	* FeaturePanelSimpleController.java
+	* MainController.java
+	* ValueInputController.java
+	* ValuePromptFrameController.java
+	* ValueTestFrameController.java
+* DataModel	
+	* Cell.java
+	* CellComposite.java
+	* CellSimple.java
+	* DimensionalSpace.java
+	* Point.java
+* ImportExport
+	* SerialExport.java
+	* SerialImport.java
+	* test.txt
+* Maths
+	* ChebyshevKNN.java
+	* DistanceAlg.java
+	* EuclideanKNN.java
+	* KNN.java
+	* ManhattanKNN.java
+	* MinkowskiKNN.java
+	* NumericalDistance.java
+	* NumericalDifference.java
+	* NumericalEquality.java
+	* NumericalStdDev.java
+	* StringCharacterValue.java
+	* StringDistance.java
+	* StringEquality.java
+	* StringHamming.java
+* Tests
+	* MyTests.java
+	* TestEnvironment.java
+* View
+	* FeaturePanel.java
+	* FeaturePanelComplex.java
+	* FeaturePanelSimple.java
+	* PromptFrame.java
+	* PromptValueFrame.java
+	* TestCaseFrame.java
+	* View.java
 * UML file
 * javadoc
 * User Manual
 
 
 ## Changes Since Last Milestone
-* Added in new KNN distance metrics on top of Euclidean
-	* Including
-		* Chebyshev
-		* Manhattan
-		* Minkowski
-* Renamed CompositeCell and SimpleCell to CellComposite and CellSimple respectively
-* Refactored DimensionalSpace.findKNN to accommodate additional distance metrics and delegate
-* Added scrollable panes
-* Made the interface much more user friendly
-	* Keyboard shortcuts
-	* Better formatting
-	* More intuitive and easier to read
-* Major refactoring of the GUI classes to reduce coupling
-* Added GUI support for users to choose new distance metrics
-* Allowed blank values to be added, rather than giving an error frame to the user
+* Added support for multiple test cases. Now, the user can run a suite a tests bu clicking the "Add Test" button. Clicking "Done" will provide the user with total results, including an overall success rate.
+* The user can now save and load a set of data
+* The user can now choose distance metrics for individual features.
+	* Difference (available for ints and floats)
+	* Equality (available for ints and floats)
+	* Standard Deviation (available for ints and floats)
+	* Hamming (available for Strings)
+	* Equal (available for Strings)
+	* Character Value (available for Strings)
 
 ## Known Issues
+* Innacurate results (See test screen shots in Files)
+* When entering a test case, if the user decides to quit on one of the prompts, the next prompt frames will still appear.
 
 ## Future Steps
-* Add Save/Load functionality
-* Increase flexibility
+
 

@@ -1,8 +1,12 @@
 package Controllers;
 
+import DataModel.DimensionalSpace;
+import ImportExport.SerialExport;
+import ImportExport.SerialImport;
 import View.View;
 
 import java.awt.event.ActionEvent;
+import java.io.IOException;
 
 import Controllers.MainController;
 /**
@@ -54,6 +58,8 @@ public class ButtonMenuController extends MainController {
 		else if(s.equals("Load Sample Data"))
 		{
 			dataModel.presetTestData();
+            view.enableTesting(true);
+            view.enableNewDataSet(false);
 			view.enableFeatureCreation(false);
 			view.enableDataInput(true);
 			view.enableTesting(true);
@@ -61,6 +67,15 @@ public class ButtonMenuController extends MainController {
 			view.enableTestData(false);
 			view.getDoneButton().setVisible(false);
 		}
+		else if(s.equals("Import Data")){
+            view.promptSaveLocation(false);
+		    //TODO: BB Finish and make clean
+
+
+
+        }else if(s.equals("Export Data")){
+           view.promptSaveLocation(true);
+        }
 
 	}
 

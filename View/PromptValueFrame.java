@@ -27,6 +27,8 @@ public class PromptValueFrame extends PromptFrame {
 		controller = new ValuePromptFrameController(view, this);
 		fillPrompts();		
 	}
+
+
 	
 	/**
 	 * Fills the frame with the number and types of prompts provided in the fieldMap

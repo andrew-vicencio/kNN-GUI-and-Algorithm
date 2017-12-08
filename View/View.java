@@ -6,6 +6,7 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GraphicsEnvironment;
 import java.awt.GridLayout;
+import java.io.Serializable;
 import java.util.*;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -23,13 +24,13 @@ import DataModel.Point;
  */
 
 
-public class View {
+public class View implements Serializable {
 
 	private JFrame mainFrame, errorFrame;
 	private JPanel mainPanel, headerPanel, contentPanel, footerPanel;
 	private JMenuBar menuBar;
-	private JMenu create, edit, display, help;
-	private JMenuItem newDataSet, newTestCase, simpleFeature, complexFeature, addValue, helpDoc, loadSampleData;
+	private JMenu create, edit, display, help, save;
+	private JMenuItem newDataSet, newTestCase, simpleFeature, complexFeature, addValue, helpDoc, loadSampleData, loadData, saveData;
 	private JButton done;
 	private LinkedHashMap<String, Object> features;
 	private ArrayList<String> featureTypes;
@@ -60,6 +61,7 @@ public class View {
 		edit = new JMenu("Edit");
 		display = new JMenu("Display");
 		help = new JMenu("Help");
+		save = new JMenu("Save");
 		newDataSet = new JMenuItem("New Data Set");
 		newTestCase = new JMenuItem("New Test Case");
 		addValue = new JMenuItem("Add Value");
@@ -67,6 +69,8 @@ public class View {
 		simpleFeature = new JMenuItem("Add a Simple Feature");
 		complexFeature = new JMenuItem("Add a Complex Feature");
 		loadSampleData = new JMenuItem("Load Sample Data");
+		loadData = new JMenuItem("Import Data");
+		saveData = new JMenuItem("Export Data");
 		done = new JButton("Done");
 		menuController = new ButtonMenuController(this);
         dataModel = menuController.getDataModel();
@@ -87,6 +91,7 @@ public class View {
 		menuBar.add(create);
 		menuBar.add(edit);
 		menuBar.add(display);
+		menuBar.add(save);
 		menuBar.add(help);
 		create.add(newDataSet);
 		create.add(newTestCase);
@@ -95,6 +100,8 @@ public class View {
 		edit.add(simpleFeature);
 		edit.add(addValue);
 		//help.add(helpDoc);
+        save.add(loadData);
+        save.add(saveData);
 		mainFrame.setSize(1000, 700);
 
 		//Initial disabling of menu items
@@ -108,7 +115,10 @@ public class View {
 		
 		//Action Listeners
 		done.addActionListener(new ButtonAddFeaturesController(this));
-		create.addActionListener(menuController);
+
+		
+        loadData.addActionListener(menuController);
+        saveData.addActionListener(menuController);
 		simpleFeature.addActionListener(menuController);
 		complexFeature.addActionListener(menuController);
 		newDataSet.addActionListener(menuController);
@@ -348,7 +358,14 @@ public class View {
 	{
 		new PromptValueFrame(this);
 	}
-	
+
+    /**
+     * Creates a new prompt for the user to enter a file location to load/save too
+     */
+
+	public void promptSaveLocation(boolean save){
+        new PromptSaveFrame(this, save);
+    }
 	/**
 	 * Prompts the user for a test case, by asking for which value they want to test for, and 
 	 * then providing the rest of the values
@@ -522,6 +539,10 @@ public class View {
 	{
 		testCount = 0;
 	}
+
+	public void setDataModel(){
+        dataModel = menuController.getDataModel();
+    }
 	
 }
 
