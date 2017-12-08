@@ -68,38 +68,13 @@ public class ButtonMenuController extends MainController {
 			view.getDoneButton().setVisible(false);
 		}
 		else if(s.equals("Import Data")){
-
+            view.promptSaveLocation(false);
 		    //TODO: BB Finish and make clean
-            SerialImport importFile = new SerialImport();
-            DimensionalSpace tempHold;
-            try {
-                 tempHold = importFile.importDimensionalSpace("test.txt");
-                tempHold.setView(view);
-                this.setDataModel(tempHold);
-                view.setDataModel();
-                view.clearContentPanel();
-                this.getDataModel().updateView();
 
-                view.enableTesting(true);
-                view.enableNewDataSet(false);
-                view.enableFeatureCreation(false);
-                view.enableDataInput(true);
-                view.enableTesting(true);
-                view.enableNewDataSet(false);
-                view.enableTestData(false);
-                view.getDoneButton().setVisible(false);
-            } catch (IOException e1) {
-                e1.printStackTrace();
-            }
 
 
         }else if(s.equals("Export Data")){
-            SerialExport exportFile = new SerialExport();
-            try {
-                exportFile.exportDimensionalSpace("test.txt", this.getDataModel());
-            } catch (IOException e1) {
-                e1.printStackTrace();
-            }
+           view.promptSaveLocation(true);
         }
 
 	}

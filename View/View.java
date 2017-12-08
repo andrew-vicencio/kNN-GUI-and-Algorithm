@@ -359,8 +359,12 @@ public class View implements Serializable {
 		new PromptValueFrame(this);
 	}
 
-	public void promptSaveLocation(){
+    /**
+     * Creates a new prompt for the user to enter a file location to load/save too
+     */
 
+	public void promptSaveLocation(boolean save){
+        new PromptSaveFrame(this, save);
     }
 	/**
 	 * Prompts the user for a test case, by asking for which value they want to test for, and 

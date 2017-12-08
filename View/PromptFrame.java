@@ -40,12 +40,14 @@ public abstract class PromptFrame extends JFrame {
 		super(string);
 		mainPanel = new JPanel();
 		footerPanel = new JPanel();
+		promptPanel = new JPanel();
 		done = new JButton("Done");
 		fieldMap = new HashMap<String, JTextField>();
 		this.view = view;
-		
+
 		setSize(500, 600);
 		mainPanel.setLayout(new GridLayout(0, 1));
+
 		setLayout(new BorderLayout());
 	}
 	
