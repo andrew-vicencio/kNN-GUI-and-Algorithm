@@ -1,6 +1,7 @@
 package DataModel;
 
 import DataModel.Cell;
+import java.io.Serializable;
 
 /**
  * DataModel.SimpleCell stores a single value of given type E.
@@ -10,7 +11,7 @@ import DataModel.Cell;
  *
  * @param <E>	Type of the value to be stored.
  */
-public class SimpleCell<E> extends Cell {
+public class SimpleCell<E> extends Cell implements Serializable {
 	
 	private E value;
 	
@@ -46,5 +47,4 @@ public class SimpleCell<E> extends Cell {
 	public String toString(){
 	    return getKey() + ": " + value;
     }
-
 }

@@ -1,5 +1,7 @@
 package DataModel;
 
+import java.io.Serializable;
+
 /**
  * DataModel.Cell is an abstract class providing functions and a key variable for the DataModel.SimpleCell and DataModel.CompositeCell subclasses.
  * 
@@ -7,7 +9,7 @@ package DataModel;
  * @version Milestone 2
  *
  */
-public abstract class Cell {
+public abstract class Cell implements Serializable {
 	private String key;
 	
 	/**

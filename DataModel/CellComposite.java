@@ -1,6 +1,7 @@
 package DataModel;
 
 import java.util.ArrayList;
+import java.io.Serializable;
 
 /**
  * DataModel.CompositeCell provides functionality for a grouped set of attributes within a DataModel.Point.
@@ -9,7 +10,7 @@ import java.util.ArrayList;
  * @version Milestone 2
  *
  */
-public class CellComposite extends Cell {
+public class CellComposite extends Cell implements Serializable {
 
 	private ArrayList<Cell> value;
 	

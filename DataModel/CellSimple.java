@@ -1,6 +1,6 @@
 package DataModel;
 
-
+import java.io.Serializable;
 /**
  * DataModel.SimpleCell stores a single value of given type E.
  * 
@@ -9,7 +9,7 @@ package DataModel;
  *
  * @param <E>	Type of the value to be stored.
  */
-public class CellSimple<E> extends Cell {
+public class CellSimple<E> extends Cell implements Serializable {
 	
 	private E value;
 	

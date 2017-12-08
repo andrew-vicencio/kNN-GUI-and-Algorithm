@@ -6,6 +6,7 @@ import DataModel.CellSimple;
 import java.util.HashMap;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
+import java.io.Serializable;
 
 /**
  * Class to hold a point from the dataset.
@@ -15,8 +16,7 @@ import java.util.concurrent.ConcurrentHashMap;
  *
  */
 
-public class Point 
-{
+public class Point implements Serializable {
     private HashMap<String, Cell> rawValues;
     private HashMap<String, Cell> stdValues;
 	
