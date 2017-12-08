@@ -17,6 +17,14 @@ import java.util.HashMap;
 public abstract class kNN {
 	
 	protected DimensionalSpace ds;
+	protected HashMap<String, String> metrics;
+	protected NumericalDifference nd;
+	protected NumericalStdDev nsd;
+	protected NumericalEquality neq;
+	protected StringEquality seq;
+	protected StringHamming sh;
+	protected StringCharacterValue scv;
+	protected DistanceAlg da;
 	
 	/**
 	 * Constructs a new Maths.kNN object
@@ -25,6 +33,13 @@ public abstract class kNN {
 	 */
 	public kNN (DimensionalSpace ds) {
 		this.ds = ds;
+		this.metrics = ds.getCellMetrics();
+		nd = new NumericalDifference();
+		nsd = new NumericalStdDev(ds.getStdDev(), ds.getMean());
+		neq = new NumericalEquality();
+		seq = new StringEquality();
+		sh = new StringHamming();
+		scv = new StringCharacterValue();
 	}
 	
 	/**
