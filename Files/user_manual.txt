@@ -1,6 +1,6 @@
 ********************************************
-User manual for Coder's Inc Milestone 2
-November 27th 2017
+User manual for Coder's Inc Milestone 4
+December 8, 2017
 Group members:
 - Benjamin Bichel
 - Darren Holden
@@ -15,7 +15,7 @@ To run this application, make sure that your run configuration is set to Test/Te
     a) Simple Feature: A feature with a name and a primitive type (Ctrl + S)
     b) Complex Feature: A feature containing two or more simple features (Ctrl + D)
 3. Enter a feature name, and for
-    a) Simple Features: choose the type and click "Add"
+    a) Simple Features: choose the type, and the metric (see below for descriptions) to be used, and click "Add"
     b) Complex Features: add two or more subfeatures with the "Add a simple subfeature"
        button. Click the "Add" button for each simple feature after initializing the 
        name, and finalize the complex feature by clicking the top "Add this feature"
@@ -30,10 +30,42 @@ To run this application, make sure that your run configuration is set to Test/Te
 8. Continue steps 6 - 7 until all your data is inputted.
 9. Create a test case by clicking Create -> New Test Case in the top menu bar (Ctrl + N)
 10. Choose a value to test from the drop-down list and click OK.
-11. Choose a distance metric to use. If you choose Minkowski, you will also have to choose a poynomial
+11. Choose a distance metric (see below for descriptions) to use. If you choose Minkowski, you will also have to choose a poynomial
     value between 3 and 6.
 11. Fill out the text fields provided to provide the remaining information
 12. Fill the field at the bottom for the K value and click Done.
 13. Your test case result will be displayed on the bottom of the page.
 14. You can execute any number of test cases, and add any number of values
     after you execute a test case
+
+
+********************************************
+Saving and Loading
+
+1. Saving    - Choose the Save menu. Then "Export Data". 
+2. Loading   - Choose the Load menu. Then "Import Data".
+
+********************************************
+Individual Feature Distance Metrics
+
+1.  Numerical
+	Differenece  	    - The distance between two features is the absolute difference of the values.
+	Equality     	    - The distance between two features is 0 if they are equal, and 1 otherwise. 
+	Standard Deviation  - The distance between two features is 0 if they are within the same (minimal) number of 
+				standard deviations from the mean, and 1 otherwise.
+
+2.  String
+	Hamming		    - The distance between two features is the number of character changes needed to convert
+				one string to another.
+	Equal		    - The distance between two features is 0 if they are equal, and 1 otherwise.
+	Character Value	    - The distance between two features is the absolute difference between the sums of the
+				character ASCII values in each string.
+
+********************************************
+Set Distance Metrics
+
+1.  Euclidean	- The distance is the square root of the sum of the squares of the feature distances.
+2.  Manhattan	- The distance is the sum of the feature distances
+3.  Minkowski	- The distance is the nth rooth of the sum of each feature distance to the power of n, where n is 
+			specified by the user. This is a generalized version of Euclidean and Manhattan.
+4.  Chebyshev	- The distance is the most significant feature distance.
