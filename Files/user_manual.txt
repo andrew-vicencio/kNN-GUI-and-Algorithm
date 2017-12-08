@@ -43,7 +43,11 @@ To run this application, make sure that your run configuration is set to Test/Te
 Saving and Loading
 
 1. Saving    - Choose the Save menu. Then "Export Data". 
+	     - Type in the location of the file or file you plan on saving to in the prompt window.
+	     - Hit the done button and the data will be saved.
 2. Loading   - Choose the Load menu. Then "Import Data".
+	     - Type in the location of the file or file you plan on saving to in the prompt window.
+	     - Hit the done button and the data will be saved.
 
 ********************************************
 Individual Feature Distance Metrics
