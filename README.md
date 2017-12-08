@@ -14,6 +14,7 @@
 	* FeaturePanelComplexController.java
 	* FeaturePanelSimpleController.java
 	* MainController.java
+	* SaveController.java
 	* ValueInputController.java
 	* ValuePromptFrameController.java
 	* ValueTestFrameController.java
@@ -50,6 +51,7 @@
 	* FeaturePanelComplex.java
 	* FeaturePanelSimple.java
 	* PromptFrame.java
+	* PromptSaveFrame.java
 	* PromptValueFrame.java
 	* TestCaseFrame.java
 	* View.java
