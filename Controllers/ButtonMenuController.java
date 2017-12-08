@@ -61,6 +61,13 @@ public class ButtonMenuController extends MainController {
 			view.enableTestData(false);
 			view.getDoneButton().setVisible(false);
 		}
+		else if(s.equals("Import Data")){
+		    System.out.println("test");
+            //TODO: AV Make the thing load the data from a test case
+        }else if(s.equals("Export Data")){
+            System.out.println("t1est");
+            //TODO: AV Make the thing export to a file for now
+        }
 
 	}
 
