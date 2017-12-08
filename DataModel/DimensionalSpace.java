@@ -453,8 +453,7 @@ public class DimensionalSpace implements Serializable {
     	view.showSuccessRate(testSuccess, testFailure);
     }
     
-<<<<<<< HEAD
-<<<<<<< HEAD
+
     public String[] getChildren(String key)
     {
     	ArrayList<String> containsKey = new ArrayList<String>();
@@ -466,9 +465,7 @@ public class DimensionalSpace implements Serializable {
     		}
     	}
     	return containsKey.toArray(new String[containsKey.size()]);
-=======
-=======
->>>>>>> origin/master
+    }
     public void addDistanceMetric(String featureName, String metric)
     {
     	cellDistanceMetrics.put(featureName, metric);
@@ -486,10 +483,6 @@ public class DimensionalSpace implements Serializable {
     public String[] getStringMetrics()
     {
     	return stringMetrics;
-<<<<<<< HEAD
->>>>>>> refs/remotes/origin/FeatureMetircs
-=======
->>>>>>> origin/master
     }
     
     /**
@@ -896,18 +889,7 @@ public class DimensionalSpace implements Serializable {
     	view.enableNewDataSet(false);
 	}
 
-    public String[] getChildren(String key)
-    {
-            	ArrayList<String> containsKey = new ArrayList<String>();
-        	for(String name: cellTypes.keySet())
-                	{
-                        		if(name.contains(key) && name.contains("."))
-                		{
-                        			containsKey.add(name);
-            		}
-            	}
-            	return containsKey.toArray(new String[containsKey.size()]);
-           }
+   
 	
 	public String toXML() {
 		String finalString = "<DimensionalSpace>" + System.lineSeparator();
