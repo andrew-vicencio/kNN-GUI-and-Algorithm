@@ -27,7 +27,7 @@ public class MinkowskiKNN extends kNN {
 	 * Constructor for Maths.EuclideanKNN. Takes a DataModel.DimensionalSpace object that it will work in and the order
 	 * to be used for the calculation. Calls the Maths.kNN constructor.
 	 * 
-	 * @param ds	The DataModel.DimensionalSpace the the funciton will work in.
+	 * @param ds	The DataModel.DimensionalSpace the the function will work in.
 	 * @param n		The order for the Minkowski function.
 	 */
 	public MinkowskiKNN(DimensionalSpace ds, int n) {
@@ -48,8 +48,6 @@ public class MinkowskiKNN extends kNN {
 	   */
 	@Override
 	public Cell findKNN(String targetKey, Point targetPoint, int neighbours) {
-		NumericalDistance nDist = new NumericalDistance();
-		StringDistance sDist = new StringDistance();
 		
 		ds.findStatistics();
 		targetPoint.normalize(ds.getMean(), ds.getStdDev());
@@ -80,11 +78,28 @@ public class MinkowskiKNN extends kNN {
 				for (String key: currentPtValues.keySet()) {
 					if (!(key.equals(targetKey))) {
 						if (currentPtValues.get(key) instanceof CellSimple) {
-							if (((CellSimple)currentPtValues.get(key)).getValue() instanceof String) {
-								distance += Math.pow(sDist.calcDistance((CellSimple)targetPtValues.get(key), (CellSimple)currentPtValues.get(key)), order);
-							} else {
-								distance += Math.pow(nDist.calcDistance((CellSimple)targetPtValues.get(key), (CellSimple)currentPtValues.get(key)), order);
+							switch (metrics.get(key)) {
+								case "Equality":
+									da = neq;
+									break;
+								case "Difference":
+									da = nd;
+									break;
+								case "Standard Deviation":
+									da = nsd;
+									break;
+								case "Equal":
+									da = seq;
+									break;
+								case "Hamming":
+									da = sh;
+									break;
+								case "Character Value":
+									da = scv;
+									break;
 							}
+							
+							distance += Math.pow(da.calcDistance((CellSimple)targetPtValues.get(key), (CellSimple)currentPtValues.get(key)), order);
 						} else {
 							distance += Math.pow(MinkowskiComposite((CellComposite) currentPtValues.get(key), (CellComposite) targetPtValues.get(key)), order);
 						}
@@ -144,19 +159,32 @@ public class MinkowskiKNN extends kNN {
 	 * @return			The distance between the Cells
 	 */
 	public float MinkowskiComposite(CellComposite current, CellComposite target) {
-	  	
-		NumericalDistance nDist = new NumericalDistance();
-		StringDistance sDist = new StringDistance();
 		ArrayList<Cell> subCells = current.getSubCells();
 		float distance = 0;
 		
 		for (Cell c: subCells) {
 			if (c instanceof CellSimple) {
-				if (((CellSimple) c).getValue() instanceof String) {
-					distance += Math.pow(sDist.calcDistance((CellSimple) target.getSubCell(c.getKey()), (CellSimple) c), order);
-				} else {
-					distance += Math.pow(nDist.calcDistance((CellSimple) target.getSubCell(c.getKey()), (CellSimple) c), order);
+				switch (metrics.get(c.getKey())) {
+					case "Equality":
+						da = neq;
+						break;
+					case "Difference":
+						da = nd;
+						break;
+					case "Standard Deviation":
+						da = nsd;
+						break;
+					case "Equal":
+						da = seq;
+						break;
+					case "Hamming":
+						da = sh;
+						break;
+					case "Character Value":
+						da = scv;
+						break;
 				}
+					distance += Math.pow(da.calcDistance((CellSimple) target.getSubCell(c.getKey()), (CellSimple) c), order);
 			} else {
 				distance += MinkowskiComposite((CellComposite) c, (CellComposite) target.getSubCell(c.getKey()));
 			}

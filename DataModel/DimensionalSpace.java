@@ -456,6 +456,10 @@ public class DimensionalSpace {
     	cellDistanceMetrics.put(featureName, metric);
     }
     
+    public HashMap<String, String> getCellMetrics() {
+    	return cellDistanceMetrics;
+    }
+    
     public String[] getNumberMetrics()
     {
     	return numberMetrics;
