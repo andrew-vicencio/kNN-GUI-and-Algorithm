@@ -12,6 +12,7 @@ import Controllers.MainController;
 /**
  * Controller for JMenuItems. It checks what was clicked, and executes the appropriate method in the view
  * @author Gabrielle
+ * @version Milestone 4
  *
  */
 public class ButtonMenuController extends MainController {

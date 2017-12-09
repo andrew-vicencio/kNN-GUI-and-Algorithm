@@ -7,6 +7,7 @@ import View.FeaturePanelSimple;
  * Action listener for the featureType JComboBox in a FeaturePanelSimple. It triggers a change in the 
  * distanceMetric JComboBox in the same panel, whenever the featureType box is changed
  * @author Gabrielle
+ * @version Milestone 4
  *
  */
 public class FeatureTypeController extends MainController implements ActionListener {

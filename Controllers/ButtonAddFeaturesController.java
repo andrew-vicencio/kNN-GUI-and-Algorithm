@@ -9,6 +9,7 @@ import Controllers.MainController;
  * Controller for the JButton (Done), when a user is inputting feature types.
  * The number of features is checked first.
  * @author Gabrielle
+ * @version Milestone 4
  *
  */
 public class ButtonAddFeaturesController extends MainController {

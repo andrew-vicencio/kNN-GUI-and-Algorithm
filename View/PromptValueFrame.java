@@ -10,6 +10,7 @@ import Controllers.ValuePromptFrameController;
 /**
  * A JFrame that prompts the user for values for each feature, using JTextfields
  * @author Gabrielle
+ * @version Milestone 4
  *
  */
 public class PromptValueFrame extends PromptFrame {

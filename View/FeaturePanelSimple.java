@@ -21,6 +21,7 @@ import Controllers.*;
 /**
  * A JPanel allowing a user to create a simple feature
  * @author Gabrielle
+ * @version Milestone 4
  *
  */
 public class FeaturePanelSimple extends FeaturePanel{
