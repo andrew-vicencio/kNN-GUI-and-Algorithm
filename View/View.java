@@ -19,7 +19,7 @@ import DataModel.Point;
 /**
  * View.View class for the GUI. This class is responsible for initiating the UI frame, and updating it as required
  *
- * @version Milestone 2
+ * @version Milestone 4
  * @author Gabrielle
  */
 
@@ -427,7 +427,7 @@ public class View implements Serializable {
 		 String distanceMetric = (String) JOptionPane.showInputDialog(chooseValueFrame, "Choose a distance metric",
 				 "Feature", JOptionPane.QUESTION_MESSAGE, null, metricsArray, metricsArray[0]); 
 		 
-		 //If the distance metric is Minkowski, we will also prompt for a p
+		 //If the distance metric is Minkowski, we will also prompt for a polynomial value
 		 int minkInt = 0;
 		 if(distanceMetric.equals("Minkowski"))
 		 {
@@ -450,7 +450,7 @@ public class View implements Serializable {
 		String values[] = x.toString().split(",");
 		point.setLayout(new GridLayout(1, values.length + 1));
 		pointCount++;
-		JLabel countLabel = new JLabel(Integer.toString(pointCount));
+		JLabel countLabel = new JLabel(Integer.toString(pointCount)); //Label on left hand side to count points
 		countLabel.setBorder(BorderFactory.createCompoundBorder(new EtchedBorder(), new EmptyBorder(6, 6, 6, 6)));
 		point.add(countLabel);
 		for(String value: values)
@@ -485,6 +485,9 @@ public class View implements Serializable {
 		footerPanel.repaint();
 	}
 	
+	/**
+	 * Increments the testCount, which is used to print out the number of tests in the footer panel
+	 */
 	public void incrementTestCount()
 	{
 		testCount++;
@@ -545,8 +548,3 @@ public class View implements Serializable {
     }
 	
 }
-
-
-
-
-

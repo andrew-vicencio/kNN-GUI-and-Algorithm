@@ -5,6 +5,7 @@ import View.*;
 /**
  * A controller class for a View.FeaturePanelComplex JPanel. It adds a complex feature to the data model (DataModel.DimensionalSpace)
  * @author Gabrielle and Ben
+ * @version Milestone 4
  *
  */
 

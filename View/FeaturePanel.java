@@ -17,7 +17,7 @@ import Controllers.FeaturePanelController;
 /**
  * Abstract class for FeaturePanelSimple and FeaturePanelComplex
  * @author Gabrielle and Ben
- *
+ * @version Milestone 4
  */
 public abstract class FeaturePanel extends JPanel {
 	

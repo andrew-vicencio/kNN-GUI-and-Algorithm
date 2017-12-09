@@ -18,6 +18,7 @@ import Controllers.*;
  * A JFrame that lists all features (other than the feature being tested)
  * in a JLabel, with an associated JTextField
  * @author Gabrielle
+ * @version Milestone 4
  *
  */
 public class TestCaseFrame extends PromptFrame {

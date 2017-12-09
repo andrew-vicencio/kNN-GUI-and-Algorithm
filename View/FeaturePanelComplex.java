@@ -17,7 +17,7 @@ import Controllers.*;
 /**
  * A JPanel allowing a user to create a complex feature
  * @author Gabrielle
- *
+ * @version Milestone 4
  */
 public class FeaturePanelComplex extends FeaturePanel
 {

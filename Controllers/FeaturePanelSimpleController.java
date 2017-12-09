@@ -7,6 +7,7 @@ import View.*;
 /**
  * Controller for a View.FeaturePanelSimple JPanel. It creates a simple feature and passes it to the data model (Dimensional Space)
  * @author Gabrielle and Ben
+ * @version Milestone 4
  *
  */
 public class FeaturePanelSimpleController extends FeaturePanelController {

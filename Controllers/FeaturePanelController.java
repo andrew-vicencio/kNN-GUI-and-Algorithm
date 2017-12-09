@@ -6,6 +6,7 @@ import View.FeaturePanelSimple;
 /**
  * Abstract class for FeaturePanelSimpleController and FeaturePanelComplexController.
  * @author Ben
+ * @version Milestone 4
  *
  */
 public abstract class FeaturePanelController extends MainController{
