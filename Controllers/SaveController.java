@@ -8,15 +8,28 @@ import View.*;
 import java.awt.event.ActionEvent;
 import java.io.IOException;
 
-public class SaveControler extends MainController {
+public class SaveController extends MainController {
+
+
     private View view;
     private PromptSaveFrame frame;
 
+    /**
+     * Standared Constructor
+     * @param view
+     * @param frame
+     */
 
-    public SaveControler(View view, PromptSaveFrame frame){
+    public SaveController(View view, PromptSaveFrame frame){
         this.view = view;
         this.frame = frame;
     }
+
+    /**
+     * Utilizes the import export classes to save the data set
+     * Also dispose of frames
+     * @param actionEvent
+     */
     @Override
     public void actionPerformed(ActionEvent actionEvent) {
 

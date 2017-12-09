@@ -1,11 +1,12 @@
 package View;
 
-import Controllers.SaveControler;
+import Controllers.SaveController;
 
 import javax.swing.*;
 import java.awt.*;
 
 public class PromptSaveFrame  extends JFrame {
+
     private View view;
     private JPanel mainPanel, footerPanel, promptPanel;
     private JLabel name;
@@ -13,6 +14,11 @@ public class PromptSaveFrame  extends JFrame {
     private JButton done;
     private boolean save;
 
+    /**
+     * Prompt user for the string input for the file location
+     * @param view
+     * @param save
+     */
     public PromptSaveFrame(View view, boolean save){
         this.save = save;
         this.view = view;
@@ -25,7 +31,7 @@ public class PromptSaveFrame  extends JFrame {
         promptPanel.add(fileName);
 
         done  = new JButton("Done");
-        done.addActionListener(new SaveControler(view, this));
+        done.addActionListener(new SaveController(view, this));
         mainPanel.setLayout(new GridLayout(0,1));
         setSize(350,125);
         footerPanel.add(done);
@@ -36,10 +42,18 @@ public class PromptSaveFrame  extends JFrame {
         setVisible(true);
     }
 
+    /**
+     * get the file name/location
+     * @return
+     */
     public String getFileName(){
         return fileName.getText();
     }
 
+    /**
+     * Checking if the user chose import or export
+     * @return
+     */
     public boolean isSave() {
         return save;
     }
