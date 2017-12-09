@@ -40,11 +40,9 @@ public class ValueTestFrameController extends ValueInputController {
         HashMap<String, Cell> newConfiguredData = new HashMap<String, Cell>();
         int k =0;
         int mink = 0;
-		String testChildren[] = tempCast.getTestChildren();
-        
-		System.out.println("Test key: " + testKey);
-		System.out.println("Number of children: " + testChildren.length);
-		System.out.println("First child: " + testChildren[0]);
+		String testChildren[] = tempCast.getTestChildren();		// The names of the features being tested, not including the 
+																// complex/parent name. If this a simple feature, this array
+																// is of size 1 and simply contains the name of the feature. 
 		
         for(String key : MainController.dataModel.getCellTypes().keySet()){
             if(!key.contains(testKey)){
@@ -75,6 +73,7 @@ public class ValueTestFrameController extends ValueInputController {
             view.sendErrorFrame("Invalid K value was provided");
         }
         
+        //Call KNN on each of the testChildren and store the results in an array
         String[] result = new String[testChildren.length];
         for(int i = 0; i < result.length; i++ )
         {
@@ -86,6 +85,7 @@ public class ValueTestFrameController extends ValueInputController {
         
         tempCast.dispose();
         
+        //Add a test and prompt a new test case
         if(e.getActionCommand().equals("Add Test"))
         {
         	for(int i = 0; i < result.length; i++)
@@ -95,6 +95,7 @@ public class ValueTestFrameController extends ValueInputController {
         	}
         	
         }
+        //Add a test, print results of enitre suite, and exit.
         else if(e.getActionCommand().equals("Done"))
         {
         	for(int i = 0; i < result.length; i++)

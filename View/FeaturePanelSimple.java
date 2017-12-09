@@ -42,9 +42,9 @@ public class FeaturePanelSimple extends FeaturePanel{
 		super(view, types, superFeatureName, tab);
 		String[] typesArray = types.toArray(new String[0]);
 		featureType = new JComboBox<String>(typesArray);
-		numberMetrics = new JComboBox<String>(view.getDataModel().getNumberMetrics());
-		stringMetrics = new JComboBox<String>(view.getDataModel().getStringMetrics());
-		featureTypeLabel = new JLabel("Feature type: ");
+		numberMetrics = new JComboBox<String>(view.getDataModel().getNumberMetrics());  //Two metrics arrays are created, one is 
+		stringMetrics = new JComboBox<String>(view.getDataModel().getStringMetrics());  //set visible, the other not, depending on the 
+		featureTypeLabel = new JLabel("Feature type: ");								//value of featureType
 		distanceMetricLabel = new JLabel("Distance metric: ");
 		innerPanel.add(featureTypeLabel);
 		innerPanel.add(featureType);
@@ -135,6 +135,10 @@ public class FeaturePanelSimple extends FeaturePanel{
 		add.setEnabled(false);
 	}
 	
+	/**
+	 * Set the appropriate metric array visible/non-visible, depending on the selected
+	 * value of the featureType JCombobox
+	 */
 	public void setMetricsArray() 
 	{
 		if(getFeatureType().equals("int") || getFeatureType().equals("float"))

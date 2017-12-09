@@ -119,11 +119,19 @@ public abstract class FeaturePanel extends JPanel {
 	public void setParentComplex(FeaturePanelComplex parentComplex) {
 		this.parent = parentComplex;
 	}
-
+	
+	/**
+	 * Sets the name of the parent complex feature
+	 * @param key
+	 */
     public void setParentComplexKey(String key){
         keyParentName = key;
     }
-
+    
+    /**
+     * Returns the name of the parent complex feature
+     * @return
+     */
     public String getParentComplexKey(){
         return keyParentName;
     }

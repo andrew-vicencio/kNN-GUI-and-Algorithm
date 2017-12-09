@@ -48,14 +48,7 @@ public class FeaturePanelComplex extends FeaturePanel
 		add.addActionListener(controller);
 	
 	}		
-	
-	/**
-	 * Returns the key/feature name inputed by the user in the JTextField featureName
-	 * @return String
-	 */
 
-
-	
 	/**
 	 * Disables the add button, preventing the panel from being modified
 	 */

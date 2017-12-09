@@ -64,6 +64,7 @@ public class FeaturePanelComplexController extends FeaturePanelController{
 
 	/**
 	 * Adds a feature to the data model, and disables the FeaturePanel that created the feature
+	 * An error message is sent if the complex feature does not have at least two subfeatures
 	 * @param key
 	 * @param tempCast
 	 */

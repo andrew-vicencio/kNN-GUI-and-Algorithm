@@ -134,11 +134,21 @@ public class TestCaseFrame extends PromptFrame {
 		return minkInt;
 	}
 	
+	/**
+	 * Provides the expected value the user has inputed
+	 * @return
+	 */
 	public String[] getExpectedValue()
 	{
 		return expected;
 	}
 	
+	/**
+	 * Returns an array with the String names of all values being tested for, not including the parent name (if applicable)
+	 * If the value being test is simple, this array is of length 1 and simply contains the name of the feature 
+	 * 
+	 * @return
+	 */
 	public String[] getTestChildren()
 	{
 		return testChildren;

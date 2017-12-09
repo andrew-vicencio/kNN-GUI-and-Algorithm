@@ -346,6 +346,10 @@ public class DimensionalSpace implements Serializable {
         return x;
     }
 
+  /**
+   * Sets the view which is using this as a model
+   * @param view
+   */
    public void setView(View view)
     {
     	this.view = view;
@@ -940,23 +944,31 @@ public class DimensionalSpace implements Serializable {
 		return finalString;
 	}
 
+	/**
+	 * Takes a feature name, and determines whether is it a parent feature, or a child/simple feature
+	 * @param feature: String
+	 * @return true if parent, false if otherwise
+	 */
     public boolean isParent(String feature) {
         		Boolean childFound = false;
         		if(feature.contains("."))
             		{
-                    			return false;
+                    			return false; 		//All children of complex features have a '.' in their name
         		}
         		for(String s: cellTypes.keySet())
-            		{
-                    			if(s.contains(feature) && s.contains("."))
-            			{
-                    				childFound = true;
-        			}
+        		{
+                    if(s.contains(feature) && s.contains("."))
+                    {
+                    		childFound = true;
+                 	}
 
-                		}
+                }
         		return childFound;
         	}
 
+    /**
+     * Updates the view with existing Points
+     */
     public void updateView(){
 
         for (Point x: points) {
