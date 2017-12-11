@@ -24,7 +24,7 @@ public abstract class Cell implements Serializable {
 	/**
 	 * Returns the key value for this cell.
 	 * 
-	 * @return	The DataModel.Cell's key value.
+	 * @return The DataModel.Cell's key value.
 	 */
 	public String getKey() {
 		return key;
@@ -43,6 +43,4 @@ public abstract class Cell implements Serializable {
 	 * Generates a string representation of the cell.
 	 */
 	public abstract String toString();
-	
-	public abstract String toXML();
 }

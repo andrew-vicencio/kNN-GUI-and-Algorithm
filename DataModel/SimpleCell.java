@@ -47,11 +47,4 @@ public class SimpleCell<E> extends Cell implements Serializable {
 	public String toString(){
 	    return getKey() + ": " + value;
     }
-	
-	public String toXML() {
-		String finalString = "<SimpleCell key=\"" + super.getKey() + "\">" + System.lineSeparator();
-		finalString = finalString + "<Value>" + value.toString() + "</Value>" + System.lineSeparator(); 
-		finalString = "</SimpleCell>";
-		return finalString;
-	}
 }

@@ -73,7 +73,7 @@ public class FeaturePanelComplex extends FeaturePanel
     
 	/**
 	 * Returns the list of panels which the panel is the parent of
-	 * @return LinkedHashMap<String, Object>
+	 * @return LinkedHashMap
 	 */
 	public LinkedHashMap<String, Object> getSubFeaturePanels()
 	{

@@ -19,7 +19,6 @@ public class SaveController extends MainController {
      * @param view
      * @param frame
      */
-
     public SaveController(View view, PromptSaveFrame frame){
         this.view = view;
         this.frame = frame;

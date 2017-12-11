@@ -23,7 +23,6 @@ public class Point implements Serializable {
     /**
     * DataModel.Point constructor for a point with a given value.
     * 
-    * @param ptVal		The value of the point
     */
 
     public Point() {
@@ -34,16 +33,19 @@ public class Point implements Serializable {
 	
     /**
     * Adds a coordinate pair value to the DataModel.Point
-    * 
-    * @param att		The key for the value
-    * @param value		The value of the key
+    * @param f		New Cell that defines a new attribute of the point
     */
     public void addAttribute(Cell f) {
         rawValues.put(f.getKey(), f);
     }
 
 
-      public void setHashMaprawValues( HashMap<String,Cell> f){
+     /**
+      * Sets the raw values hashmap to a new value
+      * 
+     * @param f		The new hash map of raw values
+     */
+    public void setHashMaprawValues(HashMap<String,Cell> f){
         rawValues = f;
     }
 
@@ -53,7 +55,6 @@ public class Point implements Serializable {
     * @return		A Set of keys in string format.
 
     */
-
     public Set<String> getAttributes() {
     	return rawValues.keySet();
     }
@@ -171,17 +172,6 @@ public class Point implements Serializable {
 		}		
 				
 		return false;		
-	}
-	
-	public String toXMLRaw() {
-		String finalString = "<Point>" + System.lineSeparator();
-		for (String key : rawValues.keySet()) {
-			Cell cell = rawValues.get(key);
-			finalString = finalString + cell.toXML();
-		}
-		finalString = finalString + "</Point>" + System.lineSeparator();
-		return finalString;
-		
 	}
 	
 }

@@ -18,7 +18,7 @@ public class CellComposite extends Cell implements Serializable {
 	 * Constructor for DataModel.CompositeCell. Sets the cell's key through the super class' constructor and initializes
 	 * the subcell list.
 	 * 
-	 * @param key	The cell's key
+	 * @param key: The cell's key
 	 */
 	public CellComposite(String key) {
 		super(key);
@@ -89,13 +89,4 @@ public class CellComposite extends Cell implements Serializable {
 
         return finalString;
     }
-	
-	public String toXML() {
-		String finalString = "<CellComposite>" + System.lineSeparator();
-		for (Cell x: value) {
-			x.toXML();
-		}
-		finalString = finalString + "</CellComposite>" + System.lineSeparator();
-		return finalString;
-	}
 }

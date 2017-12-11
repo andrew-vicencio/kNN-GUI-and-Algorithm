@@ -11,6 +11,9 @@ import DataModel.CellSimple;
  */
 public class NumericalEquality extends DistanceAlg {
 
+	/* (non-Javadoc)
+	 * @see Maths.DistanceAlg#calcDistance(DataModel.CellSimple, DataModel.CellSimple)
+	 */
 	@Override
 	public float calcDistance(CellSimple target, CellSimple current) {
 

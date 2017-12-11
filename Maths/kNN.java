@@ -122,6 +122,12 @@ public abstract class kNN {
 	 * @return						A DataModel.CellSimple containing the calculated value(s)
 	 */
 
+	/**
+	 * @param closestKNeighbours
+	 * @param type
+	 * @param targetKey
+	 * @return CellSimple
+	 */
 	public Cell calculateSimpleCell(ArrayList<Tuple<Float, Cell>> closestKNeighbours, String type, String targetKey) {
 		
 		switch (type){

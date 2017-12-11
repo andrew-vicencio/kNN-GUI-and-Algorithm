@@ -114,7 +114,7 @@ public abstract class FeaturePanel extends JPanel {
 
 	/**
 	 * Set the View.FeaturePanelComplex object which is the parent of this panel
-	 * @param FeaturePanelComplex
+	 * @param parentComplex
 	 */
 	public void setParentComplex(FeaturePanelComplex parentComplex) {
 		this.parent = parentComplex;
@@ -137,7 +137,7 @@ public abstract class FeaturePanel extends JPanel {
     }
 	/**
 	 * Sets the primitive types the user can choose from
-	 * @param types ArrayList <String>
+	 * @param types ArrayList
 	 */
 	public void setTypes(ArrayList<String> types) {
 		this.types = types;
@@ -146,7 +146,7 @@ public abstract class FeaturePanel extends JPanel {
 
 	/**
 	 * Returns the list of primitive types the user can choose from 
-	 * @return ArrayList <String>
+	 * @return ArrayList
 	 */
 	public ArrayList<String> getTypes() {
 		return types;

@@ -15,7 +15,6 @@ public class FeaturePanelComplexController extends FeaturePanelController{
 	 * Constructor to pass the View.FeaturePanelComplex using this controller
 	 * @param fp
 	 */
-
 	public FeaturePanelComplexController(FeaturePanel fp) {
 		super(fp);
 	}
@@ -23,6 +22,8 @@ public class FeaturePanelComplexController extends FeaturePanelController{
 	/**
 	 * Determines what actions to take depending on the contents of the JTextField, and the buttom pressed
 	 * If the box is empty, or a feature already has that name, an error message is given
+	 * 
+	 * @param e
 	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {

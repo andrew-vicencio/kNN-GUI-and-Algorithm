@@ -26,6 +26,8 @@ public class ButtonAddFeaturesController extends MainController {
 
 	/**
 	 * Executes action depending on if data inputed is valid or not
+	 * 
+	 * @param e
 	 */
 	public void actionPerformed(ActionEvent e) {
 		
