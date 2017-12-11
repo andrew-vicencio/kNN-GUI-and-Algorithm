@@ -37,6 +37,10 @@ public class TestCaseFrame extends PromptFrame {
 	 * Displays the View.TestCaseFrame with required JTextFields
 	 * @param view: View.View object this JFrame was spawned from
 	 * @param testValue: String
+	 * @param testChildren
+	 * @param expected
+	 * @param distanceMetric
+	 * @param minkInt
 	 */
 	public TestCaseFrame(View view, String testValue, String[] testChildren, String[] expected, String distanceMetric, int minkInt)
 	{
@@ -93,7 +97,7 @@ public class TestCaseFrame extends PromptFrame {
 	}
 	/**
 	 * Provides the JTextField where the user inputed the K value they require
-	 * @return
+	 * @return kTextField		JTextField for the K value
 	 */
 	public JTextField getKTextField()
 	{

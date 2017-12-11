@@ -30,6 +30,8 @@ public class ValueTestFrameController extends ValueInputController {
 	
 	/**
 	 * Calls the KNN function in the data model to pass along data that the user inputed
+	 * 
+	 * @param e
 	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {

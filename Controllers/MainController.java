@@ -17,11 +17,17 @@ public abstract class MainController implements ActionListener, Serializable{
 
     protected static DimensionalSpace dataModel = new DimensionalSpace();
 
+    /**
+     * @return dataModel: Current DimensionalSpace being used
+     */
     public DimensionalSpace getDataModel() {
         return dataModel;
     }
 
     //Should only ever be used for importing from a file
+    /**
+     * @param x: new DimensionalSpace to be used
+     */
     public void setDataModel(DimensionalSpace x){
         dataModel = x;
     }

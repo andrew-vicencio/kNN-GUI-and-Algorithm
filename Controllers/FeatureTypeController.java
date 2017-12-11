@@ -14,6 +14,9 @@ public class FeatureTypeController extends MainController implements ActionListe
 
 	private FeaturePanelSimple panel;
 	
+	/**
+	 * @param panel
+	 */
 	public FeatureTypeController(FeaturePanelSimple panel) 
 	{
 		this.panel = panel;
@@ -21,6 +24,8 @@ public class FeatureTypeController extends MainController implements ActionListe
 
 	/**
 	 * Change was made in the JComboBox. This method alerts the view and changes the distanceMetric JComboBox
+	 * 
+	 * @param e
 	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {

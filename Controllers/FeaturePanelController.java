@@ -11,6 +11,11 @@ import View.FeaturePanelSimple;
  */
 public abstract class FeaturePanelController extends MainController{
     protected FeaturePanel currentPanel;
+    
+    
+    /**
+     * @param fp
+     */
     public FeaturePanelController(FeaturePanel fp)
     {
         this.currentPanel = fp;

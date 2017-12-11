@@ -55,7 +55,7 @@ public abstract class PromptFrame extends JFrame {
 	/**
 	 * Provides a HashMap with the name of the feature (String) as a key, and a 
 	 * JTextField as a value.
-	 * @return HashMap<String, JTextField>
+	 * @return HashMap
 	 */
 	public HashMap<String, JTextField> getFieldMap()
 	{

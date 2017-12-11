@@ -202,6 +202,9 @@ public class View implements Serializable {
 	
 	/**
 	 * The features from a featurePanel is added to the features list
+	 * 
+	 * @param key
+	 * @param value
 	 */
 	public void addNewFeature(String key, Object value)
 	{
@@ -224,6 +227,8 @@ public class View implements Serializable {
 	/**
 	 * Sets up the main panel with the keys user has provided as JLabels in the 
 	 * headerPanel
+	 * 
+	 * @param x
 	 */
 	public void setUpFeatures(Point x)
 	{
@@ -248,7 +253,7 @@ public class View implements Serializable {
 
 	/**
 	 * Get the Done JButton in the footer panel
-	 * @return
+	 * @return done		Done JButton for the footer panel
 	 */
 	public JButton getDoneButton()
 	{

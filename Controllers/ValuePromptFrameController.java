@@ -17,9 +17,7 @@ import View.*;
  * @version Milestone 4
  *
  */
-
 public class ValuePromptFrameController extends ValueInputController {
-
 
 
 	/**
@@ -34,6 +32,8 @@ public class ValuePromptFrameController extends ValueInputController {
 	
 	/**
 	 * Adds the data that was inputed in the View.PromptValueFrame to a DataModel.Point, which is added to Dimensional Frame
+	 * 
+	 * @param e
 	 */
 	public void actionPerformed(ActionEvent e) {
 		

@@ -330,8 +330,8 @@ public class DimensionalSpace implements Serializable {
   
   /**
    * 
-   * @param key
-   * @return
+   * @param key		The key of the cell that is having its cell type checked
+   * @return x		
    */
   public int cellTypeComp(String key){
         int x = 0;
@@ -467,6 +467,10 @@ public class DimensionalSpace implements Serializable {
     }
     
 
+    /**
+     * @param key
+     * @return
+     */
     public String[] getChildren(String key)
     {
     	ArrayList<String> containsKey = new ArrayList<String>();
@@ -922,26 +926,6 @@ public class DimensionalSpace implements Serializable {
     	
     	view.enableTesting(true);
     	view.enableNewDataSet(false);
-	}
-
-   
-	
-	public String toXML() {
-		String finalString = "<DimensionalSpace>" + System.lineSeparator();
-		//TODO AndrewVicencio: Finish DimensionalSpace toXML
-		finalString = finalString + "</DimensionalSpace>" + System.lineSeparator();
-		return finalString;
-	}
-	
-	public String hashMapToXML(Map<String, Object> map, String mapName) {
-		String finalString = "<" + mapName + ">" + System.lineSeparator();
-		for (String key : map.keySet()) {
-			finalString = finalString + "<" + key + ">";
-			finalString = finalString + map.get(key).toString();
-			finalString = finalString + "</" + key + ">" + System.lineSeparator();
-		}
-		finalString = finalString + "</" + mapName + ">" + System.lineSeparator();
-		return finalString;
 	}
 
 	/**

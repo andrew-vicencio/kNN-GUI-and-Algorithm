@@ -16,11 +16,18 @@ public class NumericalStdDev extends DistanceAlg {
 	
 	private ConcurrentHashMap<String, Float> stdDev, avg;
 	
+	/**
+	 * @param stdDev
+	 * @param avg
+	 */
 	public NumericalStdDev(ConcurrentHashMap<String, Float> stdDev, ConcurrentHashMap<String, Float> avg) {
 		this.stdDev = stdDev;
 		this.avg = avg;
 	}
 
+	/* (non-Javadoc)
+	 * @see Maths.DistanceAlg#calcDistance(DataModel.CellSimple, DataModel.CellSimple)
+	 */
 	@Override
 	public float calcDistance(CellSimple target, CellSimple current) {
 
