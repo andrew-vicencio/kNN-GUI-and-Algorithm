@@ -1,5 +1,7 @@
 # **project-coders-inc**
 
+This code was created for our Third Year Project class - SYSC 3110.
+
 ## Authors
 * Benjamin Bichel
 * Darren Holden
